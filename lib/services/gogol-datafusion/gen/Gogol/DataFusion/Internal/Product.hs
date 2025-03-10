@@ -107,6 +107,14 @@ module Gogol.DataFusion.Internal.Product
     Location_Metadata (..),
     newLocation_Metadata,
 
+    -- * LoggingConfig
+    LoggingConfig (..),
+    newLoggingConfig,
+
+    -- * MaintenanceEvent
+    MaintenanceEvent (..),
+    newMaintenanceEvent,
+
     -- * MaintenancePolicy
     MaintenancePolicy (..),
     newMaintenancePolicy,
@@ -579,7 +587,7 @@ data Instance = Instance
     displayName :: (Core.Maybe Core.Text),
     -- | Optional. Option to enable granular role-based access control.
     enableRbac :: (Core.Maybe Core.Bool),
-    -- | Optional. Option to enable Stackdriver Logging.
+    -- | Optional. Option to enable Dataproc Stackdriver Logging.
     enableStackdriverLogging :: (Core.Maybe Core.Bool),
     -- | Optional. Option to enable Stackdriver Monitoring.
     enableStackdriverMonitoring :: (Core.Maybe Core.Bool),
@@ -591,13 +599,17 @@ data Instance = Instance
     gcsBucket :: (Core.Maybe Core.Text),
     -- | The resource labels for instance to use to annotate any related underlying resources such as Compute Engine VMs. The character \'=\' is not allowed to be used within the labels.
     labels :: (Core.Maybe Instance_Labels),
+    -- | Optional. The logging configuration for this instance. This field is supported only in CDF versions 6.11.0 and above.
+    loggingConfig :: (Core.Maybe LoggingConfig),
+    -- | Output only. The maintenance events for this instance.
+    maintenanceEvents :: (Core.Maybe [MaintenanceEvent]),
     -- | Optional. Configure the maintenance policy for this instance.
     maintenancePolicy :: (Core.Maybe MaintenancePolicy),
     -- | Output only. The name of this instance is in the form of projects\/{project}\/locations\/{location}\/instances\/{instance}.
     name :: (Core.Maybe Core.Text),
     -- | Optional. Network configuration options. These are required when a private Data Fusion instance is to be created.
     networkConfig :: (Core.Maybe NetworkConfig),
-    -- | Map of additional options used to configure the behavior of Data Fusion instance.
+    -- | Optional. Map of additional options used to configure the behavior of Data Fusion instance.
     options :: (Core.Maybe Instance_Options),
     -- | Output only. Service agent for the customer project.
     p4ServiceAccount :: (Core.Maybe Core.Text),
@@ -605,6 +617,8 @@ data Instance = Instance
     patchRevision :: (Core.Maybe Core.Text),
     -- | Optional. Specifies whether the Data Fusion instance should be private. If set to true, all Data Fusion nodes will have private IP addresses and will not be able to access the public internet.
     privateInstance :: (Core.Maybe Core.Bool),
+    -- | Output only. Reserved for future use.
+    satisfiesPzi :: (Core.Maybe Core.Bool),
     -- | Output only. Reserved for future use.
     satisfiesPzs :: (Core.Maybe Core.Bool),
     -- | Output only. Deprecated. Use tenant/project/id instead to extract the tenant project ID.
@@ -652,6 +666,8 @@ newInstance =
       eventPublishConfig = Core.Nothing,
       gcsBucket = Core.Nothing,
       labels = Core.Nothing,
+      loggingConfig = Core.Nothing,
+      maintenanceEvents = Core.Nothing,
       maintenancePolicy = Core.Nothing,
       name = Core.Nothing,
       networkConfig = Core.Nothing,
@@ -659,6 +675,7 @@ newInstance =
       p4ServiceAccount = Core.Nothing,
       patchRevision = Core.Nothing,
       privateInstance = Core.Nothing,
+      satisfiesPzi = Core.Nothing,
       satisfiesPzs = Core.Nothing,
       serviceAccount = Core.Nothing,
       serviceEndpoint = Core.Nothing,
@@ -695,6 +712,8 @@ instance Core.FromJSON Instance where
             Core.<*> (o Core..:? "eventPublishConfig")
             Core.<*> (o Core..:? "gcsBucket")
             Core.<*> (o Core..:? "labels")
+            Core.<*> (o Core..:? "loggingConfig")
+            Core.<*> (o Core..:? "maintenanceEvents")
             Core.<*> (o Core..:? "maintenancePolicy")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "networkConfig")
@@ -702,6 +721,7 @@ instance Core.FromJSON Instance where
             Core.<*> (o Core..:? "p4ServiceAccount")
             Core.<*> (o Core..:? "patchRevision")
             Core.<*> (o Core..:? "privateInstance")
+            Core.<*> (o Core..:? "satisfiesPzi")
             Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "serviceEndpoint")
@@ -739,6 +759,8 @@ instance Core.ToJSON Instance where
             ("eventPublishConfig" Core..=) Core.<$> eventPublishConfig,
             ("gcsBucket" Core..=) Core.<$> gcsBucket,
             ("labels" Core..=) Core.<$> labels,
+            ("loggingConfig" Core..=) Core.<$> loggingConfig,
+            ("maintenanceEvents" Core..=) Core.<$> maintenanceEvents,
             ("maintenancePolicy" Core..=) Core.<$> maintenancePolicy,
             ("name" Core..=) Core.<$> name,
             ("networkConfig" Core..=) Core.<$> networkConfig,
@@ -746,6 +768,7 @@ instance Core.ToJSON Instance where
             ("p4ServiceAccount" Core..=) Core.<$> p4ServiceAccount,
             ("patchRevision" Core..=) Core.<$> patchRevision,
             ("privateInstance" Core..=) Core.<$> privateInstance,
+            ("satisfiesPzi" Core..=) Core.<$> satisfiesPzi,
             ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
             ("serviceAccount" Core..=) Core.<$> serviceAccount,
             ("serviceEndpoint" Core..=) Core.<$> serviceEndpoint,
@@ -786,7 +809,7 @@ instance Core.FromJSON Instance_Labels where
 instance Core.ToJSON Instance_Labels where
   toJSON Instance_Labels {..} = Core.toJSON additional
 
--- | Map of additional options used to configure the behavior of Data Fusion instance.
+-- | Optional. Map of additional options used to configure the behavior of Data Fusion instance.
 --
 -- /See:/ 'newInstance_Options' smart constructor.
 newtype Instance_Options = Instance_Options
@@ -1121,6 +1144,82 @@ instance Core.FromJSON Location_Metadata where
 instance Core.ToJSON Location_Metadata where
   toJSON Location_Metadata {..} = Core.toJSON additional
 
+-- | Logging configuration for a Data Fusion instance.
+--
+-- /See:/ 'newLoggingConfig' smart constructor.
+newtype LoggingConfig = LoggingConfig
+  { -- | Optional. Option to determine whether instance logs should be written to Cloud Logging. By default, instance logs are written to Cloud Logging.
+    instanceCloudLoggingDisabled :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LoggingConfig' with the minimum fields required to make a request.
+newLoggingConfig ::
+  LoggingConfig
+newLoggingConfig =
+  LoggingConfig {instanceCloudLoggingDisabled = Core.Nothing}
+
+instance Core.FromJSON LoggingConfig where
+  parseJSON =
+    Core.withObject
+      "LoggingConfig"
+      ( \o ->
+          LoggingConfig Core.<$> (o Core..:? "instanceCloudLoggingDisabled")
+      )
+
+instance Core.ToJSON LoggingConfig where
+  toJSON LoggingConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("instanceCloudLoggingDisabled" Core..=)
+              Core.<$> instanceCloudLoggingDisabled
+          ]
+      )
+
+-- | Represents a maintenance event.
+--
+-- /See:/ 'newMaintenanceEvent' smart constructor.
+data MaintenanceEvent = MaintenanceEvent
+  { -- | Output only. The end time of the maintenance event provided in <https://www.ietf.org/rfc/rfc3339.txt RFC 3339> format. Example: \"2024-01-02T12:04:06-06:00\" This field will be empty if the maintenance event is not yet complete.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The start time of the maintenance event provided in <https://www.ietf.org/rfc/rfc3339.txt RFC 3339> format. Example: \"2024-01-01T12:04:06-04:00\"
+    startTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The state of the maintenance event.
+    state :: (Core.Maybe MaintenanceEvent_State)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MaintenanceEvent' with the minimum fields required to make a request.
+newMaintenanceEvent ::
+  MaintenanceEvent
+newMaintenanceEvent =
+  MaintenanceEvent
+    { endTime = Core.Nothing,
+      startTime = Core.Nothing,
+      state = Core.Nothing
+    }
+
+instance Core.FromJSON MaintenanceEvent where
+  parseJSON =
+    Core.withObject
+      "MaintenanceEvent"
+      ( \o ->
+          MaintenanceEvent
+            Core.<$> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "state")
+      )
+
+instance Core.ToJSON MaintenanceEvent where
+  toJSON MaintenanceEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endTime" Core..=) Core.<$> endTime,
+            ("startTime" Core..=) Core.<$> startTime,
+            ("state" Core..=) Core.<$> state
+          ]
+      )
+
 -- | Maintenance policy of the instance.
 --
 -- /See:/ 'newMaintenancePolicy' smart constructor.
@@ -1359,7 +1458,7 @@ data OperationMetadata = OperationMetadata
     createTime :: (Core.Maybe Core.DateTime),
     -- | The time the operation finished running.
     endTime :: (Core.Maybe Core.DateTime),
-    -- | Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
+    -- | Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have google.longrunning.Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
     requestedCancellation :: (Core.Maybe Core.Bool),
     -- | Human-readable status of the operation if any.
     statusDetail :: (Core.Maybe Core.Text),

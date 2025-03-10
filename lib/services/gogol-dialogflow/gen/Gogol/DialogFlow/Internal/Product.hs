@@ -1899,6 +1899,14 @@ module Gogol.DialogFlow.Internal.Product
     GoogleCloudDialogflowV2SmartReplyModelMetadata (..),
     newGoogleCloudDialogflowV2SmartReplyModelMetadata,
 
+    -- * GoogleCloudDialogflowV2SpeechWordInfo
+    GoogleCloudDialogflowV2SpeechWordInfo (..),
+    newGoogleCloudDialogflowV2SpeechWordInfo,
+
+    -- * GoogleCloudDialogflowV2StreamingRecognitionResult
+    GoogleCloudDialogflowV2StreamingRecognitionResult (..),
+    newGoogleCloudDialogflowV2StreamingRecognitionResult,
+
     -- * GoogleCloudDialogflowV2SuggestArticlesResponse
     GoogleCloudDialogflowV2SuggestArticlesResponse (..),
     newGoogleCloudDialogflowV2SuggestArticlesResponse,
@@ -2355,6 +2363,14 @@ module Gogol.DialogFlow.Internal.Product
     GoogleCloudDialogflowV2beta1SmartReplyAnswer (..),
     newGoogleCloudDialogflowV2beta1SmartReplyAnswer,
 
+    -- * GoogleCloudDialogflowV2beta1SpeechWordInfo
+    GoogleCloudDialogflowV2beta1SpeechWordInfo (..),
+    newGoogleCloudDialogflowV2beta1SpeechWordInfo,
+
+    -- * GoogleCloudDialogflowV2beta1StreamingRecognitionResult
+    GoogleCloudDialogflowV2beta1StreamingRecognitionResult (..),
+    newGoogleCloudDialogflowV2beta1StreamingRecognitionResult,
+
     -- * GoogleCloudDialogflowV2beta1SuggestArticlesResponse
     GoogleCloudDialogflowV2beta1SuggestArticlesResponse (..),
     newGoogleCloudDialogflowV2beta1SuggestArticlesResponse,
@@ -2378,6 +2394,10 @@ module Gogol.DialogFlow.Internal.Product
     -- * GoogleCloudDialogflowV2beta1SuggestionResult
     GoogleCloudDialogflowV2beta1SuggestionResult (..),
     newGoogleCloudDialogflowV2beta1SuggestionResult,
+
+    -- * GoogleCloudDialogflowV2beta1TelephonyDtmfEvents
+    GoogleCloudDialogflowV2beta1TelephonyDtmfEvents (..),
+    newGoogleCloudDialogflowV2beta1TelephonyDtmfEvents,
 
     -- * GoogleCloudDialogflowV2beta1WebhookRequest
     GoogleCloudDialogflowV2beta1WebhookRequest (..),
@@ -2641,7 +2661,7 @@ data GoogleCloudDialogflowCxV3AdvancedSettingsSpeechSettings = GoogleCloudDialog
       ),
     -- | Timeout before detecting no speech.
     noSpeechTimeout :: (Core.Maybe Core.Duration),
-    -- | Use timeout based endpointing, interpreting endpointer sensitivy as seconds of timeout value.
+    -- | Use timeout based endpointing, interpreting endpointer sensitivity as seconds of timeout value.
     useTimeoutBasedEndpointing :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2766,6 +2786,10 @@ data GoogleCloudDialogflowCxV3Agent = GoogleCloudDialogflowCxV3Agent
     name :: (Core.Maybe Core.Text),
     -- | Optional. Settings for end user personalization.
     personalizationSettings :: (Core.Maybe GoogleCloudDialogflowCxV3AgentPersonalizationSettings),
+    -- | Optional. Output only. A read only boolean field reflecting Zone Isolation status of the agent.
+    satisfiesPzi :: (Core.Maybe Core.Bool),
+    -- | Optional. Output only. A read only boolean field reflecting Zone Separation status of the agent.
+    satisfiesPzs :: (Core.Maybe Core.Bool),
     -- | Name of the SecuritySettings reference for the agent. Format: @projects\/\/locations\/\/securitySettings\/@.
     securitySettings :: (Core.Maybe Core.Text),
     -- | Speech recognition related settings.
@@ -2801,6 +2825,8 @@ newGoogleCloudDialogflowCxV3Agent =
       locked = Core.Nothing,
       name = Core.Nothing,
       personalizationSettings = Core.Nothing,
+      satisfiesPzi = Core.Nothing,
+      satisfiesPzs = Core.Nothing,
       securitySettings = Core.Nothing,
       speechToTextSettings = Core.Nothing,
       startFlow = Core.Nothing,
@@ -2830,6 +2856,8 @@ instance Core.FromJSON GoogleCloudDialogflowCxV3Agent where
             Core.<*> (o Core..:? "locked")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "personalizationSettings")
+            Core.<*> (o Core..:? "satisfiesPzi")
+            Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "securitySettings")
             Core.<*> (o Core..:? "speechToTextSettings")
             Core.<*> (o Core..:? "startFlow")
@@ -2861,6 +2889,8 @@ instance Core.ToJSON GoogleCloudDialogflowCxV3Agent where
             ("name" Core..=) Core.<$> name,
             ("personalizationSettings" Core..=)
               Core.<$> personalizationSettings,
+            ("satisfiesPzi" Core..=) Core.<$> satisfiesPzi,
+            ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
             ("securitySettings" Core..=) Core.<$> securitySettings,
             ("speechToTextSettings" Core..=) Core.<$> speechToTextSettings,
             ("startFlow" Core..=) Core.<$> startFlow,
@@ -3568,7 +3598,7 @@ instance
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3BoostSpec' smart constructor.
 newtype GoogleCloudDialogflowCxV3BoostSpec = GoogleCloudDialogflowCxV3BoostSpec
-  { -- | Optional. Condition boost specifications. If a document matches multiple conditions in the specifictions, boost scores from these specifications are all applied and combined in a non-linear way. Maximum number of specifications is 20.
+  { -- | Optional. Condition boost specifications. If a document matches multiple conditions in the specifications, boost scores from these specifications are all applied and combined in a non-linear way. Maximum number of specifications is 20.
     conditionBoostSpecs :: (Core.Maybe [GoogleCloudDialogflowCxV3BoostSpecConditionBoostSpec])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4474,6 +4504,11 @@ data GoogleCloudDialogflowCxV3DataStoreConnection = GoogleCloudDialogflowCxV3Dat
     dataStoreType ::
       ( Core.Maybe
           GoogleCloudDialogflowCxV3DataStoreConnection_DataStoreType
+      ),
+    -- | The document processing mode for the data store connection. Should only be set for PUBLIC_WEB and UNSTRUCTURED data stores. If not set it is considered as DOCUMENTS, as this is the legacy mode.
+    documentProcessingMode ::
+      ( Core.Maybe
+          GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode
       )
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4485,7 +4520,8 @@ newGoogleCloudDialogflowCxV3DataStoreConnection =
   GoogleCloudDialogflowCxV3DataStoreConnection
     { dataStore =
         Core.Nothing,
-      dataStoreType = Core.Nothing
+      dataStoreType = Core.Nothing,
+      documentProcessingMode = Core.Nothing
     }
 
 instance Core.FromJSON GoogleCloudDialogflowCxV3DataStoreConnection where
@@ -4496,6 +4532,7 @@ instance Core.FromJSON GoogleCloudDialogflowCxV3DataStoreConnection where
           GoogleCloudDialogflowCxV3DataStoreConnection
             Core.<$> (o Core..:? "dataStore")
             Core.<*> (o Core..:? "dataStoreType")
+            Core.<*> (o Core..:? "documentProcessingMode")
       )
 
 instance Core.ToJSON GoogleCloudDialogflowCxV3DataStoreConnection where
@@ -4503,7 +4540,9 @@ instance Core.ToJSON GoogleCloudDialogflowCxV3DataStoreConnection where
     Core.object
       ( Core.catMaybes
           [ ("dataStore" Core..=) Core.<$> dataStore,
-            ("dataStoreType" Core..=) Core.<$> dataStoreType
+            ("dataStoreType" Core..=) Core.<$> dataStoreType,
+            ("documentProcessingMode" Core..=)
+              Core.<$> documentProcessingMode
           ]
       )
 
@@ -6811,7 +6850,7 @@ data GoogleCloudDialogflowCxV3Flow = GoogleCloudDialogflowCxV3Flow
     nluSettings :: (Core.Maybe GoogleCloudDialogflowCxV3NluSettings),
     -- | A flow\'s transition route group serve two purposes: * They are responsible for matching the user\'s first utterances in the flow. * They are inherited by every page\'s transition route groups. Transition route groups defined in the page have higher priority than those defined in the flow. Format: @projects\/\/locations\/\/agents\/\/flows\/\/transitionRouteGroups\/@ or @projects\/\/locations\/\/agents\/\/transitionRouteGroups\/@ for agent-level groups.
     transitionRouteGroups :: (Core.Maybe [Core.Text]),
-    -- | A flow\'s transition routes serve two purposes: * They are responsible for matching the user\'s first utterances in the flow. * They are inherited by every page\'s transition routes and can support use cases such as the user saying \"help\" or \"can I talk to a human?\", which can be handled in a common way regardless of the current page. Transition routes defined in the page have higher priority than those defined in the flow. TransitionRoutes are evalauted in the following order: * TransitionRoutes with intent specified. * TransitionRoutes with only condition specified. TransitionRoutes with intent specified are inherited by pages in the flow.
+    -- | A flow\'s transition routes serve two purposes: * They are responsible for matching the user\'s first utterances in the flow. * They are inherited by every page\'s transition routes and can support use cases such as the user saying \"help\" or \"can I talk to a human?\", which can be handled in a common way regardless of the current page. Transition routes defined in the page have higher priority than those defined in the flow. TransitionRoutes are evaluated in the following order: * TransitionRoutes with intent specified. * TransitionRoutes with only condition specified. TransitionRoutes with intent specified are inherited by pages in the flow.
     transitionRoutes :: (Core.Maybe [GoogleCloudDialogflowCxV3TransitionRoute])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -10272,7 +10311,7 @@ data GoogleCloudDialogflowCxV3Page = GoogleCloudDialogflowCxV3Page
     name :: (Core.Maybe Core.Text),
     -- | Ordered list of @TransitionRouteGroups@ added to the page. Transition route groups must be unique within a page. If the page links both flow-level transition route groups and agent-level transition route groups, the flow-level ones will have higher priority and will be put before the agent-level ones. * If multiple transition routes within a page scope refer to the same intent, then the precedence order is: page\'s transition route -> page\'s transition route group -> flow\'s transition routes. * If multiple transition route groups within a page contain the same intent, then the first group in the ordered list takes precedence. Format:@projects\/\/locations\/\/agents\/\/flows\/\/transitionRouteGroups\/@ or @projects\/\/locations\/\/agents\/\/transitionRouteGroups\/@ for agent-level groups.
     transitionRouteGroups :: (Core.Maybe [Core.Text]),
-    -- | A list of transitions for the transition rules of this page. They route the conversation to another page in the same flow, or another flow. When we are in a certain page, the TransitionRoutes are evalauted in the following order: * TransitionRoutes defined in the page with intent specified. * TransitionRoutes defined in the transition route groups with intent specified. * TransitionRoutes defined in flow with intent specified. * TransitionRoutes defined in the transition route groups with intent specified. * TransitionRoutes defined in the page with only condition specified. * TransitionRoutes defined in the transition route groups with only condition specified.
+    -- | A list of transitions for the transition rules of this page. They route the conversation to another page in the same flow, or another flow. When we are in a certain page, the TransitionRoutes are evaluated in the following order: * TransitionRoutes defined in the page with intent specified. * TransitionRoutes defined in the transition route groups with intent specified. * TransitionRoutes defined in flow with intent specified. * TransitionRoutes defined in the transition route groups with intent specified. * TransitionRoutes defined in the page with only condition specified. * TransitionRoutes defined in the transition route groups with only condition specified.
     transitionRoutes :: (Core.Maybe [GoogleCloudDialogflowCxV3TransitionRoute])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -10839,7 +10878,7 @@ data GoogleCloudDialogflowCxV3QueryResult = GoogleCloudDialogflowCxV3QueryResult
     allowAnswerFeedback :: (Core.Maybe Core.Bool),
     -- | The current Page. Some, not all fields are filled in this message, including but not limited to @name@ and @display_name@.
     currentPage :: (Core.Maybe GoogleCloudDialogflowCxV3Page),
-    -- | Optional. Data store connection feature output signals. Filled only when data stores are involved in serving the query and DetectIntentRequest.populate/data/store/connection/signals is set to true in the request.
+    -- | Optional. Data store connection feature output signals. Filled only when data stores are involved in serving the query.
     dataStoreConnectionSignals :: (Core.Maybe GoogleCloudDialogflowCxV3DataStoreConnectionSignals),
     -- | The free-form diagnostic info. For example, this field could contain webhook call latency. The fields of this data can change without notice, so you should not write code that depends on its structure. One of the fields is called \"Alternative Matched Intents\", which may aid with debugging. The following describes these intent results: - The list is empty if no intent was matched to end-user input. - Only intents that are referenced in the currently active flow are included. - The matched intent is included. - Other intents that could have matched end-user input, but did not match because they are referenced by intent routes that are out of <https://cloud.google.com/dialogflow/cx/docs/concept/handler#scope scope>, are included. - Other intents referenced by intent routes in scope that matched end-user input, but had a lower confidence score.
     diagnosticInfo :: (Core.Maybe GoogleCloudDialogflowCxV3QueryResult_DiagnosticInfo),
@@ -12262,9 +12301,9 @@ instance Core.ToJSON GoogleCloudDialogflowCxV3SafetySettingsPhrase where
 --
 -- /See:/ 'newGoogleCloudDialogflowCxV3SearchConfig' smart constructor.
 data GoogleCloudDialogflowCxV3SearchConfig = GoogleCloudDialogflowCxV3SearchConfig
-  { -- | Optional. Boosting configuration for the datastores.
+  { -- | Optional. Boosting configuration for the datastores. Maps from datastore name to their boost configuration. Do not specify more than one BoostSpecs for each datastore name. If multiple BoostSpecs are provided for the same datastore name, the behavior is undefined.
     boostSpecs :: (Core.Maybe [GoogleCloudDialogflowCxV3BoostSpecs]),
-    -- | Optional. Filter configuration for the datastores.
+    -- | Optional. Filter configuration for the datastores. Maps from datastore name to the filter expression for that datastore. Do not specify more than one FilterSpecs for each datastore name. If multiple FilterSpecs are provided for the same datastore name, the behavior is undefined.
     filterSpecs :: (Core.Maybe [GoogleCloudDialogflowCxV3FilterSpecs])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -14421,7 +14460,7 @@ instance
 data GoogleCloudDialogflowCxV3WebhookGenericWebServiceOAuthConfig = GoogleCloudDialogflowCxV3WebhookGenericWebServiceOAuthConfig
   { -- | Required. The client ID provided by the 3rd party platform.
     clientId :: (Core.Maybe Core.Text),
-    -- | Required. The client secret provided by the 3rd party platform.
+    -- | Optional. The client secret provided by the 3rd party platform.
     clientSecret :: (Core.Maybe Core.Text),
     -- | Optional. The OAuth scopes to grant.
     scopes :: (Core.Maybe [Core.Text]),
@@ -15255,7 +15294,7 @@ data GoogleCloudDialogflowCxV3beta1AdvancedSettingsSpeechSettings = GoogleCloudD
       ),
     -- | Timeout before detecting no speech.
     noSpeechTimeout :: (Core.Maybe Core.Duration),
-    -- | Use timeout based endpointing, interpreting endpointer sensitivy as seconds of timeout value.
+    -- | Use timeout based endpointing, interpreting endpointer sensitivity as seconds of timeout value.
     useTimeoutBasedEndpointing :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -15964,6 +16003,11 @@ data GoogleCloudDialogflowCxV3beta1DataStoreConnection = GoogleCloudDialogflowCx
     dataStoreType ::
       ( Core.Maybe
           GoogleCloudDialogflowCxV3beta1DataStoreConnection_DataStoreType
+      ),
+    -- | The document processing mode for the data store connection. Should only be set for PUBLIC_WEB and UNSTRUCTURED data stores. If not set it is considered as DOCUMENTS, as this is the legacy mode.
+    documentProcessingMode ::
+      ( Core.Maybe
+          GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode
       )
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -15975,7 +16019,8 @@ newGoogleCloudDialogflowCxV3beta1DataStoreConnection =
   GoogleCloudDialogflowCxV3beta1DataStoreConnection
     { dataStore =
         Core.Nothing,
-      dataStoreType = Core.Nothing
+      dataStoreType = Core.Nothing,
+      documentProcessingMode = Core.Nothing
     }
 
 instance
@@ -15989,6 +16034,7 @@ instance
           GoogleCloudDialogflowCxV3beta1DataStoreConnection
             Core.<$> (o Core..:? "dataStore")
             Core.<*> (o Core..:? "dataStoreType")
+            Core.<*> (o Core..:? "documentProcessingMode")
       )
 
 instance
@@ -15999,7 +16045,9 @@ instance
     Core.object
       ( Core.catMaybes
           [ ("dataStore" Core..=) Core.<$> dataStore,
-            ("dataStoreType" Core..=) Core.<$> dataStoreType
+            ("dataStoreType" Core..=) Core.<$> dataStoreType,
+            ("documentProcessingMode" Core..=)
+              Core.<$> documentProcessingMode
           ]
       )
 
@@ -18078,7 +18126,7 @@ data GoogleCloudDialogflowCxV3beta1Page = GoogleCloudDialogflowCxV3beta1Page
     name :: (Core.Maybe Core.Text),
     -- | Ordered list of @TransitionRouteGroups@ added to the page. Transition route groups must be unique within a page. If the page links both flow-level transition route groups and agent-level transition route groups, the flow-level ones will have higher priority and will be put before the agent-level ones. * If multiple transition routes within a page scope refer to the same intent, then the precedence order is: page\'s transition route -> page\'s transition route group -> flow\'s transition routes. * If multiple transition route groups within a page contain the same intent, then the first group in the ordered list takes precedence. Format:@projects\/\/locations\/\/agents\/\/flows\/\/transitionRouteGroups\/@ or @projects\/\/locations\/\/agents\/\/transitionRouteGroups\/@ for agent-level groups.
     transitionRouteGroups :: (Core.Maybe [Core.Text]),
-    -- | A list of transitions for the transition rules of this page. They route the conversation to another page in the same flow, or another flow. When we are in a certain page, the TransitionRoutes are evalauted in the following order: * TransitionRoutes defined in the page with intent specified. * TransitionRoutes defined in the transition route groups with intent specified. * TransitionRoutes defined in flow with intent specified. * TransitionRoutes defined in the transition route groups with intent specified. * TransitionRoutes defined in the page with only condition specified. * TransitionRoutes defined in the transition route groups with only condition specified.
+    -- | A list of transitions for the transition rules of this page. They route the conversation to another page in the same flow, or another flow. When we are in a certain page, the TransitionRoutes are evaluated in the following order: * TransitionRoutes defined in the page with intent specified. * TransitionRoutes defined in the transition route groups with intent specified. * TransitionRoutes defined in flow with intent specified. * TransitionRoutes defined in the transition route groups with intent specified. * TransitionRoutes defined in the page with only condition specified. * TransitionRoutes defined in the transition route groups with only condition specified.
     transitionRoutes :: (Core.Maybe [GoogleCloudDialogflowCxV3beta1TransitionRoute])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -20192,7 +20240,7 @@ instance
 data GoogleCloudDialogflowCxV3beta1WebhookGenericWebServiceOAuthConfig = GoogleCloudDialogflowCxV3beta1WebhookGenericWebServiceOAuthConfig
   { -- | Required. The client ID provided by the 3rd party platform.
     clientId :: (Core.Maybe Core.Text),
-    -- | Required. The client secret provided by the 3rd party platform.
+    -- | Optional. The client secret provided by the 3rd party platform.
     clientSecret :: (Core.Maybe Core.Text),
     -- | Optional. The OAuth scopes to grant.
     scopes :: (Core.Maybe [Core.Text]),
@@ -21245,6 +21293,8 @@ data GoogleCloudDialogflowV2ConversationEvent = GoogleCloudDialogflowV2Conversat
     errorStatus :: (Core.Maybe GoogleRpcStatus),
     -- | Payload of NEW_MESSAGE event.
     newMessagePayload' :: (Core.Maybe GoogleCloudDialogflowV2Message),
+    -- | Payload of NEW/RECOGNITION/RESULT event.
+    newRecognitionResultPayload' :: (Core.Maybe GoogleCloudDialogflowV2StreamingRecognitionResult),
     -- | The type of the event that this notification refers to.
     type' :: (Core.Maybe GoogleCloudDialogflowV2ConversationEvent_Type)
   }
@@ -21259,6 +21309,7 @@ newGoogleCloudDialogflowV2ConversationEvent =
         Core.Nothing,
       errorStatus = Core.Nothing,
       newMessagePayload' = Core.Nothing,
+      newRecognitionResultPayload' = Core.Nothing,
       type' = Core.Nothing
     }
 
@@ -21271,6 +21322,7 @@ instance Core.FromJSON GoogleCloudDialogflowV2ConversationEvent where
             Core.<$> (o Core..:? "conversation")
             Core.<*> (o Core..:? "errorStatus")
             Core.<*> (o Core..:? "newMessagePayload")
+            Core.<*> (o Core..:? "newRecognitionResultPayload")
             Core.<*> (o Core..:? "type")
       )
 
@@ -21281,6 +21333,8 @@ instance Core.ToJSON GoogleCloudDialogflowV2ConversationEvent where
           [ ("conversation" Core..=) Core.<$> conversation,
             ("errorStatus" Core..=) Core.<$> errorStatus,
             ("newMessagePayload" Core..=) Core.<$> newMessagePayload',
+            ("newRecognitionResultPayload" Core..=)
+              Core.<$> newRecognitionResultPayload',
             ("type" Core..=) Core.<$> type'
           ]
       )
@@ -24542,7 +24596,7 @@ data GoogleCloudDialogflowV2Message = GoogleCloudDialogflowV2Message
     participant :: (Core.Maybe Core.Text),
     -- | Output only. The role of the participant.
     participantRole :: (Core.Maybe GoogleCloudDialogflowV2Message_ParticipantRole),
-    -- | Optional. The time when the message was sent.
+    -- | Optional. The time when the message was sent. For voice messages, this is the time when an utterance started.
     sendTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The sentiment analysis result for the message.
     sentimentAnalysis :: (Core.Maybe GoogleCloudDialogflowV2SentimentAnalysisResult)
@@ -25231,6 +25285,130 @@ instance Core.ToJSON GoogleCloudDialogflowV2SmartReplyModelMetadata where
     Core.object
       ( Core.catMaybes
           [("trainingModelType" Core..=) Core.<$> trainingModelType]
+      )
+
+-- | Information for a word recognized by the speech recognizer.
+--
+-- /See:/ 'newGoogleCloudDialogflowV2SpeechWordInfo' smart constructor.
+data GoogleCloudDialogflowV2SpeechWordInfo = GoogleCloudDialogflowV2SpeechWordInfo
+  { -- | The Speech confidence between 0.0 and 1.0 for this word. A higher number indicates an estimated greater likelihood that the recognized word is correct. The default of 0.0 is a sentinel value indicating that confidence was not set. This field is not guaranteed to be fully stable over time for the same audio input. Users should also not rely on it to always be provided.
+    confidence :: (Core.Maybe Core.Double),
+    -- | Time offset relative to the beginning of the audio that corresponds to the end of the spoken word. This is an experimental feature and the accuracy of the time offset can vary.
+    endOffset :: (Core.Maybe Core.Duration),
+    -- | Time offset relative to the beginning of the audio that corresponds to the start of the spoken word. This is an experimental feature and the accuracy of the time offset can vary.
+    startOffset :: (Core.Maybe Core.Duration),
+    -- | The word this info is for.
+    word :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowV2SpeechWordInfo' with the minimum fields required to make a request.
+newGoogleCloudDialogflowV2SpeechWordInfo ::
+  GoogleCloudDialogflowV2SpeechWordInfo
+newGoogleCloudDialogflowV2SpeechWordInfo =
+  GoogleCloudDialogflowV2SpeechWordInfo
+    { confidence = Core.Nothing,
+      endOffset = Core.Nothing,
+      startOffset = Core.Nothing,
+      word = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudDialogflowV2SpeechWordInfo where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowV2SpeechWordInfo"
+      ( \o ->
+          GoogleCloudDialogflowV2SpeechWordInfo
+            Core.<$> (o Core..:? "confidence")
+            Core.<*> (o Core..:? "endOffset")
+            Core.<*> (o Core..:? "startOffset")
+            Core.<*> (o Core..:? "word")
+      )
+
+instance Core.ToJSON GoogleCloudDialogflowV2SpeechWordInfo where
+  toJSON GoogleCloudDialogflowV2SpeechWordInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("endOffset" Core..=) Core.<$> endOffset,
+            ("startOffset" Core..=) Core.<$> startOffset,
+            ("word" Core..=) Core.<$> word
+          ]
+      )
+
+-- | Contains a speech recognition result corresponding to a portion of the audio that is currently being processed or an indication that this is the end of the single requested utterance. While end-user audio is being processed, Dialogflow sends a series of results. Each result may contain a @transcript@ value. A transcript represents a portion of the utterance. While the recognizer is processing audio, transcript values may be interim values or finalized values. Once a transcript is finalized, the @is_final@ value is set to true and processing continues for the next transcript. If @StreamingDetectIntentRequest.query_input.audio_config.single_utterance@ was true, and the recognizer has completed processing audio, the @message_type@ value is set to
+-- @END_OF_SINGLE_UTTERANCE and the following (last) result contains the last finalized transcript. The complete end-user utterance is determined by concatenating the finalized transcript values received for the series of results. In the following example, single utterance is enabled. In the case where single utterance is not enabled, result 7 would not occur. \`\`\` Num | transcript | message_type | is_final --- | ----------------------- | ----------------------- | -------- 1 | \"tube\" | TRANSCRIPT | false 2 | \"to be a\" | TRANSCRIPT | false 3 | \"to be\" | TRANSCRIPT | false 4 | \"to be or not to be\" | TRANSCRIPT | true 5 | \"that\'s\" | TRANSCRIPT | false 6 | \"that is | TRANSCRIPT | false 7 | unset | END_OF_SINGLE_UTTERANCE | unset 8 | \" that is the question\" | TRANSCRIPT | true \`\`\` Concatenating the finalized transcripts with@is_final\` set to true, the complete utterance becomes \"to be or not to be that is the question\".
+--
+-- /See:/ 'newGoogleCloudDialogflowV2StreamingRecognitionResult' smart constructor.
+data GoogleCloudDialogflowV2StreamingRecognitionResult = GoogleCloudDialogflowV2StreamingRecognitionResult
+  { -- | The Speech confidence between 0.0 and 1.0 for the current portion of audio. A higher number indicates an estimated greater likelihood that the recognized words are correct. The default of 0.0 is a sentinel value indicating that confidence was not set. This field is typically only provided if @is_final@ is true and you should not rely on it being accurate or even set.
+    confidence :: (Core.Maybe Core.Double),
+    -- | If @false@, the @StreamingRecognitionResult@ represents an interim result that may change. If @true@, the recognizer will not return any further hypotheses about this piece of the audio. May only be populated for @message_type@ = @TRANSCRIPT@.
+    isFinal :: (Core.Maybe Core.Bool),
+    -- | Detected language code for the transcript.
+    languageCode :: (Core.Maybe Core.Text),
+    -- | Type of the result message.
+    messageType ::
+      ( Core.Maybe
+          GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType
+      ),
+    -- | Time offset of the end of this Speech recognition result relative to the beginning of the audio. Only populated for @message_type@ = @TRANSCRIPT@.
+    speechEndOffset :: (Core.Maybe Core.Duration),
+    -- | Word-specific information for the words recognized by Speech in transcript. Populated if and only if @message_type@ = @TRANSCRIPT@ and [InputAudioConfig.enable/word/info] is set.
+    speechWordInfo :: (Core.Maybe [GoogleCloudDialogflowV2SpeechWordInfo]),
+    -- | Transcript text representing the words that the user spoke. Populated if and only if @message_type@ = @TRANSCRIPT@.
+    transcript :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowV2StreamingRecognitionResult' with the minimum fields required to make a request.
+newGoogleCloudDialogflowV2StreamingRecognitionResult ::
+  GoogleCloudDialogflowV2StreamingRecognitionResult
+newGoogleCloudDialogflowV2StreamingRecognitionResult =
+  GoogleCloudDialogflowV2StreamingRecognitionResult
+    { confidence =
+        Core.Nothing,
+      isFinal = Core.Nothing,
+      languageCode = Core.Nothing,
+      messageType = Core.Nothing,
+      speechEndOffset = Core.Nothing,
+      speechWordInfo = Core.Nothing,
+      transcript = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowV2StreamingRecognitionResult
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowV2StreamingRecognitionResult"
+      ( \o ->
+          GoogleCloudDialogflowV2StreamingRecognitionResult
+            Core.<$> (o Core..:? "confidence")
+            Core.<*> (o Core..:? "isFinal")
+            Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "messageType")
+            Core.<*> (o Core..:? "speechEndOffset")
+            Core.<*> (o Core..:? "speechWordInfo")
+            Core.<*> (o Core..:? "transcript")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowV2StreamingRecognitionResult
+  where
+  toJSON GoogleCloudDialogflowV2StreamingRecognitionResult {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("isFinal" Core..=) Core.<$> isFinal,
+            ("languageCode" Core..=) Core.<$> languageCode,
+            ("messageType" Core..=) Core.<$> messageType,
+            ("speechEndOffset" Core..=) Core.<$> speechEndOffset,
+            ("speechWordInfo" Core..=) Core.<$> speechWordInfo,
+            ("transcript" Core..=) Core.<$> transcript
+          ]
       )
 
 -- | The response message for Participants.SuggestArticles.
@@ -26068,6 +26246,8 @@ data GoogleCloudDialogflowV2beta1ConversationEvent = GoogleCloudDialogflowV2beta
     errorStatus :: (Core.Maybe GoogleRpcStatus),
     -- | Payload of NEW_MESSAGE event.
     newMessagePayload' :: (Core.Maybe GoogleCloudDialogflowV2beta1Message),
+    -- | Payload of NEW/RECOGNITION/RESULT event.
+    newRecognitionResultPayload' :: (Core.Maybe GoogleCloudDialogflowV2beta1StreamingRecognitionResult),
     -- | Required. The type of the event that this notification refers to.
     type' :: (Core.Maybe GoogleCloudDialogflowV2beta1ConversationEvent_Type)
   }
@@ -26082,6 +26262,7 @@ newGoogleCloudDialogflowV2beta1ConversationEvent =
         Core.Nothing,
       errorStatus = Core.Nothing,
       newMessagePayload' = Core.Nothing,
+      newRecognitionResultPayload' = Core.Nothing,
       type' = Core.Nothing
     }
 
@@ -26097,6 +26278,7 @@ instance
             Core.<$> (o Core..:? "conversation")
             Core.<*> (o Core..:? "errorStatus")
             Core.<*> (o Core..:? "newMessagePayload")
+            Core.<*> (o Core..:? "newRecognitionResultPayload")
             Core.<*> (o Core..:? "type")
       )
 
@@ -26107,6 +26289,8 @@ instance Core.ToJSON GoogleCloudDialogflowV2beta1ConversationEvent where
           [ ("conversation" Core..=) Core.<$> conversation,
             ("errorStatus" Core..=) Core.<$> errorStatus,
             ("newMessagePayload" Core..=) Core.<$> newMessagePayload',
+            ("newRecognitionResultPayload" Core..=)
+              Core.<$> newRecognitionResultPayload',
             ("type" Core..=) Core.<$> type'
           ]
       )
@@ -29927,7 +30111,7 @@ data GoogleCloudDialogflowV2beta1Message = GoogleCloudDialogflowV2beta1Message
     participantRole :: (Core.Maybe GoogleCloudDialogflowV2beta1Message_ParticipantRole),
     -- | Optional. Automated agent responses.
     responseMessages :: (Core.Maybe [GoogleCloudDialogflowV2beta1ResponseMessage]),
-    -- | Optional. The time when the message was sent.
+    -- | Optional. The time when the message was sent. For voice messages, this is the time when an utterance started.
     sendTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The sentiment analysis result for the message.
     sentimentAnalysis :: (Core.Maybe GoogleCloudDialogflowV2beta1SentimentAnalysisResult)
@@ -30499,7 +30683,7 @@ instance
   where
   toJSON = Core.const Core.emptyObject
 
--- | Indicates that the conversation should be handed off to a human agent. Dialogflow only uses this to determine which conversations were handed off to a human agent for measurement purposes. What else to do with this signal is up to you and your handoff procedures. You may set this, for example: * In the entry fulfillment of a CX Page if entering the page indicates something went extremely wrong in the conversation. * In a webhook response when you determine that the customer issue can only be handled by a human.
+-- | Indicates that the conversation should be handed off to a human agent. Dialogflow only uses this to determine which conversations were handed off to a human agent for measurement purposes. What else to do with this signal is up to you and your handoff procedures. You may set this, for example: * In the entry fulfillment of a Dialogflow CX Page if entering the page indicates something went extremely wrong in the conversation. * In a webhook response when you determine that the customer issue can only be handled by a human.
 --
 -- /See:/ 'newGoogleCloudDialogflowV2beta1ResponseMessageLiveAgentHandoff' smart constructor.
 newtype GoogleCloudDialogflowV2beta1ResponseMessageLiveAgentHandoff = GoogleCloudDialogflowV2beta1ResponseMessageLiveAgentHandoff
@@ -31003,6 +31187,141 @@ instance Core.ToJSON GoogleCloudDialogflowV2beta1SmartReplyAnswer where
           ]
       )
 
+-- | Information for a word recognized by the speech recognizer.
+--
+-- /See:/ 'newGoogleCloudDialogflowV2beta1SpeechWordInfo' smart constructor.
+data GoogleCloudDialogflowV2beta1SpeechWordInfo = GoogleCloudDialogflowV2beta1SpeechWordInfo
+  { -- | The Speech confidence between 0.0 and 1.0 for this word. A higher number indicates an estimated greater likelihood that the recognized word is correct. The default of 0.0 is a sentinel value indicating that confidence was not set. This field is not guaranteed to be fully stable over time for the same audio input. Users should also not rely on it to always be provided.
+    confidence :: (Core.Maybe Core.Double),
+    -- | Time offset relative to the beginning of the audio that corresponds to the end of the spoken word. This is an experimental feature and the accuracy of the time offset can vary.
+    endOffset :: (Core.Maybe Core.Duration),
+    -- | Time offset relative to the beginning of the audio that corresponds to the start of the spoken word. This is an experimental feature and the accuracy of the time offset can vary.
+    startOffset :: (Core.Maybe Core.Duration),
+    -- | The word this info is for.
+    word :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowV2beta1SpeechWordInfo' with the minimum fields required to make a request.
+newGoogleCloudDialogflowV2beta1SpeechWordInfo ::
+  GoogleCloudDialogflowV2beta1SpeechWordInfo
+newGoogleCloudDialogflowV2beta1SpeechWordInfo =
+  GoogleCloudDialogflowV2beta1SpeechWordInfo
+    { confidence =
+        Core.Nothing,
+      endOffset = Core.Nothing,
+      startOffset = Core.Nothing,
+      word = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudDialogflowV2beta1SpeechWordInfo where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowV2beta1SpeechWordInfo"
+      ( \o ->
+          GoogleCloudDialogflowV2beta1SpeechWordInfo
+            Core.<$> (o Core..:? "confidence")
+            Core.<*> (o Core..:? "endOffset")
+            Core.<*> (o Core..:? "startOffset")
+            Core.<*> (o Core..:? "word")
+      )
+
+instance Core.ToJSON GoogleCloudDialogflowV2beta1SpeechWordInfo where
+  toJSON GoogleCloudDialogflowV2beta1SpeechWordInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("endOffset" Core..=) Core.<$> endOffset,
+            ("startOffset" Core..=) Core.<$> startOffset,
+            ("word" Core..=) Core.<$> word
+          ]
+      )
+
+-- | Contains a speech recognition result corresponding to a portion of the audio that is currently being processed or an indication that this is the end of the single requested utterance. While end-user audio is being processed, Dialogflow sends a series of results. Each result may contain a @transcript@ value. A transcript represents a portion of the utterance. While the recognizer is processing audio, transcript values may be interim values or finalized values. Once a transcript is finalized, the @is_final@ value is set to true and processing continues for the next transcript. If @StreamingDetectIntentRequest.query_input.audio_config.single_utterance@ was true, and the recognizer has completed processing audio, the @message_type@ value is set to
+-- @END_OF_SINGLE_UTTERANCE and the following (last) result contains the last finalized transcript. The complete end-user utterance is determined by concatenating the finalized transcript values received for the series of results. In the following example, single utterance is enabled. In the case where single utterance is not enabled, result 7 would not occur. \`\`\` Num | transcript | message_type | is_final --- | ----------------------- | ----------------------- | -------- 1 | \"tube\" | TRANSCRIPT | false 2 | \"to be a\" | TRANSCRIPT | false 3 | \"to be\" | TRANSCRIPT | false 4 | \"to be or not to be\" | TRANSCRIPT | true 5 | \"that\'s\" | TRANSCRIPT | false 6 | \"that is | TRANSCRIPT | false 7 | unset | END_OF_SINGLE_UTTERANCE | unset 8 | \" that is the question\" | TRANSCRIPT | true \`\`\` Concatenating the finalized transcripts with@is_final\` set to true, the complete utterance becomes \"to be or not to be that is the question\".
+--
+-- /See:/ 'newGoogleCloudDialogflowV2beta1StreamingRecognitionResult' smart constructor.
+data GoogleCloudDialogflowV2beta1StreamingRecognitionResult = GoogleCloudDialogflowV2beta1StreamingRecognitionResult
+  { -- | The Speech confidence between 0.0 and 1.0 for the current portion of audio. A higher number indicates an estimated greater likelihood that the recognized words are correct. The default of 0.0 is a sentinel value indicating that confidence was not set. This field is typically only provided if @is_final@ is true and you should not rely on it being accurate or even set.
+    confidence :: (Core.Maybe Core.Double),
+    -- | DTMF digits. Populated if and only if @message_type@ = @DTMF_DIGITS@.
+    dtmfDigits :: (Core.Maybe GoogleCloudDialogflowV2beta1TelephonyDtmfEvents),
+    -- | If @false@, the @StreamingRecognitionResult@ represents an interim result that may change. If @true@, the recognizer will not return any further hypotheses about this piece of the audio. May only be populated for @message_type@ = @TRANSCRIPT@.
+    isFinal :: (Core.Maybe Core.Bool),
+    -- | Detected language code for the transcript.
+    languageCode :: (Core.Maybe Core.Text),
+    -- | Type of the result message.
+    messageType ::
+      ( Core.Maybe
+          GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType
+      ),
+    -- | Time offset of the end of this Speech recognition result relative to the beginning of the audio. Only populated for @message_type@ = @TRANSCRIPT@.
+    speechEndOffset :: (Core.Maybe Core.Duration),
+    -- | Word-specific information for the words recognized by Speech in transcript. Populated if and only if @message_type@ = @TRANSCRIPT@ and [InputAudioConfig.enable/word/info] is set.
+    speechWordInfo :: (Core.Maybe [GoogleCloudDialogflowV2beta1SpeechWordInfo]),
+    -- | An estimate of the likelihood that the speech recognizer will not change its guess about this interim recognition result: * If the value is unspecified or 0.0, Dialogflow didn\'t compute the stability. In particular, Dialogflow will only provide stability for @TRANSCRIPT@ results with @is_final = false@. * Otherwise, the value is in (0.0, 1.0] where 0.0 means completely unstable and 1.0 means completely stable.
+    stability :: (Core.Maybe Core.Double),
+    -- | Transcript text representing the words that the user spoke. Populated if and only if @message_type@ = @TRANSCRIPT@.
+    transcript :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowV2beta1StreamingRecognitionResult' with the minimum fields required to make a request.
+newGoogleCloudDialogflowV2beta1StreamingRecognitionResult ::
+  GoogleCloudDialogflowV2beta1StreamingRecognitionResult
+newGoogleCloudDialogflowV2beta1StreamingRecognitionResult =
+  GoogleCloudDialogflowV2beta1StreamingRecognitionResult
+    { confidence =
+        Core.Nothing,
+      dtmfDigits = Core.Nothing,
+      isFinal = Core.Nothing,
+      languageCode = Core.Nothing,
+      messageType = Core.Nothing,
+      speechEndOffset = Core.Nothing,
+      speechWordInfo = Core.Nothing,
+      stability = Core.Nothing,
+      transcript = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowV2beta1StreamingRecognitionResult
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowV2beta1StreamingRecognitionResult"
+      ( \o ->
+          GoogleCloudDialogflowV2beta1StreamingRecognitionResult
+            Core.<$> (o Core..:? "confidence")
+            Core.<*> (o Core..:? "dtmfDigits")
+            Core.<*> (o Core..:? "isFinal")
+            Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "messageType")
+            Core.<*> (o Core..:? "speechEndOffset")
+            Core.<*> (o Core..:? "speechWordInfo")
+            Core.<*> (o Core..:? "stability")
+            Core.<*> (o Core..:? "transcript")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowV2beta1StreamingRecognitionResult
+  where
+  toJSON GoogleCloudDialogflowV2beta1StreamingRecognitionResult {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("dtmfDigits" Core..=) Core.<$> dtmfDigits,
+            ("isFinal" Core..=) Core.<$> isFinal,
+            ("languageCode" Core..=) Core.<$> languageCode,
+            ("messageType" Core..=) Core.<$> messageType,
+            ("speechEndOffset" Core..=) Core.<$> speechEndOffset,
+            ("speechWordInfo" Core..=) Core.<$> speechWordInfo,
+            ("stability" Core..=) Core.<$> stability,
+            ("transcript" Core..=) Core.<$> transcript
+          ]
+      )
+
 -- | The response message for Participants.SuggestArticles.
 --
 -- /See:/ 'newGoogleCloudDialogflowV2beta1SuggestArticlesResponse' smart constructor.
@@ -31344,6 +31663,47 @@ instance Core.ToJSON GoogleCloudDialogflowV2beta1SuggestionResult where
               Core.<$> suggestSmartRepliesResponse
           ]
       )
+
+-- | A wrapper of repeated TelephonyDtmf digits.
+--
+-- /See:/ 'newGoogleCloudDialogflowV2beta1TelephonyDtmfEvents' smart constructor.
+newtype GoogleCloudDialogflowV2beta1TelephonyDtmfEvents = GoogleCloudDialogflowV2beta1TelephonyDtmfEvents
+  { -- | A sequence of TelephonyDtmf digits.
+    dtmfEvents ::
+      ( Core.Maybe
+          [GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem]
+      )
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudDialogflowV2beta1TelephonyDtmfEvents' with the minimum fields required to make a request.
+newGoogleCloudDialogflowV2beta1TelephonyDtmfEvents ::
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents
+newGoogleCloudDialogflowV2beta1TelephonyDtmfEvents =
+  GoogleCloudDialogflowV2beta1TelephonyDtmfEvents
+    { dtmfEvents =
+        Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudDialogflowV2beta1TelephonyDtmfEvents
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudDialogflowV2beta1TelephonyDtmfEvents"
+      ( \o ->
+          GoogleCloudDialogflowV2beta1TelephonyDtmfEvents
+            Core.<$> (o Core..:? "dtmfEvents")
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudDialogflowV2beta1TelephonyDtmfEvents
+  where
+  toJSON GoogleCloudDialogflowV2beta1TelephonyDtmfEvents {..} =
+    Core.object
+      (Core.catMaybes [("dtmfEvents" Core..=) Core.<$> dtmfEvents])
 
 -- | The request message for a webhook call.
 --

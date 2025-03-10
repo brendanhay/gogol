@@ -16,11 +16,11 @@ where
 
 import Control.Lens (Iso', iso)
 import Data.Aeson (FromJSON (..), ToJSON (..))
-import qualified Data.Base64.Types as Base64
+import Data.Base64.Types qualified as Base64
 import Data.ByteString (ByteString)
-import qualified Data.ByteString.Base64 as Base64
+import Data.ByteString.Base64 qualified as Base64
 import Data.Hashable
-import qualified Data.Text.Encoding as Text
+import Data.Text.Encoding qualified as Text
 import GHC.Generics (Generic)
 import Gogol.Data.JSON (parseJSONText, toJSONText)
 import Web.HttpApiData (FromHttpApiData (..), ToHttpApiData (..))

@@ -70,7 +70,12 @@ instance Core.GoogleRequest CalendarCalendarsGet where
   type Rs CalendarCalendarsGet = Calendar
   type
     Scopes CalendarCalendarsGet =
-      '[Calendar'FullControl, Calendar'Readonly]
+      '[ Calendar'FullControl,
+         Calendar'App'Created,
+         Calendar'Calendars,
+         Calendar'Calendars'Readonly,
+         Calendar'Readonly
+       ]
   requestClient CalendarCalendarsGet {..} =
     go calendarId (Core.Just Core.AltJSON) appsCalendarService
     where

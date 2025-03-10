@@ -23,7 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Redacts potentially sensitive info from an image. This method has limits on input size, processing time, and output size. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/redacting-sensitive-data-images to learn more. When no InfoTypes or CustomInfoTypes are specified in this request, the system will automatically choose what detectors to run. By default this may be all types, but may change over time as detectors are updated.
+-- Redacts potentially sensitive info from an image. This method has limits on input size, processing time, and output size. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/redacting-sensitive-data-images to learn more. When no InfoTypes or CustomInfoTypes are specified in this request, the system will automatically choose what detectors to run. By default this may be all types, but may change over time as detectors are updated. Only the first frame of each multiframe image is redacted. Metadata and other frames are omitted in the response.
 --
 -- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.projects.image.redact@.
 module Gogol.DLP.Projects.Image.Redact
@@ -54,7 +54,7 @@ type DLPProjectsImageRedactResource =
     Core.:> Core.ReqBody '[Core.JSON] GooglePrivacyDlpV2RedactImageRequest
     Core.:> Core.Post '[Core.JSON] GooglePrivacyDlpV2RedactImageResponse
 
--- | Redacts potentially sensitive info from an image. This method has limits on input size, processing time, and output size. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/redacting-sensitive-data-images to learn more. When no InfoTypes or CustomInfoTypes are specified in this request, the system will automatically choose what detectors to run. By default this may be all types, but may change over time as detectors are updated.
+-- | Redacts potentially sensitive info from an image. This method has limits on input size, processing time, and output size. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/redacting-sensitive-data-images to learn more. When no InfoTypes or CustomInfoTypes are specified in this request, the system will automatically choose what detectors to run. By default this may be all types, but may change over time as detectors are updated. Only the first frame of each multiframe image is redacted. Metadata and other frames are omitted in the response.
 --
 -- /See:/ 'newDLPProjectsImageRedact' smart constructor.
 data DLPProjectsImageRedact = DLPProjectsImageRedact

@@ -268,11 +268,11 @@ newtype GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey = GoogleCloudAssetV1
 pattern GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_PARTITIONKEYUNSPECIFIED :: GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey
 pattern GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_PARTITIONKEYUNSPECIFIED = GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey "PARTITION_KEY_UNSPECIFIED"
 
--- | The time when the snapshot is taken. If specified as partition key, the result table(s) is partitoned by the additional timestamp column, readTime. If [read_time] in ExportAssetsRequest is specified, the readTime column\'s value will be the same as it. Otherwise, its value will be the current time that is used to take the snapshot.
+-- | The time when the snapshot is taken. If specified as partition key, the result table(s) is partitioned by the additional timestamp column, readTime. If [read_time] in ExportAssetsRequest is specified, the readTime column\'s value will be the same as it. Otherwise, its value will be the current time that is used to take the snapshot.
 pattern GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_READTIME :: GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey
 pattern GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_READTIME = GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey "READ_TIME"
 
--- | The time when the request is received and started to be processed. If specified as partition key, the result table(s) is partitoned by the requestTime column, an additional timestamp column representing when the request was received.
+-- | The time when the request is received and started to be processed. If specified as partition key, the result table(s) is partitioned by the requestTime column, an additional timestamp column representing when the request was received.
 pattern GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_REQUESTTIME :: GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey
 pattern GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_REQUESTTIME = GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey "REQUEST_TIME"
 

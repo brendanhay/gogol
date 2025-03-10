@@ -1854,7 +1854,9 @@ data ListConnectionsResponse = ListConnectionsResponse
   { -- | The list of Connections.
     connections :: (Core.Maybe [Connection]),
     -- | A token identifying a page of results the server should return.
-    nextPageToken :: (Core.Maybe Core.Text)
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | Locations that could not be reached.
+    unreachable :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1864,7 +1866,8 @@ newListConnectionsResponse ::
 newListConnectionsResponse =
   ListConnectionsResponse
     { connections = Core.Nothing,
-      nextPageToken = Core.Nothing
+      nextPageToken = Core.Nothing,
+      unreachable = Core.Nothing
     }
 
 instance Core.FromJSON ListConnectionsResponse where
@@ -1875,6 +1878,7 @@ instance Core.FromJSON ListConnectionsResponse where
           ListConnectionsResponse
             Core.<$> (o Core..:? "connections")
             Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "unreachable")
       )
 
 instance Core.ToJSON ListConnectionsResponse where
@@ -1882,7 +1886,8 @@ instance Core.ToJSON ListConnectionsResponse where
     Core.object
       ( Core.catMaybes
           [ ("connections" Core..=) Core.<$> connections,
-            ("nextPageToken" Core..=) Core.<$> nextPageToken
+            ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("unreachable" Core..=) Core.<$> unreachable
           ]
       )
 
@@ -1932,7 +1937,9 @@ data ListRepositoriesResponse = ListRepositoriesResponse
   { -- | A token identifying a page of results the server should return.
     nextPageToken :: (Core.Maybe Core.Text),
     -- | The list of Repositories.
-    repositories :: (Core.Maybe [Repository])
+    repositories :: (Core.Maybe [Repository]),
+    -- | Locations that could not be reached.
+    unreachable :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1942,7 +1949,8 @@ newListRepositoriesResponse ::
 newListRepositoriesResponse =
   ListRepositoriesResponse
     { nextPageToken = Core.Nothing,
-      repositories = Core.Nothing
+      repositories = Core.Nothing,
+      unreachable = Core.Nothing
     }
 
 instance Core.FromJSON ListRepositoriesResponse where
@@ -1953,6 +1961,7 @@ instance Core.FromJSON ListRepositoriesResponse where
           ListRepositoriesResponse
             Core.<$> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "repositories")
+            Core.<*> (o Core..:? "unreachable")
       )
 
 instance Core.ToJSON ListRepositoriesResponse where
@@ -1960,7 +1969,8 @@ instance Core.ToJSON ListRepositoriesResponse where
     Core.object
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("repositories" Core..=) Core.<$> repositories
+            ("repositories" Core..=) Core.<$> repositories,
+            ("unreachable" Core..=) Core.<$> unreachable
           ]
       )
 

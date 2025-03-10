@@ -183,6 +183,9 @@ module Gogol.AdSense.Types
     PolicyTopic (..),
     newPolicyTopic,
 
+    -- ** PolicyTopic_Type
+    PolicyTopic_Type (..),
+
     -- ** ReportResult
     ReportResult (..),
     newReportResult,

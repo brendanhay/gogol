@@ -86,8 +86,8 @@ library
     Gogol.Drive.Files.ModifyLabels
     Gogol.Drive.Files.Update
     Gogol.Drive.Files.Watch
-    Gogol.Drive.Operation.Cancel
-    Gogol.Drive.Operation.Delete
+    Gogol.Drive.Operations.Cancel
+    Gogol.Drive.Operations.Delete
     Gogol.Drive.Operations.Get
     Gogol.Drive.Operations.List
     Gogol.Drive.Permissions.Create

@@ -1628,10 +1628,10 @@ instance Core.ToJSON IOPSPerTB where
 --
 -- /See:/ 'newInstance' smart constructor.
 data Instance = Instance
-  { -- | Output only. Indicates whether this instance\'s performance is configurable. If enabled, adjust it using the \'performance_config\' field.
-    configurablePerformanceEnabled :: (Core.Maybe Core.Bool),
-    -- | Output only. The time when the instance was created.
+  { -- | Output only. The time when the instance was created.
     createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. Indicates whether this instance supports configuring its performance. If true, the user can configure the instance\'s performance by using the \'performance_config\' field.
+    customPerformanceSupported :: (Core.Maybe Core.Bool),
     -- | Optional. Indicates whether the instance is protected against deletion.
     deletionProtectionEnabled :: (Core.Maybe Core.Bool),
     -- | Optional. The reason for enabling deletion protection.
@@ -1680,8 +1680,8 @@ newInstance ::
   Instance
 newInstance =
   Instance
-    { configurablePerformanceEnabled = Core.Nothing,
-      createTime = Core.Nothing,
+    { createTime = Core.Nothing,
+      customPerformanceSupported = Core.Nothing,
       deletionProtectionEnabled = Core.Nothing,
       deletionProtectionReason = Core.Nothing,
       description = Core.Nothing,
@@ -1710,8 +1710,8 @@ instance Core.FromJSON Instance where
       "Instance"
       ( \o ->
           Instance
-            Core.<$> (o Core..:? "configurablePerformanceEnabled")
-            Core.<*> (o Core..:? "createTime")
+            Core.<$> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "customPerformanceSupported")
             Core.<*> (o Core..:? "deletionProtectionEnabled")
             Core.<*> (o Core..:? "deletionProtectionReason")
             Core.<*> (o Core..:? "description")
@@ -1738,9 +1738,9 @@ instance Core.ToJSON Instance where
   toJSON Instance {..} =
     Core.object
       ( Core.catMaybes
-          [ ("configurablePerformanceEnabled" Core..=)
-              Core.<$> configurablePerformanceEnabled,
-            ("createTime" Core..=) Core.<$> createTime,
+          [ ("createTime" Core..=) Core.<$> createTime,
+            ("customPerformanceSupported" Core..=)
+              Core.<$> customPerformanceSupported,
             ("deletionProtectionEnabled" Core..=)
               Core.<$> deletionProtectionEnabled,
             ("deletionProtectionReason" Core..=)
@@ -2543,7 +2543,7 @@ instance Core.ToJSON OperationMetadata where
 data PerformanceConfig = PerformanceConfig
   { -- | Choose a fixed provisioned IOPS value for the instance, which will remain constant regardless of instance capacity. Value must be a multiple of 1000. If the chosen value is outside the supported range for the instance\'s capacity during instance creation, instance creation will fail with an @InvalidArgument@ error. Similarly, if an instance capacity update would result in a value outside the supported range, the update will fail with an @InvalidArgument@ error.
     fixedIops :: (Core.Maybe FixedIOPS),
-    -- | Provision IOPS dynamically based on the capacity of the instance. Provisioned read IOPS will be calculated by multiplying the capacity of the instance in TiB by the @iops_per_tb@ value. For example, for a 2 TiB instance with an @iops_per_tb@ value of 17000 the provisioned read IOPS will be 34000. If the calculated value is outside the supported range for the instance\'s capacity during instance creation, instance creation will fail with an @InvalidArgument@ error. Similarly, if an instance capacity update would result in a value outside the supported range, the update will fail with an @InvalidArgument@ error.
+    -- | Provision IOPS dynamically based on the capacity of the instance. Provisioned IOPS will be calculated by multiplying the capacity of the instance in TiB by the @iops_per_tb@ value. For example, for a 2 TiB instance with an @iops_per_tb@ value of 17000 the provisioned IOPS will be 34000. If the calculated value is outside the supported range for the instance\'s capacity during instance creation, instance creation will fail with an @InvalidArgument@ error. Similarly, if an instance capacity update would result in a value outside the supported range, the update will fail with an @InvalidArgument@ error.
     iopsPerTb :: (Core.Maybe IOPSPerTB)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2580,7 +2580,9 @@ instance Core.ToJSON PerformanceConfig where
 --
 -- /See:/ 'newPerformanceLimits' smart constructor.
 data PerformanceLimits = PerformanceLimits
-  { -- | Output only. The max read IOPS.
+  { -- | Output only. The max IOPS.
+    maxIops :: (Core.Maybe Core.Int64),
+    -- | Output only. The max read IOPS.
     maxReadIops :: (Core.Maybe Core.Int64),
     -- | Output only. The max read throughput in bytes per second.
     maxReadThroughputBps :: (Core.Maybe Core.Int64),
@@ -2596,7 +2598,8 @@ newPerformanceLimits ::
   PerformanceLimits
 newPerformanceLimits =
   PerformanceLimits
-    { maxReadIops = Core.Nothing,
+    { maxIops = Core.Nothing,
+      maxReadIops = Core.Nothing,
       maxReadThroughputBps = Core.Nothing,
       maxWriteIops = Core.Nothing,
       maxWriteThroughputBps = Core.Nothing
@@ -2608,7 +2611,8 @@ instance Core.FromJSON PerformanceLimits where
       "PerformanceLimits"
       ( \o ->
           PerformanceLimits
-            Core.<$> (o Core..:? "maxReadIops" Core.<&> Core.fmap Core.fromAsText)
+            Core.<$> (o Core..:? "maxIops" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "maxReadIops" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> ( o
                          Core..:? "maxReadThroughputBps"
                          Core.<&> Core.fmap Core.fromAsText
@@ -2624,7 +2628,8 @@ instance Core.ToJSON PerformanceLimits where
   toJSON PerformanceLimits {..} =
     Core.object
       ( Core.catMaybes
-          [ ("maxReadIops" Core..=) Core.. Core.AsText Core.<$> maxReadIops,
+          [ ("maxIops" Core..=) Core.. Core.AsText Core.<$> maxIops,
+            ("maxReadIops" Core..=) Core.. Core.AsText Core.<$> maxReadIops,
             ("maxReadThroughputBps" Core..=)
               Core.. Core.AsText
               Core.<$> maxReadThroughputBps,
@@ -2638,22 +2643,28 @@ instance Core.ToJSON PerformanceLimits where
 -- | PromoteReplicaRequest promotes a Filestore standby instance (replica).
 --
 -- /See:/ 'newPromoteReplicaRequest' smart constructor.
-data PromoteReplicaRequest = PromoteReplicaRequest
+newtype PromoteReplicaRequest = PromoteReplicaRequest
+  { -- | Optional. The resource name of the peer instance to promote, in the format @projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}@. The peer instance is required if the operation is called on an active instance.
+    peerInstance :: (Core.Maybe Core.Text)
+  }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'PromoteReplicaRequest' with the minimum fields required to make a request.
 newPromoteReplicaRequest ::
   PromoteReplicaRequest
-newPromoteReplicaRequest = PromoteReplicaRequest
+newPromoteReplicaRequest =
+  PromoteReplicaRequest {peerInstance = Core.Nothing}
 
 instance Core.FromJSON PromoteReplicaRequest where
   parseJSON =
     Core.withObject
       "PromoteReplicaRequest"
-      (\o -> Core.pure PromoteReplicaRequest)
+      (\o -> PromoteReplicaRequest Core.<$> (o Core..:? "peerInstance"))
 
 instance Core.ToJSON PromoteReplicaRequest where
-  toJSON = Core.const Core.emptyObject
+  toJSON PromoteReplicaRequest {..} =
+    Core.object
+      (Core.catMaybes [("peerInstance" Core..=) Core.<$> peerInstance])
 
 -- | Replica configuration for the instance.
 --

@@ -271,6 +271,10 @@ module Gogol.BigtableAdmin.Internal.Product
     GoogleBigtableAdminV2TypeInt64EncodingBigEndianBytes (..),
     newGoogleBigtableAdminV2TypeInt64EncodingBigEndianBytes,
 
+    -- * GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes
+    GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes (..),
+    newGoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes,
+
     -- * GoogleBigtableAdminV2TypeMap
     GoogleBigtableAdminV2TypeMap (..),
     newGoogleBigtableAdminV2TypeMap,
@@ -295,6 +299,22 @@ module Gogol.BigtableAdmin.Internal.Product
     GoogleBigtableAdminV2TypeStruct (..),
     newGoogleBigtableAdminV2TypeStruct,
 
+    -- * GoogleBigtableAdminV2TypeStructEncoding
+    GoogleBigtableAdminV2TypeStructEncoding (..),
+    newGoogleBigtableAdminV2TypeStructEncoding,
+
+    -- * GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes
+    GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes (..),
+    newGoogleBigtableAdminV2TypeStructEncodingDelimitedBytes,
+
+    -- * GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes
+    GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes (..),
+    newGoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes,
+
+    -- * GoogleBigtableAdminV2TypeStructEncodingSingleton
+    GoogleBigtableAdminV2TypeStructEncodingSingleton (..),
+    newGoogleBigtableAdminV2TypeStructEncodingSingleton,
+
     -- * GoogleBigtableAdminV2TypeStructField
     GoogleBigtableAdminV2TypeStructField (..),
     newGoogleBigtableAdminV2TypeStructField,
@@ -302,6 +322,10 @@ module Gogol.BigtableAdmin.Internal.Product
     -- * GoogleBigtableAdminV2TypeTimestamp
     GoogleBigtableAdminV2TypeTimestamp (..),
     newGoogleBigtableAdminV2TypeTimestamp,
+
+    -- * GoogleBigtableAdminV2TypeTimestampEncoding
+    GoogleBigtableAdminV2TypeTimestampEncoding (..),
+    newGoogleBigtableAdminV2TypeTimestampEncoding,
 
     -- * HotTablet
     HotTablet (..),
@@ -2701,7 +2725,10 @@ instance Core.ToJSON GoogleBigtableAdminV2TypeBytesEncoding where
 -- | Leaves the value as-is. Sorted mode: all values are supported. Distinct mode: all values are supported.
 --
 -- /See:/ 'newGoogleBigtableAdminV2TypeBytesEncodingRaw' smart constructor.
-data GoogleBigtableAdminV2TypeBytesEncodingRaw = GoogleBigtableAdminV2TypeBytesEncodingRaw
+newtype GoogleBigtableAdminV2TypeBytesEncodingRaw = GoogleBigtableAdminV2TypeBytesEncodingRaw
+  { -- | If set, allows NULL values to be encoded as the empty string \"\". The actual empty string, or any value which only contains the null byte 0x00, has one more null byte appended.
+    escapeNulls :: (Core.Maybe Core.Bool)
+  }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GoogleBigtableAdminV2TypeBytesEncodingRaw' with the minimum fields required to make a request.
@@ -2709,15 +2736,23 @@ newGoogleBigtableAdminV2TypeBytesEncodingRaw ::
   GoogleBigtableAdminV2TypeBytesEncodingRaw
 newGoogleBigtableAdminV2TypeBytesEncodingRaw =
   GoogleBigtableAdminV2TypeBytesEncodingRaw
+    { escapeNulls =
+        Core.Nothing
+    }
 
 instance Core.FromJSON GoogleBigtableAdminV2TypeBytesEncodingRaw where
   parseJSON =
     Core.withObject
       "GoogleBigtableAdminV2TypeBytesEncodingRaw"
-      (\o -> Core.pure GoogleBigtableAdminV2TypeBytesEncodingRaw)
+      ( \o ->
+          GoogleBigtableAdminV2TypeBytesEncodingRaw
+            Core.<$> (o Core..:? "escapeNulls")
+      )
 
 instance Core.ToJSON GoogleBigtableAdminV2TypeBytesEncodingRaw where
-  toJSON = Core.const Core.emptyObject
+  toJSON GoogleBigtableAdminV2TypeBytesEncodingRaw {..} =
+    Core.object
+      (Core.catMaybes [("escapeNulls" Core..=) Core.<$> escapeNulls])
 
 -- | Date Values of type @Date@ are stored in @Value.date_value@.
 --
@@ -2812,9 +2847,11 @@ instance Core.ToJSON GoogleBigtableAdminV2TypeInt64 where
 -- | Rules used to convert to or from lower level types.
 --
 -- /See:/ 'newGoogleBigtableAdminV2TypeInt64Encoding' smart constructor.
-newtype GoogleBigtableAdminV2TypeInt64Encoding = GoogleBigtableAdminV2TypeInt64Encoding
+data GoogleBigtableAdminV2TypeInt64Encoding = GoogleBigtableAdminV2TypeInt64Encoding
   { -- | Use @BigEndianBytes@ encoding.
-    bigEndianBytes :: (Core.Maybe GoogleBigtableAdminV2TypeInt64EncodingBigEndianBytes)
+    bigEndianBytes :: (Core.Maybe GoogleBigtableAdminV2TypeInt64EncodingBigEndianBytes),
+    -- | Use @OrderedCodeBytes@ encoding.
+    orderedCodeBytes :: (Core.Maybe GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2824,7 +2861,8 @@ newGoogleBigtableAdminV2TypeInt64Encoding ::
 newGoogleBigtableAdminV2TypeInt64Encoding =
   GoogleBigtableAdminV2TypeInt64Encoding
     { bigEndianBytes =
-        Core.Nothing
+        Core.Nothing,
+      orderedCodeBytes = Core.Nothing
     }
 
 instance Core.FromJSON GoogleBigtableAdminV2TypeInt64Encoding where
@@ -2834,13 +2872,16 @@ instance Core.FromJSON GoogleBigtableAdminV2TypeInt64Encoding where
       ( \o ->
           GoogleBigtableAdminV2TypeInt64Encoding
             Core.<$> (o Core..:? "bigEndianBytes")
+            Core.<*> (o Core..:? "orderedCodeBytes")
       )
 
 instance Core.ToJSON GoogleBigtableAdminV2TypeInt64Encoding where
   toJSON GoogleBigtableAdminV2TypeInt64Encoding {..} =
     Core.object
       ( Core.catMaybes
-          [("bigEndianBytes" Core..=) Core.<$> bigEndianBytes]
+          [ ("bigEndianBytes" Core..=) Core.<$> bigEndianBytes,
+            ("orderedCodeBytes" Core..=) Core.<$> orderedCodeBytes
+          ]
       )
 
 -- | Encodes the value as an 8-byte big-endian two\'s complement value. Sorted mode: non-negative values are supported. Distinct mode: all values are supported. Compatible with: - BigQuery @BINARY@ encoding - HBase @Bytes.toBytes@ - Java @ByteBuffer.putLong()@ with @ByteOrder.BIG_ENDIAN@
@@ -2880,6 +2921,35 @@ instance
   toJSON GoogleBigtableAdminV2TypeInt64EncodingBigEndianBytes {..} =
     Core.object
       (Core.catMaybes [("bytesType" Core..=) Core.<$> bytesType])
+
+-- | Encodes the value in a variable length binary format of up to 10 bytes. Values that are closer to zero use fewer bytes. Sorted mode: all values are supported. Distinct mode: all values are supported.
+--
+-- /See:/ 'newGoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes' smart constructor.
+data GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes = GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes' with the minimum fields required to make a request.
+newGoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes ::
+  GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes
+newGoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes =
+  GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes
+
+instance
+  Core.FromJSON
+    GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes"
+      ( \o ->
+          Core.pure GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes
+      )
+
+instance
+  Core.ToJSON
+    GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes
+  where
+  toJSON = Core.const Core.emptyObject
 
 -- | A mapping of keys to values of a given type. Values of type @Map@ are stored in a @Value.array_value@ where each entry is another @Value.array_value@ with two elements (the key and the value, in that order). Normally encoded Map values won\'t have repeated keys, however, clients are expected to handle the case in which they do. If the same key appears multiple times, the /last/ value takes precedence.
 --
@@ -2990,7 +3060,10 @@ instance Core.ToJSON GoogleBigtableAdminV2TypeStringEncoding where
 -- | UTF-8 encoding. Sorted mode: - All values are supported. - Code point order is preserved. Distinct mode: all values are supported. Compatible with: - BigQuery @TEXT@ encoding - HBase @Bytes.toBytes@ - Java @String#getBytes(StandardCharsets.UTF_8)@
 --
 -- /See:/ 'newGoogleBigtableAdminV2TypeStringEncodingUtf8Bytes' smart constructor.
-data GoogleBigtableAdminV2TypeStringEncodingUtf8Bytes = GoogleBigtableAdminV2TypeStringEncodingUtf8Bytes
+newtype GoogleBigtableAdminV2TypeStringEncodingUtf8Bytes = GoogleBigtableAdminV2TypeStringEncodingUtf8Bytes
+  { -- | Single-character escape sequence used to support NULL values. If set, allows NULL values to be encoded as the empty string \"\". The actual empty string, or any value where every character equals @null_escape_char@, has one more @null_escape_char@ appended. If @null_escape_char@ is set and does not equal the ASCII null character 0x00, then the encoding will not support sorted mode. .
+    nullEscapeChar :: (Core.Maybe Core.Text)
+  }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GoogleBigtableAdminV2TypeStringEncodingUtf8Bytes' with the minimum fields required to make a request.
@@ -2998,6 +3071,9 @@ newGoogleBigtableAdminV2TypeStringEncodingUtf8Bytes ::
   GoogleBigtableAdminV2TypeStringEncodingUtf8Bytes
 newGoogleBigtableAdminV2TypeStringEncodingUtf8Bytes =
   GoogleBigtableAdminV2TypeStringEncodingUtf8Bytes
+    { nullEscapeChar =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -3006,13 +3082,20 @@ instance
   parseJSON =
     Core.withObject
       "GoogleBigtableAdminV2TypeStringEncodingUtf8Bytes"
-      (\o -> Core.pure GoogleBigtableAdminV2TypeStringEncodingUtf8Bytes)
+      ( \o ->
+          GoogleBigtableAdminV2TypeStringEncodingUtf8Bytes
+            Core.<$> (o Core..:? "nullEscapeChar")
+      )
 
 instance
   Core.ToJSON
     GoogleBigtableAdminV2TypeStringEncodingUtf8Bytes
   where
-  toJSON = Core.const Core.emptyObject
+  toJSON GoogleBigtableAdminV2TypeStringEncodingUtf8Bytes {..} =
+    Core.object
+      ( Core.catMaybes
+          [("nullEscapeChar" Core..=) Core.<$> nullEscapeChar]
+      )
 
 -- | Deprecated: prefer the equivalent @Utf8Bytes@.
 --
@@ -3041,8 +3124,10 @@ instance Core.ToJSON GoogleBigtableAdminV2TypeStringEncodingUtf8Raw where
 -- | A structured data value, consisting of fields which map to dynamically typed values. Values of type @Struct@ are stored in @Value.array_value@ where entries are in the same order and number as @field_types@.
 --
 -- /See:/ 'newGoogleBigtableAdminV2TypeStruct' smart constructor.
-newtype GoogleBigtableAdminV2TypeStruct = GoogleBigtableAdminV2TypeStruct
-  { -- | The names and types of the fields in this struct.
+data GoogleBigtableAdminV2TypeStruct = GoogleBigtableAdminV2TypeStruct
+  { -- | The encoding to use when converting to or from lower level types.
+    encoding :: (Core.Maybe GoogleBigtableAdminV2TypeStructEncoding),
+    -- | The names and types of the fields in this struct.
     fields :: (Core.Maybe [GoogleBigtableAdminV2TypeStructField])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3051,19 +3136,172 @@ newtype GoogleBigtableAdminV2TypeStruct = GoogleBigtableAdminV2TypeStruct
 newGoogleBigtableAdminV2TypeStruct ::
   GoogleBigtableAdminV2TypeStruct
 newGoogleBigtableAdminV2TypeStruct =
-  GoogleBigtableAdminV2TypeStruct {fields = Core.Nothing}
+  GoogleBigtableAdminV2TypeStruct
+    { encoding = Core.Nothing,
+      fields = Core.Nothing
+    }
 
 instance Core.FromJSON GoogleBigtableAdminV2TypeStruct where
   parseJSON =
     Core.withObject
       "GoogleBigtableAdminV2TypeStruct"
       ( \o ->
-          GoogleBigtableAdminV2TypeStruct Core.<$> (o Core..:? "fields")
+          GoogleBigtableAdminV2TypeStruct
+            Core.<$> (o Core..:? "encoding")
+            Core.<*> (o Core..:? "fields")
       )
 
 instance Core.ToJSON GoogleBigtableAdminV2TypeStruct where
   toJSON GoogleBigtableAdminV2TypeStruct {..} =
-    Core.object (Core.catMaybes [("fields" Core..=) Core.<$> fields])
+    Core.object
+      ( Core.catMaybes
+          [ ("encoding" Core..=) Core.<$> encoding,
+            ("fields" Core..=) Core.<$> fields
+          ]
+      )
+
+-- | Rules used to convert to or from lower level types.
+--
+-- /See:/ 'newGoogleBigtableAdminV2TypeStructEncoding' smart constructor.
+data GoogleBigtableAdminV2TypeStructEncoding = GoogleBigtableAdminV2TypeStructEncoding
+  { -- | Use @DelimitedBytes@ encoding.
+    delimitedBytes :: (Core.Maybe GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes),
+    -- | User @OrderedCodeBytes@ encoding.
+    orderedCodeBytes ::
+      ( Core.Maybe
+          GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes
+      ),
+    -- | Use @Singleton@ encoding.
+    singleton :: (Core.Maybe GoogleBigtableAdminV2TypeStructEncodingSingleton)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleBigtableAdminV2TypeStructEncoding' with the minimum fields required to make a request.
+newGoogleBigtableAdminV2TypeStructEncoding ::
+  GoogleBigtableAdminV2TypeStructEncoding
+newGoogleBigtableAdminV2TypeStructEncoding =
+  GoogleBigtableAdminV2TypeStructEncoding
+    { delimitedBytes =
+        Core.Nothing,
+      orderedCodeBytes = Core.Nothing,
+      singleton = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleBigtableAdminV2TypeStructEncoding where
+  parseJSON =
+    Core.withObject
+      "GoogleBigtableAdminV2TypeStructEncoding"
+      ( \o ->
+          GoogleBigtableAdminV2TypeStructEncoding
+            Core.<$> (o Core..:? "delimitedBytes")
+            Core.<*> (o Core..:? "orderedCodeBytes")
+            Core.<*> (o Core..:? "singleton")
+      )
+
+instance Core.ToJSON GoogleBigtableAdminV2TypeStructEncoding where
+  toJSON GoogleBigtableAdminV2TypeStructEncoding {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("delimitedBytes" Core..=) Core.<$> delimitedBytes,
+            ("orderedCodeBytes" Core..=) Core.<$> orderedCodeBytes,
+            ("singleton" Core..=) Core.<$> singleton
+          ]
+      )
+
+-- | Fields are encoded independently and concatenated with a configurable @delimiter@ in between. A struct with no fields defined is encoded as a single @delimiter@. Sorted mode: - Fields are encoded in sorted mode. - Encoded field values must not contain any bytes \<= @delimiter[0]@ - Element-wise order is preserved: @A \< B@ if @A[0] \< B[0]@, or if @A[0] == B[0] && A[1] \< B[1]@, etc. Strict prefixes sort first. Distinct mode: - Fields are encoded in distinct mode. - Encoded field values must not contain @delimiter[0]@.
+--
+-- /See:/ 'newGoogleBigtableAdminV2TypeStructEncodingDelimitedBytes' smart constructor.
+newtype GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes = GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes
+  { -- | Byte sequence used to delimit concatenated fields. The delimiter must contain at least 1 character and at most 50 characters.
+    delimiter :: (Core.Maybe Core.Base64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes' with the minimum fields required to make a request.
+newGoogleBigtableAdminV2TypeStructEncodingDelimitedBytes ::
+  GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes
+newGoogleBigtableAdminV2TypeStructEncodingDelimitedBytes =
+  GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes
+    { delimiter =
+        Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes"
+      ( \o ->
+          GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes
+            Core.<$> (o Core..:? "delimiter")
+      )
+
+instance
+  Core.ToJSON
+    GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes
+  where
+  toJSON GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes {..} =
+    Core.object
+      (Core.catMaybes [("delimiter" Core..=) Core.<$> delimiter])
+
+-- | Fields are encoded independently and concatenated with the fixed byte pair {0x00, 0x01} in between. Any null (0x00) byte in an encoded field is replaced by the fixed byte pair {0x00, 0xFF}. Fields that encode to the empty string \"\" have special handling: - If /every/ field encodes to \"\", or if the STRUCT has no fields defined, then the STRUCT is encoded as the fixed byte pair {0x00, 0x00}. - Otherwise, the STRUCT only encodes until the last non-empty field, omitting any trailing empty fields. Any empty fields that aren\'t omitted are replaced with the fixed byte pair {0x00, 0x00}. Examples: - STRUCT() -> \"\\00\\00\" - STRUCT(\"\") -> \"\\00\\00\" - STRUCT(\"\", \"\") -> \"\\00\\00\" - STRUCT(\"\", \"B\") -> \"\\00\\00\" + \"\\00\\01\" + \"B\" - STRUCT(\"A\", \"\") -> \"A\" - STRUCT(\"\", \"B\", \"\") -> \"\\00\\00\" + \"\\00\\01\" + \"B\" - STRUCT(\"A\", \"\", \"C\") -> \"A\" + \"\\00\\01\" + \"\\00\\00\" + \"\\00\\01\" + \"C\" Since null bytes are always escaped, this encoding can cause size blowup for
+-- encodings like @Int64.BigEndianBytes@ that are likely to produce many such bytes. Sorted mode: - Fields are encoded in sorted mode. - All values supported by the field encodings are allowed - Element-wise order is preserved: @A \< B@ if @A[0] \< B[0]@, or if @A[0] == B[0] && A[1] \< B[1]@, etc. Strict prefixes sort first. Distinct mode: - Fields are encoded in distinct mode. - All values supported by the field encodings are allowed.
+--
+-- /See:/ 'newGoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes' smart constructor.
+data GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes = GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes' with the minimum fields required to make a request.
+newGoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes ::
+  GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes
+newGoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes =
+  GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes
+
+instance
+  Core.FromJSON
+    GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes"
+      ( \o ->
+          Core.pure GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes
+      )
+
+instance
+  Core.ToJSON
+    GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes
+  where
+  toJSON = Core.const Core.emptyObject
+
+-- | Uses the encoding of @fields[0].type@ as-is. Only valid if @fields.size == 1@.
+--
+-- /See:/ 'newGoogleBigtableAdminV2TypeStructEncodingSingleton' smart constructor.
+data GoogleBigtableAdminV2TypeStructEncodingSingleton = GoogleBigtableAdminV2TypeStructEncodingSingleton
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleBigtableAdminV2TypeStructEncodingSingleton' with the minimum fields required to make a request.
+newGoogleBigtableAdminV2TypeStructEncodingSingleton ::
+  GoogleBigtableAdminV2TypeStructEncodingSingleton
+newGoogleBigtableAdminV2TypeStructEncodingSingleton =
+  GoogleBigtableAdminV2TypeStructEncodingSingleton
+
+instance
+  Core.FromJSON
+    GoogleBigtableAdminV2TypeStructEncodingSingleton
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleBigtableAdminV2TypeStructEncodingSingleton"
+      (\o -> Core.pure GoogleBigtableAdminV2TypeStructEncodingSingleton)
+
+instance
+  Core.ToJSON
+    GoogleBigtableAdminV2TypeStructEncodingSingleton
+  where
+  toJSON = Core.const Core.emptyObject
 
 -- | A struct field and its type.
 --
@@ -3107,23 +3345,65 @@ instance Core.ToJSON GoogleBigtableAdminV2TypeStructField where
 -- | Timestamp Values of type @Timestamp@ are stored in @Value.timestamp_value@.
 --
 -- /See:/ 'newGoogleBigtableAdminV2TypeTimestamp' smart constructor.
-data GoogleBigtableAdminV2TypeTimestamp = GoogleBigtableAdminV2TypeTimestamp
+newtype GoogleBigtableAdminV2TypeTimestamp = GoogleBigtableAdminV2TypeTimestamp
+  { -- | The encoding to use when converting to or from lower level types.
+    encoding :: (Core.Maybe GoogleBigtableAdminV2TypeTimestampEncoding)
+  }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GoogleBigtableAdminV2TypeTimestamp' with the minimum fields required to make a request.
 newGoogleBigtableAdminV2TypeTimestamp ::
   GoogleBigtableAdminV2TypeTimestamp
 newGoogleBigtableAdminV2TypeTimestamp =
-  GoogleBigtableAdminV2TypeTimestamp
+  GoogleBigtableAdminV2TypeTimestamp {encoding = Core.Nothing}
 
 instance Core.FromJSON GoogleBigtableAdminV2TypeTimestamp where
   parseJSON =
     Core.withObject
       "GoogleBigtableAdminV2TypeTimestamp"
-      (\o -> Core.pure GoogleBigtableAdminV2TypeTimestamp)
+      ( \o ->
+          GoogleBigtableAdminV2TypeTimestamp
+            Core.<$> (o Core..:? "encoding")
+      )
 
 instance Core.ToJSON GoogleBigtableAdminV2TypeTimestamp where
-  toJSON = Core.const Core.emptyObject
+  toJSON GoogleBigtableAdminV2TypeTimestamp {..} =
+    Core.object
+      (Core.catMaybes [("encoding" Core..=) Core.<$> encoding])
+
+-- | Rules used to convert to or from lower level types.
+--
+-- /See:/ 'newGoogleBigtableAdminV2TypeTimestampEncoding' smart constructor.
+newtype GoogleBigtableAdminV2TypeTimestampEncoding = GoogleBigtableAdminV2TypeTimestampEncoding
+  { -- | Encodes the number of microseconds since the Unix epoch using the given @Int64@ encoding. Values must be microsecond-aligned. Compatible with: - Java @Instant.truncatedTo()@ with @ChronoUnit.MICROS@
+    unixMicrosInt64 :: (Core.Maybe GoogleBigtableAdminV2TypeInt64Encoding)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleBigtableAdminV2TypeTimestampEncoding' with the minimum fields required to make a request.
+newGoogleBigtableAdminV2TypeTimestampEncoding ::
+  GoogleBigtableAdminV2TypeTimestampEncoding
+newGoogleBigtableAdminV2TypeTimestampEncoding =
+  GoogleBigtableAdminV2TypeTimestampEncoding
+    { unixMicrosInt64 =
+        Core.Nothing
+    }
+
+instance Core.FromJSON GoogleBigtableAdminV2TypeTimestampEncoding where
+  parseJSON =
+    Core.withObject
+      "GoogleBigtableAdminV2TypeTimestampEncoding"
+      ( \o ->
+          GoogleBigtableAdminV2TypeTimestampEncoding
+            Core.<$> (o Core..:? "unixMicrosInt64")
+      )
+
+instance Core.ToJSON GoogleBigtableAdminV2TypeTimestampEncoding where
+  toJSON GoogleBigtableAdminV2TypeTimestampEncoding {..} =
+    Core.object
+      ( Core.catMaybes
+          [("unixMicrosInt64" Core..=) Core.<$> unixMicrosInt64]
+      )
 
 -- | A tablet is a defined by a start and end key and is explained in https:\/\/cloud.google.com\/bigtable\/docs\/overview#architecture and https:\/\/cloud.google.com\/bigtable\/docs\/performance#optimization. A Hot tablet is a tablet that exhibits high average cpu usage during the time interval from start time to end time.
 --

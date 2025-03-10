@@ -115,6 +115,8 @@ module Gogol.Language.Internal.Sum
         CpuMetric_MachineSpec_A3HIGHGPU4G,
         CpuMetric_MachineSpec_A3HIGHGPU8G,
         CpuMetric_MachineSpec_A3MEGAGPU8G,
+        CpuMetric_MachineSpec_A3ULTRAGPU8G,
+        CpuMetric_MachineSpec_A3EDGEGPU8G,
         CpuMetric_MachineSpec_E2_STANDARD_2,
         CpuMetric_MachineSpec_E2_STANDARD_4,
         CpuMetric_MachineSpec_E2_STANDARD_8,
@@ -342,6 +344,8 @@ module Gogol.Language.Internal.Sum
         GpuMetric_MachineSpec_A3HIGHGPU4G,
         GpuMetric_MachineSpec_A3HIGHGPU8G,
         GpuMetric_MachineSpec_A3MEGAGPU8G,
+        GpuMetric_MachineSpec_A3ULTRAGPU8G,
+        GpuMetric_MachineSpec_A3EDGEGPU8G,
         GpuMetric_MachineSpec_E2_STANDARD_2,
         GpuMetric_MachineSpec_E2_STANDARD_4,
         GpuMetric_MachineSpec_E2_STANDARD_8,
@@ -517,6 +521,8 @@ module Gogol.Language.Internal.Sum
         RamMetric_MachineSpec_A3HIGHGPU4G,
         RamMetric_MachineSpec_A3HIGHGPU8G,
         RamMetric_MachineSpec_A3MEGAGPU8G,
+        RamMetric_MachineSpec_A3ULTRAGPU8G,
+        RamMetric_MachineSpec_A3EDGEGPU8G,
         RamMetric_MachineSpec_E2_STANDARD_2,
         RamMetric_MachineSpec_E2_STANDARD_4,
         RamMetric_MachineSpec_E2_STANDARD_8,
@@ -756,6 +762,7 @@ module Gogol.Language.Internal.Sum
         XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_NVIDIA_L4,
         XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_NVIDIAH10080GB,
         XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_NVIDIAH100MEGA80GB,
+        XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_NVIDIAH200141GB,
         XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_TPU_V2,
         XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_TPU_V3,
         XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_TPUV4POD,
@@ -1274,6 +1281,12 @@ pattern CpuMetric_MachineSpec_A3HIGHGPU8G = CpuMetric_MachineSpec "A3_HIGHGPU_8G
 pattern CpuMetric_MachineSpec_A3MEGAGPU8G :: CpuMetric_MachineSpec
 pattern CpuMetric_MachineSpec_A3MEGAGPU8G = CpuMetric_MachineSpec "A3_MEGAGPU_8G"
 
+pattern CpuMetric_MachineSpec_A3ULTRAGPU8G :: CpuMetric_MachineSpec
+pattern CpuMetric_MachineSpec_A3ULTRAGPU8G = CpuMetric_MachineSpec "A3_ULTRAGPU_8G"
+
+pattern CpuMetric_MachineSpec_A3EDGEGPU8G :: CpuMetric_MachineSpec
+pattern CpuMetric_MachineSpec_A3EDGEGPU8G = CpuMetric_MachineSpec "A3_EDGEGPU_8G"
+
 pattern CpuMetric_MachineSpec_E2_STANDARD_2 :: CpuMetric_MachineSpec
 pattern CpuMetric_MachineSpec_E2_STANDARD_2 = CpuMetric_MachineSpec "E2_STANDARD_2"
 
@@ -1689,6 +1702,8 @@ pattern CpuMetric_MachineSpec_C3_HIGHMEM_176 = CpuMetric_MachineSpec "C3_HIGHMEM
   CpuMetric_MachineSpec_A3HIGHGPU4G,
   CpuMetric_MachineSpec_A3HIGHGPU8G,
   CpuMetric_MachineSpec_A3MEGAGPU8G,
+  CpuMetric_MachineSpec_A3ULTRAGPU8G,
+  CpuMetric_MachineSpec_A3EDGEGPU8G,
   CpuMetric_MachineSpec_E2_STANDARD_2,
   CpuMetric_MachineSpec_E2_STANDARD_4,
   CpuMetric_MachineSpec_E2_STANDARD_8,
@@ -2183,6 +2198,12 @@ pattern GpuMetric_MachineSpec_A3HIGHGPU8G = GpuMetric_MachineSpec "A3_HIGHGPU_8G
 pattern GpuMetric_MachineSpec_A3MEGAGPU8G :: GpuMetric_MachineSpec
 pattern GpuMetric_MachineSpec_A3MEGAGPU8G = GpuMetric_MachineSpec "A3_MEGAGPU_8G"
 
+pattern GpuMetric_MachineSpec_A3ULTRAGPU8G :: GpuMetric_MachineSpec
+pattern GpuMetric_MachineSpec_A3ULTRAGPU8G = GpuMetric_MachineSpec "A3_ULTRAGPU_8G"
+
+pattern GpuMetric_MachineSpec_A3EDGEGPU8G :: GpuMetric_MachineSpec
+pattern GpuMetric_MachineSpec_A3EDGEGPU8G = GpuMetric_MachineSpec "A3_EDGEGPU_8G"
+
 pattern GpuMetric_MachineSpec_E2_STANDARD_2 :: GpuMetric_MachineSpec
 pattern GpuMetric_MachineSpec_E2_STANDARD_2 = GpuMetric_MachineSpec "E2_STANDARD_2"
 
@@ -2598,6 +2619,8 @@ pattern GpuMetric_MachineSpec_C3_HIGHMEM_176 = GpuMetric_MachineSpec "C3_HIGHMEM
   GpuMetric_MachineSpec_A3HIGHGPU4G,
   GpuMetric_MachineSpec_A3HIGHGPU8G,
   GpuMetric_MachineSpec_A3MEGAGPU8G,
+  GpuMetric_MachineSpec_A3ULTRAGPU8G,
+  GpuMetric_MachineSpec_A3EDGEGPU8G,
   GpuMetric_MachineSpec_E2_STANDARD_2,
   GpuMetric_MachineSpec_E2_STANDARD_4,
   GpuMetric_MachineSpec_E2_STANDARD_8,
@@ -2879,6 +2902,12 @@ pattern RamMetric_MachineSpec_A3HIGHGPU8G = RamMetric_MachineSpec "A3_HIGHGPU_8G
 
 pattern RamMetric_MachineSpec_A3MEGAGPU8G :: RamMetric_MachineSpec
 pattern RamMetric_MachineSpec_A3MEGAGPU8G = RamMetric_MachineSpec "A3_MEGAGPU_8G"
+
+pattern RamMetric_MachineSpec_A3ULTRAGPU8G :: RamMetric_MachineSpec
+pattern RamMetric_MachineSpec_A3ULTRAGPU8G = RamMetric_MachineSpec "A3_ULTRAGPU_8G"
+
+pattern RamMetric_MachineSpec_A3EDGEGPU8G :: RamMetric_MachineSpec
+pattern RamMetric_MachineSpec_A3EDGEGPU8G = RamMetric_MachineSpec "A3_EDGEGPU_8G"
 
 pattern RamMetric_MachineSpec_E2_STANDARD_2 :: RamMetric_MachineSpec
 pattern RamMetric_MachineSpec_E2_STANDARD_2 = RamMetric_MachineSpec "E2_STANDARD_2"
@@ -3295,6 +3324,8 @@ pattern RamMetric_MachineSpec_C3_HIGHMEM_176 = RamMetric_MachineSpec "C3_HIGHMEM
   RamMetric_MachineSpec_A3HIGHGPU4G,
   RamMetric_MachineSpec_A3HIGHGPU8G,
   RamMetric_MachineSpec_A3MEGAGPU8G,
+  RamMetric_MachineSpec_A3ULTRAGPU8G,
+  RamMetric_MachineSpec_A3EDGEGPU8G,
   RamMetric_MachineSpec_E2_STANDARD_2,
   RamMetric_MachineSpec_E2_STANDARD_4,
   RamMetric_MachineSpec_E2_STANDARD_8,
@@ -3863,6 +3894,10 @@ pattern XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAccelerat
 pattern XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_NVIDIAH100MEGA80GB :: XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType
 pattern XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_NVIDIAH100MEGA80GB = XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType "NVIDIA_H100_MEGA_80GB"
 
+-- | Nvidia H200 141Gb GPU.
+pattern XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_NVIDIAH200141GB :: XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType
+pattern XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_NVIDIAH200141GB = XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType "NVIDIA_H200_141GB"
+
 -- | TPU v2 (JellyFish).
 pattern XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_TPU_V2 :: XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType
 pattern XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_TPU_V2 = XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType "TPU_V2"
@@ -3891,6 +3926,7 @@ pattern XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAccelerat
   XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_NVIDIA_L4,
   XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_NVIDIAH10080GB,
   XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_NVIDIAH100MEGA80GB,
+  XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_NVIDIAH200141GB,
   XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_TPU_V2,
   XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_TPU_V3,
   XPSImageModelServingSpecModelThroughputEstimation_ComputeEngineAcceleratorType_TPUV4POD,

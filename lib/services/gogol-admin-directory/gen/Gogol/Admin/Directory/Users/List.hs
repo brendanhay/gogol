@@ -88,7 +88,7 @@ data DirectoryUsersList = DirectoryUsersList
     maxResults :: Core.Int32,
     -- | Property to use for sorting results.
     orderBy :: (Core.Maybe UsersListOrderBy),
-    -- | Token to specify next page in the list
+    -- | Token to specify next page in the list. The page token is only valid for three days.
     pageToken :: (Core.Maybe Core.Text),
     -- | What subset of fields to fetch for this user.
     projection :: UsersListProjection,

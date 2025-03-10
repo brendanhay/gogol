@@ -70,7 +70,7 @@ data BigQueryJobsCancel = BigQueryJobsCancel
     callback :: (Core.Maybe Core.Text),
     -- | Required. Job ID of the job to cancel
     jobId :: Core.Text,
-    -- | The geographic location of the job. You must specify the location to run the job for the following scenarios: * If the location to run a job is not in the @us@ or the @eu@ multi-regional location * If the job\'s location is in a single region (for example, @us-central1@) For more information, see https:\/\/cloud.google.com\/bigquery\/docs\/locations#specifying/your/location.
+    -- | The geographic location of the job. You must <https://cloud.google.com/bigquery/docs/locations#specify_locations specify the location> to run the job for the following scenarios: * If the location to run a job is not in the @us@ or the @eu@ multi-regional location * If the job\'s location is in a single region (for example, @us-central1@)
     location :: (Core.Maybe Core.Text),
     -- | Required. Project ID of the job to cancel
     projectId :: Core.Text,

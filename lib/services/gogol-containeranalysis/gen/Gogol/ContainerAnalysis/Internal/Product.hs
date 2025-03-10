@@ -171,6 +171,10 @@ module Gogol.ContainerAnalysis.Internal.Product
     ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects,
 
+    -- * ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule,
+
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact
     ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact,
@@ -226,6 +230,18 @@ module Gogol.ContainerAnalysis.Internal.Product
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1ConnectedRepository
     ContaineranalysisGoogleDevtoolsCloudbuildV1ConnectedRepository (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1ConnectedRepository,
+
+    -- * ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1Dependency,
+
+    -- * ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency
+    ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency,
+
+    -- * ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository
+    ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository,
 
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1DeveloperConnectConfig
     ContaineranalysisGoogleDevtoolsCloudbuildV1DeveloperConnectConfig (..),
@@ -310,6 +326,10 @@ module Gogol.ContainerAnalysis.Internal.Product
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan
     ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan,
+
+    -- * ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule,
 
     -- * ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact
     ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact (..),
@@ -2372,7 +2392,12 @@ instance
 --
 -- /See:/ 'newContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts' smart constructor.
 data ContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts = ContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts
-  { -- | A list of images to be pushed upon the successful completion of all build steps. The images will be pushed using the builder service account\'s credentials. The digests of the pushed images will be stored in the Build resource\'s results field. If any of the images fail to be pushed, the build is marked FAILURE.
+  { -- | Optional. A list of Go modules to be uploaded to Artifact Registry upon successful completion of all build steps. If any objects fail to be pushed, the build is marked FAILURE.
+    goModules ::
+      ( Core.Maybe
+          [ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule]
+      ),
+    -- | A list of images to be pushed upon the successful completion of all build steps. The images will be pushed using the builder service account\'s credentials. The digests of the pushed images will be stored in the Build resource\'s results field. If any of the images fail to be pushed, the build is marked FAILURE.
     images :: (Core.Maybe [Core.Text]),
     -- | A list of Maven artifacts to be uploaded to Artifact Registry upon successful completion of all build steps. Artifacts in the workspace matching specified paths globs will be uploaded to the specified Artifact Registry repository using the builder service account\'s credentials. If any artifacts fail to be pushed, the build is marked FAILURE.
     mavenArtifacts ::
@@ -2402,8 +2427,9 @@ newContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts ::
   ContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts
 newContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts =
   ContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts
-    { images =
+    { goModules =
         Core.Nothing,
+      images = Core.Nothing,
       mavenArtifacts = Core.Nothing,
       npmPackages = Core.Nothing,
       objects = Core.Nothing,
@@ -2419,7 +2445,8 @@ instance
       "ContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts"
       ( \o ->
           ContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts
-            Core.<$> (o Core..:? "images")
+            Core.<$> (o Core..:? "goModules")
+            Core.<*> (o Core..:? "images")
             Core.<*> (o Core..:? "mavenArtifacts")
             Core.<*> (o Core..:? "npmPackages")
             Core.<*> (o Core..:? "objects")
@@ -2433,7 +2460,8 @@ instance
   toJSON ContaineranalysisGoogleDevtoolsCloudbuildV1Artifacts {..} =
     Core.object
       ( Core.catMaybes
-          [ ("images" Core..=) Core.<$> images,
+          [ ("goModules" Core..=) Core.<$> goModules,
+            ("images" Core..=) Core.<$> images,
             ("mavenArtifacts" Core..=) Core.<$> mavenArtifacts,
             ("npmPackages" Core..=) Core.<$> npmPackages,
             ("objects" Core..=) Core.<$> objects,
@@ -2490,6 +2518,73 @@ instance
             [ ("location" Core..=) Core.<$> location,
               ("paths" Core..=) Core.<$> paths,
               ("timing" Core..=) Core.<$> timing
+            ]
+        )
+
+-- | Go module to upload to Artifact Registry upon successful completion of all build steps. A module refers to all dependencies in a go.mod file.
+--
+-- /See:/ 'newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule' smart constructor.
+data ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule = ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule
+  { -- | Optional. The Go module\'s \"module path\". e.g. example.com\/foo\/v2
+    modulePath :: (Core.Maybe Core.Text),
+    -- | Optional. The Go module\'s semantic version in the form vX.Y.Z. e.g. v0.1.1 Pre-release identifiers can also be added by appending a dash and dot separated ASCII alphanumeric characters and hyphens. e.g. v0.2.3-alpha.x.12m.5
+    moduleVersion :: (Core.Maybe Core.Text),
+    -- | Optional. Location of the Artifact Registry repository. i.e. us-east1 Defaults to the build’s location.
+    repositoryLocation :: (Core.Maybe Core.Text),
+    -- | Optional. Artifact Registry repository name. Specified Go modules will be zipped and uploaded to Artifact Registry with this location as a prefix. e.g. my-go-repo
+    repositoryName :: (Core.Maybe Core.Text),
+    -- | Optional. Project ID of the Artifact Registry repository. Defaults to the build project.
+    repositoryProjectId :: (Core.Maybe Core.Text),
+    -- | Optional. Source path of the go.mod file in the build\'s workspace. If not specified, this will default to the current directory. e.g. ~\/code\/go\/mypackage
+    sourcePath :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule' with the minimum fields required to make a request.
+newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule ::
+  ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule
+newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule =
+  ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule
+    { modulePath =
+        Core.Nothing,
+      moduleVersion = Core.Nothing,
+      repositoryLocation = Core.Nothing,
+      repositoryName = Core.Nothing,
+      repositoryProjectId = Core.Nothing,
+      sourcePath = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule
+  where
+  parseJSON =
+    Core.withObject
+      "ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule"
+      ( \o ->
+          ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule
+            Core.<$> (o Core..:? "modulePath")
+            Core.<*> (o Core..:? "moduleVersion")
+            Core.<*> (o Core..:? "repositoryLocation")
+            Core.<*> (o Core..:? "repositoryName")
+            Core.<*> (o Core..:? "repositoryProjectId")
+            Core.<*> (o Core..:? "sourcePath")
+      )
+
+instance
+  Core.ToJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule
+  where
+  toJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("modulePath" Core..=) Core.<$> modulePath,
+              ("moduleVersion" Core..=) Core.<$> moduleVersion,
+              ("repositoryLocation" Core..=) Core.<$> repositoryLocation,
+              ("repositoryName" Core..=) Core.<$> repositoryName,
+              ("repositoryProjectId" Core..=) Core.<$> repositoryProjectId,
+              ("sourcePath" Core..=) Core.<$> sourcePath
             ]
         )
 
@@ -2666,6 +2761,11 @@ data ContaineranalysisGoogleDevtoolsCloudbuildV1Build = ContaineranalysisGoogleD
     buildTriggerId :: (Core.Maybe Core.Text),
     -- | Output only. Time at which the request to create the build was received.
     createTime :: (Core.Maybe Core.DateTime),
+    -- | Optional. Dependencies that the Cloud Build worker will fetch before executing user steps.
+    dependencies ::
+      ( Core.Maybe
+          [ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency]
+      ),
     -- | Output only. Contains information about the build when status=FAILURE.
     failureInfo ::
       ( Core.Maybe
@@ -2751,6 +2851,7 @@ newContaineranalysisGoogleDevtoolsCloudbuildV1Build =
       availableSecrets = Core.Nothing,
       buildTriggerId = Core.Nothing,
       createTime = Core.Nothing,
+      dependencies = Core.Nothing,
       failureInfo = Core.Nothing,
       finishTime = Core.Nothing,
       gitConfig = Core.Nothing,
@@ -2792,6 +2893,7 @@ instance
             Core.<*> (o Core..:? "availableSecrets")
             Core.<*> (o Core..:? "buildTriggerId")
             Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "dependencies")
             Core.<*> (o Core..:? "failureInfo")
             Core.<*> (o Core..:? "finishTime")
             Core.<*> (o Core..:? "gitConfig")
@@ -2831,6 +2933,7 @@ instance
             ("availableSecrets" Core..=) Core.<$> availableSecrets,
             ("buildTriggerId" Core..=) Core.<$> buildTriggerId,
             ("createTime" Core..=) Core.<$> createTime,
+            ("dependencies" Core..=) Core.<$> dependencies,
             ("failureInfo" Core..=) Core.<$> failureInfo,
             ("finishTime" Core..=) Core.<$> finishTime,
             ("gitConfig" Core..=) Core.<$> gitConfig,
@@ -3069,6 +3172,8 @@ data ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions = Containeranalysis
     diskSizeGb :: (Core.Maybe Core.Int64),
     -- | Option to specify whether or not to apply bash style string operations to the substitutions. NOTE: this is always enabled for triggered builds and cannot be overridden in the build configuration file.
     dynamicSubstitutions :: (Core.Maybe Core.Bool),
+    -- | Optional. Option to specify whether structured logging is enabled. If true, JSON-formatted logs are parsed as structured logs.
+    enableStructuredLogging :: (Core.Maybe Core.Bool),
     -- | A list of global environment variable definitions that will exist for all build steps in this build. If a variable is defined in both globally and in a build step, the variable will use the build step value. The elements are of the form \"KEY=VALUE\" for the environment variable \"KEY\" being given the value \"VALUE\".
     env :: (Core.Maybe [Core.Text]),
     -- | Option to define build log streaming behavior to Cloud Storage.
@@ -3091,6 +3196,8 @@ data ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions = Containeranalysis
       ( Core.Maybe
           ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptionsPoolOption
       ),
+    -- | Optional. Option to specify the Pub\/Sub topic to receive build status updates.
+    pubsubTopic :: (Core.Maybe Core.Text),
     -- | Requested verifiability options.
     requestedVerifyOption ::
       ( Core.Maybe
@@ -3126,11 +3233,13 @@ newContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions =
         Core.Nothing,
       diskSizeGb = Core.Nothing,
       dynamicSubstitutions = Core.Nothing,
+      enableStructuredLogging = Core.Nothing,
       env = Core.Nothing,
       logStreamingOption = Core.Nothing,
       logging = Core.Nothing,
       machineType = Core.Nothing,
       pool = Core.Nothing,
+      pubsubTopic = Core.Nothing,
       requestedVerifyOption = Core.Nothing,
       secretEnv = Core.Nothing,
       sourceProvenanceHash = Core.Nothing,
@@ -3152,11 +3261,13 @@ instance
             Core.<*> (o Core..:? "defaultLogsBucketBehavior")
             Core.<*> (o Core..:? "diskSizeGb" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "dynamicSubstitutions")
+            Core.<*> (o Core..:? "enableStructuredLogging")
             Core.<*> (o Core..:? "env")
             Core.<*> (o Core..:? "logStreamingOption")
             Core.<*> (o Core..:? "logging")
             Core.<*> (o Core..:? "machineType")
             Core.<*> (o Core..:? "pool")
+            Core.<*> (o Core..:? "pubsubTopic")
             Core.<*> (o Core..:? "requestedVerifyOption")
             Core.<*> (o Core..:? "secretEnv")
             Core.<*> (o Core..:? "sourceProvenanceHash")
@@ -3177,11 +3288,14 @@ instance
               Core.<$> defaultLogsBucketBehavior,
             ("diskSizeGb" Core..=) Core.. Core.AsText Core.<$> diskSizeGb,
             ("dynamicSubstitutions" Core..=) Core.<$> dynamicSubstitutions,
+            ("enableStructuredLogging" Core..=)
+              Core.<$> enableStructuredLogging,
             ("env" Core..=) Core.<$> env,
             ("logStreamingOption" Core..=) Core.<$> logStreamingOption,
             ("logging" Core..=) Core.<$> logging,
             ("machineType" Core..=) Core.<$> machineType,
             ("pool" Core..=) Core.<$> pool,
+            ("pubsubTopic" Core..=) Core.<$> pubsubTopic,
             ("requestedVerifyOption" Core..=) Core.<$> requestedVerifyOption,
             ("secretEnv" Core..=) Core.<$> secretEnv,
             ("sourceProvenanceHash" Core..=) Core.<$> sourceProvenanceHash,
@@ -3507,6 +3621,171 @@ instance
             [ ("dir" Core..=) Core.<$> dir,
               ("repository" Core..=) Core.<$> repository,
               ("revision" Core..=) Core.<$> revision
+            ]
+        )
+
+-- | A dependency that the Cloud Build worker will fetch before executing user steps.
+--
+-- /See:/ 'newContaineranalysisGoogleDevtoolsCloudbuildV1Dependency' smart constructor.
+data ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency = ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency
+  { -- | If set to true disable all dependency fetching (ignoring the default source as well).
+    empty :: (Core.Maybe Core.Bool),
+    -- | Represents a git repository as a build dependency.
+    gitSource ::
+      ( Core.Maybe
+          ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency
+      )
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency' with the minimum fields required to make a request.
+newContaineranalysisGoogleDevtoolsCloudbuildV1Dependency ::
+  ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency
+newContaineranalysisGoogleDevtoolsCloudbuildV1Dependency =
+  ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency
+    { empty =
+        Core.Nothing,
+      gitSource = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency
+  where
+  parseJSON =
+    Core.withObject
+      "ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency"
+      ( \o ->
+          ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency
+            Core.<$> (o Core..:? "empty")
+            Core.<*> (o Core..:? "gitSource")
+      )
+
+instance
+  Core.ToJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency
+  where
+  toJSON ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("empty" Core..=) Core.<$> empty,
+            ("gitSource" Core..=) Core.<$> gitSource
+          ]
+      )
+
+-- | Represents a git repository as a build dependency.
+--
+-- /See:/ 'newContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency' smart constructor.
+data ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency = ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency
+  { -- | Optional. How much history should be fetched for the build (default 1, -1 for all history).
+    depth :: (Core.Maybe Core.Int64),
+    -- | Required. Where should the files be placed on the worker.
+    destPath :: (Core.Maybe Core.Text),
+    -- | Optional. True if submodules should be fetched too (default false).
+    recurseSubmodules :: (Core.Maybe Core.Bool),
+    -- | Required. The kind of repo (url or dev connect).
+    repository ::
+      ( Core.Maybe
+          ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository
+      ),
+    -- | Required. The revision that we will fetch the repo at.
+    revision :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency' with the minimum fields required to make a request.
+newContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency ::
+  ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency
+newContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency =
+  ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency
+    { depth =
+        Core.Nothing,
+      destPath =
+        Core.Nothing,
+      recurseSubmodules =
+        Core.Nothing,
+      repository =
+        Core.Nothing,
+      revision =
+        Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency
+  where
+  parseJSON =
+    Core.withObject
+      "ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency"
+      ( \o ->
+          ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency
+            Core.<$> (o Core..:? "depth" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "destPath")
+            Core.<*> (o Core..:? "recurseSubmodules")
+            Core.<*> (o Core..:? "repository")
+            Core.<*> (o Core..:? "revision")
+      )
+
+instance
+  Core.ToJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency
+  where
+  toJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("depth" Core..=) Core.. Core.AsText Core.<$> depth,
+              ("destPath" Core..=) Core.<$> destPath,
+              ("recurseSubmodules" Core..=) Core.<$> recurseSubmodules,
+              ("repository" Core..=) Core.<$> repository,
+              ("revision" Core..=) Core.<$> revision
+            ]
+        )
+
+-- | A repository for a git source.
+--
+-- /See:/ 'newContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository' smart constructor.
+data ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository = ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository
+  { -- | The Developer Connect Git repository link or the url that matches a repository link in the current project, formatted as @projects\/*\/locations\/*\/connections\/*\/gitRepositoryLink\/*@
+    developerConnect :: (Core.Maybe Core.Text),
+    -- | Location of the Git repository.
+    url :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository' with the minimum fields required to make a request.
+newContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository ::
+  ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository
+newContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository =
+  ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository
+    { developerConnect =
+        Core.Nothing,
+      url = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository
+  where
+  parseJSON =
+    Core.withObject
+      "ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository"
+      ( \o ->
+          ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository
+            Core.<$> (o Core..:? "developerConnect")
+            Core.<*> (o Core..:? "url")
+      )
+
+instance
+  Core.ToJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository
+  where
+  toJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("developerConnect" Core..=) Core.<$> developerConnect,
+              ("url" Core..=) Core.<$> url
             ]
         )
 
@@ -4003,6 +4282,11 @@ data ContaineranalysisGoogleDevtoolsCloudbuildV1Results = ContaineranalysisGoogl
     buildStepImages :: (Core.Maybe [Core.Text]),
     -- | List of build step outputs, produced by builder images, in the order corresponding to build step indices. <https://cloud.google.com/cloud-build/docs/cloud-builders Cloud Builders> can produce this output by writing to @$BUILDER_OUTPUT\/output@. Only the first 50KB of data is stored. Note that the @$BUILDER_OUTPUT@ variable is read-only and can\'t be substituted.
     buildStepOutputs :: (Core.Maybe [Core.Base64]),
+    -- | Optional. Go module artifacts uploaded to Artifact Registry at the end of the build.
+    goModules ::
+      ( Core.Maybe
+          [ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule]
+      ),
     -- | Container images that were built as a part of the build.
     images ::
       ( Core.Maybe
@@ -4038,6 +4322,7 @@ newContaineranalysisGoogleDevtoolsCloudbuildV1Results =
       artifactTiming = Core.Nothing,
       buildStepImages = Core.Nothing,
       buildStepOutputs = Core.Nothing,
+      goModules = Core.Nothing,
       images = Core.Nothing,
       mavenArtifacts = Core.Nothing,
       npmPackages = Core.Nothing,
@@ -4058,6 +4343,7 @@ instance
             Core.<*> (o Core..:? "artifactTiming")
             Core.<*> (o Core..:? "buildStepImages")
             Core.<*> (o Core..:? "buildStepOutputs")
+            Core.<*> (o Core..:? "goModules")
             Core.<*> (o Core..:? "images")
             Core.<*> (o Core..:? "mavenArtifacts")
             Core.<*> (o Core..:? "npmPackages")
@@ -4076,6 +4362,7 @@ instance
             ("artifactTiming" Core..=) Core.<$> artifactTiming,
             ("buildStepImages" Core..=) Core.<$> buildStepImages,
             ("buildStepOutputs" Core..=) Core.<$> buildStepOutputs,
+            ("goModules" Core..=) Core.<$> goModules,
             ("images" Core..=) Core.<$> images,
             ("mavenArtifacts" Core..=) Core.<$> mavenArtifacts,
             ("npmPackages" Core..=) Core.<$> npmPackages,
@@ -4636,6 +4923,58 @@ instance
             ("startTime" Core..=) Core.<$> startTime
           ]
       )
+
+-- | A Go module artifact uploaded to Artifact Registry using the GoModule directive.
+--
+-- /See:/ 'newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule' smart constructor.
+data ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule = ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule
+  { -- | Hash types and values of the Go Module Artifact.
+    fileHashes :: (Core.Maybe ContaineranalysisGoogleDevtoolsCloudbuildV1FileHashes),
+    -- | Output only. Stores timing information for pushing the specified artifact.
+    pushTiming :: (Core.Maybe ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan),
+    -- | URI of the uploaded artifact.
+    uri :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule' with the minimum fields required to make a request.
+newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule ::
+  ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule
+newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule =
+  ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule
+    { fileHashes =
+        Core.Nothing,
+      pushTiming = Core.Nothing,
+      uri = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule
+  where
+  parseJSON =
+    Core.withObject
+      "ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule"
+      ( \o ->
+          ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule
+            Core.<$> (o Core..:? "fileHashes")
+            Core.<*> (o Core..:? "pushTiming")
+            Core.<*> (o Core..:? "uri")
+      )
+
+instance
+  Core.ToJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule
+  where
+  toJSON
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("fileHashes" Core..=) Core.<$> fileHashes,
+              ("pushTiming" Core..=) Core.<$> pushTiming,
+              ("uri" Core..=) Core.<$> uri
+            ]
+        )
 
 -- | A Maven artifact uploaded using the MavenArtifact directive.
 --
@@ -5398,7 +5737,7 @@ instance Core.ToJSON EnvelopeSignature where
 --
 -- /See:/ 'newExportSBOMRequest' smart constructor.
 newtype ExportSBOMRequest = ExportSBOMRequest
-  { -- | Empty placeholder to denote that this is a Google Cloud Storage export request.
+  { -- | Optional. Empty placeholder to denote that this is a Google Cloud Storage export request.
     cloudStorageLocation :: (Core.Maybe CloudStorageLocation)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

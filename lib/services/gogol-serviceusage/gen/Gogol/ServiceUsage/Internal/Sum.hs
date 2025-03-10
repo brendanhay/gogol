@@ -35,6 +35,7 @@ module Gogol.ServiceUsage.Internal.Sum
       ( Analysis_AnalysisType_ANALYSISTYPEUNSPECIFIED,
         Analysis_AnalysisType_ANALYSISTYPEDEPENDENCY,
         Analysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE,
+        Analysis_AnalysisType_ANALYSISTYPERESOURCEEXISTENCE,
         ..
       ),
 
@@ -174,6 +175,7 @@ module Gogol.ServiceUsage.Internal.Sum
     Impact_ImpactType
       ( Impact_ImpactType_IMPACTTYPEUNSPECIFIED,
         Impact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES,
+        Impact_ImpactType_RESOURCEEXISTENCEPROJECT,
         ..
       ),
 
@@ -339,10 +341,15 @@ pattern Analysis_AnalysisType_ANALYSISTYPEDEPENDENCY = Analysis_AnalysisType "AN
 pattern Analysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE :: Analysis_AnalysisType
 pattern Analysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE = Analysis_AnalysisType "ANALYSIS_TYPE_RESOURCE_USAGE"
 
+-- | The analysis of service resource existence.
+pattern Analysis_AnalysisType_ANALYSISTYPERESOURCEEXISTENCE :: Analysis_AnalysisType
+pattern Analysis_AnalysisType_ANALYSISTYPERESOURCEEXISTENCE = Analysis_AnalysisType "ANALYSIS_TYPE_RESOURCE_EXISTENCE"
+
 {-# COMPLETE
   Analysis_AnalysisType_ANALYSISTYPEUNSPECIFIED,
   Analysis_AnalysisType_ANALYSISTYPEDEPENDENCY,
   Analysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE,
+  Analysis_AnalysisType_ANALYSISTYPERESOURCEEXISTENCE,
   Analysis_AnalysisType
   #-}
 
@@ -904,7 +911,7 @@ newtype Impact_ImpactType = Impact_ImpactType {fromImpact_ImpactType :: Core.Tex
       Core.FromJSONKey
     )
 
--- | Reserved Blocks (Block n contains codes from 100n to 100(n+1) -1 Block 0 - Special\/Admin codes Block 1 - Impact Type of ANALYSIS/TYPE/DEPENDENCY Block 2 - Impact Type of ANALYSIS/TYPE/RESOURCE_USAGE ...
+-- | Reserved Blocks (Block n contains codes from 100n to 100(n+1) -1 Block 0 - Special\/Admin codes Block 1 - Impact Type of ANALYSIS/TYPE/DEPENDENCY Block 2 - Impact Type of ANALYSIS/TYPE/RESOURCE/USAGE Block 3 - Impact Type of ANALYSIS/TYPE/RESOURCE/EXISTENCE ...
 pattern Impact_ImpactType_IMPACTTYPEUNSPECIFIED :: Impact_ImpactType
 pattern Impact_ImpactType_IMPACTTYPEUNSPECIFIED = Impact_ImpactType "IMPACT_TYPE_UNSPECIFIED"
 
@@ -912,9 +919,14 @@ pattern Impact_ImpactType_IMPACTTYPEUNSPECIFIED = Impact_ImpactType "IMPACT_TYPE
 pattern Impact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES :: Impact_ImpactType
 pattern Impact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES = Impact_ImpactType "DEPENDENCY_MISSING_DEPENDENCIES"
 
+-- | Block 3 - Impact Type of ANALYSIS/TYPE/RESOURCE_EXISTENCE
+pattern Impact_ImpactType_RESOURCEEXISTENCEPROJECT :: Impact_ImpactType
+pattern Impact_ImpactType_RESOURCEEXISTENCEPROJECT = Impact_ImpactType "RESOURCE_EXISTENCE_PROJECT"
+
 {-# COMPLETE
   Impact_ImpactType_IMPACTTYPEUNSPECIFIED,
   Impact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES,
+  Impact_ImpactType_RESOURCEEXISTENCEPROJECT,
   Impact_ImpactType
   #-}
 

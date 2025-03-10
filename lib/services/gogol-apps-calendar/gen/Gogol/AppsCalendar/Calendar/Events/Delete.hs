@@ -89,7 +89,11 @@ instance Core.GoogleRequest CalendarEventsDelete where
   type Rs CalendarEventsDelete = ()
   type
     Scopes CalendarEventsDelete =
-      '[Calendar'FullControl, Calendar'Events]
+      '[ Calendar'FullControl,
+         Calendar'App'Created,
+         Calendar'Events,
+         Calendar'Events'Owned
+       ]
   requestClient CalendarEventsDelete {..} =
     go
       calendarId

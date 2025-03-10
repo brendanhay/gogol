@@ -284,6 +284,18 @@ module Gogol.Dataflow
     BigTableIODetails (..),
     newBigTableIODetails,
 
+    -- ** BoundedTrie
+    BoundedTrie (..),
+    newBoundedTrie,
+
+    -- ** BoundedTrieNode
+    BoundedTrieNode (..),
+    newBoundedTrieNode,
+
+    -- ** BoundedTrieNode_Children
+    BoundedTrieNode_Children (..),
+    newBoundedTrieNode_Children,
+
     -- ** BucketOptions
     BucketOptions (..),
     newBucketOptions,

@@ -81,7 +81,9 @@ newCalendarAclInsert calendarId payload =
 
 instance Core.GoogleRequest CalendarAclInsert where
   type Rs CalendarAclInsert = AclRule
-  type Scopes CalendarAclInsert = '[Calendar'FullControl]
+  type
+    Scopes CalendarAclInsert =
+      '[Calendar'FullControl, Calendar'Acls]
   requestClient CalendarAclInsert {..} =
     go
       calendarId

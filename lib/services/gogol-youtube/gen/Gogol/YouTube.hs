@@ -396,6 +396,11 @@ module Gogol.YouTube
     YouTubeVideoCategoriesList (..),
     newYouTubeVideoCategoriesList,
 
+    -- ** youtube.videoTrainability.get
+    YouTubeVideoTrainabilityGetResource,
+    YouTubeVideoTrainabilityGet (..),
+    newYouTubeVideoTrainabilityGet,
+
     -- ** youtube.videos.delete
     YouTubeVideosDeleteResource,
     YouTubeVideosDelete (..),
@@ -1672,6 +1677,10 @@ module Gogol.YouTube
     VideoTopicDetails (..),
     newVideoTopicDetails,
 
+    -- ** VideoTrainability
+    VideoTrainability (..),
+    newVideoTrainability,
+
     -- ** WatchSettings
     WatchSettings (..),
     newWatchSettings,
@@ -1838,6 +1847,7 @@ import Gogol.YouTube.Types
 import Gogol.YouTube.V3.UpdateCommentThreads
 import Gogol.YouTube.VideoAbuseReportReasons.List
 import Gogol.YouTube.VideoCategories.List
+import Gogol.YouTube.VideoTrainability.Get
 import Gogol.YouTube.Videos.Delete
 import Gogol.YouTube.Videos.GetRating
 import Gogol.YouTube.Videos.Insert

@@ -27,6 +27,18 @@ module Gogol.Run.Internal.Product
     GoogleCloudRunV2BinaryAuthorization (..),
     newGoogleCloudRunV2BinaryAuthorization,
 
+    -- * GoogleCloudRunV2BuildConfig
+    GoogleCloudRunV2BuildConfig (..),
+    newGoogleCloudRunV2BuildConfig,
+
+    -- * GoogleCloudRunV2BuildConfig_EnvironmentVariables
+    GoogleCloudRunV2BuildConfig_EnvironmentVariables (..),
+    newGoogleCloudRunV2BuildConfig_EnvironmentVariables,
+
+    -- * GoogleCloudRunV2BuildInfo
+    GoogleCloudRunV2BuildInfo (..),
+    newGoogleCloudRunV2BuildInfo,
+
     -- * GoogleCloudRunV2BuildpacksBuild
     GoogleCloudRunV2BuildpacksBuild (..),
     newGoogleCloudRunV2BuildpacksBuild,
@@ -135,6 +147,14 @@ module Gogol.Run.Internal.Product
     GoogleCloudRunV2ImageExportStatus (..),
     newGoogleCloudRunV2ImageExportStatus,
 
+    -- * GoogleCloudRunV2InstanceSplit
+    GoogleCloudRunV2InstanceSplit (..),
+    newGoogleCloudRunV2InstanceSplit,
+
+    -- * GoogleCloudRunV2InstanceSplitStatus
+    GoogleCloudRunV2InstanceSplitStatus (..),
+    newGoogleCloudRunV2InstanceSplitStatus,
+
     -- * GoogleCloudRunV2Job
     GoogleCloudRunV2Job (..),
     newGoogleCloudRunV2Job,
@@ -166,6 +186,10 @@ module Gogol.Run.Internal.Product
     -- * GoogleCloudRunV2ListTasksResponse
     GoogleCloudRunV2ListTasksResponse (..),
     newGoogleCloudRunV2ListTasksResponse,
+
+    -- * GoogleCloudRunV2ListWorkerPoolsResponse
+    GoogleCloudRunV2ListWorkerPoolsResponse (..),
+    newGoogleCloudRunV2ListWorkerPoolsResponse,
 
     -- * GoogleCloudRunV2Metadata
     GoogleCloudRunV2Metadata (..),
@@ -323,6 +347,34 @@ module Gogol.Run.Internal.Product
     GoogleCloudRunV2VpcAccess (..),
     newGoogleCloudRunV2VpcAccess,
 
+    -- * GoogleCloudRunV2WorkerPool
+    GoogleCloudRunV2WorkerPool (..),
+    newGoogleCloudRunV2WorkerPool,
+
+    -- * GoogleCloudRunV2WorkerPool_Annotations
+    GoogleCloudRunV2WorkerPool_Annotations (..),
+    newGoogleCloudRunV2WorkerPool_Annotations,
+
+    -- * GoogleCloudRunV2WorkerPool_Labels
+    GoogleCloudRunV2WorkerPool_Labels (..),
+    newGoogleCloudRunV2WorkerPool_Labels,
+
+    -- * GoogleCloudRunV2WorkerPoolRevisionTemplate
+    GoogleCloudRunV2WorkerPoolRevisionTemplate (..),
+    newGoogleCloudRunV2WorkerPoolRevisionTemplate,
+
+    -- * GoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations
+    GoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations (..),
+    newGoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations,
+
+    -- * GoogleCloudRunV2WorkerPoolRevisionTemplate_Labels
+    GoogleCloudRunV2WorkerPoolRevisionTemplate_Labels (..),
+    newGoogleCloudRunV2WorkerPoolRevisionTemplate_Labels,
+
+    -- * GoogleCloudRunV2WorkerPoolScaling
+    GoogleCloudRunV2WorkerPoolScaling (..),
+    newGoogleCloudRunV2WorkerPoolScaling,
+
     -- * GoogleDevtoolsCloudbuildV1ApprovalConfig
     GoogleDevtoolsCloudbuildV1ApprovalConfig (..),
     newGoogleDevtoolsCloudbuildV1ApprovalConfig,
@@ -375,6 +427,10 @@ module Gogol.Run.Internal.Product
     GoogleDevtoolsCloudbuildV1ConnectedRepository (..),
     newGoogleDevtoolsCloudbuildV1ConnectedRepository,
 
+    -- * GoogleDevtoolsCloudbuildV1Dependency
+    GoogleDevtoolsCloudbuildV1Dependency (..),
+    newGoogleDevtoolsCloudbuildV1Dependency,
+
     -- * GoogleDevtoolsCloudbuildV1DeveloperConnectConfig
     GoogleDevtoolsCloudbuildV1DeveloperConnectConfig (..),
     newGoogleDevtoolsCloudbuildV1DeveloperConnectConfig,
@@ -394,6 +450,18 @@ module Gogol.Run.Internal.Product
     -- * GoogleDevtoolsCloudbuildV1GitSource
     GoogleDevtoolsCloudbuildV1GitSource (..),
     newGoogleDevtoolsCloudbuildV1GitSource,
+
+    -- * GoogleDevtoolsCloudbuildV1GitSourceDependency
+    GoogleDevtoolsCloudbuildV1GitSourceDependency (..),
+    newGoogleDevtoolsCloudbuildV1GitSourceDependency,
+
+    -- * GoogleDevtoolsCloudbuildV1GitSourceRepository
+    GoogleDevtoolsCloudbuildV1GitSourceRepository (..),
+    newGoogleDevtoolsCloudbuildV1GitSourceRepository,
+
+    -- * GoogleDevtoolsCloudbuildV1GoModule
+    GoogleDevtoolsCloudbuildV1GoModule (..),
+    newGoogleDevtoolsCloudbuildV1GoModule,
 
     -- * GoogleDevtoolsCloudbuildV1Hash
     GoogleDevtoolsCloudbuildV1Hash (..),
@@ -478,6 +546,10 @@ module Gogol.Run.Internal.Product
     -- * GoogleDevtoolsCloudbuildV1TimeSpan
     GoogleDevtoolsCloudbuildV1TimeSpan (..),
     newGoogleDevtoolsCloudbuildV1TimeSpan,
+
+    -- * GoogleDevtoolsCloudbuildV1UploadedGoModule
+    GoogleDevtoolsCloudbuildV1UploadedGoModule (..),
+    newGoogleDevtoolsCloudbuildV1UploadedGoModule,
 
     -- * GoogleDevtoolsCloudbuildV1UploadedMavenArtifact
     GoogleDevtoolsCloudbuildV1UploadedMavenArtifact (..),
@@ -622,11 +694,162 @@ instance Core.ToJSON GoogleCloudRunV2BinaryAuthorization where
           ]
       )
 
+-- | Describes the Build step of the function that builds a container from the given source.
+--
+-- /See:/ 'newGoogleCloudRunV2BuildConfig' smart constructor.
+data GoogleCloudRunV2BuildConfig = GoogleCloudRunV2BuildConfig
+  { -- | Optional. The base image used to build the function.
+    baseImage :: (Core.Maybe Core.Text),
+    -- | Optional. Sets whether the function will receive automatic base image updates.
+    enableAutomaticUpdates :: (Core.Maybe Core.Bool),
+    -- | Optional. User-provided build-time environment variables for the function
+    environmentVariables :: (Core.Maybe GoogleCloudRunV2BuildConfig_EnvironmentVariables),
+    -- | Optional. The name of the function (as defined in source code) that will be executed. Defaults to the resource name suffix, if not specified. For backward compatibility, if function with given name is not found, then the system will try to use function named \"function\".
+    functionTarget :: (Core.Maybe Core.Text),
+    -- | Optional. Artifact Registry URI to store the built image.
+    imageUri :: (Core.Maybe Core.Text),
+    -- | Output only. The Cloud Build name of the latest successful deployment of the function.
+    name :: (Core.Maybe Core.Text),
+    -- | Optional. Service account to be used for building the container. The format of this field is @projects\/{projectId}\/serviceAccounts\/{serviceAccountEmail}@.
+    serviceAccount :: (Core.Maybe Core.Text),
+    -- | The Cloud Storage bucket URI where the function source code is located.
+    sourceLocation :: (Core.Maybe Core.Text),
+    -- | Optional. Name of the Cloud Build Custom Worker Pool that should be used to build the Cloud Run function. The format of this field is @projects\/{project}\/locations\/{region}\/workerPools\/{workerPool}@ where @{project}@ and @{region}@ are the project id and region respectively where the worker pool is defined and @{workerPool}@ is the short name of the worker pool.
+    workerPool :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2BuildConfig' with the minimum fields required to make a request.
+newGoogleCloudRunV2BuildConfig ::
+  GoogleCloudRunV2BuildConfig
+newGoogleCloudRunV2BuildConfig =
+  GoogleCloudRunV2BuildConfig
+    { baseImage = Core.Nothing,
+      enableAutomaticUpdates = Core.Nothing,
+      environmentVariables = Core.Nothing,
+      functionTarget = Core.Nothing,
+      imageUri = Core.Nothing,
+      name = Core.Nothing,
+      serviceAccount = Core.Nothing,
+      sourceLocation = Core.Nothing,
+      workerPool = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudRunV2BuildConfig where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2BuildConfig"
+      ( \o ->
+          GoogleCloudRunV2BuildConfig
+            Core.<$> (o Core..:? "baseImage")
+            Core.<*> (o Core..:? "enableAutomaticUpdates")
+            Core.<*> (o Core..:? "environmentVariables")
+            Core.<*> (o Core..:? "functionTarget")
+            Core.<*> (o Core..:? "imageUri")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "serviceAccount")
+            Core.<*> (o Core..:? "sourceLocation")
+            Core.<*> (o Core..:? "workerPool")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2BuildConfig where
+  toJSON GoogleCloudRunV2BuildConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("baseImage" Core..=) Core.<$> baseImage,
+            ("enableAutomaticUpdates" Core..=) Core.<$> enableAutomaticUpdates,
+            ("environmentVariables" Core..=) Core.<$> environmentVariables,
+            ("functionTarget" Core..=) Core.<$> functionTarget,
+            ("imageUri" Core..=) Core.<$> imageUri,
+            ("name" Core..=) Core.<$> name,
+            ("serviceAccount" Core..=) Core.<$> serviceAccount,
+            ("sourceLocation" Core..=) Core.<$> sourceLocation,
+            ("workerPool" Core..=) Core.<$> workerPool
+          ]
+      )
+
+-- | Optional. User-provided build-time environment variables for the function
+--
+-- /See:/ 'newGoogleCloudRunV2BuildConfig_EnvironmentVariables' smart constructor.
+newtype GoogleCloudRunV2BuildConfig_EnvironmentVariables = GoogleCloudRunV2BuildConfig_EnvironmentVariables
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2BuildConfig_EnvironmentVariables' with the minimum fields required to make a request.
+newGoogleCloudRunV2BuildConfig_EnvironmentVariables ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleCloudRunV2BuildConfig_EnvironmentVariables
+newGoogleCloudRunV2BuildConfig_EnvironmentVariables additional =
+  GoogleCloudRunV2BuildConfig_EnvironmentVariables
+    { additional =
+        additional
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudRunV2BuildConfig_EnvironmentVariables
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2BuildConfig_EnvironmentVariables"
+      ( \o ->
+          GoogleCloudRunV2BuildConfig_EnvironmentVariables
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudRunV2BuildConfig_EnvironmentVariables
+  where
+  toJSON GoogleCloudRunV2BuildConfig_EnvironmentVariables {..} =
+    Core.toJSON additional
+
+-- | Build information of the image.
+--
+-- /See:/ 'newGoogleCloudRunV2BuildInfo' smart constructor.
+data GoogleCloudRunV2BuildInfo = GoogleCloudRunV2BuildInfo
+  { -- | Output only. Entry point of the function when the image is a Cloud Run function.
+    functionTarget :: (Core.Maybe Core.Text),
+    -- | Output only. Source code location of the image.
+    sourceLocation :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2BuildInfo' with the minimum fields required to make a request.
+newGoogleCloudRunV2BuildInfo ::
+  GoogleCloudRunV2BuildInfo
+newGoogleCloudRunV2BuildInfo =
+  GoogleCloudRunV2BuildInfo
+    { functionTarget = Core.Nothing,
+      sourceLocation = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudRunV2BuildInfo where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2BuildInfo"
+      ( \o ->
+          GoogleCloudRunV2BuildInfo
+            Core.<$> (o Core..:? "functionTarget")
+            Core.<*> (o Core..:? "sourceLocation")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2BuildInfo where
+  toJSON GoogleCloudRunV2BuildInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("functionTarget" Core..=) Core.<$> functionTarget,
+            ("sourceLocation" Core..=) Core.<$> sourceLocation
+          ]
+      )
+
 -- | Build the source using Buildpacks.
 --
 -- /See:/ 'newGoogleCloudRunV2BuildpacksBuild' smart constructor.
 data GoogleCloudRunV2BuildpacksBuild = GoogleCloudRunV2BuildpacksBuild
-  { -- | Optional. The base image used to opt into automatic base image updates.
+  { -- | Optional. The base image to use for the build.
     baseImage :: (Core.Maybe Core.Text),
     -- | Optional. cache/image/uri is the GCR\/AR URL where the cache image will be stored. cache/image/uri is optional and omitting it will disable caching. This URL must be stable across builds. It is used to derive a build-specific temporary URL by substituting the tag with the build ID. The build will clean up the temporary image on a best-effort basis.
     cacheImageUri :: (Core.Maybe Core.Text),
@@ -866,6 +1089,10 @@ instance Core.ToJSON GoogleCloudRunV2Condition where
 data GoogleCloudRunV2Container = GoogleCloudRunV2Container
   { -- | Arguments to the entrypoint. The docker image\'s CMD is used if this is not provided.
     args :: (Core.Maybe [Core.Text]),
+    -- | Base image for this container. Only supported for services. If set, it indicates that the service is enrolled into automatic base image update.
+    baseImageUri :: (Core.Maybe Core.Text),
+    -- | Output only. The build info of the container image.
+    buildInfo :: (Core.Maybe GoogleCloudRunV2BuildInfo),
     -- | Entrypoint array. Not executed within a shell. The docker image\'s ENTRYPOINT is used if this is not provided.
     command :: (Core.Maybe [Core.Text]),
     -- | Names of the containers that must start before this container.
@@ -897,6 +1124,8 @@ newGoogleCloudRunV2Container ::
 newGoogleCloudRunV2Container =
   GoogleCloudRunV2Container
     { args = Core.Nothing,
+      baseImageUri = Core.Nothing,
+      buildInfo = Core.Nothing,
       command = Core.Nothing,
       dependsOn = Core.Nothing,
       env = Core.Nothing,
@@ -917,6 +1146,8 @@ instance Core.FromJSON GoogleCloudRunV2Container where
       ( \o ->
           GoogleCloudRunV2Container
             Core.<$> (o Core..:? "args")
+            Core.<*> (o Core..:? "baseImageUri")
+            Core.<*> (o Core..:? "buildInfo")
             Core.<*> (o Core..:? "command")
             Core.<*> (o Core..:? "dependsOn")
             Core.<*> (o Core..:? "env")
@@ -935,6 +1166,8 @@ instance Core.ToJSON GoogleCloudRunV2Container where
     Core.object
       ( Core.catMaybes
           [ ("args" Core..=) Core.<$> args,
+            ("baseImageUri" Core..=) Core.<$> baseImageUri,
+            ("buildInfo" Core..=) Core.<$> buildInfo,
             ("command" Core..=) Core.<$> command,
             ("dependsOn" Core..=) Core.<$> dependsOn,
             ("env" Core..=) Core.<$> env,
@@ -1182,6 +1415,8 @@ data GoogleCloudRunV2Execution = GoogleCloudRunV2Execution
     conditions :: (Core.Maybe [GoogleCloudRunV2Condition]),
     -- | Output only. Represents time when the execution was acknowledged by the execution controller. It is not guaranteed to be set in happens-before order across separate operations.
     createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. Email address of the authenticated creator.
+    creator :: (Core.Maybe Core.Text),
     -- | Output only. For a deleted resource, the deletion time. It is only populated as a response to a Delete request.
     deleteTime :: (Core.Maybe Core.DateTime),
     -- | Output only. A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.
@@ -1239,6 +1474,7 @@ newGoogleCloudRunV2Execution =
       completionTime = Core.Nothing,
       conditions = Core.Nothing,
       createTime = Core.Nothing,
+      creator = Core.Nothing,
       deleteTime = Core.Nothing,
       etag = Core.Nothing,
       expireTime = Core.Nothing,
@@ -1274,6 +1510,7 @@ instance Core.FromJSON GoogleCloudRunV2Execution where
             Core.<*> (o Core..:? "completionTime")
             Core.<*> (o Core..:? "conditions")
             Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "creator")
             Core.<*> (o Core..:? "deleteTime")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "expireTime")
@@ -1310,6 +1547,7 @@ instance Core.ToJSON GoogleCloudRunV2Execution where
             ("completionTime" Core..=) Core.<$> completionTime,
             ("conditions" Core..=) Core.<$> conditions,
             ("createTime" Core..=) Core.<$> createTime,
+            ("creator" Core..=) Core.<$> creator,
             ("deleteTime" Core..=) Core.<$> deleteTime,
             ("etag" Core..=) Core.<$> etag,
             ("expireTime" Core..=) Core.<$> expireTime,
@@ -1457,7 +1695,7 @@ data GoogleCloudRunV2ExecutionTemplate = GoogleCloudRunV2ExecutionTemplate
     annotations :: (Core.Maybe GoogleCloudRunV2ExecutionTemplate_Annotations),
     -- | Unstructured key value map that can be used to organize and categorize objects. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels. Cloud Run API v2 does not support labels with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system labels in v1 now have a corresponding field in v2 ExecutionTemplate.
     labels :: (Core.Maybe GoogleCloudRunV2ExecutionTemplate_Labels),
-    -- | Specifies the maximum desired number of tasks the execution should run at given time. Must be \<= task_count. When the job is run, if this field is 0 or unset, the maximum possible value will be used for that execution. The actual number of tasks running in steady state will be less than this number when there are fewer tasks waiting to be completed remaining, i.e. when the work left to do is less than max parallelism.
+    -- | Optional. Specifies the maximum desired number of tasks the execution should run at given time. When the job is run, if this field is 0 or unset, the maximum possible value will be used for that execution. The actual number of tasks running in steady state will be less than this number when there are fewer tasks waiting to be completed remaining, i.e. when the work left to do is less than max parallelism.
     parallelism :: (Core.Maybe Core.Int32),
     -- | Specifies the desired number of tasks the execution should run. Setting to 1 means that parallelism is limited to 1 and the success of that task signals the success of the execution. Defaults to 1.
     taskCount :: (Core.Maybe Core.Int32),
@@ -1888,6 +2126,94 @@ instance Core.ToJSON GoogleCloudRunV2ImageExportStatus where
           ]
       )
 
+-- | Holds a single instance split entry for the Worker. Allocations can be done to a specific Revision name, or pointing to the latest Ready Revision.
+--
+-- /See:/ 'newGoogleCloudRunV2InstanceSplit' smart constructor.
+data GoogleCloudRunV2InstanceSplit = GoogleCloudRunV2InstanceSplit
+  { -- | Specifies percent of the instance split to this Revision. This defaults to zero if unspecified.
+    percent :: (Core.Maybe Core.Int32),
+    -- | Revision to which to assign this portion of instances, if split allocation is by revision.
+    revision :: (Core.Maybe Core.Text),
+    -- | The allocation type for this instance split.
+    type' :: (Core.Maybe GoogleCloudRunV2InstanceSplit_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2InstanceSplit' with the minimum fields required to make a request.
+newGoogleCloudRunV2InstanceSplit ::
+  GoogleCloudRunV2InstanceSplit
+newGoogleCloudRunV2InstanceSplit =
+  GoogleCloudRunV2InstanceSplit
+    { percent = Core.Nothing,
+      revision = Core.Nothing,
+      type' = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudRunV2InstanceSplit where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2InstanceSplit"
+      ( \o ->
+          GoogleCloudRunV2InstanceSplit
+            Core.<$> (o Core..:? "percent")
+            Core.<*> (o Core..:? "revision")
+            Core.<*> (o Core..:? "type")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2InstanceSplit where
+  toJSON GoogleCloudRunV2InstanceSplit {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("percent" Core..=) Core.<$> percent,
+            ("revision" Core..=) Core.<$> revision,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
+
+-- | Represents the observed state of a single @InstanceSplit@ entry.
+--
+-- /See:/ 'newGoogleCloudRunV2InstanceSplitStatus' smart constructor.
+data GoogleCloudRunV2InstanceSplitStatus = GoogleCloudRunV2InstanceSplitStatus
+  { -- | Specifies percent of the instance split to this Revision.
+    percent :: (Core.Maybe Core.Int32),
+    -- | Revision to which this instance split is assigned.
+    revision :: (Core.Maybe Core.Text),
+    -- | The allocation type for this instance split.
+    type' :: (Core.Maybe GoogleCloudRunV2InstanceSplitStatus_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2InstanceSplitStatus' with the minimum fields required to make a request.
+newGoogleCloudRunV2InstanceSplitStatus ::
+  GoogleCloudRunV2InstanceSplitStatus
+newGoogleCloudRunV2InstanceSplitStatus =
+  GoogleCloudRunV2InstanceSplitStatus
+    { percent = Core.Nothing,
+      revision = Core.Nothing,
+      type' = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudRunV2InstanceSplitStatus where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2InstanceSplitStatus"
+      ( \o ->
+          GoogleCloudRunV2InstanceSplitStatus
+            Core.<$> (o Core..:? "percent")
+            Core.<*> (o Core..:? "revision")
+            Core.<*> (o Core..:? "type")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2InstanceSplitStatus where
+  toJSON GoogleCloudRunV2InstanceSplitStatus {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("percent" Core..=) Core.<$> percent,
+            ("revision" Core..=) Core.<$> revision,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
+
 -- | Job represents the configuration of a single job, which references a container image that is run to completion.
 --
 -- /See:/ 'newGoogleCloudRunV2Job' smart constructor.
@@ -2304,6 +2630,46 @@ instance Core.ToJSON GoogleCloudRunV2ListTasksResponse where
           ]
       )
 
+-- | Response message containing a list of WorkerPools.
+--
+-- /See:/ 'newGoogleCloudRunV2ListWorkerPoolsResponse' smart constructor.
+data GoogleCloudRunV2ListWorkerPoolsResponse = GoogleCloudRunV2ListWorkerPoolsResponse
+  { -- | A token indicating there are more items than page_size. Use it in the next ListWorkerPools request to continue.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | The resulting list of WorkerPools.
+    workerPools :: (Core.Maybe [GoogleCloudRunV2WorkerPool])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2ListWorkerPoolsResponse' with the minimum fields required to make a request.
+newGoogleCloudRunV2ListWorkerPoolsResponse ::
+  GoogleCloudRunV2ListWorkerPoolsResponse
+newGoogleCloudRunV2ListWorkerPoolsResponse =
+  GoogleCloudRunV2ListWorkerPoolsResponse
+    { nextPageToken =
+        Core.Nothing,
+      workerPools = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudRunV2ListWorkerPoolsResponse where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2ListWorkerPoolsResponse"
+      ( \o ->
+          GoogleCloudRunV2ListWorkerPoolsResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "workerPools")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2ListWorkerPoolsResponse where
+  toJSON GoogleCloudRunV2ListWorkerPoolsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("workerPools" Core..=) Core.<$> workerPools
+          ]
+      )
+
 -- | Metadata represents the JSON encoded generated customer metadata.
 --
 -- /See:/ 'newGoogleCloudRunV2Metadata' smart constructor.
@@ -2642,6 +3008,8 @@ data GoogleCloudRunV2Revision = GoogleCloudRunV2Revision
     containers :: (Core.Maybe [GoogleCloudRunV2Container]),
     -- | Output only. The creation time.
     createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. Email address of the authenticated creator.
+    creator :: (Core.Maybe Core.Text),
     -- | Output only. For a deleted resource, the deletion time. It is only populated as a response to a Delete request.
     deleteTime :: (Core.Maybe Core.DateTime),
     -- | A reference to a customer managed encryption key (CMEK) to use to encrypt this container image. For more information, go to https:\/\/cloud.google.com\/run\/docs\/securing\/using-cmek
@@ -2710,6 +3078,7 @@ newGoogleCloudRunV2Revision =
       conditions = Core.Nothing,
       containers = Core.Nothing,
       createTime = Core.Nothing,
+      creator = Core.Nothing,
       deleteTime = Core.Nothing,
       encryptionKey = Core.Nothing,
       encryptionKeyRevocationAction = Core.Nothing,
@@ -2750,6 +3119,7 @@ instance Core.FromJSON GoogleCloudRunV2Revision where
             Core.<*> (o Core..:? "conditions")
             Core.<*> (o Core..:? "containers")
             Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "creator")
             Core.<*> (o Core..:? "deleteTime")
             Core.<*> (o Core..:? "encryptionKey")
             Core.<*> (o Core..:? "encryptionKeyRevocationAction")
@@ -2791,6 +3161,7 @@ instance Core.ToJSON GoogleCloudRunV2Revision where
             ("conditions" Core..=) Core.<$> conditions,
             ("containers" Core..=) Core.<$> containers,
             ("createTime" Core..=) Core.<$> createTime,
+            ("creator" Core..=) Core.<$> creator,
             ("deleteTime" Core..=) Core.<$> deleteTime,
             ("encryptionKey" Core..=) Core.<$> encryptionKey,
             ("encryptionKeyRevocationAction" Core..=)
@@ -3279,6 +3650,8 @@ data GoogleCloudRunV2Service = GoogleCloudRunV2Service
     annotations :: (Core.Maybe GoogleCloudRunV2Service_Annotations),
     -- | Optional. Settings for the Binary Authorization feature.
     binaryAuthorization :: (Core.Maybe GoogleCloudRunV2BinaryAuthorization),
+    -- | Optional. Configuration for building a Cloud Run function.
+    buildConfig :: (Core.Maybe GoogleCloudRunV2BuildConfig),
     -- | Arbitrary identifier for the API client.
     client :: (Core.Maybe Core.Text),
     -- | Arbitrary version identifier for the API client.
@@ -3299,7 +3672,7 @@ data GoogleCloudRunV2Service = GoogleCloudRunV2Service
     description :: (Core.Maybe Core.Text),
     -- | Output only. A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.
     etag :: (Core.Maybe Core.Text),
-    -- | Output only. For a deleted resource, the time after which it will be permamently deleted.
+    -- | Output only. For a deleted resource, the time after which it will be permanently deleted.
     expireTime :: (Core.Maybe Core.DateTime),
     -- | Output only. A number that monotonically increases every time the user modifies the desired state. Please note that unlike v1, this is an int64 value. As with most Google APIs, its JSON representation will be a @string@ instead of an @integer@.
     generation :: (Core.Maybe Core.Int64),
@@ -3321,7 +3694,7 @@ data GoogleCloudRunV2Service = GoogleCloudRunV2Service
     name :: (Core.Maybe Core.Text),
     -- | Output only. The generation of this Service currently serving traffic. See comments in @reconciling@ for additional information on reconciliation process in Cloud Run. Please note that unlike v1, this is an int64 value. As with most Google APIs, its JSON representation will be a @string@ instead of an @integer@.
     observedGeneration :: (Core.Maybe Core.Int64),
-    -- | Output only. Returns true if the Service is currently being acted upon by the system to bring it into the desired state. When a new Service is created, or an existing one is updated, Cloud Run will asynchronously perform all necessary steps to bring the Service to the desired serving state. This process is called reconciliation. While reconciliation is in process, @observed_generation@, @latest_ready_revison@, @traffic_statuses@, and @uri@ will have transient values that might mismatch the intended state: Once reconciliation is over (and this field is false), there are two possible outcomes: reconciliation succeeded and the serving state matches the Service, or there was an error, and reconciliation failed. This state can be found in @terminal_condition.state@. If reconciliation succeeded, the following fields will match: @traffic@ and @traffic_statuses@, @observed_generation@ and @generation@, @latest_ready_revision@ and @latest_created_revision@. If reconciliation failed, @traffic_statuses@,
+    -- | Output only. Returns true if the Service is currently being acted upon by the system to bring it into the desired state. When a new Service is created, or an existing one is updated, Cloud Run will asynchronously perform all necessary steps to bring the Service to the desired serving state. This process is called reconciliation. While reconciliation is in process, @observed_generation@, @latest_ready_revision@, @traffic_statuses@, and @uri@ will have transient values that might mismatch the intended state: Once reconciliation is over (and this field is false), there are two possible outcomes: reconciliation succeeded and the serving state matches the Service, or there was an error, and reconciliation failed. This state can be found in @terminal_condition.state@. If reconciliation succeeded, the following fields will match: @traffic@ and @traffic_statuses@, @observed_generation@ and @generation@, @latest_ready_revision@ and @latest_created_revision@. If reconciliation failed, @traffic_statuses@,
     -- @observed_generation@, and @latest_ready_revision@ will have the state of the last serving revision, or empty for newly created Services. Additional information on the failure can be found in @terminal_condition@ and @conditions@.
     reconciling :: (Core.Maybe Core.Bool),
     -- | Output only. Reserved for future use.
@@ -3354,6 +3727,7 @@ newGoogleCloudRunV2Service =
   GoogleCloudRunV2Service
     { annotations = Core.Nothing,
       binaryAuthorization = Core.Nothing,
+      buildConfig = Core.Nothing,
       client = Core.Nothing,
       clientVersion = Core.Nothing,
       conditions = Core.Nothing,
@@ -3396,6 +3770,7 @@ instance Core.FromJSON GoogleCloudRunV2Service where
           GoogleCloudRunV2Service
             Core.<$> (o Core..:? "annotations")
             Core.<*> (o Core..:? "binaryAuthorization")
+            Core.<*> (o Core..:? "buildConfig")
             Core.<*> (o Core..:? "client")
             Core.<*> (o Core..:? "clientVersion")
             Core.<*> (o Core..:? "conditions")
@@ -3439,6 +3814,7 @@ instance Core.ToJSON GoogleCloudRunV2Service where
       ( Core.catMaybes
           [ ("annotations" Core..=) Core.<$> annotations,
             ("binaryAuthorization" Core..=) Core.<$> binaryAuthorization,
+            ("buildConfig" Core..=) Core.<$> buildConfig,
             ("client" Core..=) Core.<$> client,
             ("clientVersion" Core..=) Core.<$> clientVersion,
             ("conditions" Core..=) Core.<$> conditions,
@@ -3563,6 +3939,8 @@ instance Core.ToJSON GoogleCloudRunV2ServiceMesh where
 data GoogleCloudRunV2ServiceScaling = GoogleCloudRunV2ServiceScaling
   { -- | Optional. total instance count for the service in manual scaling mode. This number of instances is divided among all revisions with specified traffic based on the percent of traffic they are receiving.
     manualInstanceCount :: (Core.Maybe Core.Int32),
+    -- | Optional. total max instances for the service. This number of instances is divided among all revisions with specified traffic based on the percent of traffic they are receiving.
+    maxInstanceCount :: (Core.Maybe Core.Int32),
     -- | Optional. total min instances for the service. This number of instances is divided among all revisions with specified traffic based on the percent of traffic they are receiving.
     minInstanceCount :: (Core.Maybe Core.Int32),
     -- | Optional. The scaling mode for the service.
@@ -3577,6 +3955,7 @@ newGoogleCloudRunV2ServiceScaling =
   GoogleCloudRunV2ServiceScaling
     { manualInstanceCount =
         Core.Nothing,
+      maxInstanceCount = Core.Nothing,
       minInstanceCount = Core.Nothing,
       scalingMode = Core.Nothing
     }
@@ -3588,6 +3967,7 @@ instance Core.FromJSON GoogleCloudRunV2ServiceScaling where
       ( \o ->
           GoogleCloudRunV2ServiceScaling
             Core.<$> (o Core..:? "manualInstanceCount")
+            Core.<*> (o Core..:? "maxInstanceCount")
             Core.<*> (o Core..:? "minInstanceCount")
             Core.<*> (o Core..:? "scalingMode")
       )
@@ -3597,6 +3977,7 @@ instance Core.ToJSON GoogleCloudRunV2ServiceScaling where
     Core.object
       ( Core.catMaybes
           [ ("manualInstanceCount" Core..=) Core.<$> manualInstanceCount,
+            ("maxInstanceCount" Core..=) Core.<$> maxInstanceCount,
             ("minInstanceCount" Core..=) Core.<$> minInstanceCount,
             ("scalingMode" Core..=) Core.<$> scalingMode
           ]
@@ -3823,6 +4204,8 @@ data GoogleCloudRunV2Task = GoogleCloudRunV2Task
     maxRetries :: (Core.Maybe Core.Int32),
     -- | Output only. The unique name of this Task.
     name :: (Core.Maybe Core.Text),
+    -- | Output only. The node selector for the task.
+    nodeSelector :: (Core.Maybe GoogleCloudRunV2NodeSelector),
     -- | Output only. The generation of this Task. See comments in @Job.reconciling@ for additional information on reconciliation process in Cloud Run.
     observedGeneration :: (Core.Maybe Core.Int64),
     -- | Output only. Indicates whether the resource\'s reconciliation is still in progress. See comments in @Job.reconciling@ for additional information on reconciliation process in Cloud Run.
@@ -3874,6 +4257,7 @@ newGoogleCloudRunV2Task =
       logUri = Core.Nothing,
       maxRetries = Core.Nothing,
       name = Core.Nothing,
+      nodeSelector = Core.Nothing,
       observedGeneration = Core.Nothing,
       reconciling = Core.Nothing,
       retried = Core.Nothing,
@@ -3913,6 +4297,7 @@ instance Core.FromJSON GoogleCloudRunV2Task where
             Core.<*> (o Core..:? "logUri")
             Core.<*> (o Core..:? "maxRetries")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "nodeSelector")
             Core.<*> ( o
                          Core..:? "observedGeneration"
                          Core.<&> Core.fmap Core.fromAsText
@@ -3953,6 +4338,7 @@ instance Core.ToJSON GoogleCloudRunV2Task where
             ("logUri" Core..=) Core.<$> logUri,
             ("maxRetries" Core..=) Core.<$> maxRetries,
             ("name" Core..=) Core.<$> name,
+            ("nodeSelector" Core..=) Core.<$> nodeSelector,
             ("observedGeneration" Core..=)
               Core.. Core.AsText
               Core.<$> observedGeneration,
@@ -4076,6 +4462,8 @@ data GoogleCloudRunV2TaskTemplate = GoogleCloudRunV2TaskTemplate
     executionEnvironment :: (Core.Maybe GoogleCloudRunV2TaskTemplate_ExecutionEnvironment),
     -- | Number of retries allowed per Task, before marking this Task failed. Defaults to 3.
     maxRetries :: (Core.Maybe Core.Int32),
+    -- | Optional. The node selector for the task template.
+    nodeSelector :: (Core.Maybe GoogleCloudRunV2NodeSelector),
     -- | Optional. Email address of the IAM service account associated with the Task of a Job. The service account represents the identity of the running task, and determines what permissions the task has. If not provided, the task will use the project\'s default service account.
     serviceAccount :: (Core.Maybe Core.Text),
     -- | Optional. Max allowed time duration the Task may be active before the system will actively try to mark it failed and kill associated containers. This applies per attempt of a task, meaning each retry can run for the full timeout. Defaults to 600 seconds.
@@ -4096,6 +4484,7 @@ newGoogleCloudRunV2TaskTemplate =
       encryptionKey = Core.Nothing,
       executionEnvironment = Core.Nothing,
       maxRetries = Core.Nothing,
+      nodeSelector = Core.Nothing,
       serviceAccount = Core.Nothing,
       timeout = Core.Nothing,
       volumes = Core.Nothing,
@@ -4112,6 +4501,7 @@ instance Core.FromJSON GoogleCloudRunV2TaskTemplate where
             Core.<*> (o Core..:? "encryptionKey")
             Core.<*> (o Core..:? "executionEnvironment")
             Core.<*> (o Core..:? "maxRetries")
+            Core.<*> (o Core..:? "nodeSelector")
             Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "timeout")
             Core.<*> (o Core..:? "volumes")
@@ -4126,6 +4516,7 @@ instance Core.ToJSON GoogleCloudRunV2TaskTemplate where
             ("encryptionKey" Core..=) Core.<$> encryptionKey,
             ("executionEnvironment" Core..=) Core.<$> executionEnvironment,
             ("maxRetries" Core..=) Core.<$> maxRetries,
+            ("nodeSelector" Core..=) Core.<$> nodeSelector,
             ("serviceAccount" Core..=) Core.<$> serviceAccount,
             ("timeout" Core..=) Core.<$> timeout,
             ("volumes" Core..=) Core.<$> volumes,
@@ -4422,6 +4813,481 @@ instance Core.ToJSON GoogleCloudRunV2VpcAccess where
           ]
       )
 
+-- | WorkerPool acts as a top-level container that manages a set of configurations and revision templates which implement a pull-based workload. WorkerPool exists to provide a singular abstraction which can be access controlled, reasoned about, and which encapsulates software lifecycle decisions such as rollout policy and team resource ownership.
+--
+-- /See:/ 'newGoogleCloudRunV2WorkerPool' smart constructor.
+data GoogleCloudRunV2WorkerPool = GoogleCloudRunV2WorkerPool
+  { -- | Optional. Unstructured key value map that may be set by external tools to store and arbitrary metadata. They are not queryable and should be preserved when modifying objects. Cloud Run API v2 does not support annotations with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected in new resources. All system annotations in v1 now have a corresponding field in v2 WorkerPool. This field follows Kubernetes annotations\' namespacing, limits, and rules.
+    annotations :: (Core.Maybe GoogleCloudRunV2WorkerPool_Annotations),
+    -- | Optional. Settings for the Binary Authorization feature.
+    binaryAuthorization :: (Core.Maybe GoogleCloudRunV2BinaryAuthorization),
+    -- | Arbitrary identifier for the API client.
+    client :: (Core.Maybe Core.Text),
+    -- | Arbitrary version identifier for the API client.
+    clientVersion :: (Core.Maybe Core.Text),
+    -- | Output only. The Conditions of all other associated sub-resources. They contain additional diagnostics information in case the WorkerPool does not reach its Serving state. See comments in @reconciling@ for additional information on reconciliation process in Cloud Run.
+    conditions :: (Core.Maybe [GoogleCloudRunV2Condition]),
+    -- | Output only. The creation time.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. Email address of the authenticated creator.
+    creator :: (Core.Maybe Core.Text),
+    -- | One or more custom audiences that you want this worker pool to support. Specify each custom audience as the full URL in a string. The custom audiences are encoded in the token and used to authenticate requests. For more information, see https:\/\/cloud.google.com\/run\/docs\/configuring\/custom-audiences.
+    customAudiences :: (Core.Maybe [Core.Text]),
+    -- | Output only. The deletion time. It is only populated as a response to a Delete request.
+    deleteTime :: (Core.Maybe Core.DateTime),
+    -- | User-provided description of the WorkerPool. This field currently has a 512-character limit.
+    description :: (Core.Maybe Core.Text),
+    -- | Output only. A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.
+    etag :: (Core.Maybe Core.Text),
+    -- | Output only. For a deleted resource, the time after which it will be permamently deleted.
+    expireTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. A number that monotonically increases every time the user modifies the desired state. Please note that unlike v1, this is an int64 value. As with most Google APIs, its JSON representation will be a @string@ instead of an @integer@.
+    generation :: (Core.Maybe Core.Int64),
+    -- | Output only. Detailed status information for corresponding instance splits. See comments in @reconciling@ for additional information on reconciliation process in Cloud Run.
+    instanceSplitStatuses :: (Core.Maybe [GoogleCloudRunV2InstanceSplitStatus]),
+    -- | Optional. Specifies how to distribute instances over a collection of Revisions belonging to the WorkerPool. If instance split is empty or not provided, defaults to 100% instances assigned to the latest @Ready@ Revision.
+    instanceSplits :: (Core.Maybe [GoogleCloudRunV2InstanceSplit]),
+    -- | Optional. Unstructured key value map that can be used to organize and categorize objects. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels. Cloud Run API v2 does not support labels with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system labels in v1 now have a corresponding field in v2 WorkerPool.
+    labels :: (Core.Maybe GoogleCloudRunV2WorkerPool_Labels),
+    -- | Output only. Email address of the last authenticated modifier.
+    lastModifier :: (Core.Maybe Core.Text),
+    -- | Output only. Name of the last created revision. See comments in @reconciling@ for additional information on reconciliation process in Cloud Run.
+    latestCreatedRevision :: (Core.Maybe Core.Text),
+    -- | Output only. Name of the latest revision that is serving traffic. See comments in @reconciling@ for additional information on reconciliation process in Cloud Run.
+    latestReadyRevision :: (Core.Maybe Core.Text),
+    -- | Optional. The launch stage as defined by <https://cloud.google.com/terms/launch-stages Google Cloud Platform Launch Stages>. Cloud Run supports @ALPHA@, @BETA@, and @GA@. If no value is specified, GA is assumed. Set the launch stage to a preview stage on input to allow use of preview features in that stage. On read (or output), describes whether the resource uses preview features. For example, if ALPHA is provided as input, but only BETA and GA-level features are used, this field will be BETA on output.
+    launchStage :: (Core.Maybe GoogleCloudRunV2WorkerPool_LaunchStage),
+    -- | The fully qualified name of this WorkerPool. In CreateWorkerPoolRequest, this field is ignored, and instead composed from CreateWorkerPoolRequest.parent and CreateWorkerPoolRequest.worker/id. Format: projects\/{project}\/locations\/{location}\/workerPools\/{worker/id}
+    name :: (Core.Maybe Core.Text),
+    -- | Output only. The generation of this WorkerPool currently serving traffic. See comments in @reconciling@ for additional information on reconciliation process in Cloud Run. Please note that unlike v1, this is an int64 value. As with most Google APIs, its JSON representation will be a @string@ instead of an @integer@.
+    observedGeneration :: (Core.Maybe Core.Int64),
+    -- | Output only. Returns true if the WorkerPool is currently being acted upon by the system to bring it into the desired state. When a new WorkerPool is created, or an existing one is updated, Cloud Run will asynchronously perform all necessary steps to bring the WorkerPool to the desired serving state. This process is called reconciliation. While reconciliation is in process, @observed_generation@, @latest_ready_revison@, @traffic_statuses@, and @uri@ will have transient values that might mismatch the intended state: Once reconciliation is over (and this field is false), there are two possible outcomes: reconciliation succeeded and the serving state matches the WorkerPool, or there was an error, and reconciliation failed. This state can be found in @terminal_condition.state@. If reconciliation succeeded, the following fields will match: @traffic@ and @traffic_statuses@, @observed_generation@ and @generation@, @latest_ready_revision@ and @latest_created_revision@. If reconciliation failed, @traffic_statuses@,
+    -- @observed_generation@, and @latest_ready_revision@ will have the state of the last serving revision, or empty for newly created WorkerPools. Additional information on the failure can be found in @terminal_condition@ and @conditions@.
+    reconciling :: (Core.Maybe Core.Bool),
+    -- | Output only. Reserved for future use.
+    satisfiesPzs :: (Core.Maybe Core.Bool),
+    -- | Optional. Specifies worker-pool-level scaling settings
+    scaling :: (Core.Maybe GoogleCloudRunV2WorkerPoolScaling),
+    -- | Required. The template used to create revisions for this WorkerPool.
+    template :: (Core.Maybe GoogleCloudRunV2WorkerPoolRevisionTemplate),
+    -- | Output only. The Condition of this WorkerPool, containing its readiness status, and detailed error information in case it did not reach a serving state. See comments in @reconciling@ for additional information on reconciliation process in Cloud Run.
+    terminalCondition :: (Core.Maybe GoogleCloudRunV2Condition),
+    -- | Output only. Server assigned unique identifier for the trigger. The value is a UUID4 string and guaranteed to remain unchanged until the resource is deleted.
+    uid :: (Core.Maybe Core.Text),
+    -- | Output only. The last-modified time.
+    updateTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2WorkerPool' with the minimum fields required to make a request.
+newGoogleCloudRunV2WorkerPool ::
+  GoogleCloudRunV2WorkerPool
+newGoogleCloudRunV2WorkerPool =
+  GoogleCloudRunV2WorkerPool
+    { annotations = Core.Nothing,
+      binaryAuthorization = Core.Nothing,
+      client = Core.Nothing,
+      clientVersion = Core.Nothing,
+      conditions = Core.Nothing,
+      createTime = Core.Nothing,
+      creator = Core.Nothing,
+      customAudiences = Core.Nothing,
+      deleteTime = Core.Nothing,
+      description = Core.Nothing,
+      etag = Core.Nothing,
+      expireTime = Core.Nothing,
+      generation = Core.Nothing,
+      instanceSplitStatuses = Core.Nothing,
+      instanceSplits = Core.Nothing,
+      labels = Core.Nothing,
+      lastModifier = Core.Nothing,
+      latestCreatedRevision = Core.Nothing,
+      latestReadyRevision = Core.Nothing,
+      launchStage = Core.Nothing,
+      name = Core.Nothing,
+      observedGeneration = Core.Nothing,
+      reconciling = Core.Nothing,
+      satisfiesPzs = Core.Nothing,
+      scaling = Core.Nothing,
+      template = Core.Nothing,
+      terminalCondition = Core.Nothing,
+      uid = Core.Nothing,
+      updateTime = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudRunV2WorkerPool where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2WorkerPool"
+      ( \o ->
+          GoogleCloudRunV2WorkerPool
+            Core.<$> (o Core..:? "annotations")
+            Core.<*> (o Core..:? "binaryAuthorization")
+            Core.<*> (o Core..:? "client")
+            Core.<*> (o Core..:? "clientVersion")
+            Core.<*> (o Core..:? "conditions")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "creator")
+            Core.<*> (o Core..:? "customAudiences")
+            Core.<*> (o Core..:? "deleteTime")
+            Core.<*> (o Core..:? "description")
+            Core.<*> (o Core..:? "etag")
+            Core.<*> (o Core..:? "expireTime")
+            Core.<*> (o Core..:? "generation" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "instanceSplitStatuses")
+            Core.<*> (o Core..:? "instanceSplits")
+            Core.<*> (o Core..:? "labels")
+            Core.<*> (o Core..:? "lastModifier")
+            Core.<*> (o Core..:? "latestCreatedRevision")
+            Core.<*> (o Core..:? "latestReadyRevision")
+            Core.<*> (o Core..:? "launchStage")
+            Core.<*> (o Core..:? "name")
+            Core.<*> ( o
+                         Core..:? "observedGeneration"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "reconciling")
+            Core.<*> (o Core..:? "satisfiesPzs")
+            Core.<*> (o Core..:? "scaling")
+            Core.<*> (o Core..:? "template")
+            Core.<*> (o Core..:? "terminalCondition")
+            Core.<*> (o Core..:? "uid")
+            Core.<*> (o Core..:? "updateTime")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2WorkerPool where
+  toJSON GoogleCloudRunV2WorkerPool {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("annotations" Core..=) Core.<$> annotations,
+            ("binaryAuthorization" Core..=) Core.<$> binaryAuthorization,
+            ("client" Core..=) Core.<$> client,
+            ("clientVersion" Core..=) Core.<$> clientVersion,
+            ("conditions" Core..=) Core.<$> conditions,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("creator" Core..=) Core.<$> creator,
+            ("customAudiences" Core..=) Core.<$> customAudiences,
+            ("deleteTime" Core..=) Core.<$> deleteTime,
+            ("description" Core..=) Core.<$> description,
+            ("etag" Core..=) Core.<$> etag,
+            ("expireTime" Core..=) Core.<$> expireTime,
+            ("generation" Core..=) Core.. Core.AsText Core.<$> generation,
+            ("instanceSplitStatuses" Core..=) Core.<$> instanceSplitStatuses,
+            ("instanceSplits" Core..=) Core.<$> instanceSplits,
+            ("labels" Core..=) Core.<$> labels,
+            ("lastModifier" Core..=) Core.<$> lastModifier,
+            ("latestCreatedRevision" Core..=) Core.<$> latestCreatedRevision,
+            ("latestReadyRevision" Core..=) Core.<$> latestReadyRevision,
+            ("launchStage" Core..=) Core.<$> launchStage,
+            ("name" Core..=) Core.<$> name,
+            ("observedGeneration" Core..=)
+              Core.. Core.AsText
+              Core.<$> observedGeneration,
+            ("reconciling" Core..=) Core.<$> reconciling,
+            ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
+            ("scaling" Core..=) Core.<$> scaling,
+            ("template" Core..=) Core.<$> template,
+            ("terminalCondition" Core..=) Core.<$> terminalCondition,
+            ("uid" Core..=) Core.<$> uid,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
+
+-- | Optional. Unstructured key value map that may be set by external tools to store and arbitrary metadata. They are not queryable and should be preserved when modifying objects. Cloud Run API v2 does not support annotations with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected in new resources. All system annotations in v1 now have a corresponding field in v2 WorkerPool. This field follows Kubernetes annotations\' namespacing, limits, and rules.
+--
+-- /See:/ 'newGoogleCloudRunV2WorkerPool_Annotations' smart constructor.
+newtype GoogleCloudRunV2WorkerPool_Annotations = GoogleCloudRunV2WorkerPool_Annotations
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2WorkerPool_Annotations' with the minimum fields required to make a request.
+newGoogleCloudRunV2WorkerPool_Annotations ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleCloudRunV2WorkerPool_Annotations
+newGoogleCloudRunV2WorkerPool_Annotations additional =
+  GoogleCloudRunV2WorkerPool_Annotations {additional = additional}
+
+instance Core.FromJSON GoogleCloudRunV2WorkerPool_Annotations where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2WorkerPool_Annotations"
+      ( \o ->
+          GoogleCloudRunV2WorkerPool_Annotations
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON GoogleCloudRunV2WorkerPool_Annotations where
+  toJSON GoogleCloudRunV2WorkerPool_Annotations {..} =
+    Core.toJSON additional
+
+-- | Optional. Unstructured key value map that can be used to organize and categorize objects. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels. Cloud Run API v2 does not support labels with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system labels in v1 now have a corresponding field in v2 WorkerPool.
+--
+-- /See:/ 'newGoogleCloudRunV2WorkerPool_Labels' smart constructor.
+newtype GoogleCloudRunV2WorkerPool_Labels = GoogleCloudRunV2WorkerPool_Labels
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2WorkerPool_Labels' with the minimum fields required to make a request.
+newGoogleCloudRunV2WorkerPool_Labels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleCloudRunV2WorkerPool_Labels
+newGoogleCloudRunV2WorkerPool_Labels additional =
+  GoogleCloudRunV2WorkerPool_Labels {additional = additional}
+
+instance Core.FromJSON GoogleCloudRunV2WorkerPool_Labels where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2WorkerPool_Labels"
+      ( \o ->
+          GoogleCloudRunV2WorkerPool_Labels
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON GoogleCloudRunV2WorkerPool_Labels where
+  toJSON GoogleCloudRunV2WorkerPool_Labels {..} =
+    Core.toJSON additional
+
+-- | WorkerPoolRevisionTemplate describes the data a worker pool revision should have when created from a template.
+--
+-- /See:/ 'newGoogleCloudRunV2WorkerPoolRevisionTemplate' smart constructor.
+data GoogleCloudRunV2WorkerPoolRevisionTemplate = GoogleCloudRunV2WorkerPoolRevisionTemplate
+  { -- | Optional. Unstructured key value map that may be set by external tools to store and arbitrary metadata. They are not queryable and should be preserved when modifying objects. Cloud Run API v2 does not support annotations with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system annotations in v1 now have a corresponding field in v2 WorkerPoolRevisionTemplate. This field follows Kubernetes annotations\' namespacing, limits, and rules.
+    annotations :: (Core.Maybe GoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations),
+    -- | Holds list of the containers that defines the unit of execution for this Revision.
+    containers :: (Core.Maybe [GoogleCloudRunV2Container]),
+    -- | A reference to a customer managed encryption key (CMEK) to use to encrypt this container image. For more information, go to https:\/\/cloud.google.com\/run\/docs\/securing\/using-cmek
+    encryptionKey :: (Core.Maybe Core.Text),
+    -- | Optional. The action to take if the encryption key is revoked.
+    encryptionKeyRevocationAction ::
+      ( Core.Maybe
+          GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction
+      ),
+    -- | Optional. If encryption/key/revocation_action is SHUTDOWN, the duration before shutting down all instances. The minimum increment is 1 hour.
+    encryptionKeyShutdownDuration :: (Core.Maybe Core.Duration),
+    -- | Optional. Unstructured key value map that can be used to organize and categorize objects. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels. Cloud Run API v2 does not support labels with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system labels in v1 now have a corresponding field in v2 WorkerPoolRevisionTemplate.
+    labels :: (Core.Maybe GoogleCloudRunV2WorkerPoolRevisionTemplate_Labels),
+    -- | Optional. The node selector for the revision template.
+    nodeSelector :: (Core.Maybe GoogleCloudRunV2NodeSelector),
+    -- | Optional. The unique name for the revision. If this field is omitted, it will be automatically generated based on the WorkerPool name.
+    revision :: (Core.Maybe Core.Text),
+    -- | Optional. Email address of the IAM service account associated with the revision of the service. The service account represents the identity of the running revision, and determines what permissions the revision has. If not provided, the revision will use the project\'s default service account.
+    serviceAccount :: (Core.Maybe Core.Text),
+    -- | Optional. Enables service mesh connectivity.
+    serviceMesh :: (Core.Maybe GoogleCloudRunV2ServiceMesh),
+    -- | Optional. Enable session affinity.
+    sessionAffinity :: (Core.Maybe Core.Bool),
+    -- | Optional. A list of Volumes to make available to containers.
+    volumes :: (Core.Maybe [GoogleCloudRunV2Volume]),
+    -- | Optional. VPC Access configuration to use for this Revision. For more information, visit https:\/\/cloud.google.com\/run\/docs\/configuring\/connecting-vpc.
+    vpcAccess :: (Core.Maybe GoogleCloudRunV2VpcAccess)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2WorkerPoolRevisionTemplate' with the minimum fields required to make a request.
+newGoogleCloudRunV2WorkerPoolRevisionTemplate ::
+  GoogleCloudRunV2WorkerPoolRevisionTemplate
+newGoogleCloudRunV2WorkerPoolRevisionTemplate =
+  GoogleCloudRunV2WorkerPoolRevisionTemplate
+    { annotations =
+        Core.Nothing,
+      containers = Core.Nothing,
+      encryptionKey = Core.Nothing,
+      encryptionKeyRevocationAction = Core.Nothing,
+      encryptionKeyShutdownDuration = Core.Nothing,
+      labels = Core.Nothing,
+      nodeSelector = Core.Nothing,
+      revision = Core.Nothing,
+      serviceAccount = Core.Nothing,
+      serviceMesh = Core.Nothing,
+      sessionAffinity = Core.Nothing,
+      volumes = Core.Nothing,
+      vpcAccess = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudRunV2WorkerPoolRevisionTemplate where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2WorkerPoolRevisionTemplate"
+      ( \o ->
+          GoogleCloudRunV2WorkerPoolRevisionTemplate
+            Core.<$> (o Core..:? "annotations")
+            Core.<*> (o Core..:? "containers")
+            Core.<*> (o Core..:? "encryptionKey")
+            Core.<*> (o Core..:? "encryptionKeyRevocationAction")
+            Core.<*> (o Core..:? "encryptionKeyShutdownDuration")
+            Core.<*> (o Core..:? "labels")
+            Core.<*> (o Core..:? "nodeSelector")
+            Core.<*> (o Core..:? "revision")
+            Core.<*> (o Core..:? "serviceAccount")
+            Core.<*> (o Core..:? "serviceMesh")
+            Core.<*> (o Core..:? "sessionAffinity")
+            Core.<*> (o Core..:? "volumes")
+            Core.<*> (o Core..:? "vpcAccess")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2WorkerPoolRevisionTemplate where
+  toJSON GoogleCloudRunV2WorkerPoolRevisionTemplate {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("annotations" Core..=) Core.<$> annotations,
+            ("containers" Core..=) Core.<$> containers,
+            ("encryptionKey" Core..=) Core.<$> encryptionKey,
+            ("encryptionKeyRevocationAction" Core..=)
+              Core.<$> encryptionKeyRevocationAction,
+            ("encryptionKeyShutdownDuration" Core..=)
+              Core.<$> encryptionKeyShutdownDuration,
+            ("labels" Core..=) Core.<$> labels,
+            ("nodeSelector" Core..=) Core.<$> nodeSelector,
+            ("revision" Core..=) Core.<$> revision,
+            ("serviceAccount" Core..=) Core.<$> serviceAccount,
+            ("serviceMesh" Core..=) Core.<$> serviceMesh,
+            ("sessionAffinity" Core..=) Core.<$> sessionAffinity,
+            ("volumes" Core..=) Core.<$> volumes,
+            ("vpcAccess" Core..=) Core.<$> vpcAccess
+          ]
+      )
+
+-- | Optional. Unstructured key value map that may be set by external tools to store and arbitrary metadata. They are not queryable and should be preserved when modifying objects. Cloud Run API v2 does not support annotations with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system annotations in v1 now have a corresponding field in v2 WorkerPoolRevisionTemplate. This field follows Kubernetes annotations\' namespacing, limits, and rules.
+--
+-- /See:/ 'newGoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations' smart constructor.
+newtype GoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations = GoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations' with the minimum fields required to make a request.
+newGoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations
+newGoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations
+  additional =
+    GoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations
+      { additional =
+          additional
+      }
+
+instance
+  Core.FromJSON
+    GoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations"
+      ( \o ->
+          GoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations
+  where
+  toJSON GoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations {..} =
+    Core.toJSON additional
+
+-- | Optional. Unstructured key value map that can be used to organize and categorize objects. User-provided labels are shared with Google\'s billing system, so they can be used to filter, or break down billing charges by team, component, environment, state, etc. For more information, visit https:\/\/cloud.google.com\/resource-manager\/docs\/creating-managing-labels or https:\/\/cloud.google.com\/run\/docs\/configuring\/labels. Cloud Run API v2 does not support labels with @run.googleapis.com@, @cloud.googleapis.com@, @serving.knative.dev@, or @autoscaling.knative.dev@ namespaces, and they will be rejected. All system labels in v1 now have a corresponding field in v2 WorkerPoolRevisionTemplate.
+--
+-- /See:/ 'newGoogleCloudRunV2WorkerPoolRevisionTemplate_Labels' smart constructor.
+newtype GoogleCloudRunV2WorkerPoolRevisionTemplate_Labels = GoogleCloudRunV2WorkerPoolRevisionTemplate_Labels
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2WorkerPoolRevisionTemplate_Labels' with the minimum fields required to make a request.
+newGoogleCloudRunV2WorkerPoolRevisionTemplate_Labels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleCloudRunV2WorkerPoolRevisionTemplate_Labels
+newGoogleCloudRunV2WorkerPoolRevisionTemplate_Labels additional =
+  GoogleCloudRunV2WorkerPoolRevisionTemplate_Labels
+    { additional =
+        additional
+    }
+
+instance
+  Core.FromJSON
+    GoogleCloudRunV2WorkerPoolRevisionTemplate_Labels
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2WorkerPoolRevisionTemplate_Labels"
+      ( \o ->
+          GoogleCloudRunV2WorkerPoolRevisionTemplate_Labels
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudRunV2WorkerPoolRevisionTemplate_Labels
+  where
+  toJSON GoogleCloudRunV2WorkerPoolRevisionTemplate_Labels {..} =
+    Core.toJSON additional
+
+-- | Worker pool scaling settings.
+--
+-- /See:/ 'newGoogleCloudRunV2WorkerPoolScaling' smart constructor.
+data GoogleCloudRunV2WorkerPoolScaling = GoogleCloudRunV2WorkerPoolScaling
+  { -- | Optional. The total number of instances in manual scaling mode.
+    manualInstanceCount :: (Core.Maybe Core.Int32),
+    -- | Optional. The maximum count of instances distributed among revisions based on the specified instance split percentages.
+    maxInstanceCount :: (Core.Maybe Core.Int32),
+    -- | Optional. A maximum percentage of instances that will be moved in each step of traffic split changes. When set to a positive value, the server will bring up, at most, that percentage of new instances at a time before moving traffic to them. After moving traffic, the server will bring down instances of the old revision. This can reduce a spike of total active instances during changes from one revision to another but specifying how many extra instances can be brought up at a time.
+    maxSurge :: (Core.Maybe Core.Int32),
+    -- | Optional. A maximum percentage of instances that may be unavailable during changes from one revision to another. When set to a positive value, the server may bring down instances before bringing up new instances. This can prevent a spike of total active instances during changes from one revision by reducing the pool of instances before bringing up new ones. Some requests may be slow or fail to serve during the transition.
+    maxUnavailable :: (Core.Maybe Core.Int32),
+    -- | Optional. The minimum count of instances distributed among revisions based on the specified instance split percentages.
+    minInstanceCount :: (Core.Maybe Core.Int32),
+    -- | Optional. The scaling mode for the worker pool.
+    scalingMode :: (Core.Maybe GoogleCloudRunV2WorkerPoolScaling_ScalingMode)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudRunV2WorkerPoolScaling' with the minimum fields required to make a request.
+newGoogleCloudRunV2WorkerPoolScaling ::
+  GoogleCloudRunV2WorkerPoolScaling
+newGoogleCloudRunV2WorkerPoolScaling =
+  GoogleCloudRunV2WorkerPoolScaling
+    { manualInstanceCount =
+        Core.Nothing,
+      maxInstanceCount = Core.Nothing,
+      maxSurge = Core.Nothing,
+      maxUnavailable = Core.Nothing,
+      minInstanceCount = Core.Nothing,
+      scalingMode = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudRunV2WorkerPoolScaling where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudRunV2WorkerPoolScaling"
+      ( \o ->
+          GoogleCloudRunV2WorkerPoolScaling
+            Core.<$> (o Core..:? "manualInstanceCount")
+            Core.<*> (o Core..:? "maxInstanceCount")
+            Core.<*> (o Core..:? "maxSurge")
+            Core.<*> (o Core..:? "maxUnavailable")
+            Core.<*> (o Core..:? "minInstanceCount")
+            Core.<*> (o Core..:? "scalingMode")
+      )
+
+instance Core.ToJSON GoogleCloudRunV2WorkerPoolScaling where
+  toJSON GoogleCloudRunV2WorkerPoolScaling {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("manualInstanceCount" Core..=) Core.<$> manualInstanceCount,
+            ("maxInstanceCount" Core..=) Core.<$> maxInstanceCount,
+            ("maxSurge" Core..=) Core.<$> maxSurge,
+            ("maxUnavailable" Core..=) Core.<$> maxUnavailable,
+            ("minInstanceCount" Core..=) Core.<$> minInstanceCount,
+            ("scalingMode" Core..=) Core.<$> scalingMode
+          ]
+      )
+
 -- | ApprovalConfig describes configuration for manual approval of a build.
 --
 -- /See:/ 'newGoogleDevtoolsCloudbuildV1ApprovalConfig' smart constructor.
@@ -4560,7 +5426,9 @@ instance Core.ToJSON GoogleDevtoolsCloudbuildV1ArtifactObjects where
 --
 -- /See:/ 'newGoogleDevtoolsCloudbuildV1Artifacts' smart constructor.
 data GoogleDevtoolsCloudbuildV1Artifacts = GoogleDevtoolsCloudbuildV1Artifacts
-  { -- | A list of images to be pushed upon the successful completion of all build steps. The images will be pushed using the builder service account\'s credentials. The digests of the pushed images will be stored in the Build resource\'s results field. If any of the images fail to be pushed, the build is marked FAILURE.
+  { -- | Optional. A list of Go modules to be uploaded to Artifact Registry upon successful completion of all build steps. If any objects fail to be pushed, the build is marked FAILURE.
+    goModules :: (Core.Maybe [GoogleDevtoolsCloudbuildV1GoModule]),
+    -- | A list of images to be pushed upon the successful completion of all build steps. The images will be pushed using the builder service account\'s credentials. The digests of the pushed images will be stored in the Build resource\'s results field. If any of the images fail to be pushed, the build is marked FAILURE.
     images :: (Core.Maybe [Core.Text]),
     -- | A list of Maven artifacts to be uploaded to Artifact Registry upon successful completion of all build steps. Artifacts in the workspace matching specified paths globs will be uploaded to the specified Artifact Registry repository using the builder service account\'s credentials. If any artifacts fail to be pushed, the build is marked FAILURE.
     mavenArtifacts :: (Core.Maybe [GoogleDevtoolsCloudbuildV1MavenArtifact]),
@@ -4578,7 +5446,8 @@ newGoogleDevtoolsCloudbuildV1Artifacts ::
   GoogleDevtoolsCloudbuildV1Artifacts
 newGoogleDevtoolsCloudbuildV1Artifacts =
   GoogleDevtoolsCloudbuildV1Artifacts
-    { images = Core.Nothing,
+    { goModules = Core.Nothing,
+      images = Core.Nothing,
       mavenArtifacts = Core.Nothing,
       npmPackages = Core.Nothing,
       objects = Core.Nothing,
@@ -4591,7 +5460,8 @@ instance Core.FromJSON GoogleDevtoolsCloudbuildV1Artifacts where
       "GoogleDevtoolsCloudbuildV1Artifacts"
       ( \o ->
           GoogleDevtoolsCloudbuildV1Artifacts
-            Core.<$> (o Core..:? "images")
+            Core.<$> (o Core..:? "goModules")
+            Core.<*> (o Core..:? "images")
             Core.<*> (o Core..:? "mavenArtifacts")
             Core.<*> (o Core..:? "npmPackages")
             Core.<*> (o Core..:? "objects")
@@ -4602,7 +5472,8 @@ instance Core.ToJSON GoogleDevtoolsCloudbuildV1Artifacts where
   toJSON GoogleDevtoolsCloudbuildV1Artifacts {..} =
     Core.object
       ( Core.catMaybes
-          [ ("images" Core..=) Core.<$> images,
+          [ ("goModules" Core..=) Core.<$> goModules,
+            ("images" Core..=) Core.<$> images,
             ("mavenArtifacts" Core..=) Core.<$> mavenArtifacts,
             ("npmPackages" Core..=) Core.<$> npmPackages,
             ("objects" Core..=) Core.<$> objects,
@@ -4624,6 +5495,8 @@ data GoogleDevtoolsCloudbuildV1Build = GoogleDevtoolsCloudbuildV1Build
     buildTriggerId :: (Core.Maybe Core.Text),
     -- | Output only. Time at which the request to create the build was received.
     createTime :: (Core.Maybe Core.DateTime),
+    -- | Optional. Dependencies that the Cloud Build worker will fetch before executing user steps.
+    dependencies :: (Core.Maybe [GoogleDevtoolsCloudbuildV1Dependency]),
     -- | Output only. Contains information about the build when status=FAILURE.
     failureInfo :: (Core.Maybe GoogleDevtoolsCloudbuildV1FailureInfo),
     -- | Output only. Time at which execution of the build was finished. The difference between finish/time and start/time is the duration of the build\'s execution.
@@ -4687,6 +5560,7 @@ newGoogleDevtoolsCloudbuildV1Build =
       availableSecrets = Core.Nothing,
       buildTriggerId = Core.Nothing,
       createTime = Core.Nothing,
+      dependencies = Core.Nothing,
       failureInfo = Core.Nothing,
       finishTime = Core.Nothing,
       gitConfig = Core.Nothing,
@@ -4725,6 +5599,7 @@ instance Core.FromJSON GoogleDevtoolsCloudbuildV1Build where
             Core.<*> (o Core..:? "availableSecrets")
             Core.<*> (o Core..:? "buildTriggerId")
             Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "dependencies")
             Core.<*> (o Core..:? "failureInfo")
             Core.<*> (o Core..:? "finishTime")
             Core.<*> (o Core..:? "gitConfig")
@@ -4761,6 +5636,7 @@ instance Core.ToJSON GoogleDevtoolsCloudbuildV1Build where
             ("availableSecrets" Core..=) Core.<$> availableSecrets,
             ("buildTriggerId" Core..=) Core.<$> buildTriggerId,
             ("createTime" Core..=) Core.<$> createTime,
+            ("dependencies" Core..=) Core.<$> dependencies,
             ("failureInfo" Core..=) Core.<$> failureInfo,
             ("finishTime" Core..=) Core.<$> finishTime,
             ("gitConfig" Core..=) Core.<$> gitConfig,
@@ -4949,6 +5825,8 @@ data GoogleDevtoolsCloudbuildV1BuildOptions = GoogleDevtoolsCloudbuildV1BuildOpt
     diskSizeGb :: (Core.Maybe Core.Int64),
     -- | Option to specify whether or not to apply bash style string operations to the substitutions. NOTE: this is always enabled for triggered builds and cannot be overridden in the build configuration file.
     dynamicSubstitutions :: (Core.Maybe Core.Bool),
+    -- | Optional. Option to specify whether structured logging is enabled. If true, JSON-formatted logs are parsed as structured logs.
+    enableStructuredLogging :: (Core.Maybe Core.Bool),
     -- | A list of global environment variable definitions that will exist for all build steps in this build. If a variable is defined in both globally and in a build step, the variable will use the build step value. The elements are of the form \"KEY=VALUE\" for the environment variable \"KEY\" being given the value \"VALUE\".
     env :: (Core.Maybe [Core.Text]),
     -- | Option to define build log streaming behavior to Cloud Storage.
@@ -4962,6 +5840,8 @@ data GoogleDevtoolsCloudbuildV1BuildOptions = GoogleDevtoolsCloudbuildV1BuildOpt
     machineType :: (Core.Maybe GoogleDevtoolsCloudbuildV1BuildOptions_MachineType),
     -- | Optional. Specification for execution on a @WorkerPool@. See <https://cloud.google.com/build/docs/private-pools/run-builds-in-private-pool running builds in a private pool> for more information.
     pool :: (Core.Maybe GoogleDevtoolsCloudbuildV1PoolOption),
+    -- | Optional. Option to specify the Pub\/Sub topic to receive build status updates.
+    pubsubTopic :: (Core.Maybe Core.Text),
     -- | Requested verifiability options.
     requestedVerifyOption ::
       ( Core.Maybe
@@ -4996,11 +5876,13 @@ newGoogleDevtoolsCloudbuildV1BuildOptions =
       defaultLogsBucketBehavior = Core.Nothing,
       diskSizeGb = Core.Nothing,
       dynamicSubstitutions = Core.Nothing,
+      enableStructuredLogging = Core.Nothing,
       env = Core.Nothing,
       logStreamingOption = Core.Nothing,
       logging = Core.Nothing,
       machineType = Core.Nothing,
       pool = Core.Nothing,
+      pubsubTopic = Core.Nothing,
       requestedVerifyOption = Core.Nothing,
       secretEnv = Core.Nothing,
       sourceProvenanceHash = Core.Nothing,
@@ -5019,11 +5901,13 @@ instance Core.FromJSON GoogleDevtoolsCloudbuildV1BuildOptions where
             Core.<*> (o Core..:? "defaultLogsBucketBehavior")
             Core.<*> (o Core..:? "diskSizeGb" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "dynamicSubstitutions")
+            Core.<*> (o Core..:? "enableStructuredLogging")
             Core.<*> (o Core..:? "env")
             Core.<*> (o Core..:? "logStreamingOption")
             Core.<*> (o Core..:? "logging")
             Core.<*> (o Core..:? "machineType")
             Core.<*> (o Core..:? "pool")
+            Core.<*> (o Core..:? "pubsubTopic")
             Core.<*> (o Core..:? "requestedVerifyOption")
             Core.<*> (o Core..:? "secretEnv")
             Core.<*> (o Core..:? "sourceProvenanceHash")
@@ -5041,11 +5925,14 @@ instance Core.ToJSON GoogleDevtoolsCloudbuildV1BuildOptions where
               Core.<$> defaultLogsBucketBehavior,
             ("diskSizeGb" Core..=) Core.. Core.AsText Core.<$> diskSizeGb,
             ("dynamicSubstitutions" Core..=) Core.<$> dynamicSubstitutions,
+            ("enableStructuredLogging" Core..=)
+              Core.<$> enableStructuredLogging,
             ("env" Core..=) Core.<$> env,
             ("logStreamingOption" Core..=) Core.<$> logStreamingOption,
             ("logging" Core..=) Core.<$> logging,
             ("machineType" Core..=) Core.<$> machineType,
             ("pool" Core..=) Core.<$> pool,
+            ("pubsubTopic" Core..=) Core.<$> pubsubTopic,
             ("requestedVerifyOption" Core..=) Core.<$> requestedVerifyOption,
             ("secretEnv" Core..=) Core.<$> secretEnv,
             ("sourceProvenanceHash" Core..=) Core.<$> sourceProvenanceHash,
@@ -5266,6 +6153,45 @@ instance Core.ToJSON GoogleDevtoolsCloudbuildV1ConnectedRepository where
           ]
       )
 
+-- | A dependency that the Cloud Build worker will fetch before executing user steps.
+--
+-- /See:/ 'newGoogleDevtoolsCloudbuildV1Dependency' smart constructor.
+data GoogleDevtoolsCloudbuildV1Dependency = GoogleDevtoolsCloudbuildV1Dependency
+  { -- | If set to true disable all dependency fetching (ignoring the default source as well).
+    empty :: (Core.Maybe Core.Bool),
+    -- | Represents a git repository as a build dependency.
+    gitSource :: (Core.Maybe GoogleDevtoolsCloudbuildV1GitSourceDependency)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleDevtoolsCloudbuildV1Dependency' with the minimum fields required to make a request.
+newGoogleDevtoolsCloudbuildV1Dependency ::
+  GoogleDevtoolsCloudbuildV1Dependency
+newGoogleDevtoolsCloudbuildV1Dependency =
+  GoogleDevtoolsCloudbuildV1Dependency
+    { empty = Core.Nothing,
+      gitSource = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleDevtoolsCloudbuildV1Dependency where
+  parseJSON =
+    Core.withObject
+      "GoogleDevtoolsCloudbuildV1Dependency"
+      ( \o ->
+          GoogleDevtoolsCloudbuildV1Dependency
+            Core.<$> (o Core..:? "empty")
+            Core.<*> (o Core..:? "gitSource")
+      )
+
+instance Core.ToJSON GoogleDevtoolsCloudbuildV1Dependency where
+  toJSON GoogleDevtoolsCloudbuildV1Dependency {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("empty" Core..=) Core.<$> empty,
+            ("gitSource" Core..=) Core.<$> gitSource
+          ]
+      )
+
 -- | This config defines the location of a source through Developer Connect.
 --
 -- /See:/ 'newGoogleDevtoolsCloudbuildV1DeveloperConnectConfig' smart constructor.
@@ -5453,6 +6379,166 @@ instance Core.ToJSON GoogleDevtoolsCloudbuildV1GitSource where
           [ ("dir" Core..=) Core.<$> dir,
             ("revision" Core..=) Core.<$> revision,
             ("url" Core..=) Core.<$> url
+          ]
+      )
+
+-- | Represents a git repository as a build dependency.
+--
+-- /See:/ 'newGoogleDevtoolsCloudbuildV1GitSourceDependency' smart constructor.
+data GoogleDevtoolsCloudbuildV1GitSourceDependency = GoogleDevtoolsCloudbuildV1GitSourceDependency
+  { -- | Optional. How much history should be fetched for the build (default 1, -1 for all history).
+    depth :: (Core.Maybe Core.Int64),
+    -- | Required. Where should the files be placed on the worker.
+    destPath :: (Core.Maybe Core.Text),
+    -- | Optional. True if submodules should be fetched too (default false).
+    recurseSubmodules :: (Core.Maybe Core.Bool),
+    -- | Required. The kind of repo (url or dev connect).
+    repository :: (Core.Maybe GoogleDevtoolsCloudbuildV1GitSourceRepository),
+    -- | Required. The revision that we will fetch the repo at.
+    revision :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleDevtoolsCloudbuildV1GitSourceDependency' with the minimum fields required to make a request.
+newGoogleDevtoolsCloudbuildV1GitSourceDependency ::
+  GoogleDevtoolsCloudbuildV1GitSourceDependency
+newGoogleDevtoolsCloudbuildV1GitSourceDependency =
+  GoogleDevtoolsCloudbuildV1GitSourceDependency
+    { depth =
+        Core.Nothing,
+      destPath = Core.Nothing,
+      recurseSubmodules = Core.Nothing,
+      repository = Core.Nothing,
+      revision = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleDevtoolsCloudbuildV1GitSourceDependency
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleDevtoolsCloudbuildV1GitSourceDependency"
+      ( \o ->
+          GoogleDevtoolsCloudbuildV1GitSourceDependency
+            Core.<$> (o Core..:? "depth" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "destPath")
+            Core.<*> (o Core..:? "recurseSubmodules")
+            Core.<*> (o Core..:? "repository")
+            Core.<*> (o Core..:? "revision")
+      )
+
+instance Core.ToJSON GoogleDevtoolsCloudbuildV1GitSourceDependency where
+  toJSON GoogleDevtoolsCloudbuildV1GitSourceDependency {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("depth" Core..=) Core.. Core.AsText Core.<$> depth,
+            ("destPath" Core..=) Core.<$> destPath,
+            ("recurseSubmodules" Core..=) Core.<$> recurseSubmodules,
+            ("repository" Core..=) Core.<$> repository,
+            ("revision" Core..=) Core.<$> revision
+          ]
+      )
+
+-- | A repository for a git source.
+--
+-- /See:/ 'newGoogleDevtoolsCloudbuildV1GitSourceRepository' smart constructor.
+data GoogleDevtoolsCloudbuildV1GitSourceRepository = GoogleDevtoolsCloudbuildV1GitSourceRepository
+  { -- | The Developer Connect Git repository link or the url that matches a repository link in the current project, formatted as @projects\/*\/locations\/*\/connections\/*\/gitRepositoryLink\/*@
+    developerConnect :: (Core.Maybe Core.Text),
+    -- | Location of the Git repository.
+    url :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleDevtoolsCloudbuildV1GitSourceRepository' with the minimum fields required to make a request.
+newGoogleDevtoolsCloudbuildV1GitSourceRepository ::
+  GoogleDevtoolsCloudbuildV1GitSourceRepository
+newGoogleDevtoolsCloudbuildV1GitSourceRepository =
+  GoogleDevtoolsCloudbuildV1GitSourceRepository
+    { developerConnect =
+        Core.Nothing,
+      url = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleDevtoolsCloudbuildV1GitSourceRepository
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleDevtoolsCloudbuildV1GitSourceRepository"
+      ( \o ->
+          GoogleDevtoolsCloudbuildV1GitSourceRepository
+            Core.<$> (o Core..:? "developerConnect")
+            Core.<*> (o Core..:? "url")
+      )
+
+instance Core.ToJSON GoogleDevtoolsCloudbuildV1GitSourceRepository where
+  toJSON GoogleDevtoolsCloudbuildV1GitSourceRepository {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("developerConnect" Core..=) Core.<$> developerConnect,
+            ("url" Core..=) Core.<$> url
+          ]
+      )
+
+-- | Go module to upload to Artifact Registry upon successful completion of all build steps. A module refers to all dependencies in a go.mod file.
+--
+-- /See:/ 'newGoogleDevtoolsCloudbuildV1GoModule' smart constructor.
+data GoogleDevtoolsCloudbuildV1GoModule = GoogleDevtoolsCloudbuildV1GoModule
+  { -- | Optional. The Go module\'s \"module path\". e.g. example.com\/foo\/v2
+    modulePath :: (Core.Maybe Core.Text),
+    -- | Optional. The Go module\'s semantic version in the form vX.Y.Z. e.g. v0.1.1 Pre-release identifiers can also be added by appending a dash and dot separated ASCII alphanumeric characters and hyphens. e.g. v0.2.3-alpha.x.12m.5
+    moduleVersion :: (Core.Maybe Core.Text),
+    -- | Optional. Location of the Artifact Registry repository. i.e. us-east1 Defaults to the build’s location.
+    repositoryLocation :: (Core.Maybe Core.Text),
+    -- | Optional. Artifact Registry repository name. Specified Go modules will be zipped and uploaded to Artifact Registry with this location as a prefix. e.g. my-go-repo
+    repositoryName :: (Core.Maybe Core.Text),
+    -- | Optional. Project ID of the Artifact Registry repository. Defaults to the build project.
+    repositoryProjectId :: (Core.Maybe Core.Text),
+    -- | Optional. Source path of the go.mod file in the build\'s workspace. If not specified, this will default to the current directory. e.g. ~\/code\/go\/mypackage
+    sourcePath :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleDevtoolsCloudbuildV1GoModule' with the minimum fields required to make a request.
+newGoogleDevtoolsCloudbuildV1GoModule ::
+  GoogleDevtoolsCloudbuildV1GoModule
+newGoogleDevtoolsCloudbuildV1GoModule =
+  GoogleDevtoolsCloudbuildV1GoModule
+    { modulePath = Core.Nothing,
+      moduleVersion = Core.Nothing,
+      repositoryLocation = Core.Nothing,
+      repositoryName = Core.Nothing,
+      repositoryProjectId = Core.Nothing,
+      sourcePath = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleDevtoolsCloudbuildV1GoModule where
+  parseJSON =
+    Core.withObject
+      "GoogleDevtoolsCloudbuildV1GoModule"
+      ( \o ->
+          GoogleDevtoolsCloudbuildV1GoModule
+            Core.<$> (o Core..:? "modulePath")
+            Core.<*> (o Core..:? "moduleVersion")
+            Core.<*> (o Core..:? "repositoryLocation")
+            Core.<*> (o Core..:? "repositoryName")
+            Core.<*> (o Core..:? "repositoryProjectId")
+            Core.<*> (o Core..:? "sourcePath")
+      )
+
+instance Core.ToJSON GoogleDevtoolsCloudbuildV1GoModule where
+  toJSON GoogleDevtoolsCloudbuildV1GoModule {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("modulePath" Core..=) Core.<$> modulePath,
+            ("moduleVersion" Core..=) Core.<$> moduleVersion,
+            ("repositoryLocation" Core..=) Core.<$> repositoryLocation,
+            ("repositoryName" Core..=) Core.<$> repositoryName,
+            ("repositoryProjectId" Core..=) Core.<$> repositoryProjectId,
+            ("sourcePath" Core..=) Core.<$> sourcePath
           ]
       )
 
@@ -5884,6 +6970,8 @@ data GoogleDevtoolsCloudbuildV1Results = GoogleDevtoolsCloudbuildV1Results
     buildStepImages :: (Core.Maybe [Core.Text]),
     -- | List of build step outputs, produced by builder images, in the order corresponding to build step indices. <https://cloud.google.com/cloud-build/docs/cloud-builders Cloud Builders> can produce this output by writing to @$BUILDER_OUTPUT\/output@. Only the first 50KB of data is stored. Note that the @$BUILDER_OUTPUT@ variable is read-only and can\'t be substituted.
     buildStepOutputs :: (Core.Maybe [Core.Base64]),
+    -- | Optional. Go module artifacts uploaded to Artifact Registry at the end of the build.
+    goModules :: (Core.Maybe [GoogleDevtoolsCloudbuildV1UploadedGoModule]),
     -- | Container images that were built as a part of the build.
     images :: (Core.Maybe [GoogleDevtoolsCloudbuildV1BuiltImage]),
     -- | Maven artifacts uploaded to Artifact Registry at the end of the build.
@@ -5907,6 +6995,7 @@ newGoogleDevtoolsCloudbuildV1Results =
       artifactTiming = Core.Nothing,
       buildStepImages = Core.Nothing,
       buildStepOutputs = Core.Nothing,
+      goModules = Core.Nothing,
       images = Core.Nothing,
       mavenArtifacts = Core.Nothing,
       npmPackages = Core.Nothing,
@@ -5924,6 +7013,7 @@ instance Core.FromJSON GoogleDevtoolsCloudbuildV1Results where
             Core.<*> (o Core..:? "artifactTiming")
             Core.<*> (o Core..:? "buildStepImages")
             Core.<*> (o Core..:? "buildStepOutputs")
+            Core.<*> (o Core..:? "goModules")
             Core.<*> (o Core..:? "images")
             Core.<*> (o Core..:? "mavenArtifacts")
             Core.<*> (o Core..:? "npmPackages")
@@ -5939,6 +7029,7 @@ instance Core.ToJSON GoogleDevtoolsCloudbuildV1Results where
             ("artifactTiming" Core..=) Core.<$> artifactTiming,
             ("buildStepImages" Core..=) Core.<$> buildStepImages,
             ("buildStepOutputs" Core..=) Core.<$> buildStepOutputs,
+            ("goModules" Core..=) Core.<$> goModules,
             ("images" Core..=) Core.<$> images,
             ("mavenArtifacts" Core..=) Core.<$> mavenArtifacts,
             ("npmPackages" Core..=) Core.<$> npmPackages,
@@ -6397,6 +7488,51 @@ instance Core.ToJSON GoogleDevtoolsCloudbuildV1TimeSpan where
       ( Core.catMaybes
           [ ("endTime" Core..=) Core.<$> endTime,
             ("startTime" Core..=) Core.<$> startTime
+          ]
+      )
+
+-- | A Go module artifact uploaded to Artifact Registry using the GoModule directive.
+--
+-- /See:/ 'newGoogleDevtoolsCloudbuildV1UploadedGoModule' smart constructor.
+data GoogleDevtoolsCloudbuildV1UploadedGoModule = GoogleDevtoolsCloudbuildV1UploadedGoModule
+  { -- | Hash types and values of the Go Module Artifact.
+    fileHashes :: (Core.Maybe GoogleDevtoolsCloudbuildV1FileHashes),
+    -- | Output only. Stores timing information for pushing the specified artifact.
+    pushTiming :: (Core.Maybe GoogleDevtoolsCloudbuildV1TimeSpan),
+    -- | URI of the uploaded artifact.
+    uri :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleDevtoolsCloudbuildV1UploadedGoModule' with the minimum fields required to make a request.
+newGoogleDevtoolsCloudbuildV1UploadedGoModule ::
+  GoogleDevtoolsCloudbuildV1UploadedGoModule
+newGoogleDevtoolsCloudbuildV1UploadedGoModule =
+  GoogleDevtoolsCloudbuildV1UploadedGoModule
+    { fileHashes =
+        Core.Nothing,
+      pushTiming = Core.Nothing,
+      uri = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleDevtoolsCloudbuildV1UploadedGoModule where
+  parseJSON =
+    Core.withObject
+      "GoogleDevtoolsCloudbuildV1UploadedGoModule"
+      ( \o ->
+          GoogleDevtoolsCloudbuildV1UploadedGoModule
+            Core.<$> (o Core..:? "fileHashes")
+            Core.<*> (o Core..:? "pushTiming")
+            Core.<*> (o Core..:? "uri")
+      )
+
+instance Core.ToJSON GoogleDevtoolsCloudbuildV1UploadedGoModule where
+  toJSON GoogleDevtoolsCloudbuildV1UploadedGoModule {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("fileHashes" Core..=) Core.<$> fileHashes,
+            ("pushTiming" Core..=) Core.<$> pushTiming,
+            ("uri" Core..=) Core.<$> uri
           ]
       )
 
@@ -7247,15 +8383,15 @@ instance Core.ToJSON Proto2BridgeMessageSet where
 --
 -- /See:/ 'newUtilStatusProto' smart constructor.
 data UtilStatusProto = UtilStatusProto
-  { -- | The canonical error code (see codes.proto) that most closely corresponds to this status. This may be missing, and in the common case of the generic space, it definitely will be.
+  { -- | The canonical error code (see codes.proto) that most closely corresponds to this status. This may be missing, and in the common case of the generic space, it definitely will be. copybara:strip/begin(b\/383363683) copybara:strip/end/and/replace optional int32 canonical_code = 6;
     canonicalCode :: (Core.Maybe Core.Int32),
-    -- | Numeric code drawn from the space specified below. Often, this is the canonical error space, and code is drawn from google3\/util\/task\/codes.proto
+    -- | Numeric code drawn from the space specified below. Often, this is the canonical error space, and code is drawn from google3\/util\/task\/codes.proto copybara:strip/begin(b\/383363683) copybara:strip/end/and/replace optional int32 code = 1;
     code :: (Core.Maybe Core.Int32),
-    -- | Detail message
+    -- | Detail message copybara:strip/begin(b\/383363683) copybara:strip/end/and/replace optional string message = 3;
     message :: (Core.Maybe Core.Text),
-    -- | message_set associates an arbitrary proto message with the status.
+    -- | message/set associates an arbitrary proto message with the status. copybara:strip/begin(b\/383363683) copybara:strip/end/and/replace optional proto2.bridge.MessageSet message/set = 5;
     messageSet :: (Core.Maybe Proto2BridgeMessageSet),
-    -- | The following are usually only present when code != 0 Space to which this status belongs
+    -- | The following are usually only present when code != 0 Space to which this status belongs copybara:strip/begin(b\/383363683) copybara:strip/end/and/replace optional string space = 2;
     space :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

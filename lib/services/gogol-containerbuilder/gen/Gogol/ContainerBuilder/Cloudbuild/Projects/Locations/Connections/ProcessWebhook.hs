@@ -73,7 +73,7 @@ data CloudbuildProjectsLocationsConnectionsProcessWebhook = CloudbuildProjectsLo
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
     uploadProtocol :: (Core.Maybe Core.Text),
-    -- | Arbitrary additional key to find the maching repository for a webhook event if needed.
+    -- | Arbitrary additional key to find the matching repository for a webhook event if needed.
     webhookKey :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

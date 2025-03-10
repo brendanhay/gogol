@@ -413,7 +413,7 @@ newtype GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequest_ReasonsItem = 
       Core.FromJSONKey
     )
 
--- | Default unspecified reason.
+-- | Unspecified reason. Do not use.
 pattern GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequest_ReasonsItem_REASONUNSPECIFIED :: GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequest_ReasonsItem
 pattern GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequest_ReasonsItem_REASONUNSPECIFIED = GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentRequest_ReasonsItem "REASON_UNSPECIFIED"
 
@@ -513,7 +513,7 @@ pattern GoogleCloudRecaptchaenterpriseV1Event_FraudPrevention_FRAUDPREVENTIONUNS
 pattern GoogleCloudRecaptchaenterpriseV1Event_FraudPrevention_Enabled :: GoogleCloudRecaptchaenterpriseV1Event_FraudPrevention
 pattern GoogleCloudRecaptchaenterpriseV1Event_FraudPrevention_Enabled = GoogleCloudRecaptchaenterpriseV1Event_FraudPrevention "ENABLED"
 
--- | Disable Fraud Prevention for this assessment, regardless of Google Cloud console settings.
+-- | Disable Fraud Prevention for this assessment, regardless of the Google Cloud console settings.
 pattern GoogleCloudRecaptchaenterpriseV1Event_FraudPrevention_Disabled :: GoogleCloudRecaptchaenterpriseV1Event_FraudPrevention
 pattern GoogleCloudRecaptchaenterpriseV1Event_FraudPrevention_Disabled = GoogleCloudRecaptchaenterpriseV1Event_FraudPrevention "DISABLED"
 

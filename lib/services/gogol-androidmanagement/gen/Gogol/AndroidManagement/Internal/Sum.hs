@@ -492,6 +492,31 @@ module Gogol.AndroidManagement.Internal.Sum
         Enterprise_EnabledNotificationTypesItem_STATUSREPORT,
         Enterprise_EnabledNotificationTypesItem_Command,
         Enterprise_EnabledNotificationTypesItem_USAGELOGS,
+        Enterprise_EnabledNotificationTypesItem_ENTERPRISEUPGRADE,
+        ..
+      ),
+
+    -- * Enterprise_EnterpriseType
+    Enterprise_EnterpriseType
+      ( Enterprise_EnterpriseType_ENTERPRISETYPEUNSPECIFIED,
+        Enterprise_EnterpriseType_MANAGEDGOOGLEDOMAIN,
+        Enterprise_EnterpriseType_MANAGEDGOOGLEPLAYACCOUNTSENTERPRISE,
+        ..
+      ),
+
+    -- * Enterprise_ManagedGoogleDomainType
+    Enterprise_ManagedGoogleDomainType
+      ( Enterprise_ManagedGoogleDomainType_MANAGEDGOOGLEDOMAINTYPEUNSPECIFIED,
+        Enterprise_ManagedGoogleDomainType_TYPETEAM,
+        Enterprise_ManagedGoogleDomainType_TYPEDOMAIN,
+        ..
+      ),
+
+    -- * Enterprise_ManagedGooglePlayAccountsEnterpriseType
+    Enterprise_ManagedGooglePlayAccountsEnterpriseType
+      ( Enterprise_ManagedGooglePlayAccountsEnterpriseType_MANAGEDGOOGLEPLAYACCOUNTSENTERPRISETYPEUNSPECIFIED,
+        Enterprise_ManagedGooglePlayAccountsEnterpriseType_CUSTOMERMANAGED,
+        Enterprise_ManagedGooglePlayAccountsEnterpriseType_EMMMANAGED,
         ..
       ),
 
@@ -3109,6 +3134,10 @@ pattern Enterprise_EnabledNotificationTypesItem_Command = Enterprise_EnabledNoti
 pattern Enterprise_EnabledNotificationTypesItem_USAGELOGS :: Enterprise_EnabledNotificationTypesItem
 pattern Enterprise_EnabledNotificationTypesItem_USAGELOGS = Enterprise_EnabledNotificationTypesItem "USAGE_LOGS"
 
+-- | A notification sent when an enterprise is upgraded.Note: This feature is not generally available.
+pattern Enterprise_EnabledNotificationTypesItem_ENTERPRISEUPGRADE :: Enterprise_EnabledNotificationTypesItem
+pattern Enterprise_EnabledNotificationTypesItem_ENTERPRISEUPGRADE = Enterprise_EnabledNotificationTypesItem "ENTERPRISE_UPGRADE"
+
 {-# COMPLETE
   Enterprise_EnabledNotificationTypesItem_NOTIFICATIONTYPEUNSPECIFIED,
   Enterprise_EnabledNotificationTypesItem_Enrollment,
@@ -3116,7 +3145,104 @@ pattern Enterprise_EnabledNotificationTypesItem_USAGELOGS = Enterprise_EnabledNo
   Enterprise_EnabledNotificationTypesItem_STATUSREPORT,
   Enterprise_EnabledNotificationTypesItem_Command,
   Enterprise_EnabledNotificationTypesItem_USAGELOGS,
+  Enterprise_EnabledNotificationTypesItem_ENTERPRISEUPGRADE,
   Enterprise_EnabledNotificationTypesItem
+  #-}
+
+-- | Output only. The type of the enterprise.
+newtype Enterprise_EnterpriseType = Enterprise_EnterpriseType {fromEnterprise_EnterpriseType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This value is not used.
+pattern Enterprise_EnterpriseType_ENTERPRISETYPEUNSPECIFIED :: Enterprise_EnterpriseType
+pattern Enterprise_EnterpriseType_ENTERPRISETYPEUNSPECIFIED = Enterprise_EnterpriseType "ENTERPRISE_TYPE_UNSPECIFIED"
+
+-- | The enterprise belongs to a managed Google domain (https:\/\/developers.google.com\/android\/work\/terminology#managed/google/domain).
+pattern Enterprise_EnterpriseType_MANAGEDGOOGLEDOMAIN :: Enterprise_EnterpriseType
+pattern Enterprise_EnterpriseType_MANAGEDGOOGLEDOMAIN = Enterprise_EnterpriseType "MANAGED_GOOGLE_DOMAIN"
+
+-- | The enterprise is a managed Google Play Accounts enterprise (https:\/\/developers.google.com\/android\/work\/terminology#managed/google/play/accounts/enterprise).
+pattern Enterprise_EnterpriseType_MANAGEDGOOGLEPLAYACCOUNTSENTERPRISE :: Enterprise_EnterpriseType
+pattern Enterprise_EnterpriseType_MANAGEDGOOGLEPLAYACCOUNTSENTERPRISE = Enterprise_EnterpriseType "MANAGED_GOOGLE_PLAY_ACCOUNTS_ENTERPRISE"
+
+{-# COMPLETE
+  Enterprise_EnterpriseType_ENTERPRISETYPEUNSPECIFIED,
+  Enterprise_EnterpriseType_MANAGEDGOOGLEDOMAIN,
+  Enterprise_EnterpriseType_MANAGEDGOOGLEPLAYACCOUNTSENTERPRISE,
+  Enterprise_EnterpriseType
+  #-}
+
+-- | Output only. The type of managed Google domain.
+newtype Enterprise_ManagedGoogleDomainType = Enterprise_ManagedGoogleDomainType {fromEnterprise_ManagedGoogleDomainType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The managed Google domain type is not specified.
+pattern Enterprise_ManagedGoogleDomainType_MANAGEDGOOGLEDOMAINTYPEUNSPECIFIED :: Enterprise_ManagedGoogleDomainType
+pattern Enterprise_ManagedGoogleDomainType_MANAGEDGOOGLEDOMAINTYPEUNSPECIFIED = Enterprise_ManagedGoogleDomainType "MANAGED_GOOGLE_DOMAIN_TYPE_UNSPECIFIED"
+
+-- | The managed Google domain is an email-verified team.
+pattern Enterprise_ManagedGoogleDomainType_TYPETEAM :: Enterprise_ManagedGoogleDomainType
+pattern Enterprise_ManagedGoogleDomainType_TYPETEAM = Enterprise_ManagedGoogleDomainType "TYPE_TEAM"
+
+-- | The managed Google domain is domain-verified.
+pattern Enterprise_ManagedGoogleDomainType_TYPEDOMAIN :: Enterprise_ManagedGoogleDomainType
+pattern Enterprise_ManagedGoogleDomainType_TYPEDOMAIN = Enterprise_ManagedGoogleDomainType "TYPE_DOMAIN"
+
+{-# COMPLETE
+  Enterprise_ManagedGoogleDomainType_MANAGEDGOOGLEDOMAINTYPEUNSPECIFIED,
+  Enterprise_ManagedGoogleDomainType_TYPETEAM,
+  Enterprise_ManagedGoogleDomainType_TYPEDOMAIN,
+  Enterprise_ManagedGoogleDomainType
+  #-}
+
+-- | Output only. The type of a managed Google Play Accounts enterprise.
+newtype Enterprise_ManagedGooglePlayAccountsEnterpriseType = Enterprise_ManagedGooglePlayAccountsEnterpriseType {fromEnterprise_ManagedGooglePlayAccountsEnterpriseType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The managed Google Play Accounts enterprise type is not specified.
+pattern Enterprise_ManagedGooglePlayAccountsEnterpriseType_MANAGEDGOOGLEPLAYACCOUNTSENTERPRISETYPEUNSPECIFIED :: Enterprise_ManagedGooglePlayAccountsEnterpriseType
+pattern Enterprise_ManagedGooglePlayAccountsEnterpriseType_MANAGEDGOOGLEPLAYACCOUNTSENTERPRISETYPEUNSPECIFIED = Enterprise_ManagedGooglePlayAccountsEnterpriseType "MANAGED_GOOGLE_PLAY_ACCOUNTS_ENTERPRISE_TYPE_UNSPECIFIED"
+
+-- | The enterprise is customer-managed
+pattern Enterprise_ManagedGooglePlayAccountsEnterpriseType_CUSTOMERMANAGED :: Enterprise_ManagedGooglePlayAccountsEnterpriseType
+pattern Enterprise_ManagedGooglePlayAccountsEnterpriseType_CUSTOMERMANAGED = Enterprise_ManagedGooglePlayAccountsEnterpriseType "CUSTOMER_MANAGED"
+
+-- | The enterprise is EMM-managed (deprecated).
+pattern Enterprise_ManagedGooglePlayAccountsEnterpriseType_EMMMANAGED :: Enterprise_ManagedGooglePlayAccountsEnterpriseType
+pattern Enterprise_ManagedGooglePlayAccountsEnterpriseType_EMMMANAGED = Enterprise_ManagedGooglePlayAccountsEnterpriseType "EMM_MANAGED"
+
+{-# COMPLETE
+  Enterprise_ManagedGooglePlayAccountsEnterpriseType_MANAGEDGOOGLEPLAYACCOUNTSENTERPRISETYPEUNSPECIFIED,
+  Enterprise_ManagedGooglePlayAccountsEnterpriseType_CUSTOMERMANAGED,
+  Enterprise_ManagedGooglePlayAccountsEnterpriseType_EMMMANAGED,
+  Enterprise_ManagedGooglePlayAccountsEnterpriseType
   #-}
 
 -- | Output only. Whether users need to be authenticated by Google during the enrollment process. IT admin can specify if Google authentication is enabled for the enterprise for knowledge worker devices. This value can be set only via the Google Admin Console. Google authentication can be used with signin/url In the case where Google authentication is required and a signin/url is specified, Google authentication will be launched before signin_url.

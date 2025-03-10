@@ -65,7 +65,7 @@ data RedisProjectsLocationsClustersDelete = RedisProjectsLocationsClustersDelete
     callback :: (Core.Maybe Core.Text),
     -- | Required. Redis cluster resource name using the form: @projects\/{project_id}\/locations\/{location_id}\/clusters\/{cluster_id}@ where @location_id@ refers to a GCP region.
     name :: Core.Text,
-    -- | Idempotent request UUID.
+    -- | Optional. Idempotent request UUID.
     requestId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),

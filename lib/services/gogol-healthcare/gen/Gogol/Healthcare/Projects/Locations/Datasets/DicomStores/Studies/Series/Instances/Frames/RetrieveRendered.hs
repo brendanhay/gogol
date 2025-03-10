@@ -51,6 +51,7 @@ type HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesFramesR
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "viewport" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] HttpBody
 
@@ -71,7 +72,9 @@ data HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesFramesR
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
+    uploadProtocol :: (Core.Maybe Core.Text),
+    -- | Optional. The viewport setting to use as specified in https:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/chtml\/part18\/sect/8.3.5.html#sect/8.3.5.1.3
+    viewport :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -99,6 +102,8 @@ newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesFramesRet
         uploadType =
           Core.Nothing,
         uploadProtocol =
+          Core.Nothing,
+        viewport =
           Core.Nothing
       }
 
@@ -124,6 +129,7 @@ instance
         callback
         uploadType
         uploadProtocol
+        viewport
         (Core.Just Core.AltJSON)
         healthcareService
       where

@@ -45,14 +45,14 @@ import Control.Monad.Catch
 import Control.Monad.IO.Class (MonadIO (..))
 import Data.Aeson (eitherDecode')
 import Data.ByteString (ByteString)
-import qualified Data.ByteString.Lazy as LBS
+import Data.ByteString.Lazy qualified as LBS
 import Data.Char (toLower)
-import qualified Data.Text.Encoding as Text
-import qualified Data.Text.Lazy as LText
-import qualified Data.Text.Lazy.Encoding as LText
+import Data.Text.Encoding qualified as Text
+import Data.Text.Lazy qualified as LText
+import Data.Text.Lazy.Encoding qualified as LText
 import Gogol.Prelude (Text)
 import Network.HTTP.Client (HttpException (..), HttpExceptionContent (..), Manager)
-import qualified Network.HTTP.Client as Client
+import Network.HTTP.Client qualified as Client
 import Network.HTTP.Types (HeaderName)
 import System.Environment (lookupEnv)
 

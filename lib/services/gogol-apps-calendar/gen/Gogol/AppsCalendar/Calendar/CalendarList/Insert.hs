@@ -76,7 +76,9 @@ newCalendarCalendarListInsert payload =
 
 instance Core.GoogleRequest CalendarCalendarListInsert where
   type Rs CalendarCalendarListInsert = CalendarListEntry
-  type Scopes CalendarCalendarListInsert = '[Calendar'FullControl]
+  type
+    Scopes CalendarCalendarListInsert =
+      '[Calendar'FullControl, Calendar'Calendarlist]
   requestClient CalendarCalendarListInsert {..} =
     go
       colorRgbFormat

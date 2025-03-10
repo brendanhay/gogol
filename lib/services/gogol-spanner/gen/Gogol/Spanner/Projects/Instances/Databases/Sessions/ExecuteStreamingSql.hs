@@ -23,7 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Like ExecuteSql, except returns the result set as a stream. Unlike ExecuteSql, there is no limit on the size of the returned result set. However, no individual row in the result set can exceed 100 MiB, and no column value can exceed 10 MiB.
+-- Like ExecuteSql, except returns the result set as a stream. Unlike ExecuteSql, there is no limit on the size of the returned result set. However, no individual row in the result set can exceed 100 MiB, and no column value can exceed 10 MiB. The query string can be SQL or <https://cloud.google.com/spanner/docs/reference/standard-sql/graph-intro Graph Query Language (GQL)>.
 --
 -- /See:/ <https://cloud.google.com/spanner/ Cloud Spanner API Reference> for @spanner.projects.instances.databases.sessions.executeStreamingSql@.
 module Gogol.Spanner.Projects.Instances.Databases.Sessions.ExecuteStreamingSql
@@ -53,7 +53,7 @@ type SpannerProjectsInstancesDatabasesSessionsExecuteStreamingSqlResource =
     Core.:> Core.ReqBody '[Core.JSON] ExecuteSqlRequest
     Core.:> Core.Post '[Core.JSON] PartialResultSet
 
--- | Like ExecuteSql, except returns the result set as a stream. Unlike ExecuteSql, there is no limit on the size of the returned result set. However, no individual row in the result set can exceed 100 MiB, and no column value can exceed 10 MiB.
+-- | Like ExecuteSql, except returns the result set as a stream. Unlike ExecuteSql, there is no limit on the size of the returned result set. However, no individual row in the result set can exceed 100 MiB, and no column value can exceed 10 MiB. The query string can be SQL or <https://cloud.google.com/spanner/docs/reference/standard-sql/graph-intro Graph Query Language (GQL)>.
 --
 -- /See:/ 'newSpannerProjectsInstancesDatabasesSessionsExecuteStreamingSql' smart constructor.
 data SpannerProjectsInstancesDatabasesSessionsExecuteStreamingSql = SpannerProjectsInstancesDatabasesSessionsExecuteStreamingSql

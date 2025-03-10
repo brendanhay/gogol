@@ -325,6 +325,7 @@ module Gogol.Dataflow.Internal.Sum
         SDKInfo_Language_Java,
         SDKInfo_Language_Python,
         SDKInfo_Language_GO,
+        SDKInfo_Language_Yaml,
         ..
       ),
 
@@ -1897,11 +1898,16 @@ pattern SDKInfo_Language_Python = SDKInfo_Language "PYTHON"
 pattern SDKInfo_Language_GO :: SDKInfo_Language
 pattern SDKInfo_Language_GO = SDKInfo_Language "GO"
 
+-- | YAML.
+pattern SDKInfo_Language_Yaml :: SDKInfo_Language
+pattern SDKInfo_Language_Yaml = SDKInfo_Language "YAML"
+
 {-# COMPLETE
   SDKInfo_Language_Unknown,
   SDKInfo_Language_Java,
   SDKInfo_Language_Python,
   SDKInfo_Language_GO,
+  SDKInfo_Language_Yaml,
   SDKInfo_Language
   #-}
 

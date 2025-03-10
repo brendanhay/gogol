@@ -2123,7 +2123,7 @@ data IosRoboTest = IosRoboTest
     appBundleId :: (Core.Maybe Core.Text),
     -- | Required. The ipa stored at this file should be used to run the test.
     appIpa :: (Core.Maybe FileReference),
-    -- | An optional Roboscript to customize the crawl. See https:\/\/firebase.google.com\/docs\/test-lab\/android\/robo-scripts-reference for more information about Roboscripts.
+    -- | An optional Roboscript to customize the crawl. See https:\/\/firebase.google.com\/docs\/test-lab\/android\/robo-scripts-reference for more information about Roboscripts. The maximum allowed file size of the roboscript is 10MiB.
     roboScript :: (Core.Maybe FileReference)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2404,26 +2404,38 @@ instance Core.ToJSON IosXcTest where
 -- | Lab specific information for a device.
 --
 -- /See:/ 'newLabInfo' smart constructor.
-newtype LabInfo = LabInfo
+data LabInfo = LabInfo
   { -- | Lab name where the device is hosted. If empty, the device is hosted in a Google owned lab.
-    name :: (Core.Maybe Core.Text)
+    name :: (Core.Maybe Core.Text),
+    -- | The Unicode country\/region code (CLDR) of the lab where the device is hosted. E.g. \"US\" for United States, \"CH\" for Switzerland.
+    regionCode :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'LabInfo' with the minimum fields required to make a request.
 newLabInfo ::
   LabInfo
-newLabInfo = LabInfo {name = Core.Nothing}
+newLabInfo =
+  LabInfo {name = Core.Nothing, regionCode = Core.Nothing}
 
 instance Core.FromJSON LabInfo where
   parseJSON =
     Core.withObject
       "LabInfo"
-      (\o -> LabInfo Core.<$> (o Core..:? "name"))
+      ( \o ->
+          LabInfo
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "regionCode")
+      )
 
 instance Core.ToJSON LabInfo where
   toJSON LabInfo {..} =
-    Core.object (Core.catMaybes [("name" Core..=) Core.<$> name])
+    Core.object
+      ( Core.catMaybes
+          [ ("name" Core..=) Core.<$> name,
+            ("regionCode" Core..=) Core.<$> regionCode
+          ]
+      )
 
 -- | Specifies an intent that starts the main launcher activity.
 --

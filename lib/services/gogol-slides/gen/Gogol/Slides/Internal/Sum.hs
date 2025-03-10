@@ -946,7 +946,7 @@ pattern AutoText_Type_SLIDENUMBER = AutoText_Type "SLIDE_NUMBER"
   AutoText_Type
   #-}
 
--- | The autofit type of the shape. If the autofit type is AUTOFIT/TYPE/UNSPECIFIED, the autofit type is inherited from a parent placeholder if it exists. The field is automatically set to NONE if a request is made that might affect text fitting within its bounding text box. In this case the font/scale is applied to the font/size and the line/spacing/reduction is applied to the line_spacing. Both properties are also reset to default values.
+-- | The autofit type of the shape. If the autofit type is AUTOFIT/TYPE/UNSPECIFIED, the autofit type is inherited from a parent placeholder if it exists. The field is automatically set to NONE if a request is made that might affect text fitting within its bounding text box. In this case, the font/scale is applied to the font/size and the line/spacing/reduction is applied to the line_spacing. Both properties are also reset to default values.
 newtype Autofit_AutofitType = Autofit_AutofitType {fromAutofit_AutofitType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1157,7 +1157,7 @@ newtype CreateShapeRequest_ShapeType = CreateShapeRequest_ShapeType {fromCreateS
       Core.FromJSONKey
     )
 
--- | The shape type that is not predefined.
+-- | Default value. This value is unused.
 pattern CreateShapeRequest_ShapeType_TYPEUNSPECIFIED :: CreateShapeRequest_ShapeType
 pattern CreateShapeRequest_ShapeType_TYPEUNSPECIFIED = CreateShapeRequest_ShapeType "TYPE_UNSPECIFIED"
 
@@ -1165,7 +1165,7 @@ pattern CreateShapeRequest_ShapeType_TYPEUNSPECIFIED = CreateShapeRequest_ShapeT
 pattern CreateShapeRequest_ShapeType_TEXTBOX :: CreateShapeRequest_ShapeType
 pattern CreateShapeRequest_ShapeType_TEXTBOX = CreateShapeRequest_ShapeType "TEXT_BOX"
 
--- | Rectangle shape. Corresponds to ECMA-376 ST_ShapeType \'rect\'.
+-- | Rectangle shape. Corresponds to ECMA-376 ST_ShapeType \'rect\'
 pattern CreateShapeRequest_ShapeType_Rectangle :: CreateShapeRequest_ShapeType
 pattern CreateShapeRequest_ShapeType_Rectangle = CreateShapeRequest_ShapeType "RECTANGLE"
 
@@ -2925,7 +2925,7 @@ pattern Recolor_Name_LIGHT2 = Recolor_Name "LIGHT2"
 pattern Recolor_Name_LIGHT3 :: Recolor_Name
 pattern Recolor_Name_LIGHT3 = Recolor_Name "LIGHT3"
 
--- | A recolor effect that lightens the image using the page\'s forth available color from its color scheme.
+-- | A recolor effect that lightens the image using the page\'s fourth available color from its color scheme.
 pattern Recolor_Name_LIGHT4 :: Recolor_Name
 pattern Recolor_Name_LIGHT4 = Recolor_Name "LIGHT4"
 
@@ -3295,7 +3295,7 @@ newtype Shape_ShapeType = Shape_ShapeType {fromShape_ShapeType :: Core.Text}
       Core.FromJSONKey
     )
 
--- | The shape type that is not predefined.
+-- | Default value. This value is unused.
 pattern Shape_ShapeType_TYPEUNSPECIFIED :: Shape_ShapeType
 pattern Shape_ShapeType_TYPEUNSPECIFIED = Shape_ShapeType "TYPE_UNSPECIFIED"
 
@@ -3303,7 +3303,7 @@ pattern Shape_ShapeType_TYPEUNSPECIFIED = Shape_ShapeType "TYPE_UNSPECIFIED"
 pattern Shape_ShapeType_TEXTBOX :: Shape_ShapeType
 pattern Shape_ShapeType_TEXTBOX = Shape_ShapeType "TEXT_BOX"
 
--- | Rectangle shape. Corresponds to ECMA-376 ST_ShapeType \'rect\'.
+-- | Rectangle shape. Corresponds to ECMA-376 ST_ShapeType \'rect\'
 pattern Shape_ShapeType_Rectangle :: Shape_ShapeType
 pattern Shape_ShapeType_Rectangle = Shape_ShapeType "RECTANGLE"
 

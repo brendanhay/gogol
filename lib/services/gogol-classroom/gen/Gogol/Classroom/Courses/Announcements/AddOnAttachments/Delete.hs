@@ -116,7 +116,7 @@ instance
   type Rs ClassroomCoursesAnnouncementsAddOnAttachmentsDelete = Empty
   type
     Scopes ClassroomCoursesAnnouncementsAddOnAttachmentsDelete =
-      '[]
+      '[Classroom'Addons'Teacher]
   requestClient
     ClassroomCoursesAnnouncementsAddOnAttachmentsDelete {..} =
       go

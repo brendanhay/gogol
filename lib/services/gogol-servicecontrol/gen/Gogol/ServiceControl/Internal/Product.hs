@@ -87,6 +87,10 @@ module Gogol.ServiceControl.Internal.Product
     CheckResponse (..),
     newCheckResponse,
 
+    -- * CheckResponse_DynamicMetadata
+    CheckResponse_DynamicMetadata (..),
+    newCheckResponse_DynamicMetadata,
+
     -- * CheckResponse_Headers
     CheckResponse_Headers (..),
     newCheckResponse_Headers,
@@ -653,8 +657,6 @@ data Auth = Auth
     audiences :: (Core.Maybe [Core.Text]),
     -- | Structured claims presented with the credential. JWTs include @{key: value}@ pairs for standard and private claims. The following is a subset of the standard required and optional claims that would typically be presented for a Google-based JWT: {\'iss\': \'accounts.google.com\', \'sub\': \'113289723416554971153\', \'aud\': [\'123456789012\', \'pubsub.googleapis.com\'], \'azp\': \'123456789012.apps.googleusercontent.com\', \'email\': \'jsmith\@example.com\', \'iat\': 1353601026, \'exp\': 1353604926} SAML assertions are similarly specified, but with an identity provider dependent structure.
     claims :: (Core.Maybe Auth_Claims),
-    -- | Identifies the client credential id used for authentication. credential/id is in the format of AUTH/METHOD:IDENTIFIER, e.g. \"serviceaccount:XXXXX, apikey:XXXXX\" where the format of the IDENTIFIER can vary for different AUTH_METHODs.
-    credentialId :: (Core.Maybe Core.Text),
     -- | The authorized presenter of the credential. Reflects the optional Authorized Presenter (@azp@) claim within a JWT or the OAuth client id. For example, a Google Cloud Platform client id looks as follows: \"123456789012.apps.googleusercontent.com\".
     presenter :: (Core.Maybe Core.Text),
     -- | The authenticated principal. Reflects the issuer (@iss@) and subject (@sub@) claims within a JWT. The issuer and subject should be @\/@ delimited, with @\/@ percent-encoded within the subject fragment. For Google accounts, the principal format is: \"https:\/\/accounts.google.com\/{id}\"
@@ -670,7 +672,6 @@ newAuth =
     { accessLevels = Core.Nothing,
       audiences = Core.Nothing,
       claims = Core.Nothing,
-      credentialId = Core.Nothing,
       presenter = Core.Nothing,
       principal = Core.Nothing
     }
@@ -684,7 +685,6 @@ instance Core.FromJSON Auth where
             Core.<$> (o Core..:? "accessLevels")
             Core.<*> (o Core..:? "audiences")
             Core.<*> (o Core..:? "claims")
-            Core.<*> (o Core..:? "credentialId")
             Core.<*> (o Core..:? "presenter")
             Core.<*> (o Core..:? "principal")
       )
@@ -696,7 +696,6 @@ instance Core.ToJSON Auth where
           [ ("accessLevels" Core..=) Core.<$> accessLevels,
             ("audiences" Core..=) Core.<$> audiences,
             ("claims" Core..=) Core.<$> claims,
-            ("credentialId" Core..=) Core.<$> credentialId,
             ("presenter" Core..=) Core.<$> presenter,
             ("principal" Core..=) Core.<$> principal
           ]
@@ -930,7 +929,9 @@ instance Core.ToJSON CheckRequest where
 --
 -- /See:/ 'newCheckResponse' smart constructor.
 data CheckResponse = CheckResponse
-  { -- | Returns a set of request contexts generated from the @CheckRequest@.
+  { -- | Optional response metadata that will be emitted as dynamic metadata to be consumed by the caller of ServiceController. For compatibility with the ext_authz interface.
+    dynamicMetadata :: (Core.Maybe CheckResponse_DynamicMetadata),
+    -- | Returns a set of request contexts generated from the @CheckRequest@.
     headers :: (Core.Maybe CheckResponse_Headers),
     -- | Operation is allowed when this field is not set. Any non-\'OK\' status indicates a denial; google.rpc.Status.details would contain additional details about the denial.
     status :: (Core.Maybe Status)
@@ -941,7 +942,11 @@ data CheckResponse = CheckResponse
 newCheckResponse ::
   CheckResponse
 newCheckResponse =
-  CheckResponse {headers = Core.Nothing, status = Core.Nothing}
+  CheckResponse
+    { dynamicMetadata = Core.Nothing,
+      headers = Core.Nothing,
+      status = Core.Nothing
+    }
 
 instance Core.FromJSON CheckResponse where
   parseJSON =
@@ -949,7 +954,8 @@ instance Core.FromJSON CheckResponse where
       "CheckResponse"
       ( \o ->
           CheckResponse
-            Core.<$> (o Core..:? "headers")
+            Core.<$> (o Core..:? "dynamicMetadata")
+            Core.<*> (o Core..:? "headers")
             Core.<*> (o Core..:? "status")
       )
 
@@ -957,10 +963,39 @@ instance Core.ToJSON CheckResponse where
   toJSON CheckResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("headers" Core..=) Core.<$> headers,
+          [ ("dynamicMetadata" Core..=) Core.<$> dynamicMetadata,
+            ("headers" Core..=) Core.<$> headers,
             ("status" Core..=) Core.<$> status
           ]
       )
+
+-- | Optional response metadata that will be emitted as dynamic metadata to be consumed by the caller of ServiceController. For compatibility with the ext_authz interface.
+--
+-- /See:/ 'newCheckResponse_DynamicMetadata' smart constructor.
+newtype CheckResponse_DynamicMetadata = CheckResponse_DynamicMetadata
+  { -- | Properties of the object.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CheckResponse_DynamicMetadata' with the minimum fields required to make a request.
+newCheckResponse_DynamicMetadata ::
+  -- |  Properties of the object. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  CheckResponse_DynamicMetadata
+newCheckResponse_DynamicMetadata additional =
+  CheckResponse_DynamicMetadata {additional = additional}
+
+instance Core.FromJSON CheckResponse_DynamicMetadata where
+  parseJSON =
+    Core.withObject
+      "CheckResponse_DynamicMetadata"
+      ( \o ->
+          CheckResponse_DynamicMetadata Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON CheckResponse_DynamicMetadata where
+  toJSON CheckResponse_DynamicMetadata {..} = Core.toJSON additional
 
 -- | Returns a set of request contexts generated from the @CheckRequest@.
 --
@@ -1378,6 +1413,8 @@ data Request' = Request'
     id :: (Core.Maybe Core.Text),
     -- | The HTTP request method, such as @GET@, @POST@.
     method :: (Core.Maybe Core.Text),
+    -- | The values from Origin header from the HTTP request, such as \"https:\/\/console.cloud.google.com\". Modern browsers can only have one origin. Special browsers and\/or HTTP clients may require multiple origins.
+    origin :: (Core.Maybe Core.Text),
     -- | The HTTP URL path, excluding the query parameters.
     path :: (Core.Maybe Core.Text),
     -- | The network protocol used with the request, such as \"http\/1.1\", \"spdy\/3\", \"h2\", \"h2c\", \"webrtc\", \"tcp\", \"udp\", \"quic\". See https:\/\/www.iana.org\/assignments\/tls-extensiontype-values\/tls-extensiontype-values.xhtml#alpn-protocol-ids for details.
@@ -1405,6 +1442,7 @@ newRequest =
       host = Core.Nothing,
       id = Core.Nothing,
       method = Core.Nothing,
+      origin = Core.Nothing,
       path = Core.Nothing,
       protocol = Core.Nothing,
       query = Core.Nothing,
@@ -1425,6 +1463,7 @@ instance Core.FromJSON Request' where
             Core.<*> (o Core..:? "host")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "method")
+            Core.<*> (o Core..:? "origin")
             Core.<*> (o Core..:? "path")
             Core.<*> (o Core..:? "protocol")
             Core.<*> (o Core..:? "query")
@@ -1443,6 +1482,7 @@ instance Core.ToJSON Request' where
             ("host" Core..=) Core.<$> host,
             ("id" Core..=) Core.<$> id,
             ("method" Core..=) Core.<$> method,
+            ("origin" Core..=) Core.<$> origin,
             ("path" Core..=) Core.<$> path,
             ("protocol" Core..=) Core.<$> protocol,
             ("query" Core..=) Core.<$> query,
@@ -2169,7 +2209,7 @@ data V2HttpRequest = V2HttpRequest
     latency :: (Core.Maybe Core.Duration),
     -- | Protocol used for the request. Examples: \"HTTP\/1.1\", \"HTTP\/2\", \"websocket\"
     protocol :: (Core.Maybe Core.Text),
-    -- | The referer URL of the request, as defined in <http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html HTTP\/1.1 Header Field Definitions>.
+    -- | The referer URL of the request, as defined in <https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html HTTP\/1.1 Header Field Definitions>.
     referer :: (Core.Maybe Core.Text),
     -- | The IP address (IPv4 or IPv6) of the client that issued the HTTP request. Examples: @\"192.168.1.1\"@, @\"FE80::0202:B3FF:FE1E:8329\"@.
     remoteIp :: (Core.Maybe Core.Text),

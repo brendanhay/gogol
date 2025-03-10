@@ -16,14 +16,14 @@ module Example.Storage where
 import Control.Lens ((.~), (<&>), (?~))
 import Control.Monad.Trans.Resource (liftResourceT)
 import Data.Conduit (runConduit, (.|))
-import qualified Data.Conduit.Binary as Conduit
+import Data.Conduit.Binary qualified as Conduit
 import Data.Function ((&))
 import Data.Generics.Labels ()
 import Data.Proxy
 import Data.Text
-import qualified Data.Text as Text
+import Data.Text qualified as Text
 import Gogol
-import qualified Gogol.Storage as Storage
+import Gogol.Storage qualified as Storage
 import System.IO (stdout)
 import Prelude
 

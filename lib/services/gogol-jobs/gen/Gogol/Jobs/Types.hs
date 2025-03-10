@@ -308,6 +308,9 @@ module Gogol.Jobs.Types
     -- ** SearchJobsRequest_KeywordMatchMode
     SearchJobsRequest_KeywordMatchMode (..),
 
+    -- ** SearchJobsRequest_RelevanceThreshold
+    SearchJobsRequest_RelevanceThreshold (..),
+
     -- ** SearchJobsRequest_SearchMode
     SearchJobsRequest_SearchMode (..),
 

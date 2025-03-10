@@ -57,6 +57,7 @@ module Gogol.Chat
     Chat'Spaces'Readonly,
     Chat'Users'Readstate,
     Chat'Users'Readstate'Readonly,
+    Chat'Users'Spacesettings,
 
     -- * Resources
 
@@ -205,6 +206,16 @@ module Gogol.Chat
     ChatUsersSpacesGetSpaceReadState (..),
     newChatUsersSpacesGetSpaceReadState,
 
+    -- ** chat.users.spaces.spaceNotificationSetting.get
+    ChatUsersSpacesSpaceNotificationSettingGetResource,
+    ChatUsersSpacesSpaceNotificationSettingGet (..),
+    newChatUsersSpacesSpaceNotificationSettingGet,
+
+    -- ** chat.users.spaces.spaceNotificationSetting.patch
+    ChatUsersSpacesSpaceNotificationSettingPatchResource,
+    ChatUsersSpacesSpaceNotificationSettingPatch (..),
+    newChatUsersSpacesSpaceNotificationSettingPatch,
+
     -- ** chat.users.spaces.threads.getThreadReadState
     ChatUsersSpacesThreadsGetThreadReadStateResource,
     ChatUsersSpacesThreadsGetThreadReadState (..),
@@ -255,6 +266,13 @@ module Gogol.Chat
 
     -- ** Annotation_Type
     Annotation_Type (..),
+
+    -- ** AppCommandMetadata
+    AppCommandMetadata (..),
+    newAppCommandMetadata,
+
+    -- ** AppCommandMetadata_AppCommandType
+    AppCommandMetadata_AppCommandType (..),
 
     -- ** AttachedGif
     AttachedGif (..),
@@ -339,6 +357,10 @@ module Gogol.Chat
     -- ** CustomEmoji
     CustomEmoji (..),
     newCustomEmoji,
+
+    -- ** CustomEmojiMetadata
+    CustomEmojiMetadata (..),
+    newCustomEmojiMetadata,
 
     -- ** DateInput
     DateInput (..),
@@ -623,6 +645,13 @@ module Gogol.Chat
     GoogleAppsCardV1TextParagraph (..),
     newGoogleAppsCardV1TextParagraph,
 
+    -- ** GoogleAppsCardV1Validation
+    GoogleAppsCardV1Validation (..),
+    newGoogleAppsCardV1Validation,
+
+    -- ** GoogleAppsCardV1Validation_InputType
+    GoogleAppsCardV1Validation_InputType (..),
+
     -- ** GoogleAppsCardV1Widget
     GoogleAppsCardV1Widget (..),
     newGoogleAppsCardV1Widget,
@@ -867,6 +896,16 @@ module Gogol.Chat
     SpaceEvent (..),
     newSpaceEvent,
 
+    -- ** SpaceNotificationSetting
+    SpaceNotificationSetting (..),
+    newSpaceNotificationSetting,
+
+    -- ** SpaceNotificationSetting_MuteSetting
+    SpaceNotificationSetting_MuteSetting (..),
+
+    -- ** SpaceNotificationSetting_NotificationSetting
+    SpaceNotificationSetting_NotificationSetting (..),
+
     -- ** SpaceReadState
     SpaceReadState (..),
     newSpaceReadState,
@@ -976,5 +1015,7 @@ import Gogol.Chat.Spaces.SpaceEvents.Get
 import Gogol.Chat.Spaces.SpaceEvents.List
 import Gogol.Chat.Types
 import Gogol.Chat.Users.Spaces.GetSpaceReadState
+import Gogol.Chat.Users.Spaces.SpaceNotificationSetting.Get
+import Gogol.Chat.Users.Spaces.SpaceNotificationSetting.Patch
 import Gogol.Chat.Users.Spaces.Threads.GetThreadReadState
 import Gogol.Chat.Users.Spaces.UpdateSpaceReadState

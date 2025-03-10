@@ -78,6 +78,15 @@ module Gogol.Chat.Internal.Sum
         Annotation_Type_USERMENTION,
         Annotation_Type_SLASHCOMMAND,
         Annotation_Type_RICHLINK,
+        Annotation_Type_CUSTOMEMOJI,
+        ..
+      ),
+
+    -- * AppCommandMetadata_AppCommandType
+    AppCommandMetadata_AppCommandType
+      ( AppCommandMetadata_AppCommandType_APPCOMMANDTYPEUNSPECIFIED,
+        AppCommandMetadata_AppCommandType_SLASHCOMMAND,
+        AppCommandMetadata_AppCommandType_QUICKCOMMAND,
         ..
       ),
 
@@ -131,6 +140,7 @@ module Gogol.Chat.Internal.Sum
         DeletionMetadata_DeletionType_APPMESSAGEEXPIRY,
         DeletionMetadata_DeletionType_CREATORVIAAPP,
         DeletionMetadata_DeletionType_SPACEOWNERVIAAPP,
+        DeletionMetadata_DeletionType_SPACEMEMBER,
         ..
       ),
 
@@ -151,6 +161,7 @@ module Gogol.Chat.Internal.Sum
         DeprecatedEvent_Type_REMOVEDFROMSPACE,
         DeprecatedEvent_Type_CARDCLICKED,
         DeprecatedEvent_Type_WIDGETUPDATED,
+        DeprecatedEvent_Type_APPCOMMAND,
         ..
       ),
 
@@ -331,6 +342,17 @@ module Gogol.Chat.Internal.Sum
         ..
       ),
 
+    -- * GoogleAppsCardV1Validation_InputType
+    GoogleAppsCardV1Validation_InputType
+      ( GoogleAppsCardV1Validation_InputType_INPUTTYPEUNSPECIFIED,
+        GoogleAppsCardV1Validation_InputType_Text,
+        GoogleAppsCardV1Validation_InputType_Integer,
+        GoogleAppsCardV1Validation_InputType_Float,
+        GoogleAppsCardV1Validation_InputType_Email,
+        GoogleAppsCardV1Validation_InputType_EMOJIPICKER,
+        ..
+      ),
+
     -- * GoogleAppsCardV1Widget_HorizontalAlignment
     GoogleAppsCardV1Widget_HorizontalAlignment
       ( GoogleAppsCardV1Widget_HorizontalAlignment_HORIZONTALALIGNMENTUNSPECIFIED,
@@ -484,6 +506,24 @@ module Gogol.Chat.Internal.Sum
       ( Space_Type_TYPEUNSPECIFIED,
         Space_Type_Room,
         Space_Type_DM,
+        ..
+      ),
+
+    -- * SpaceNotificationSetting_MuteSetting
+    SpaceNotificationSetting_MuteSetting
+      ( SpaceNotificationSetting_MuteSetting_MUTESETTINGUNSPECIFIED,
+        SpaceNotificationSetting_MuteSetting_Unmuted,
+        SpaceNotificationSetting_MuteSetting_Muted,
+        ..
+      ),
+
+    -- * SpaceNotificationSetting_NotificationSetting
+    SpaceNotificationSetting_NotificationSetting
+      ( SpaceNotificationSetting_NotificationSetting_NOTIFICATIONSETTINGUNSPECIFIED,
+        SpaceNotificationSetting_NotificationSetting_All,
+        SpaceNotificationSetting_NotificationSetting_MAINCONVERSATIONS,
+        SpaceNotificationSetting_NotificationSetting_FORYOU,
+        SpaceNotificationSetting_NotificationSetting_Off,
         ..
       ),
 
@@ -757,12 +797,49 @@ pattern Annotation_Type_SLASHCOMMAND = Annotation_Type "SLASH_COMMAND"
 pattern Annotation_Type_RICHLINK :: Annotation_Type
 pattern Annotation_Type_RICHLINK = Annotation_Type "RICH_LINK"
 
+-- | A custom emoji annotation.
+pattern Annotation_Type_CUSTOMEMOJI :: Annotation_Type
+pattern Annotation_Type_CUSTOMEMOJI = Annotation_Type "CUSTOM_EMOJI"
+
 {-# COMPLETE
   Annotation_Type_ANNOTATIONTYPEUNSPECIFIED,
   Annotation_Type_USERMENTION,
   Annotation_Type_SLASHCOMMAND,
   Annotation_Type_RICHLINK,
+  Annotation_Type_CUSTOMEMOJI,
   Annotation_Type
+  #-}
+
+-- | The type of Chat app command.
+newtype AppCommandMetadata_AppCommandType = AppCommandMetadata_AppCommandType {fromAppCommandMetadata_AppCommandType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. Unspecified.
+pattern AppCommandMetadata_AppCommandType_APPCOMMANDTYPEUNSPECIFIED :: AppCommandMetadata_AppCommandType
+pattern AppCommandMetadata_AppCommandType_APPCOMMANDTYPEUNSPECIFIED = AppCommandMetadata_AppCommandType "APP_COMMAND_TYPE_UNSPECIFIED"
+
+-- | A slash command. The user sends the command in a Chat message.
+pattern AppCommandMetadata_AppCommandType_SLASHCOMMAND :: AppCommandMetadata_AppCommandType
+pattern AppCommandMetadata_AppCommandType_SLASHCOMMAND = AppCommandMetadata_AppCommandType "SLASH_COMMAND"
+
+-- | A quick command. The user selects the command from the Chat menu in the message reply area.
+pattern AppCommandMetadata_AppCommandType_QUICKCOMMAND :: AppCommandMetadata_AppCommandType
+pattern AppCommandMetadata_AppCommandType_QUICKCOMMAND = AppCommandMetadata_AppCommandType "QUICK_COMMAND"
+
+{-# COMPLETE
+  AppCommandMetadata_AppCommandType_APPCOMMANDTYPEUNSPECIFIED,
+  AppCommandMetadata_AppCommandType_SLASHCOMMAND,
+  AppCommandMetadata_AppCommandType_QUICKCOMMAND,
+  AppCommandMetadata_AppCommandType
   #-}
 
 -- | Output only. The source of the attachment.
@@ -881,7 +958,7 @@ pattern CommonEventObject_HostApp_Slides = CommonEventObject_HostApp "SLIDES"
 pattern CommonEventObject_HostApp_Drawings :: CommonEventObject_HostApp
 pattern CommonEventObject_HostApp_Drawings = CommonEventObject_HostApp "DRAWINGS"
 
--- | A Google Chat app. Not used for Google Workspace Add-ons.
+-- | A Google Chat app. Not used for Google Workspace add-ons.
 pattern CommonEventObject_HostApp_Chat :: CommonEventObject_HostApp
 pattern CommonEventObject_HostApp_Chat = CommonEventObject_HostApp "CHAT"
 
@@ -954,11 +1031,11 @@ pattern DeletionMetadata_DeletionType_DELETIONTYPEUNSPECIFIED = DeletionMetadata
 pattern DeletionMetadata_DeletionType_Creator :: DeletionMetadata_DeletionType
 pattern DeletionMetadata_DeletionType_Creator = DeletionMetadata_DeletionType "CREATOR"
 
--- | The space owner deleted the message.
+-- | A space manager deleted the message.
 pattern DeletionMetadata_DeletionType_SPACEOWNER :: DeletionMetadata_DeletionType
 pattern DeletionMetadata_DeletionType_SPACEOWNER = DeletionMetadata_DeletionType "SPACE_OWNER"
 
--- | A Google Workspace admin deleted the message.
+-- | A Google Workspace administrator deleted the message. Administrators can delete any message in the space, including messages sent by any space member or Chat app.
 pattern DeletionMetadata_DeletionType_Admin :: DeletionMetadata_DeletionType
 pattern DeletionMetadata_DeletionType_Admin = DeletionMetadata_DeletionType "ADMIN"
 
@@ -966,13 +1043,17 @@ pattern DeletionMetadata_DeletionType_Admin = DeletionMetadata_DeletionType "ADM
 pattern DeletionMetadata_DeletionType_APPMESSAGEEXPIRY :: DeletionMetadata_DeletionType
 pattern DeletionMetadata_DeletionType_APPMESSAGEEXPIRY = DeletionMetadata_DeletionType "APP_MESSAGE_EXPIRY"
 
--- | A Chat app deleted the message on behalf of the user.
+-- | A Chat app deleted the message on behalf of the creator (using user authentication).
 pattern DeletionMetadata_DeletionType_CREATORVIAAPP :: DeletionMetadata_DeletionType
 pattern DeletionMetadata_DeletionType_CREATORVIAAPP = DeletionMetadata_DeletionType "CREATOR_VIA_APP"
 
--- | A Chat app deleted the message on behalf of the space owner.
+-- | A Chat app deleted the message on behalf of a space manager (using user authentication).
 pattern DeletionMetadata_DeletionType_SPACEOWNERVIAAPP :: DeletionMetadata_DeletionType
 pattern DeletionMetadata_DeletionType_SPACEOWNERVIAAPP = DeletionMetadata_DeletionType "SPACE_OWNER_VIA_APP"
+
+-- | A member of the space deleted the message. Users can delete messages sent by apps.
+pattern DeletionMetadata_DeletionType_SPACEMEMBER :: DeletionMetadata_DeletionType
+pattern DeletionMetadata_DeletionType_SPACEMEMBER = DeletionMetadata_DeletionType "SPACE_MEMBER"
 
 {-# COMPLETE
   DeletionMetadata_DeletionType_DELETIONTYPEUNSPECIFIED,
@@ -982,6 +1063,7 @@ pattern DeletionMetadata_DeletionType_SPACEOWNERVIAAPP = DeletionMetadata_Deleti
   DeletionMetadata_DeletionType_APPMESSAGEEXPIRY,
   DeletionMetadata_DeletionType_CREATORVIAAPP,
   DeletionMetadata_DeletionType_SPACEOWNERVIAAPP,
+  DeletionMetadata_DeletionType_SPACEMEMBER,
   DeletionMetadata_DeletionType
   #-}
 
@@ -1039,7 +1121,7 @@ newtype DeprecatedEvent_Type = DeprecatedEvent_Type {fromDeprecatedEvent_Type ::
 pattern DeprecatedEvent_Type_Unspecified :: DeprecatedEvent_Type
 pattern DeprecatedEvent_Type_Unspecified = DeprecatedEvent_Type "UNSPECIFIED"
 
--- | A user sends the Chat app a message, or invokes the Chat app in a space, such as any of the following examples: * Any message in a direct message (DM) space with the Chat app. * A message in a multi-person space where a person \@mentions the Chat app, or uses one of its slash commands. * If you\'ve configured link previews for your Chat app, a user posts a message that contains a link that matches the configured URL pattern.
+-- | A user sends the Chat app a message, or invokes the Chat app in a space, such as any of the following examples: * Any message in a direct message (DM) space with the Chat app. * A message in a multi-person space where a person \@mentions the Chat app, or uses one of its <https://developers.google.com/workspace/chat/commands#types slash commands>. * If you\'ve configured link previews for your Chat app, a user posts a message that contains a link that matches the configured URL pattern.
 pattern DeprecatedEvent_Type_Message :: DeprecatedEvent_Type
 pattern DeprecatedEvent_Type_Message = DeprecatedEvent_Type "MESSAGE"
 
@@ -1059,6 +1141,10 @@ pattern DeprecatedEvent_Type_CARDCLICKED = DeprecatedEvent_Type "CARD_CLICKED"
 pattern DeprecatedEvent_Type_WIDGETUPDATED :: DeprecatedEvent_Type
 pattern DeprecatedEvent_Type_WIDGETUPDATED = DeprecatedEvent_Type "WIDGET_UPDATED"
 
+-- | A user uses a Chat app <https://developers.google.com/workspace/chat/commands#types quick command>.
+pattern DeprecatedEvent_Type_APPCOMMAND :: DeprecatedEvent_Type
+pattern DeprecatedEvent_Type_APPCOMMAND = DeprecatedEvent_Type "APP_COMMAND"
+
 {-# COMPLETE
   DeprecatedEvent_Type_Unspecified,
   DeprecatedEvent_Type_Message,
@@ -1066,6 +1152,7 @@ pattern DeprecatedEvent_Type_WIDGETUPDATED = DeprecatedEvent_Type "WIDGET_UPDATE
   DeprecatedEvent_Type_REMOVEDFROMSPACE,
   DeprecatedEvent_Type_CARDCLICKED,
   DeprecatedEvent_Type_WIDGETUPDATED,
+  DeprecatedEvent_Type_APPCOMMAND,
   DeprecatedEvent_Type
   #-}
 
@@ -1155,7 +1242,7 @@ pattern GoogleAppsCardV1BorderStyle_Type_Stroke = GoogleAppsCardV1BorderStyle_Ty
   GoogleAppsCardV1BorderStyle_Type
   #-}
 
--- | Optional. The type of a button. If unset, button type defaults to @OUTLINED@. If the @color@ field is set, the button type is forced to @FILLED@ and any value set for this field is ignored. <https://developers.google.com/workspace/chat Google Chat apps>:
+-- | Optional. The type of a button. If unset, button type defaults to @OUTLINED@. If the @color@ field is set, the button type is forced to @FILLED@ and any value set for this field is ignored.
 newtype GoogleAppsCardV1Button_Type = GoogleAppsCardV1Button_Type {fromGoogleAppsCardV1Button_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1197,7 +1284,7 @@ pattern GoogleAppsCardV1Button_Type_Borderless = GoogleAppsCardV1Button_Type "BO
   GoogleAppsCardV1Button_Type
   #-}
 
--- | In Google Workspace Add-ons, sets the display properties of the @peekCardHeader@. <https://developers.google.com/workspace/add-ons Google Workspace Add-ons>:
+-- | In Google Workspace add-ons, sets the display properties of the @peekCardHeader@. <https://developers.google.com/workspace/add-ons Google Workspace add-ons>:
 newtype GoogleAppsCardV1Card_DisplayStyle = GoogleAppsCardV1Card_DisplayStyle {fromGoogleAppsCardV1Card_DisplayStyle :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1261,7 +1348,7 @@ pattern GoogleAppsCardV1Card_SectionDividerStyle_NODIVIDER = GoogleAppsCardV1Car
   GoogleAppsCardV1Card_SectionDividerStyle
   #-}
 
--- | The shape used to crop the image. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | The shape used to crop the image. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 newtype GoogleAppsCardV1CardHeader_ImageType = GoogleAppsCardV1CardHeader_ImageType {fromGoogleAppsCardV1CardHeader_ImageType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1596,7 +1683,7 @@ pattern GoogleAppsCardV1ImageCropStyle_Type_RECTANGLE_4_3 = GoogleAppsCardV1Imag
   GoogleAppsCardV1ImageCropStyle_Type
   #-}
 
--- | Whether the client forgets about a link after opening it, or observes it until the window closes. <https://developers.google.com/workspace/add-ons Google Workspace Add-ons>:
+-- | Whether the client forgets about a link after opening it, or observes it until the window closes. <https://developers.google.com/workspace/add-ons Google Workspace add-ons>:
 newtype GoogleAppsCardV1OpenLink_OnClose = GoogleAppsCardV1OpenLink_OnClose {fromGoogleAppsCardV1OpenLink_OnClose :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1623,7 +1710,7 @@ pattern GoogleAppsCardV1OpenLink_OnClose_Reload = GoogleAppsCardV1OpenLink_OnClo
   GoogleAppsCardV1OpenLink_OnClose
   #-}
 
--- | How to open a link. <https://developers.google.com/workspace/add-ons Google Workspace Add-ons>:
+-- | How to open a link. <https://developers.google.com/workspace/add-ons Google Workspace add-ons>:
 newtype GoogleAppsCardV1OpenLink_OpenAs = GoogleAppsCardV1OpenLink_OpenAs {fromGoogleAppsCardV1OpenLink_OpenAs :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1706,7 +1793,7 @@ pattern GoogleAppsCardV1SelectionInput_Type_Switch = GoogleAppsCardV1SelectionIn
 pattern GoogleAppsCardV1SelectionInput_Type_Dropdown :: GoogleAppsCardV1SelectionInput_Type
 pattern GoogleAppsCardV1SelectionInput_Type_Dropdown = GoogleAppsCardV1SelectionInput_Type "DROPDOWN"
 
--- | A menu with a text box. Users can type and select one or more items. For Google Workspace Add-ons, you must populate items using a static array of @SelectionItem@ objects. For Google Chat apps, you can also populate items using a dynamic data source and autosuggest items as users type in the menu. For example, users can start typing the name of a Google Chat space and the widget autosuggests the space. To dynamically populate items for a multiselect menu, use one of the following types of data sources: * Google Workspace data: Items are populated using data from Google Workspace, such as Google Workspace users or Google Chat spaces. * External data: Items are populated from an external data source outside of Google Workspace. For examples of how to implement multiselect menus for Chat apps, see <https://developers.google.com/workspace/chat/design-interactive-card-dialog#multiselect-menu Add a multiselect menu>. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | A menu with a text box. Users can type and select one or more items. For Google Workspace add-ons, you must populate items using a static array of @SelectionItem@ objects. For Google Chat apps, you can also populate items using a dynamic data source and autosuggest items as users type in the menu. For example, users can start typing the name of a Google Chat space and the widget autosuggests the space. To dynamically populate items for a multiselect menu, use one of the following types of data sources: * Google Workspace data: Items are populated using data from Google Workspace, such as Google Workspace users or Google Chat spaces. * External data: Items are populated from an external data source outside of Google Workspace. For examples of how to implement multiselect menus for Chat apps, see <https://developers.google.com/workspace/chat/design-interactive-card-dialog#multiselect-menu Add a multiselect menu>. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 pattern GoogleAppsCardV1SelectionInput_Type_MULTISELECT :: GoogleAppsCardV1SelectionInput_Type
 pattern GoogleAppsCardV1SelectionInput_Type_MULTISELECT = GoogleAppsCardV1SelectionInput_Type "MULTI_SELECT"
 
@@ -1719,7 +1806,7 @@ pattern GoogleAppsCardV1SelectionInput_Type_MULTISELECT = GoogleAppsCardV1Select
   GoogleAppsCardV1SelectionInput_Type
   #-}
 
--- | How the switch appears in the user interface. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | How the switch appears in the user interface. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 newtype GoogleAppsCardV1SwitchControl_ControlType = GoogleAppsCardV1SwitchControl_ControlType {fromGoogleAppsCardV1SwitchControl_ControlType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1776,6 +1863,53 @@ pattern GoogleAppsCardV1TextInput_Type_MULTIPLELINE = GoogleAppsCardV1TextInput_
   GoogleAppsCardV1TextInput_Type_SINGLELINE,
   GoogleAppsCardV1TextInput_Type_MULTIPLELINE,
   GoogleAppsCardV1TextInput_Type
+  #-}
+
+-- | Specify the type of the input widgets. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
+newtype GoogleAppsCardV1Validation_InputType = GoogleAppsCardV1Validation_InputType {fromGoogleAppsCardV1Validation_InputType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified type. Do not use.
+pattern GoogleAppsCardV1Validation_InputType_INPUTTYPEUNSPECIFIED :: GoogleAppsCardV1Validation_InputType
+pattern GoogleAppsCardV1Validation_InputType_INPUTTYPEUNSPECIFIED = GoogleAppsCardV1Validation_InputType "INPUT_TYPE_UNSPECIFIED"
+
+-- | Regular text that accepts all characters.
+pattern GoogleAppsCardV1Validation_InputType_Text :: GoogleAppsCardV1Validation_InputType
+pattern GoogleAppsCardV1Validation_InputType_Text = GoogleAppsCardV1Validation_InputType "TEXT"
+
+-- | An integer value.
+pattern GoogleAppsCardV1Validation_InputType_Integer :: GoogleAppsCardV1Validation_InputType
+pattern GoogleAppsCardV1Validation_InputType_Integer = GoogleAppsCardV1Validation_InputType "INTEGER"
+
+-- | A float value.
+pattern GoogleAppsCardV1Validation_InputType_Float :: GoogleAppsCardV1Validation_InputType
+pattern GoogleAppsCardV1Validation_InputType_Float = GoogleAppsCardV1Validation_InputType "FLOAT"
+
+-- | An email address.
+pattern GoogleAppsCardV1Validation_InputType_Email :: GoogleAppsCardV1Validation_InputType
+pattern GoogleAppsCardV1Validation_InputType_Email = GoogleAppsCardV1Validation_InputType "EMAIL"
+
+-- | A emoji selected from system-provided emoji picker.
+pattern GoogleAppsCardV1Validation_InputType_EMOJIPICKER :: GoogleAppsCardV1Validation_InputType
+pattern GoogleAppsCardV1Validation_InputType_EMOJIPICKER = GoogleAppsCardV1Validation_InputType "EMOJI_PICKER"
+
+{-# COMPLETE
+  GoogleAppsCardV1Validation_InputType_INPUTTYPEUNSPECIFIED,
+  GoogleAppsCardV1Validation_InputType_Text,
+  GoogleAppsCardV1Validation_InputType_Integer,
+  GoogleAppsCardV1Validation_InputType_Float,
+  GoogleAppsCardV1Validation_InputType_Email,
+  GoogleAppsCardV1Validation_InputType_EMOJIPICKER,
+  GoogleAppsCardV1Validation_InputType
   #-}
 
 -- | Specifies whether widgets align to the left, right, or center of a column.
@@ -2230,7 +2364,7 @@ pattern SlashCommandMetadata_Type_Invoke = SlashCommandMetadata_Type "INVOKE"
   SlashCommandMetadata_Type
   #-}
 
--- | Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the @PermissionSettings@ field.
+-- | Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the @PermissionSettings@ field. Setting predefined permission settings supports: - In <https://developers.google.com/workspace/preview Developer Preview>, <https://developers.google.com/workspace/chat/authenticate-authorize-chat-app App authentication> with <https://support.google.com/a?p=chat-app-auth administrator approval> with the @chat.app.spaces@ or @chat.app.spaces.create@ scopes. - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user User authentication>
 newtype Space_PredefinedPermissionSettings = Space_PredefinedPermissionSettings {fromSpace_PredefinedPermissionSettings :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -2398,6 +2532,80 @@ pattern Space_Type_DM = Space_Type "DM"
   Space_Type_Room,
   Space_Type_DM,
   Space_Type
+  #-}
+
+-- | The space notification mute setting.
+newtype SpaceNotificationSetting_MuteSetting = SpaceNotificationSetting_MuteSetting {fromSpaceNotificationSetting_MuteSetting :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Reserved.
+pattern SpaceNotificationSetting_MuteSetting_MUTESETTINGUNSPECIFIED :: SpaceNotificationSetting_MuteSetting
+pattern SpaceNotificationSetting_MuteSetting_MUTESETTINGUNSPECIFIED = SpaceNotificationSetting_MuteSetting "MUTE_SETTING_UNSPECIFIED"
+
+-- | The user will receive notifications for the space based on the notification setting.
+pattern SpaceNotificationSetting_MuteSetting_Unmuted :: SpaceNotificationSetting_MuteSetting
+pattern SpaceNotificationSetting_MuteSetting_Unmuted = SpaceNotificationSetting_MuteSetting "UNMUTED"
+
+-- | The user will not receive any notifications for the space, regardless of the notification setting.
+pattern SpaceNotificationSetting_MuteSetting_Muted :: SpaceNotificationSetting_MuteSetting
+pattern SpaceNotificationSetting_MuteSetting_Muted = SpaceNotificationSetting_MuteSetting "MUTED"
+
+{-# COMPLETE
+  SpaceNotificationSetting_MuteSetting_MUTESETTINGUNSPECIFIED,
+  SpaceNotificationSetting_MuteSetting_Unmuted,
+  SpaceNotificationSetting_MuteSetting_Muted,
+  SpaceNotificationSetting_MuteSetting
+  #-}
+
+-- | The notification setting.
+newtype SpaceNotificationSetting_NotificationSetting = SpaceNotificationSetting_NotificationSetting {fromSpaceNotificationSetting_NotificationSetting :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Reserved.
+pattern SpaceNotificationSetting_NotificationSetting_NOTIFICATIONSETTINGUNSPECIFIED :: SpaceNotificationSetting_NotificationSetting
+pattern SpaceNotificationSetting_NotificationSetting_NOTIFICATIONSETTINGUNSPECIFIED = SpaceNotificationSetting_NotificationSetting "NOTIFICATION_SETTING_UNSPECIFIED"
+
+-- | Notifications are triggered by \@mentions, followed threads, first message of new threads. All new threads are automatically followed, unless manually unfollowed by the user.
+pattern SpaceNotificationSetting_NotificationSetting_All :: SpaceNotificationSetting_NotificationSetting
+pattern SpaceNotificationSetting_NotificationSetting_All = SpaceNotificationSetting_NotificationSetting "ALL"
+
+-- | The notification is triggered by \@mentions, followed threads, first message of new threads. Not available for 1:1 direct messages.
+pattern SpaceNotificationSetting_NotificationSetting_MAINCONVERSATIONS :: SpaceNotificationSetting_NotificationSetting
+pattern SpaceNotificationSetting_NotificationSetting_MAINCONVERSATIONS = SpaceNotificationSetting_NotificationSetting "MAIN_CONVERSATIONS"
+
+-- | The notification is triggered by \@mentions, followed threads. Not available for 1:1 direct messages.
+pattern SpaceNotificationSetting_NotificationSetting_FORYOU :: SpaceNotificationSetting_NotificationSetting
+pattern SpaceNotificationSetting_NotificationSetting_FORYOU = SpaceNotificationSetting_NotificationSetting "FOR_YOU"
+
+-- | Notification is off.
+pattern SpaceNotificationSetting_NotificationSetting_Off :: SpaceNotificationSetting_NotificationSetting
+pattern SpaceNotificationSetting_NotificationSetting_Off = SpaceNotificationSetting_NotificationSetting "OFF"
+
+{-# COMPLETE
+  SpaceNotificationSetting_NotificationSetting_NOTIFICATIONSETTINGUNSPECIFIED,
+  SpaceNotificationSetting_NotificationSetting_All,
+  SpaceNotificationSetting_NotificationSetting_MAINCONVERSATIONS,
+  SpaceNotificationSetting_NotificationSetting_FORYOU,
+  SpaceNotificationSetting_NotificationSetting_Off,
+  SpaceNotificationSetting_NotificationSetting
   #-}
 
 -- | User type.

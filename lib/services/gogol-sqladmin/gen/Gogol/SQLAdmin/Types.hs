@@ -58,6 +58,19 @@ module Gogol.SQLAdmin.Types
     AvailableDatabaseVersion (..),
     newAvailableDatabaseVersion,
 
+    -- ** Backup
+    Backup (..),
+    newBackup,
+
+    -- ** Backup_BackupKind
+    Backup_BackupKind (..),
+
+    -- ** Backup_State
+    Backup_State (..),
+
+    -- ** Backup_Type
+    Backup_Type (..),
+
     -- ** BackupConfiguration
     BackupConfiguration (..),
     newBackupConfiguration,
@@ -195,6 +208,16 @@ module Gogol.SQLAdmin.Types
     DiskEncryptionStatus (..),
     newDiskEncryptionStatus,
 
+    -- ** DnsNameMapping
+    DnsNameMapping (..),
+    newDnsNameMapping,
+
+    -- ** DnsNameMapping_ConnectionType
+    DnsNameMapping_ConnectionType (..),
+
+    -- ** DnsNameMapping_DnsScope
+    DnsNameMapping_DnsScope (..),
+
     -- ** Empty
     Empty (..),
     newEmpty,
@@ -228,6 +251,10 @@ module Gogol.SQLAdmin.Types
     -- ** ExportContext_SqlExportOptions_PostgresExportOptions
     ExportContext_SqlExportOptions_PostgresExportOptions (..),
     newExportContext_SqlExportOptions_PostgresExportOptions,
+
+    -- ** ExportContext_TdeExportOptions
+    ExportContext_TdeExportOptions (..),
+    newExportContext_TdeExportOptions,
 
     -- ** ExternalSyncSelectedObject
     ExternalSyncSelectedObject (..),
@@ -292,6 +319,10 @@ module Gogol.SQLAdmin.Types
     -- ** ImportContext_SqlImportOptions_PostgresImportOptions
     ImportContext_SqlImportOptions_PostgresImportOptions (..),
     newImportContext_SqlImportOptions_PostgresImportOptions,
+
+    -- ** ImportContext_TdeImportOptions
+    ImportContext_TdeImportOptions (..),
+    newImportContext_TdeImportOptions,
 
     -- ** InsightsConfig
     InsightsConfig (..),
@@ -361,6 +392,10 @@ module Gogol.SQLAdmin.Types
     InstancesTruncateLogRequest (..),
     newInstancesTruncateLogRequest,
 
+    -- ** Interval
+    Interval (..),
+    newInterval,
+
     -- ** IpConfiguration
     IpConfiguration (..),
     newIpConfiguration,
@@ -377,6 +412,10 @@ module Gogol.SQLAdmin.Types
 
     -- ** IpMapping_Type
     IpMapping_Type (..),
+
+    -- ** ListBackupsResponse
+    ListBackupsResponse (..),
+    newListBackupsResponse,
 
     -- ** LocationPreference
     LocationPreference (..),

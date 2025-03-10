@@ -76,7 +76,7 @@ data BigQueryJobsGetQueryResults = BigQueryJobsGetQueryResults
     formatOptionsUseInt64Timestamp :: (Core.Maybe Core.Bool),
     -- | Required. Job ID of the query job.
     jobId :: Core.Text,
-    -- | The geographic location of the job. You must specify the location to run the job for the following scenarios: * If the location to run a job is not in the @us@ or the @eu@ multi-regional location * If the job\'s location is in a single region (for example, @us-central1@) For more information, see https:\/\/cloud.google.com\/bigquery\/docs\/locations#specifying/your/location.
+    -- | The geographic location of the job. You must specify the location to run the job for the following scenarios: * If the location to run a job is not in the @us@ or the @eu@ multi-regional location * If the job\'s location is in a single region (for example, @us-central1@) For more information, see how to <https://cloud.google.com/bigquery/docs/locations#specify_locations specify locations>.
     location :: (Core.Maybe Core.Text),
     -- | Maximum number of results to read.
     maxResults :: (Core.Maybe Core.Word32),

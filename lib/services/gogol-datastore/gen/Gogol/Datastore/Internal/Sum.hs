@@ -872,7 +872,7 @@ pattern GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode_OPTIMISTICWITHE
   GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode
   #-}
 
--- | Ths concurrency mode for this database.
+-- | The concurrency mode for this database.
 newtype GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode = GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode {fromGoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype

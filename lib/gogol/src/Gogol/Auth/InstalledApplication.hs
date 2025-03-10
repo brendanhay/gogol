@@ -37,8 +37,8 @@ where
 
 import Control.Monad.Catch (MonadCatch)
 import Control.Monad.IO.Class (MonadIO)
-import qualified Data.Text as Text
-import qualified Data.Text.Encoding as Text
+import Data.Text qualified as Text
+import Data.Text.Encoding qualified as Text
 import GHC.TypeLits (Symbol)
 import Gogol.Auth.Scope
   ( KnownScopes (..),
@@ -48,7 +48,7 @@ import Gogol.Internal.Auth
 import Gogol.Internal.Logger (Logger)
 import Gogol.Prelude
 import Network.HTTP.Conduit (Manager)
-import qualified Network.HTTP.Conduit as Client
+import Network.HTTP.Conduit qualified as Client
 
 -- | Create new Installed Application credentials.
 --

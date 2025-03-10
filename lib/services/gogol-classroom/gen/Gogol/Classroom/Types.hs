@@ -27,6 +27,8 @@ module Gogol.Classroom.Types
     classroomService,
 
     -- * OAuth Scopes
+    Classroom'Addons'Student,
+    Classroom'Addons'Teacher,
     Classroom'Announcements,
     Classroom'Announcements'Readonly,
     Classroom'Courses,
@@ -469,6 +471,14 @@ classroomService =
   Core.defaultService
     (Core.ServiceId "classroom:v1")
     "classroom.googleapis.com"
+
+-- | See and update its own attachments to posts in Google Classroom
+type Classroom'Addons'Student =
+  "https://www.googleapis.com/auth/classroom.addons.student"
+
+-- | See, create, and update its own attachments to posts in classes you teach in Google Classroom
+type Classroom'Addons'Teacher =
+  "https://www.googleapis.com/auth/classroom.addons.teacher"
 
 -- | View and manage announcements in Google Classroom
 type Classroom'Announcements =

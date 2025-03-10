@@ -111,7 +111,11 @@ instance Core.GoogleRequest CalendarEventsUpdate where
   type Rs CalendarEventsUpdate = Event
   type
     Scopes CalendarEventsUpdate =
-      '[Calendar'FullControl, Calendar'Events]
+      '[ Calendar'FullControl,
+         Calendar'App'Created,
+         Calendar'Events,
+         Calendar'Events'Owned
+       ]
   requestClient CalendarEventsUpdate {..} =
     go
       calendarId

@@ -295,6 +295,18 @@ module Gogol.DLP.Internal.Product
     GooglePrivacyDlpV2DataProfileConfigSnapshot (..),
     newGooglePrivacyDlpV2DataProfileConfigSnapshot,
 
+    -- * GooglePrivacyDlpV2DataProfileFinding
+    GooglePrivacyDlpV2DataProfileFinding (..),
+    newGooglePrivacyDlpV2DataProfileFinding,
+
+    -- * GooglePrivacyDlpV2DataProfileFindingLocation
+    GooglePrivacyDlpV2DataProfileFindingLocation (..),
+    newGooglePrivacyDlpV2DataProfileFindingLocation,
+
+    -- * GooglePrivacyDlpV2DataProfileFindingRecordLocation
+    GooglePrivacyDlpV2DataProfileFindingRecordLocation (..),
+    newGooglePrivacyDlpV2DataProfileFindingRecordLocation,
+
     -- * GooglePrivacyDlpV2DataProfileJobConfig
     GooglePrivacyDlpV2DataProfileJobConfig (..),
     newGooglePrivacyDlpV2DataProfileJobConfig,
@@ -483,6 +495,18 @@ module Gogol.DLP.Internal.Product
     GooglePrivacyDlpV2DiscoveryTarget (..),
     newGooglePrivacyDlpV2DiscoveryTarget,
 
+    -- * GooglePrivacyDlpV2DiscoveryVertexDatasetConditions
+    GooglePrivacyDlpV2DiscoveryVertexDatasetConditions (..),
+    newGooglePrivacyDlpV2DiscoveryVertexDatasetConditions,
+
+    -- * GooglePrivacyDlpV2DiscoveryVertexDatasetFilter
+    GooglePrivacyDlpV2DiscoveryVertexDatasetFilter (..),
+    newGooglePrivacyDlpV2DiscoveryVertexDatasetFilter,
+
+    -- * GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence
+    GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence (..),
+    newGooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence,
+
     -- * GooglePrivacyDlpV2DlpJob
     GooglePrivacyDlpV2DlpJob (..),
     newGooglePrivacyDlpV2DlpJob,
@@ -591,6 +615,10 @@ module Gogol.DLP.Internal.Product
     GooglePrivacyDlpV2FixedSizeBucketingConfig (..),
     newGooglePrivacyDlpV2FixedSizeBucketingConfig,
 
+    -- * GooglePrivacyDlpV2GlobalProcessing
+    GooglePrivacyDlpV2GlobalProcessing (..),
+    newGooglePrivacyDlpV2GlobalProcessing,
+
     -- * GooglePrivacyDlpV2HotwordRule
     GooglePrivacyDlpV2HotwordRule (..),
     newGooglePrivacyDlpV2HotwordRule,
@@ -630,6 +658,10 @@ module Gogol.DLP.Internal.Product
     -- * GooglePrivacyDlpV2HybridOptions_Labels
     GooglePrivacyDlpV2HybridOptions_Labels (..),
     newGooglePrivacyDlpV2HybridOptions_Labels,
+
+    -- * GooglePrivacyDlpV2ImageFallbackLocation
+    GooglePrivacyDlpV2ImageFallbackLocation (..),
+    newGooglePrivacyDlpV2ImageFallbackLocation,
 
     -- * GooglePrivacyDlpV2ImageLocation
     GooglePrivacyDlpV2ImageLocation (..),
@@ -863,6 +895,10 @@ module Gogol.DLP.Internal.Product
     GooglePrivacyDlpV2MetadataLocation (..),
     newGooglePrivacyDlpV2MetadataLocation,
 
+    -- * GooglePrivacyDlpV2MultiRegionProcessing
+    GooglePrivacyDlpV2MultiRegionProcessing (..),
+    newGooglePrivacyDlpV2MultiRegionProcessing,
+
     -- * GooglePrivacyDlpV2NumericalStatsConfig
     GooglePrivacyDlpV2NumericalStatsConfig (..),
     newGooglePrivacyDlpV2NumericalStatsConfig,
@@ -926,6 +962,10 @@ module Gogol.DLP.Internal.Product
     -- * GooglePrivacyDlpV2PrivacyMetric
     GooglePrivacyDlpV2PrivacyMetric (..),
     newGooglePrivacyDlpV2PrivacyMetric,
+
+    -- * GooglePrivacyDlpV2ProcessingLocation
+    GooglePrivacyDlpV2ProcessingLocation (..),
+    newGooglePrivacyDlpV2ProcessingLocation,
 
     -- * GooglePrivacyDlpV2ProfileStatus
     GooglePrivacyDlpV2ProfileStatus (..),
@@ -1042,6 +1082,10 @@ module Gogol.DLP.Internal.Product
     -- * GooglePrivacyDlpV2ReidentifyContentResponse
     GooglePrivacyDlpV2ReidentifyContentResponse (..),
     newGooglePrivacyDlpV2ReidentifyContentResponse,
+
+    -- * GooglePrivacyDlpV2RelatedResource
+    GooglePrivacyDlpV2RelatedResource (..),
+    newGooglePrivacyDlpV2RelatedResource,
 
     -- * GooglePrivacyDlpV2ReplaceDictionaryConfig
     GooglePrivacyDlpV2ReplaceDictionaryConfig (..),
@@ -1290,6 +1334,26 @@ module Gogol.DLP.Internal.Product
     -- * GooglePrivacyDlpV2VersionDescription
     GooglePrivacyDlpV2VersionDescription (..),
     newGooglePrivacyDlpV2VersionDescription,
+
+    -- * GooglePrivacyDlpV2VertexDatasetCollection
+    GooglePrivacyDlpV2VertexDatasetCollection (..),
+    newGooglePrivacyDlpV2VertexDatasetCollection,
+
+    -- * GooglePrivacyDlpV2VertexDatasetDiscoveryTarget
+    GooglePrivacyDlpV2VertexDatasetDiscoveryTarget (..),
+    newGooglePrivacyDlpV2VertexDatasetDiscoveryTarget,
+
+    -- * GooglePrivacyDlpV2VertexDatasetRegex
+    GooglePrivacyDlpV2VertexDatasetRegex (..),
+    newGooglePrivacyDlpV2VertexDatasetRegex,
+
+    -- * GooglePrivacyDlpV2VertexDatasetRegexes
+    GooglePrivacyDlpV2VertexDatasetRegexes (..),
+    newGooglePrivacyDlpV2VertexDatasetRegexes,
+
+    -- * GooglePrivacyDlpV2VertexDatasetResourceReference
+    GooglePrivacyDlpV2VertexDatasetResourceReference (..),
+    newGooglePrivacyDlpV2VertexDatasetResourceReference,
 
     -- * GooglePrivacyDlpV2WordList
     GooglePrivacyDlpV2WordList (..),
@@ -4008,7 +4072,7 @@ instance Core.ToJSON GooglePrivacyDlpV2CryptoKey where
           ]
       )
 
--- | Replaces an identifier with a surrogate using Format Preserving Encryption (FPE) with the FFX mode of operation; however when used in the @ReidentifyContent@ API method, it serves the opposite function by reversing the surrogate back into the original identifier. The identifier must be encoded as ASCII. For a given crypto key and context, the same identifier will be replaced with the same surrogate. Identifiers must be at least two characters long. In the case that the identifier is the empty string, it will be skipped. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/pseudonymization to learn more. Note: We recommend using CryptoDeterministicConfig for all use cases which do not require preserving the input alphabet space and size, plus warrant referential integrity.
+-- | Replaces an identifier with a surrogate using Format Preserving Encryption (FPE) with the FFX mode of operation; however when used in the @ReidentifyContent@ API method, it serves the opposite function by reversing the surrogate back into the original identifier. The identifier must be encoded as ASCII. For a given crypto key and context, the same identifier will be replaced with the same surrogate. Identifiers must be at least two characters long. In the case that the identifier is the empty string, it will be skipped. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/pseudonymization to learn more. Note: We recommend using CryptoDeterministicConfig for all use cases which do not require preserving the input alphabet space and size, plus warrant referential integrity. FPE incurs significant latency costs.
 --
 -- /See:/ 'newGooglePrivacyDlpV2CryptoReplaceFfxFpeConfig' smart constructor.
 data GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig = GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig
@@ -4303,6 +4367,158 @@ instance Core.ToJSON GooglePrivacyDlpV2DataProfileConfigSnapshot where
             ("inspectTemplateName" Core..=) Core.<$> inspectTemplateName
           ]
       )
+
+-- | Details about a piece of potentially sensitive information that was detected when the data resource was profiled.
+--
+-- /See:/ 'newGooglePrivacyDlpV2DataProfileFinding' smart constructor.
+data GooglePrivacyDlpV2DataProfileFinding = GooglePrivacyDlpV2DataProfileFinding
+  { -- | Resource name of the data profile associated with the finding.
+    dataProfileResourceName :: (Core.Maybe Core.Text),
+    -- | A unique identifier for the finding.
+    findingId :: (Core.Maybe Core.Text),
+    -- | The <https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference type of content> that might have been found.
+    infotype :: (Core.Maybe GooglePrivacyDlpV2InfoType),
+    -- | Where the content was found.
+    location :: (Core.Maybe GooglePrivacyDlpV2DataProfileFindingLocation),
+    -- | The content that was found. Even if the content is not textual, it may be converted to a textual representation here. If the finding exceeds 4096 bytes in length, the quote may be omitted.
+    quote :: (Core.Maybe Core.Text),
+    -- | Contains data parsed from quotes. Currently supported infoTypes: DATE, DATE/OF/BIRTH, and TIME.
+    quoteInfo :: (Core.Maybe GooglePrivacyDlpV2QuoteInfo),
+    -- | How broadly a resource has been shared.
+    resourceVisibility ::
+      ( Core.Maybe
+          GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility
+      ),
+    -- | Timestamp when the finding was detected.
+    timestamp :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GooglePrivacyDlpV2DataProfileFinding' with the minimum fields required to make a request.
+newGooglePrivacyDlpV2DataProfileFinding ::
+  GooglePrivacyDlpV2DataProfileFinding
+newGooglePrivacyDlpV2DataProfileFinding =
+  GooglePrivacyDlpV2DataProfileFinding
+    { dataProfileResourceName =
+        Core.Nothing,
+      findingId = Core.Nothing,
+      infotype = Core.Nothing,
+      location = Core.Nothing,
+      quote = Core.Nothing,
+      quoteInfo = Core.Nothing,
+      resourceVisibility = Core.Nothing,
+      timestamp = Core.Nothing
+    }
+
+instance Core.FromJSON GooglePrivacyDlpV2DataProfileFinding where
+  parseJSON =
+    Core.withObject
+      "GooglePrivacyDlpV2DataProfileFinding"
+      ( \o ->
+          GooglePrivacyDlpV2DataProfileFinding
+            Core.<$> (o Core..:? "dataProfileResourceName")
+            Core.<*> (o Core..:? "findingId")
+            Core.<*> (o Core..:? "infotype")
+            Core.<*> (o Core..:? "location")
+            Core.<*> (o Core..:? "quote")
+            Core.<*> (o Core..:? "quoteInfo")
+            Core.<*> (o Core..:? "resourceVisibility")
+            Core.<*> (o Core..:? "timestamp")
+      )
+
+instance Core.ToJSON GooglePrivacyDlpV2DataProfileFinding where
+  toJSON GooglePrivacyDlpV2DataProfileFinding {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("dataProfileResourceName" Core..=)
+              Core.<$> dataProfileResourceName,
+            ("findingId" Core..=) Core.<$> findingId,
+            ("infotype" Core..=) Core.<$> infotype,
+            ("location" Core..=) Core.<$> location,
+            ("quote" Core..=) Core.<$> quote,
+            ("quoteInfo" Core..=) Core.<$> quoteInfo,
+            ("resourceVisibility" Core..=) Core.<$> resourceVisibility,
+            ("timestamp" Core..=) Core.<$> timestamp
+          ]
+      )
+
+-- | Location of a data profile finding within a resource.
+--
+-- /See:/ 'newGooglePrivacyDlpV2DataProfileFindingLocation' smart constructor.
+data GooglePrivacyDlpV2DataProfileFindingLocation = GooglePrivacyDlpV2DataProfileFindingLocation
+  { -- | Name of the container where the finding is located. The top-level name is the source file name or table name. Names of some common storage containers are formatted as follows: * BigQuery tables: @{project_id}:{dataset_id}.{table_id}@ * Cloud Storage files: @gs:\/\/{bucket}\/{path}@
+    containerName :: (Core.Maybe Core.Text),
+    -- | Location of a finding within a resource that produces a table data profile.
+    dataProfileFindingRecordLocation :: (Core.Maybe GooglePrivacyDlpV2DataProfileFindingRecordLocation)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GooglePrivacyDlpV2DataProfileFindingLocation' with the minimum fields required to make a request.
+newGooglePrivacyDlpV2DataProfileFindingLocation ::
+  GooglePrivacyDlpV2DataProfileFindingLocation
+newGooglePrivacyDlpV2DataProfileFindingLocation =
+  GooglePrivacyDlpV2DataProfileFindingLocation
+    { containerName =
+        Core.Nothing,
+      dataProfileFindingRecordLocation = Core.Nothing
+    }
+
+instance Core.FromJSON GooglePrivacyDlpV2DataProfileFindingLocation where
+  parseJSON =
+    Core.withObject
+      "GooglePrivacyDlpV2DataProfileFindingLocation"
+      ( \o ->
+          GooglePrivacyDlpV2DataProfileFindingLocation
+            Core.<$> (o Core..:? "containerName")
+            Core.<*> (o Core..:? "dataProfileFindingRecordLocation")
+      )
+
+instance Core.ToJSON GooglePrivacyDlpV2DataProfileFindingLocation where
+  toJSON GooglePrivacyDlpV2DataProfileFindingLocation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("containerName" Core..=) Core.<$> containerName,
+            ("dataProfileFindingRecordLocation" Core..=)
+              Core.<$> dataProfileFindingRecordLocation
+          ]
+      )
+
+-- | Location of a finding within a resource that produces a table data profile.
+--
+-- /See:/ 'newGooglePrivacyDlpV2DataProfileFindingRecordLocation' smart constructor.
+newtype GooglePrivacyDlpV2DataProfileFindingRecordLocation = GooglePrivacyDlpV2DataProfileFindingRecordLocation
+  { -- | Field ID of the column containing the finding.
+    field :: (Core.Maybe GooglePrivacyDlpV2FieldId)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GooglePrivacyDlpV2DataProfileFindingRecordLocation' with the minimum fields required to make a request.
+newGooglePrivacyDlpV2DataProfileFindingRecordLocation ::
+  GooglePrivacyDlpV2DataProfileFindingRecordLocation
+newGooglePrivacyDlpV2DataProfileFindingRecordLocation =
+  GooglePrivacyDlpV2DataProfileFindingRecordLocation
+    { field =
+        Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GooglePrivacyDlpV2DataProfileFindingRecordLocation
+  where
+  parseJSON =
+    Core.withObject
+      "GooglePrivacyDlpV2DataProfileFindingRecordLocation"
+      ( \o ->
+          GooglePrivacyDlpV2DataProfileFindingRecordLocation
+            Core.<$> (o Core..:? "field")
+      )
+
+instance
+  Core.ToJSON
+    GooglePrivacyDlpV2DataProfileFindingRecordLocation
+  where
+  toJSON GooglePrivacyDlpV2DataProfileFindingRecordLocation {..} =
+    Core.object (Core.catMaybes [("field" Core..=) Core.<$> field])
 
 -- | Configuration for setting up a job to scan resources for profile generation. Only one data profile configuration may exist per organization, folder, or project. The generated data profiles are retained according to the [data retention policy] (https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/data-profiles#retention).
 --
@@ -5957,6 +6173,8 @@ data GooglePrivacyDlpV2DiscoveryConfig = GooglePrivacyDlpV2DiscoveryConfig
     orgConfig :: (Core.Maybe GooglePrivacyDlpV2OrgConfig),
     -- | Must be set only when scanning other clouds.
     otherCloudStartingLocation :: (Core.Maybe GooglePrivacyDlpV2OtherCloudDiscoveryStartingLocation),
+    -- | Optional. Processing location configuration. Vertex AI dataset scanning will set processing/location.image/fallback_type to MultiRegionProcessing by default.
+    processingLocation :: (Core.Maybe GooglePrivacyDlpV2ProcessingLocation),
     -- | Required. A status for this configuration.
     status :: (Core.Maybe GooglePrivacyDlpV2DiscoveryConfig_Status),
     -- | Target to match against for determining what to scan and how frequently.
@@ -5980,6 +6198,7 @@ newGooglePrivacyDlpV2DiscoveryConfig =
       name = Core.Nothing,
       orgConfig = Core.Nothing,
       otherCloudStartingLocation = Core.Nothing,
+      processingLocation = Core.Nothing,
       status = Core.Nothing,
       targets = Core.Nothing,
       updateTime = Core.Nothing
@@ -6000,6 +6219,7 @@ instance Core.FromJSON GooglePrivacyDlpV2DiscoveryConfig where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "orgConfig")
             Core.<*> (o Core..:? "otherCloudStartingLocation")
+            Core.<*> (o Core..:? "processingLocation")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "targets")
             Core.<*> (o Core..:? "updateTime")
@@ -6019,6 +6239,7 @@ instance Core.ToJSON GooglePrivacyDlpV2DiscoveryConfig where
             ("orgConfig" Core..=) Core.<$> orgConfig,
             ("otherCloudStartingLocation" Core..=)
               Core.<$> otherCloudStartingLocation,
+            ("processingLocation" Core..=) Core.<$> processingLocation,
             ("status" Core..=) Core.<$> status,
             ("targets" Core..=) Core.<$> targets,
             ("updateTime" Core..=) Core.<$> updateTime
@@ -6477,7 +6698,9 @@ data GooglePrivacyDlpV2DiscoveryTarget = GooglePrivacyDlpV2DiscoveryTarget
     -- | Other clouds target for discovery. The first target to match a resource will be the one applied.
     otherCloudTarget :: (Core.Maybe GooglePrivacyDlpV2OtherCloudDiscoveryTarget),
     -- | Discovery target that looks for credentials and secrets stored in cloud resource metadata and reports them as vulnerabilities to Security Command Center. Only one target of this type is allowed.
-    secretsTarget :: (Core.Maybe GooglePrivacyDlpV2SecretsDiscoveryTarget)
+    secretsTarget :: (Core.Maybe GooglePrivacyDlpV2SecretsDiscoveryTarget),
+    -- | Vertex AI dataset target for Discovery. The first target to match a dataset will be the one applied. Note that discovery for Vertex AI can incur Cloud Storage Class B operation charges for storage.objects.get operations and retrieval fees. For more information, see <https://cloud.google.com/storage/pricing#price-tables Cloud Storage pricing>. Note that discovery for Vertex AI dataset will not be able to scan images unless DiscoveryConfig.processing/location.image/fallback/location has multi/region/processing or global/processing configured.
+    vertexDatasetTarget :: (Core.Maybe GooglePrivacyDlpV2VertexDatasetDiscoveryTarget)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6490,7 +6713,8 @@ newGooglePrivacyDlpV2DiscoveryTarget =
       cloudSqlTarget = Core.Nothing,
       cloudStorageTarget = Core.Nothing,
       otherCloudTarget = Core.Nothing,
-      secretsTarget = Core.Nothing
+      secretsTarget = Core.Nothing,
+      vertexDatasetTarget = Core.Nothing
     }
 
 instance Core.FromJSON GooglePrivacyDlpV2DiscoveryTarget where
@@ -6504,6 +6728,7 @@ instance Core.FromJSON GooglePrivacyDlpV2DiscoveryTarget where
             Core.<*> (o Core..:? "cloudStorageTarget")
             Core.<*> (o Core..:? "otherCloudTarget")
             Core.<*> (o Core..:? "secretsTarget")
+            Core.<*> (o Core..:? "vertexDatasetTarget")
       )
 
 instance Core.ToJSON GooglePrivacyDlpV2DiscoveryTarget where
@@ -6514,9 +6739,159 @@ instance Core.ToJSON GooglePrivacyDlpV2DiscoveryTarget where
             ("cloudSqlTarget" Core..=) Core.<$> cloudSqlTarget,
             ("cloudStorageTarget" Core..=) Core.<$> cloudStorageTarget,
             ("otherCloudTarget" Core..=) Core.<$> otherCloudTarget,
-            ("secretsTarget" Core..=) Core.<$> secretsTarget
+            ("secretsTarget" Core..=) Core.<$> secretsTarget,
+            ("vertexDatasetTarget" Core..=) Core.<$> vertexDatasetTarget
           ]
       )
+
+-- | Requirements that must be true before a dataset is profiled for the first time.
+--
+-- /See:/ 'newGooglePrivacyDlpV2DiscoveryVertexDatasetConditions' smart constructor.
+data GooglePrivacyDlpV2DiscoveryVertexDatasetConditions = GooglePrivacyDlpV2DiscoveryVertexDatasetConditions
+  { -- | Vertex AI dataset must have been created after this date. Used to avoid backfilling.
+    createdAfter :: (Core.Maybe Core.DateTime),
+    -- | Minimum age a Vertex AI dataset must have. If set, the value must be 1 hour or greater.
+    minAge :: (Core.Maybe Core.Duration)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GooglePrivacyDlpV2DiscoveryVertexDatasetConditions' with the minimum fields required to make a request.
+newGooglePrivacyDlpV2DiscoveryVertexDatasetConditions ::
+  GooglePrivacyDlpV2DiscoveryVertexDatasetConditions
+newGooglePrivacyDlpV2DiscoveryVertexDatasetConditions =
+  GooglePrivacyDlpV2DiscoveryVertexDatasetConditions
+    { createdAfter =
+        Core.Nothing,
+      minAge = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GooglePrivacyDlpV2DiscoveryVertexDatasetConditions
+  where
+  parseJSON =
+    Core.withObject
+      "GooglePrivacyDlpV2DiscoveryVertexDatasetConditions"
+      ( \o ->
+          GooglePrivacyDlpV2DiscoveryVertexDatasetConditions
+            Core.<$> (o Core..:? "createdAfter")
+            Core.<*> (o Core..:? "minAge")
+      )
+
+instance
+  Core.ToJSON
+    GooglePrivacyDlpV2DiscoveryVertexDatasetConditions
+  where
+  toJSON GooglePrivacyDlpV2DiscoveryVertexDatasetConditions {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("createdAfter" Core..=) Core.<$> createdAfter,
+            ("minAge" Core..=) Core.<$> minAge
+          ]
+      )
+
+-- | Determines what datasets will have profiles generated within an organization or project. Includes the ability to filter by regular expression patterns on project ID or dataset regex.
+--
+-- /See:/ 'newGooglePrivacyDlpV2DiscoveryVertexDatasetFilter' smart constructor.
+data GooglePrivacyDlpV2DiscoveryVertexDatasetFilter = GooglePrivacyDlpV2DiscoveryVertexDatasetFilter
+  { -- | A specific set of Vertex AI datasets for this filter to apply to.
+    collection :: (Core.Maybe GooglePrivacyDlpV2VertexDatasetCollection),
+    -- | Catch-all. This should always be the last target in the list because anything above it will apply first. Should only appear once in a configuration. If none is specified, a default one will be added automatically.
+    others :: (Core.Maybe GooglePrivacyDlpV2AllOtherResources),
+    -- | The dataset resource to scan. Targets including this can only include one target (the target with this dataset resource reference).
+    vertexDatasetResourceReference :: (Core.Maybe GooglePrivacyDlpV2VertexDatasetResourceReference)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GooglePrivacyDlpV2DiscoveryVertexDatasetFilter' with the minimum fields required to make a request.
+newGooglePrivacyDlpV2DiscoveryVertexDatasetFilter ::
+  GooglePrivacyDlpV2DiscoveryVertexDatasetFilter
+newGooglePrivacyDlpV2DiscoveryVertexDatasetFilter =
+  GooglePrivacyDlpV2DiscoveryVertexDatasetFilter
+    { collection =
+        Core.Nothing,
+      others = Core.Nothing,
+      vertexDatasetResourceReference = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GooglePrivacyDlpV2DiscoveryVertexDatasetFilter
+  where
+  parseJSON =
+    Core.withObject
+      "GooglePrivacyDlpV2DiscoveryVertexDatasetFilter"
+      ( \o ->
+          GooglePrivacyDlpV2DiscoveryVertexDatasetFilter
+            Core.<$> (o Core..:? "collection")
+            Core.<*> (o Core..:? "others")
+            Core.<*> (o Core..:? "vertexDatasetResourceReference")
+      )
+
+instance Core.ToJSON GooglePrivacyDlpV2DiscoveryVertexDatasetFilter where
+  toJSON GooglePrivacyDlpV2DiscoveryVertexDatasetFilter {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("collection" Core..=) Core.<$> collection,
+            ("others" Core..=) Core.<$> others,
+            ("vertexDatasetResourceReference" Core..=)
+              Core.<$> vertexDatasetResourceReference
+          ]
+      )
+
+-- | How often existing datasets should have their profiles refreshed. New datasets are scanned as quickly as possible depending on system capacity.
+--
+-- /See:/ 'newGooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence' smart constructor.
+data GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence = GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence
+  { -- | Governs when to update data profiles when the inspection rules defined by the @InspectTemplate@ change. If not set, changing the template will not cause a data profile to be updated.
+    inspectTemplateModifiedCadence ::
+      ( Core.Maybe
+          GooglePrivacyDlpV2DiscoveryInspectTemplateModifiedCadence
+      ),
+    -- | If you set this field, profiles are refreshed at this frequency regardless of whether the underlying datasets have changed. Defaults to never.
+    refreshFrequency ::
+      ( Core.Maybe
+          GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency
+      )
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence' with the minimum fields required to make a request.
+newGooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence ::
+  GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence
+newGooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence =
+  GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence
+    { inspectTemplateModifiedCadence =
+        Core.Nothing,
+      refreshFrequency = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence
+  where
+  parseJSON =
+    Core.withObject
+      "GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence"
+      ( \o ->
+          GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence
+            Core.<$> (o Core..:? "inspectTemplateModifiedCadence")
+            Core.<*> (o Core..:? "refreshFrequency")
+      )
+
+instance
+  Core.ToJSON
+    GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence
+  where
+  toJSON
+    GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("inspectTemplateModifiedCadence" Core..=)
+                Core.<$> inspectTemplateModifiedCadence,
+              ("refreshFrequency" Core..=) Core.<$> refreshFrequency
+            ]
+        )
 
 -- | Combines all of the information about a DLP job.
 --
@@ -6832,9 +7207,12 @@ instance Core.ToJSON GooglePrivacyDlpV2ExclusionRule where
 -- | If set, the detailed data profiles will be persisted to the location of your choice whenever updated.
 --
 -- /See:/ 'newGooglePrivacyDlpV2Export' smart constructor.
-newtype GooglePrivacyDlpV2Export = GooglePrivacyDlpV2Export
-  { -- | Store all table and column profiles in an existing table or a new table in an existing dataset. Each re-generation will result in new rows in BigQuery. Data is inserted using <https://cloud.google.com/blog/products/bigquery/life-of-a-bigquery-streaming-insert streaming insert> and so data may be in the buffer for a period of time after the profile has finished. The Pub\/Sub notification is sent before the streaming buffer is guaranteed to be written, so data may not be instantly visible to queries by the time your topic receives the Pub\/Sub notification.
-    profileTable :: (Core.Maybe GooglePrivacyDlpV2BigQueryTable)
+data GooglePrivacyDlpV2Export = GooglePrivacyDlpV2Export
+  { -- | Store all profiles to BigQuery. * The system will create a new dataset and table for you if none are are provided. The dataset will be named @sensitive_data_protection_discovery@ and table will be named @discovery_profiles@. This table will be placed in the same project as the container project running the scan. After the first profile is generated and the dataset and table are created, the discovery scan configuration will be updated with the dataset and table names. * See <https://cloud.google.com/sensitive-data-protection/docs/analyze-data-profiles Analyze data profiles stored in BigQuery>. * See <https://cloud.google.com/sensitive-data-protection/docs/analyze-data-profiles#sample_sql_queries Sample queries for your BigQuery table>. * Data is inserted using <https://cloud.google.com/blog/products/bigquery/life-of-a-bigquery-streaming-insert streaming insert> and so data may be in the buffer for a period of time after the profile has finished. * The Pub\/Sub notification is sent before the streaming buffer
+    -- is guaranteed to be written, so data may not be instantly visible to queries by the time your topic receives the Pub\/Sub notification. * The best practice is to use the same table for an entire organization so that you can take advantage of the <https://cloud.google.com/sensitive-data-protection/docs/analyze-data-profiles#use_a_premade_report provided Looker reports>. If you use VPC Service Controls to define security perimeters, then you must use a separate table for each boundary.
+    profileTable :: (Core.Maybe GooglePrivacyDlpV2BigQueryTable),
+    -- | Store sample data profile findings in an existing table or a new table in an existing dataset. Each regeneration will result in new rows in BigQuery. Data is inserted using <https://cloud.google.com/blog/products/bigquery/life-of-a-bigquery-streaming-insert streaming insert> and so data may be in the buffer for a period of time after the profile has finished.
+    sampleFindingsTable :: (Core.Maybe GooglePrivacyDlpV2BigQueryTable)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6842,20 +7220,29 @@ newtype GooglePrivacyDlpV2Export = GooglePrivacyDlpV2Export
 newGooglePrivacyDlpV2Export ::
   GooglePrivacyDlpV2Export
 newGooglePrivacyDlpV2Export =
-  GooglePrivacyDlpV2Export {profileTable = Core.Nothing}
+  GooglePrivacyDlpV2Export
+    { profileTable = Core.Nothing,
+      sampleFindingsTable = Core.Nothing
+    }
 
 instance Core.FromJSON GooglePrivacyDlpV2Export where
   parseJSON =
     Core.withObject
       "GooglePrivacyDlpV2Export"
       ( \o ->
-          GooglePrivacyDlpV2Export Core.<$> (o Core..:? "profileTable")
+          GooglePrivacyDlpV2Export
+            Core.<$> (o Core..:? "profileTable")
+            Core.<*> (o Core..:? "sampleFindingsTable")
       )
 
 instance Core.ToJSON GooglePrivacyDlpV2Export where
   toJSON GooglePrivacyDlpV2Export {..} =
     Core.object
-      (Core.catMaybes [("profileTable" Core..=) Core.<$> profileTable])
+      ( Core.catMaybes
+          [ ("profileTable" Core..=) Core.<$> profileTable,
+            ("sampleFindingsTable" Core..=) Core.<$> sampleFindingsTable
+          ]
+      )
 
 -- | An expression, consisting of an operator and conditions.
 --
@@ -6988,7 +7375,7 @@ data GooglePrivacyDlpV2FileClusterSummary = GooglePrivacyDlpV2FileClusterSummary
     fileExtensionsSeen :: (Core.Maybe [GooglePrivacyDlpV2FileExtensionInfo]),
     -- | InfoTypes detected in this cluster.
     fileStoreInfoTypeSummaries :: (Core.Maybe [GooglePrivacyDlpV2FileStoreInfoTypeSummary]),
-    -- | True if no files exist in this cluster. If the bucket had more files than could be listed, this will be false even if no files for this cluster were seen and file/extensions/seen is empty.
+    -- | True if no files exist in this cluster. If the file store had more files than could be listed, this will be false even if no files for this cluster were seen and file/extensions/seen is empty.
     noFilesExist :: (Core.Maybe Core.Bool),
     -- | The sensitivity score of this cluster. The score will be SENSITIVITY_LOW if nothing has been scanned.
     sensitivityScore :: (Core.Maybe GooglePrivacyDlpV2SensitivityScore)
@@ -7195,13 +7582,13 @@ data GooglePrivacyDlpV2FileStoreDataProfile = GooglePrivacyDlpV2FileStoreDataPro
     fileStoreIsEmpty :: (Core.Maybe Core.Bool),
     -- | The location of the file store. * Cloud Storage: https:\/\/cloud.google.com\/storage\/docs\/locations#available-locations * Amazon S3: https:\/\/docs.aws.amazon.com\/general\/latest\/gr\/rande.html#regional-endpoints
     fileStoreLocation :: (Core.Maybe Core.Text),
-    -- | The file store path. * Cloud Storage: @gs:\/\/{bucket}@ * Amazon S3: @s3:\/\/{bucket}@
+    -- | The file store path. * Cloud Storage: @gs:\/\/{bucket}@ * Amazon S3: @s3:\/\/{bucket}@ * Vertex AI dataset: @projects\/{project_number}\/locations\/{location}\/datasets\/{dataset_id}@
     fileStorePath :: (Core.Maybe Core.Text),
     -- | The resource name of the resource profiled. https:\/\/cloud.google.com\/apis\/design\/resource/names#full/resource_name Example format of an S3 bucket full resource name: @\/\/cloudasset.googleapis.com\/organizations\/{org_id}\/otherCloudConnections\/aws\/arn:aws:s3:::{bucket_name}@
     fullResource :: (Core.Maybe Core.Text),
     -- | The time the file store was last modified.
     lastModifiedTime :: (Core.Maybe Core.DateTime),
-    -- | The location type of the bucket (region, dual-region, multi-region, etc). If dual-region, expect data/storage/locations to be populated.
+    -- | The location type of the file store (region, dual-region, multi-region, etc). If dual-region, expect data/storage/locations to be populated.
     locationType :: (Core.Maybe Core.Text),
     -- | The name of the profile.
     name :: (Core.Maybe Core.Text),
@@ -7213,6 +7600,8 @@ data GooglePrivacyDlpV2FileStoreDataProfile = GooglePrivacyDlpV2FileStoreDataPro
     projectDataProfile :: (Core.Maybe Core.Text),
     -- | The Google Cloud project ID that owns the resource. For Amazon S3 buckets, this is the AWS Account Id.
     projectId :: (Core.Maybe Core.Text),
+    -- | Resources related to this profile.
+    relatedResources :: (Core.Maybe [GooglePrivacyDlpV2RelatedResource]),
     -- | Attributes of the resource being profiled. Currently used attributes: * customer/managed/encryption: boolean - true: the resource is encrypted with a customer-managed key. - false: the resource is encrypted with a provider-managed key.
     resourceAttributes ::
       ( Core.Maybe
@@ -7225,6 +7614,8 @@ data GooglePrivacyDlpV2FileStoreDataProfile = GooglePrivacyDlpV2FileStoreDataPro
       ( Core.Maybe
           GooglePrivacyDlpV2FileStoreDataProfile_ResourceVisibility
       ),
+    -- | The BigQuery table to which the sample findings are written.
+    sampleFindingsTable :: (Core.Maybe GooglePrivacyDlpV2BigQueryTable),
     -- | The sensitivity score of this resource.
     sensitivityScore :: (Core.Maybe GooglePrivacyDlpV2SensitivityScore),
     -- | State of a profile.
@@ -7256,9 +7647,11 @@ newGooglePrivacyDlpV2FileStoreDataProfile =
       profileStatus = Core.Nothing,
       projectDataProfile = Core.Nothing,
       projectId = Core.Nothing,
+      relatedResources = Core.Nothing,
       resourceAttributes = Core.Nothing,
       resourceLabels = Core.Nothing,
       resourceVisibility = Core.Nothing,
+      sampleFindingsTable = Core.Nothing,
       sensitivityScore = Core.Nothing,
       state = Core.Nothing
     }
@@ -7287,9 +7680,11 @@ instance Core.FromJSON GooglePrivacyDlpV2FileStoreDataProfile where
             Core.<*> (o Core..:? "profileStatus")
             Core.<*> (o Core..:? "projectDataProfile")
             Core.<*> (o Core..:? "projectId")
+            Core.<*> (o Core..:? "relatedResources")
             Core.<*> (o Core..:? "resourceAttributes")
             Core.<*> (o Core..:? "resourceLabels")
             Core.<*> (o Core..:? "resourceVisibility")
+            Core.<*> (o Core..:? "sampleFindingsTable")
             Core.<*> (o Core..:? "sensitivityScore")
             Core.<*> (o Core..:? "state")
       )
@@ -7317,9 +7712,11 @@ instance Core.ToJSON GooglePrivacyDlpV2FileStoreDataProfile where
             ("profileStatus" Core..=) Core.<$> profileStatus,
             ("projectDataProfile" Core..=) Core.<$> projectDataProfile,
             ("projectId" Core..=) Core.<$> projectId,
+            ("relatedResources" Core..=) Core.<$> relatedResources,
             ("resourceAttributes" Core..=) Core.<$> resourceAttributes,
             ("resourceLabels" Core..=) Core.<$> resourceLabels,
             ("resourceVisibility" Core..=) Core.<$> resourceVisibility,
+            ("sampleFindingsTable" Core..=) Core.<$> sampleFindingsTable,
             ("sensitivityScore" Core..=) Core.<$> sensitivityScore,
             ("state" Core..=) Core.<$> state
           ]
@@ -7734,6 +8131,27 @@ instance Core.ToJSON GooglePrivacyDlpV2FixedSizeBucketingConfig where
           ]
       )
 
+-- | Processing will happen in the global region.
+--
+-- /See:/ 'newGooglePrivacyDlpV2GlobalProcessing' smart constructor.
+data GooglePrivacyDlpV2GlobalProcessing = GooglePrivacyDlpV2GlobalProcessing
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GooglePrivacyDlpV2GlobalProcessing' with the minimum fields required to make a request.
+newGooglePrivacyDlpV2GlobalProcessing ::
+  GooglePrivacyDlpV2GlobalProcessing
+newGooglePrivacyDlpV2GlobalProcessing =
+  GooglePrivacyDlpV2GlobalProcessing
+
+instance Core.FromJSON GooglePrivacyDlpV2GlobalProcessing where
+  parseJSON =
+    Core.withObject
+      "GooglePrivacyDlpV2GlobalProcessing"
+      (\o -> Core.pure GooglePrivacyDlpV2GlobalProcessing)
+
+instance Core.ToJSON GooglePrivacyDlpV2GlobalProcessing where
+  toJSON = Core.const Core.emptyObject
+
 -- | The rule that adjusts the likelihood of findings within a certain proximity of hotwords.
 --
 -- /See:/ 'newGooglePrivacyDlpV2HotwordRule' smart constructor.
@@ -8125,6 +8543,46 @@ instance Core.ToJSON GooglePrivacyDlpV2HybridOptions_Labels where
   toJSON GooglePrivacyDlpV2HybridOptions_Labels {..} =
     Core.toJSON additional
 
+-- | Configure image processing to fall back to the configured processing option below if unavailable in the request location.
+--
+-- /See:/ 'newGooglePrivacyDlpV2ImageFallbackLocation' smart constructor.
+data GooglePrivacyDlpV2ImageFallbackLocation = GooglePrivacyDlpV2ImageFallbackLocation
+  { -- | Processing will happen in the global region.
+    globalProcessing :: (Core.Maybe GooglePrivacyDlpV2GlobalProcessing),
+    -- | Processing will happen in a multi-region that contains the current region if available.
+    multiRegionProcessing :: (Core.Maybe GooglePrivacyDlpV2MultiRegionProcessing)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GooglePrivacyDlpV2ImageFallbackLocation' with the minimum fields required to make a request.
+newGooglePrivacyDlpV2ImageFallbackLocation ::
+  GooglePrivacyDlpV2ImageFallbackLocation
+newGooglePrivacyDlpV2ImageFallbackLocation =
+  GooglePrivacyDlpV2ImageFallbackLocation
+    { globalProcessing =
+        Core.Nothing,
+      multiRegionProcessing = Core.Nothing
+    }
+
+instance Core.FromJSON GooglePrivacyDlpV2ImageFallbackLocation where
+  parseJSON =
+    Core.withObject
+      "GooglePrivacyDlpV2ImageFallbackLocation"
+      ( \o ->
+          GooglePrivacyDlpV2ImageFallbackLocation
+            Core.<$> (o Core..:? "globalProcessing")
+            Core.<*> (o Core..:? "multiRegionProcessing")
+      )
+
+instance Core.ToJSON GooglePrivacyDlpV2ImageFallbackLocation where
+  toJSON GooglePrivacyDlpV2ImageFallbackLocation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("globalProcessing" Core..=) Core.<$> globalProcessing,
+            ("multiRegionProcessing" Core..=) Core.<$> multiRegionProcessing
+          ]
+      )
+
 -- | Location of the finding within an image.
 --
 -- /See:/ 'newGooglePrivacyDlpV2ImageLocation' smart constructor.
@@ -8376,7 +8834,7 @@ data GooglePrivacyDlpV2InfoTypeDescription = GooglePrivacyDlpV2InfoTypeDescripti
     description :: (Core.Maybe Core.Text),
     -- | Human readable form of the infoType name.
     displayName :: (Core.Maybe Core.Text),
-    -- | A sample true positive for this infoType.
+    -- | A sample that is a true positive for this infoType.
     example :: (Core.Maybe Core.Text),
     -- | Internal name of the infoType.
     name :: (Core.Maybe Core.Text),
@@ -10636,6 +11094,27 @@ instance Core.ToJSON GooglePrivacyDlpV2MetadataLocation where
           ]
       )
 
+-- | Processing will happen in a multi-region that contains the current region if available.
+--
+-- /See:/ 'newGooglePrivacyDlpV2MultiRegionProcessing' smart constructor.
+data GooglePrivacyDlpV2MultiRegionProcessing = GooglePrivacyDlpV2MultiRegionProcessing
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GooglePrivacyDlpV2MultiRegionProcessing' with the minimum fields required to make a request.
+newGooglePrivacyDlpV2MultiRegionProcessing ::
+  GooglePrivacyDlpV2MultiRegionProcessing
+newGooglePrivacyDlpV2MultiRegionProcessing =
+  GooglePrivacyDlpV2MultiRegionProcessing
+
+instance Core.FromJSON GooglePrivacyDlpV2MultiRegionProcessing where
+  parseJSON =
+    Core.withObject
+      "GooglePrivacyDlpV2MultiRegionProcessing"
+      (\o -> Core.pure GooglePrivacyDlpV2MultiRegionProcessing)
+
+instance Core.ToJSON GooglePrivacyDlpV2MultiRegionProcessing where
+  toJSON = Core.const Core.emptyObject
+
 -- | Compute numerical stats over an individual column, including min, max, and quantiles.
 --
 -- /See:/ 'newGooglePrivacyDlpV2NumericalStatsConfig' smart constructor.
@@ -11202,7 +11681,7 @@ data GooglePrivacyDlpV2PrimitiveTransformation = GooglePrivacyDlpV2PrimitiveTran
     cryptoDeterministicConfig :: (Core.Maybe GooglePrivacyDlpV2CryptoDeterministicConfig),
     -- | Crypto
     cryptoHashConfig :: (Core.Maybe GooglePrivacyDlpV2CryptoHashConfig),
-    -- | Ffx-Fpe
+    -- | Ffx-Fpe. Strongly discouraged, consider using CryptoDeterministicConfig instead. Fpe is computationally expensive incurring latency costs.
     cryptoReplaceFfxFpeConfig :: (Core.Maybe GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig),
     -- | Date Shift
     dateShiftConfig :: (Core.Maybe GooglePrivacyDlpV2DateShiftConfig),
@@ -11345,6 +11824,40 @@ instance Core.ToJSON GooglePrivacyDlpV2PrivacyMetric where
             ("lDiversityConfig" Core..=) Core.<$> lDiversityConfig,
             ("numericalStatsConfig" Core..=) Core.<$> numericalStatsConfig
           ]
+      )
+
+-- | Configure processing location for discovery and inspection. For example, image OCR is only provided in limited regions but configuring ProcessingLocation will redirect OCR to a location where OCR is provided.
+--
+-- /See:/ 'newGooglePrivacyDlpV2ProcessingLocation' smart constructor.
+newtype GooglePrivacyDlpV2ProcessingLocation = GooglePrivacyDlpV2ProcessingLocation
+  { -- | Image processing will fall back using this configuration.
+    imageFallbackLocation :: (Core.Maybe GooglePrivacyDlpV2ImageFallbackLocation)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GooglePrivacyDlpV2ProcessingLocation' with the minimum fields required to make a request.
+newGooglePrivacyDlpV2ProcessingLocation ::
+  GooglePrivacyDlpV2ProcessingLocation
+newGooglePrivacyDlpV2ProcessingLocation =
+  GooglePrivacyDlpV2ProcessingLocation
+    { imageFallbackLocation =
+        Core.Nothing
+    }
+
+instance Core.FromJSON GooglePrivacyDlpV2ProcessingLocation where
+  parseJSON =
+    Core.withObject
+      "GooglePrivacyDlpV2ProcessingLocation"
+      ( \o ->
+          GooglePrivacyDlpV2ProcessingLocation
+            Core.<$> (o Core..:? "imageFallbackLocation")
+      )
+
+instance Core.ToJSON GooglePrivacyDlpV2ProcessingLocation where
+  toJSON GooglePrivacyDlpV2ProcessingLocation {..} =
+    Core.object
+      ( Core.catMaybes
+          [("imageFallbackLocation" Core..=) Core.<$> imageFallbackLocation]
       )
 
 -- | Success or errors for the profile generation.
@@ -12464,6 +12977,35 @@ instance Core.ToJSON GooglePrivacyDlpV2ReidentifyContentResponse where
           ]
       )
 
+-- | A related resource. Examples: * The source BigQuery table for a Vertex AI dataset. * The source Cloud Storage bucket for a Vertex AI dataset.
+--
+-- /See:/ 'newGooglePrivacyDlpV2RelatedResource' smart constructor.
+newtype GooglePrivacyDlpV2RelatedResource = GooglePrivacyDlpV2RelatedResource
+  { -- | The full resource name of the related resource.
+    fullResource :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GooglePrivacyDlpV2RelatedResource' with the minimum fields required to make a request.
+newGooglePrivacyDlpV2RelatedResource ::
+  GooglePrivacyDlpV2RelatedResource
+newGooglePrivacyDlpV2RelatedResource =
+  GooglePrivacyDlpV2RelatedResource {fullResource = Core.Nothing}
+
+instance Core.FromJSON GooglePrivacyDlpV2RelatedResource where
+  parseJSON =
+    Core.withObject
+      "GooglePrivacyDlpV2RelatedResource"
+      ( \o ->
+          GooglePrivacyDlpV2RelatedResource
+            Core.<$> (o Core..:? "fullResource")
+      )
+
+instance Core.ToJSON GooglePrivacyDlpV2RelatedResource where
+  toJSON GooglePrivacyDlpV2RelatedResource {..} =
+    Core.object
+      (Core.catMaybes [("fullResource" Core..=) Core.<$> fullResource])
+
 -- | Replace each input value with a value randomly selected from the dictionary.
 --
 -- /See:/ 'newGooglePrivacyDlpV2ReplaceDictionaryConfig' smart constructor.
@@ -13559,12 +14101,16 @@ data GooglePrivacyDlpV2TableDataProfile = GooglePrivacyDlpV2TableDataProfile
     profileStatus :: (Core.Maybe GooglePrivacyDlpV2ProfileStatus),
     -- | The resource name of the project data profile for this table.
     projectDataProfile :: (Core.Maybe Core.Text),
+    -- | Resources related to this profile.
+    relatedResources :: (Core.Maybe [GooglePrivacyDlpV2RelatedResource]),
     -- | The labels applied to the resource at the time the profile was generated.
     resourceLabels :: (Core.Maybe GooglePrivacyDlpV2TableDataProfile_ResourceLabels),
     -- | How broadly a resource has been shared.
     resourceVisibility :: (Core.Maybe GooglePrivacyDlpV2TableDataProfile_ResourceVisibility),
     -- | Number of rows in the table when the profile was generated. This will not be populated for BigLake tables.
     rowCount :: (Core.Maybe Core.Int64),
+    -- | The BigQuery table to which the sample findings are written.
+    sampleFindingsTable :: (Core.Maybe GooglePrivacyDlpV2BigQueryTable),
     -- | The number of columns profiled in the table.
     scannedColumnCount :: (Core.Maybe Core.Int64),
     -- | The sensitivity score of this table.
@@ -13601,9 +14147,11 @@ newGooglePrivacyDlpV2TableDataProfile =
       profileLastGenerated = Core.Nothing,
       profileStatus = Core.Nothing,
       projectDataProfile = Core.Nothing,
+      relatedResources = Core.Nothing,
       resourceLabels = Core.Nothing,
       resourceVisibility = Core.Nothing,
       rowCount = Core.Nothing,
+      sampleFindingsTable = Core.Nothing,
       scannedColumnCount = Core.Nothing,
       sensitivityScore = Core.Nothing,
       state = Core.Nothing,
@@ -13635,9 +14183,11 @@ instance Core.FromJSON GooglePrivacyDlpV2TableDataProfile where
             Core.<*> (o Core..:? "profileLastGenerated")
             Core.<*> (o Core..:? "profileStatus")
             Core.<*> (o Core..:? "projectDataProfile")
+            Core.<*> (o Core..:? "relatedResources")
             Core.<*> (o Core..:? "resourceLabels")
             Core.<*> (o Core..:? "resourceVisibility")
             Core.<*> (o Core..:? "rowCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "sampleFindingsTable")
             Core.<*> ( o
                          Core..:? "scannedColumnCount"
                          Core.<&> Core.fmap Core.fromAsText
@@ -13672,9 +14222,11 @@ instance Core.ToJSON GooglePrivacyDlpV2TableDataProfile where
             ("profileLastGenerated" Core..=) Core.<$> profileLastGenerated,
             ("profileStatus" Core..=) Core.<$> profileStatus,
             ("projectDataProfile" Core..=) Core.<$> projectDataProfile,
+            ("relatedResources" Core..=) Core.<$> relatedResources,
             ("resourceLabels" Core..=) Core.<$> resourceLabels,
             ("resourceVisibility" Core..=) Core.<$> resourceVisibility,
             ("rowCount" Core..=) Core.. Core.AsText Core.<$> rowCount,
+            ("sampleFindingsTable" Core..=) Core.<$> sampleFindingsTable,
             ("scannedColumnCount" Core..=)
               Core.. Core.AsText
               Core.<$> scannedColumnCount,
@@ -15049,6 +15601,199 @@ instance Core.ToJSON GooglePrivacyDlpV2VersionDescription where
           [ ("description" Core..=) Core.<$> description,
             ("version" Core..=) Core.<$> version
           ]
+      )
+
+-- | Match dataset resources using regex filters.
+--
+-- /See:/ 'newGooglePrivacyDlpV2VertexDatasetCollection' smart constructor.
+newtype GooglePrivacyDlpV2VertexDatasetCollection = GooglePrivacyDlpV2VertexDatasetCollection
+  { -- | The regex used to filter dataset resources.
+    vertexDatasetRegexes :: (Core.Maybe GooglePrivacyDlpV2VertexDatasetRegexes)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GooglePrivacyDlpV2VertexDatasetCollection' with the minimum fields required to make a request.
+newGooglePrivacyDlpV2VertexDatasetCollection ::
+  GooglePrivacyDlpV2VertexDatasetCollection
+newGooglePrivacyDlpV2VertexDatasetCollection =
+  GooglePrivacyDlpV2VertexDatasetCollection
+    { vertexDatasetRegexes =
+        Core.Nothing
+    }
+
+instance Core.FromJSON GooglePrivacyDlpV2VertexDatasetCollection where
+  parseJSON =
+    Core.withObject
+      "GooglePrivacyDlpV2VertexDatasetCollection"
+      ( \o ->
+          GooglePrivacyDlpV2VertexDatasetCollection
+            Core.<$> (o Core..:? "vertexDatasetRegexes")
+      )
+
+instance Core.ToJSON GooglePrivacyDlpV2VertexDatasetCollection where
+  toJSON GooglePrivacyDlpV2VertexDatasetCollection {..} =
+    Core.object
+      ( Core.catMaybes
+          [("vertexDatasetRegexes" Core..=) Core.<$> vertexDatasetRegexes]
+      )
+
+-- | Target used to match against for discovery with Vertex AI datasets.
+--
+-- /See:/ 'newGooglePrivacyDlpV2VertexDatasetDiscoveryTarget' smart constructor.
+data GooglePrivacyDlpV2VertexDatasetDiscoveryTarget = GooglePrivacyDlpV2VertexDatasetDiscoveryTarget
+  { -- | In addition to matching the filter, these conditions must be true before a profile is generated.
+    conditions :: (Core.Maybe GooglePrivacyDlpV2DiscoveryVertexDatasetConditions),
+    -- | Disable profiling for datasets that match this filter.
+    disabled :: (Core.Maybe GooglePrivacyDlpV2Disabled),
+    -- | Required. The datasets the discovery cadence applies to. The first target with a matching filter will be the one to apply to a dataset.
+    filter :: (Core.Maybe GooglePrivacyDlpV2DiscoveryVertexDatasetFilter),
+    -- | How often and when to update profiles. New datasets that match both the filter and conditions are scanned as quickly as possible depending on system capacity.
+    generationCadence ::
+      ( Core.Maybe
+          GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence
+      )
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GooglePrivacyDlpV2VertexDatasetDiscoveryTarget' with the minimum fields required to make a request.
+newGooglePrivacyDlpV2VertexDatasetDiscoveryTarget ::
+  GooglePrivacyDlpV2VertexDatasetDiscoveryTarget
+newGooglePrivacyDlpV2VertexDatasetDiscoveryTarget =
+  GooglePrivacyDlpV2VertexDatasetDiscoveryTarget
+    { conditions =
+        Core.Nothing,
+      disabled = Core.Nothing,
+      filter = Core.Nothing,
+      generationCadence = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GooglePrivacyDlpV2VertexDatasetDiscoveryTarget
+  where
+  parseJSON =
+    Core.withObject
+      "GooglePrivacyDlpV2VertexDatasetDiscoveryTarget"
+      ( \o ->
+          GooglePrivacyDlpV2VertexDatasetDiscoveryTarget
+            Core.<$> (o Core..:? "conditions")
+            Core.<*> (o Core..:? "disabled")
+            Core.<*> (o Core..:? "filter")
+            Core.<*> (o Core..:? "generationCadence")
+      )
+
+instance Core.ToJSON GooglePrivacyDlpV2VertexDatasetDiscoveryTarget where
+  toJSON GooglePrivacyDlpV2VertexDatasetDiscoveryTarget {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("conditions" Core..=) Core.<$> conditions,
+            ("disabled" Core..=) Core.<$> disabled,
+            ("filter" Core..=) Core.<$> filter,
+            ("generationCadence" Core..=) Core.<$> generationCadence
+          ]
+      )
+
+-- | A pattern to match against one or more dataset resources.
+--
+-- /See:/ 'newGooglePrivacyDlpV2VertexDatasetRegex' smart constructor.
+newtype GooglePrivacyDlpV2VertexDatasetRegex = GooglePrivacyDlpV2VertexDatasetRegex
+  { -- | For organizations, if unset, will match all projects. Has no effect for configurations created within a project.
+    projectIdRegex :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GooglePrivacyDlpV2VertexDatasetRegex' with the minimum fields required to make a request.
+newGooglePrivacyDlpV2VertexDatasetRegex ::
+  GooglePrivacyDlpV2VertexDatasetRegex
+newGooglePrivacyDlpV2VertexDatasetRegex =
+  GooglePrivacyDlpV2VertexDatasetRegex
+    { projectIdRegex =
+        Core.Nothing
+    }
+
+instance Core.FromJSON GooglePrivacyDlpV2VertexDatasetRegex where
+  parseJSON =
+    Core.withObject
+      "GooglePrivacyDlpV2VertexDatasetRegex"
+      ( \o ->
+          GooglePrivacyDlpV2VertexDatasetRegex
+            Core.<$> (o Core..:? "projectIdRegex")
+      )
+
+instance Core.ToJSON GooglePrivacyDlpV2VertexDatasetRegex where
+  toJSON GooglePrivacyDlpV2VertexDatasetRegex {..} =
+    Core.object
+      ( Core.catMaybes
+          [("projectIdRegex" Core..=) Core.<$> projectIdRegex]
+      )
+
+-- | A collection of regular expressions to determine what datasets to match against.
+--
+-- /See:/ 'newGooglePrivacyDlpV2VertexDatasetRegexes' smart constructor.
+newtype GooglePrivacyDlpV2VertexDatasetRegexes = GooglePrivacyDlpV2VertexDatasetRegexes
+  { -- | Required. The group of regular expression patterns to match against one or more datasets. Maximum of 100 entries. The sum of the lengths of all regular expressions can\'t exceed 10 KiB.
+    patterns :: (Core.Maybe [GooglePrivacyDlpV2VertexDatasetRegex])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GooglePrivacyDlpV2VertexDatasetRegexes' with the minimum fields required to make a request.
+newGooglePrivacyDlpV2VertexDatasetRegexes ::
+  GooglePrivacyDlpV2VertexDatasetRegexes
+newGooglePrivacyDlpV2VertexDatasetRegexes =
+  GooglePrivacyDlpV2VertexDatasetRegexes {patterns = Core.Nothing}
+
+instance Core.FromJSON GooglePrivacyDlpV2VertexDatasetRegexes where
+  parseJSON =
+    Core.withObject
+      "GooglePrivacyDlpV2VertexDatasetRegexes"
+      ( \o ->
+          GooglePrivacyDlpV2VertexDatasetRegexes
+            Core.<$> (o Core..:? "patterns")
+      )
+
+instance Core.ToJSON GooglePrivacyDlpV2VertexDatasetRegexes where
+  toJSON GooglePrivacyDlpV2VertexDatasetRegexes {..} =
+    Core.object
+      (Core.catMaybes [("patterns" Core..=) Core.<$> patterns])
+
+-- | Identifies a single Vertex AI dataset.
+--
+-- /See:/ 'newGooglePrivacyDlpV2VertexDatasetResourceReference' smart constructor.
+newtype GooglePrivacyDlpV2VertexDatasetResourceReference = GooglePrivacyDlpV2VertexDatasetResourceReference
+  { -- | Required. The name of the dataset resource. If set within a project-level configuration, the specified resource must be within the project.
+    datasetResourceName :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GooglePrivacyDlpV2VertexDatasetResourceReference' with the minimum fields required to make a request.
+newGooglePrivacyDlpV2VertexDatasetResourceReference ::
+  GooglePrivacyDlpV2VertexDatasetResourceReference
+newGooglePrivacyDlpV2VertexDatasetResourceReference =
+  GooglePrivacyDlpV2VertexDatasetResourceReference
+    { datasetResourceName =
+        Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GooglePrivacyDlpV2VertexDatasetResourceReference
+  where
+  parseJSON =
+    Core.withObject
+      "GooglePrivacyDlpV2VertexDatasetResourceReference"
+      ( \o ->
+          GooglePrivacyDlpV2VertexDatasetResourceReference
+            Core.<$> (o Core..:? "datasetResourceName")
+      )
+
+instance
+  Core.ToJSON
+    GooglePrivacyDlpV2VertexDatasetResourceReference
+  where
+  toJSON GooglePrivacyDlpV2VertexDatasetResourceReference {..} =
+    Core.object
+      ( Core.catMaybes
+          [("datasetResourceName" Core..=) Core.<$> datasetResourceName]
       )
 
 -- | Message defining a list of words or phrases to search for in the data.

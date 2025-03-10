@@ -388,6 +388,10 @@ module Gogol.CloudKMS
     CertificateChains (..),
     newCertificateChains,
 
+    -- ** ChecksummedData
+    ChecksummedData (..),
+    newChecksummedData,
+
     -- ** CryptoKey
     CryptoKey (..),
     newCryptoKey,
@@ -616,6 +620,9 @@ module Gogol.CloudKMS
     -- ** PublicKey_ProtectionLevel
     PublicKey_ProtectionLevel (..),
 
+    -- ** PublicKey_PublicKeyFormat
+    PublicKey_PublicKeyFormat (..),
+
     -- ** RawDecryptRequest
     RawDecryptRequest (..),
     newRawDecryptRequest,
@@ -681,6 +688,9 @@ module Gogol.CloudKMS
     -- ** WrappingPublicKey
     WrappingPublicKey (..),
     newWrappingPublicKey,
+
+    -- ** ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat
+    ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat (..),
 
     -- ** ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView
     ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView (..),

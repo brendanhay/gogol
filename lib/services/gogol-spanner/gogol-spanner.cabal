@@ -81,6 +81,7 @@ library
     Gogol.Spanner.Projects.Instances.Backups.TestIamPermissions
     Gogol.Spanner.Projects.Instances.Create
     Gogol.Spanner.Projects.Instances.DatabaseOperations.List
+    Gogol.Spanner.Projects.Instances.Databases.AddSplitPoints
     Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.Create
     Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.Delete
     Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.Get
@@ -105,6 +106,8 @@ library
     Gogol.Spanner.Projects.Instances.Databases.Operations.List
     Gogol.Spanner.Projects.Instances.Databases.Patch
     Gogol.Spanner.Projects.Instances.Databases.Restore
+    Gogol.Spanner.Projects.Instances.Databases.Sessions.Adapter
+    Gogol.Spanner.Projects.Instances.Databases.Sessions.AdaptMessage
     Gogol.Spanner.Projects.Instances.Databases.Sessions.BatchCreate
     Gogol.Spanner.Projects.Instances.Databases.Sessions.BatchWrite
     Gogol.Spanner.Projects.Instances.Databases.Sessions.BeginTransaction

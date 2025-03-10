@@ -38,6 +38,7 @@ module Gogol.TextToSpeech.Internal.Sum
         AudioConfig_AudioEncoding_OGGOPUS,
         AudioConfig_AudioEncoding_Mulaw,
         AudioConfig_AudioEncoding_Alaw,
+        AudioConfig_AudioEncoding_Pcm,
         ..
       ),
 
@@ -131,7 +132,7 @@ pattern AudioConfig_AudioEncoding_LINEAR16 = AudioConfig_AudioEncoding "LINEAR16
 pattern AudioConfig_AudioEncoding_MP3 :: AudioConfig_AudioEncoding
 pattern AudioConfig_AudioEncoding_MP3 = AudioConfig_AudioEncoding "MP3"
 
--- | Opus encoded audio wrapped in an ogg container. The result will be a file which can be played natively on Android, and in browsers (at least Chrome and Firefox). The quality of the encoding is considerably higher than MP3 while using approximately the same bitrate.
+-- | Opus encoded audio wrapped in an ogg container. The result is a file which can be played natively on Android, and in browsers (at least Chrome and Firefox). The quality of the encoding is considerably higher than MP3 while using approximately the same bitrate.
 pattern AudioConfig_AudioEncoding_OGGOPUS :: AudioConfig_AudioEncoding
 pattern AudioConfig_AudioEncoding_OGGOPUS = AudioConfig_AudioEncoding "OGG_OPUS"
 
@@ -143,6 +144,10 @@ pattern AudioConfig_AudioEncoding_Mulaw = AudioConfig_AudioEncoding "MULAW"
 pattern AudioConfig_AudioEncoding_Alaw :: AudioConfig_AudioEncoding
 pattern AudioConfig_AudioEncoding_Alaw = AudioConfig_AudioEncoding "ALAW"
 
+-- | Uncompressed 16-bit signed little-endian samples (Linear PCM). Note that as opposed to LINEAR16, audio won\'t be wrapped in a WAV (or any other) header.
+pattern AudioConfig_AudioEncoding_Pcm :: AudioConfig_AudioEncoding
+pattern AudioConfig_AudioEncoding_Pcm = AudioConfig_AudioEncoding "PCM"
+
 {-# COMPLETE
   AudioConfig_AudioEncoding_AUDIOENCODINGUNSPECIFIED,
   AudioConfig_AudioEncoding_LINEAR16,
@@ -150,6 +155,7 @@ pattern AudioConfig_AudioEncoding_Alaw = AudioConfig_AudioEncoding "ALAW"
   AudioConfig_AudioEncoding_OGGOPUS,
   AudioConfig_AudioEncoding_Mulaw,
   AudioConfig_AudioEncoding_Alaw,
+  AudioConfig_AudioEncoding_Pcm,
   AudioConfig_AudioEncoding
   #-}
 
@@ -170,11 +176,11 @@ newtype CustomPronunciationParams_PhoneticEncoding = CustomPronunciationParams_P
 pattern CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGUNSPECIFIED :: CustomPronunciationParams_PhoneticEncoding
 pattern CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGUNSPECIFIED = CustomPronunciationParams_PhoneticEncoding "PHONETIC_ENCODING_UNSPECIFIED"
 
--- | IPA. (e.g. apple -> ˈæpəl ) https:\/\/en.wikipedia.org\/wiki\/International/Phonetic/Alphabet
+-- | IPA, such as apple -> ˈæpəl. https:\/\/en.wikipedia.org\/wiki\/International/Phonetic/Alphabet
 pattern CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGIPA :: CustomPronunciationParams_PhoneticEncoding
 pattern CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGIPA = CustomPronunciationParams_PhoneticEncoding "PHONETIC_ENCODING_IPA"
 
--- | X-SAMPA (e.g. apple -> \"{p\@l\" ) https:\/\/en.wikipedia.org\/wiki\/X-SAMPA
+-- | X-SAMPA, such as apple -> \"{p\@l\". https:\/\/en.wikipedia.org\/wiki\/X-SAMPA
 pattern CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGXSAMPA :: CustomPronunciationParams_PhoneticEncoding
 pattern CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGXSAMPA = CustomPronunciationParams_PhoneticEncoding "PHONETIC_ENCODING_X_SAMPA"
 

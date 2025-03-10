@@ -113,7 +113,9 @@ instance
     ClassroomCoursesAnnouncementsGetAddOnContext
   where
   type Rs ClassroomCoursesAnnouncementsGetAddOnContext = AddOnContext
-  type Scopes ClassroomCoursesAnnouncementsGetAddOnContext = '[]
+  type
+    Scopes ClassroomCoursesAnnouncementsGetAddOnContext =
+      '[Classroom'Addons'Student, Classroom'Addons'Teacher]
   requestClient ClassroomCoursesAnnouncementsGetAddOnContext {..} =
     go
       courseId

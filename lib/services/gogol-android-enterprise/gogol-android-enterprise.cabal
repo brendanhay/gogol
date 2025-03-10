@@ -57,11 +57,12 @@ library
     Gogol.AndroidEnterprise.Devices.List
     Gogol.AndroidEnterprise.Devices.SetState
     Gogol.AndroidEnterprise.Devices.Update
+    Gogol.AndroidEnterprise.EnrollmentTokens.Create
     Gogol.AndroidEnterprise.Enterprises.AcknowledgeNotificationSet
     Gogol.AndroidEnterprise.Enterprises.CompleteSignup
-    Gogol.AndroidEnterprise.Enterprises.CreateEnrollmentToken
     Gogol.AndroidEnterprise.Enterprises.CreateWebToken
     Gogol.AndroidEnterprise.Enterprises.Enroll
+    Gogol.AndroidEnterprise.Enterprises.GenerateEnterpriseUpgradeUrl
     Gogol.AndroidEnterprise.Enterprises.GenerateSignupUrl
     Gogol.AndroidEnterprise.Enterprises.Get
     Gogol.AndroidEnterprise.Enterprises.GetServiceAccount

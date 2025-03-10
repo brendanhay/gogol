@@ -96,6 +96,8 @@ module Gogol.AccessApproval.Internal.Sum
         SignatureInfo_GoogleKeyAlgorithm_HMAC_SHA512,
         SignatureInfo_GoogleKeyAlgorithm_HMAC_SHA224,
         SignatureInfo_GoogleKeyAlgorithm_EXTERNALSYMMETRICENCRYPTION,
+        SignatureInfo_GoogleKeyAlgorithm_PQ_SIGN_ML_DSA_65,
+        SignatureInfo_GoogleKeyAlgorithm_PQSIGNSLHDSASHA2128S,
         ..
       ),
   )
@@ -403,6 +405,14 @@ pattern SignatureInfo_GoogleKeyAlgorithm_HMAC_SHA224 = SignatureInfo_GoogleKeyAl
 pattern SignatureInfo_GoogleKeyAlgorithm_EXTERNALSYMMETRICENCRYPTION :: SignatureInfo_GoogleKeyAlgorithm
 pattern SignatureInfo_GoogleKeyAlgorithm_EXTERNALSYMMETRICENCRYPTION = SignatureInfo_GoogleKeyAlgorithm "EXTERNAL_SYMMETRIC_ENCRYPTION"
 
+-- | The post-quantum Module-Lattice-Based Digital Signature Algorithm, at security level 3. Randomized version.
+pattern SignatureInfo_GoogleKeyAlgorithm_PQ_SIGN_ML_DSA_65 :: SignatureInfo_GoogleKeyAlgorithm
+pattern SignatureInfo_GoogleKeyAlgorithm_PQ_SIGN_ML_DSA_65 = SignatureInfo_GoogleKeyAlgorithm "PQ_SIGN_ML_DSA_65"
+
+-- | The post-quantum stateless hash-based digital signature algorithm, at security level 1. Randomized version.
+pattern SignatureInfo_GoogleKeyAlgorithm_PQSIGNSLHDSASHA2128S :: SignatureInfo_GoogleKeyAlgorithm
+pattern SignatureInfo_GoogleKeyAlgorithm_PQSIGNSLHDSASHA2128S = SignatureInfo_GoogleKeyAlgorithm "PQ_SIGN_SLH_DSA_SHA2_128S"
+
 {-# COMPLETE
   SignatureInfo_GoogleKeyAlgorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
   SignatureInfo_GoogleKeyAlgorithm_GOOGLESYMMETRICENCRYPTION,
@@ -440,5 +450,7 @@ pattern SignatureInfo_GoogleKeyAlgorithm_EXTERNALSYMMETRICENCRYPTION = Signature
   SignatureInfo_GoogleKeyAlgorithm_HMAC_SHA512,
   SignatureInfo_GoogleKeyAlgorithm_HMAC_SHA224,
   SignatureInfo_GoogleKeyAlgorithm_EXTERNALSYMMETRICENCRYPTION,
+  SignatureInfo_GoogleKeyAlgorithm_PQ_SIGN_ML_DSA_65,
+  SignatureInfo_GoogleKeyAlgorithm_PQSIGNSLHDSASHA2128S,
   SignatureInfo_GoogleKeyAlgorithm
   #-}

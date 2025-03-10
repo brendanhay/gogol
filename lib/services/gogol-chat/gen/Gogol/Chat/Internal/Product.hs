@@ -47,6 +47,10 @@ module Gogol.Chat.Internal.Product
     Annotation (..),
     newAnnotation,
 
+    -- * AppCommandMetadata
+    AppCommandMetadata (..),
+    newAppCommandMetadata,
+
     -- * AttachedGif
     AttachedGif (..),
     newAttachedGif,
@@ -118,6 +122,10 @@ module Gogol.Chat.Internal.Product
     -- * CustomEmoji
     CustomEmoji (..),
     newCustomEmoji,
+
+    -- * CustomEmojiMetadata
+    CustomEmojiMetadata (..),
+    newCustomEmojiMetadata,
 
     -- * DateInput
     DateInput (..),
@@ -327,6 +335,10 @@ module Gogol.Chat.Internal.Product
     GoogleAppsCardV1TextParagraph (..),
     newGoogleAppsCardV1TextParagraph,
 
+    -- * GoogleAppsCardV1Validation
+    GoogleAppsCardV1Validation (..),
+    newGoogleAppsCardV1Validation,
+
     -- * GoogleAppsCardV1Widget
     GoogleAppsCardV1Widget (..),
     newGoogleAppsCardV1Widget,
@@ -534,6 +546,10 @@ module Gogol.Chat.Internal.Product
     -- * SpaceEvent
     SpaceEvent (..),
     newSpaceEvent,
+
+    -- * SpaceNotificationSetting
+    SpaceNotificationSetting (..),
+    newSpaceNotificationSetting,
 
     -- * SpaceReadState
     SpaceReadState (..),
@@ -799,7 +815,9 @@ instance Core.ToJSON ActionStatus where
 --
 -- /See:/ 'newAnnotation' smart constructor.
 data Annotation = Annotation
-  { -- | Length of the substring in the plain-text message body this annotation corresponds to.
+  { -- | The metadata for a custom emoji.
+    customEmojiMetadata :: (Core.Maybe CustomEmojiMetadata),
+    -- | Length of the substring in the plain-text message body this annotation corresponds to.
     length :: (Core.Maybe Core.Int32),
     -- | The metadata for a rich link.
     richLinkMetadata :: (Core.Maybe RichLinkMetadata),
@@ -819,7 +837,8 @@ newAnnotation ::
   Annotation
 newAnnotation =
   Annotation
-    { length = Core.Nothing,
+    { customEmojiMetadata = Core.Nothing,
+      length = Core.Nothing,
       richLinkMetadata = Core.Nothing,
       slashCommand = Core.Nothing,
       startIndex = Core.Nothing,
@@ -833,7 +852,8 @@ instance Core.FromJSON Annotation where
       "Annotation"
       ( \o ->
           Annotation
-            Core.<$> (o Core..:? "length")
+            Core.<$> (o Core..:? "customEmojiMetadata")
+            Core.<*> (o Core..:? "length")
             Core.<*> (o Core..:? "richLinkMetadata")
             Core.<*> (o Core..:? "slashCommand")
             Core.<*> (o Core..:? "startIndex")
@@ -845,12 +865,52 @@ instance Core.ToJSON Annotation where
   toJSON Annotation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("length" Core..=) Core.<$> length,
+          [ ("customEmojiMetadata" Core..=) Core.<$> customEmojiMetadata,
+            ("length" Core..=) Core.<$> length,
             ("richLinkMetadata" Core..=) Core.<$> richLinkMetadata,
             ("slashCommand" Core..=) Core.<$> slashCommand,
             ("startIndex" Core..=) Core.<$> startIndex,
             ("type" Core..=) Core.<$> type',
             ("userMention" Core..=) Core.<$> userMention
+          ]
+      )
+
+-- | Metadata about a <https://developers.google.com/workspace/chat/commands Chat app command>.
+--
+-- /See:/ 'newAppCommandMetadata' smart constructor.
+data AppCommandMetadata = AppCommandMetadata
+  { -- | The ID for the command specified in the Chat API configuration.
+    appCommandId :: (Core.Maybe Core.Int32),
+    -- | The type of Chat app command.
+    appCommandType :: (Core.Maybe AppCommandMetadata_AppCommandType)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AppCommandMetadata' with the minimum fields required to make a request.
+newAppCommandMetadata ::
+  AppCommandMetadata
+newAppCommandMetadata =
+  AppCommandMetadata
+    { appCommandId = Core.Nothing,
+      appCommandType = Core.Nothing
+    }
+
+instance Core.FromJSON AppCommandMetadata where
+  parseJSON =
+    Core.withObject
+      "AppCommandMetadata"
+      ( \o ->
+          AppCommandMetadata
+            Core.<$> (o Core..:? "appCommandId")
+            Core.<*> (o Core..:? "appCommandType")
+      )
+
+instance Core.ToJSON AppCommandMetadata where
+  toJSON AppCommandMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("appCommandId" Core..=) Core.<$> appCommandId,
+            ("appCommandType" Core..=) Core.<$> appCommandType
           ]
       )
 
@@ -1548,6 +1608,32 @@ instance Core.ToJSON CustomEmoji where
   toJSON CustomEmoji {..} =
     Core.object (Core.catMaybes [("uid" Core..=) Core.<$> uid])
 
+-- | Annotation metadata for custom emoji.
+--
+-- /See:/ 'newCustomEmojiMetadata' smart constructor.
+newtype CustomEmojiMetadata = CustomEmojiMetadata
+  { -- | The custom emoji.
+    customEmoji :: (Core.Maybe CustomEmoji)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CustomEmojiMetadata' with the minimum fields required to make a request.
+newCustomEmojiMetadata ::
+  CustomEmojiMetadata
+newCustomEmojiMetadata =
+  CustomEmojiMetadata {customEmoji = Core.Nothing}
+
+instance Core.FromJSON CustomEmojiMetadata where
+  parseJSON =
+    Core.withObject
+      "CustomEmojiMetadata"
+      (\o -> CustomEmojiMetadata Core.<$> (o Core..:? "customEmoji"))
+
+instance Core.ToJSON CustomEmojiMetadata where
+  toJSON CustomEmojiMetadata {..} =
+    Core.object
+      (Core.catMaybes [("customEmoji" Core..=) Core.<$> customEmoji])
+
 -- | Date input values.
 --
 -- /See:/ 'newDateInput' smart constructor.
@@ -1656,9 +1742,11 @@ instance Core.ToJSON DeletionMetadata where
 data DeprecatedEvent = DeprecatedEvent
   { -- | For @CARD_CLICKED@ interaction events, the form action data associated when a user clicks a card or dialog. To learn more, see <https://developers.google.com/workspace/chat/read-form-data Read form data input by users on cards>.
     action :: (Core.Maybe FormAction),
+    -- | Metadata about a Chat app command.
+    appCommandMetadata :: (Core.Maybe AppCommandMetadata),
     -- | Represents information about the user\'s client, such as locale, host app, and platform. For Chat apps, @CommonEventObject@ includes information submitted by users interacting with <https://developers.google.com/workspace/chat/dialogs dialogs>, like data entered on a card.
     common :: (Core.Maybe CommonEventObject),
-    -- | For @MESSAGE@ interaction events, the URL that users must be redirected to after they complete an authorization or configuration flow outside of Google Chat. For more information, see <https://developers.google.com/workspace/chat/connect-web-services-tools Connect a Chat app with other services and tools>.
+    -- | This URL is populated for @MESSAGE@, @ADDED_TO_SPACE@, and @APP_COMMAND@ interaction events. After completing an authorization or configuration flow outside of Google Chat, users must be redirected to this URL to signal to Google Chat that the authorization or configuration flow was successful. For more information, see <https://developers.google.com/workspace/chat/connect-web-services-tools Connect a Chat app with other services and tools>.
     configCompleteRedirectUrl :: (Core.Maybe Core.Text),
     -- | The type of <https://developers.google.com/workspace/chat/dialogs dialog> interaction event received.
     dialogEventType :: (Core.Maybe DeprecatedEvent_DialogEventType),
@@ -1670,6 +1758,8 @@ data DeprecatedEvent = DeprecatedEvent
     message :: (Core.Maybe Message),
     -- | The space in which the user interacted with the Chat app.
     space :: (Core.Maybe Space),
+    -- | The thread in which the user interacted with the Chat app. This could be in a new thread created by a newly sent message. This field is populated if the interaction event is associated with a specific message or thread.
+    thread :: (Core.Maybe Thread),
     -- | The Chat app-defined key for the thread related to the interaction event. See </chat/api/reference/rest/v1/spaces.messages#Thread.FIELDS.thread_key spaces.messages.thread.threadKey> for more information.
     threadKey :: (Core.Maybe Core.Text),
     -- | A secret value that legacy Chat apps can use to verify if a request is from Google. Google randomly generates the token, and its value remains static. You can obtain, revoke, or regenerate the token from the <https://console.cloud.google.com/apis/api/chat.googleapis.com/hangouts-chat Chat API configuration page> in the Google Cloud Console. Modern Chat apps don\'t use this field. It is absent from API responses and the <https://console.cloud.google.com/apis/api/chat.googleapis.com/hangouts-chat Chat API configuration page>.
@@ -1687,6 +1777,7 @@ newDeprecatedEvent ::
 newDeprecatedEvent =
   DeprecatedEvent
     { action = Core.Nothing,
+      appCommandMetadata = Core.Nothing,
       common = Core.Nothing,
       configCompleteRedirectUrl = Core.Nothing,
       dialogEventType = Core.Nothing,
@@ -1694,6 +1785,7 @@ newDeprecatedEvent =
       isDialogEvent = Core.Nothing,
       message = Core.Nothing,
       space = Core.Nothing,
+      thread = Core.Nothing,
       threadKey = Core.Nothing,
       token = Core.Nothing,
       type' = Core.Nothing,
@@ -1707,6 +1799,7 @@ instance Core.FromJSON DeprecatedEvent where
       ( \o ->
           DeprecatedEvent
             Core.<$> (o Core..:? "action")
+            Core.<*> (o Core..:? "appCommandMetadata")
             Core.<*> (o Core..:? "common")
             Core.<*> (o Core..:? "configCompleteRedirectUrl")
             Core.<*> (o Core..:? "dialogEventType")
@@ -1714,6 +1807,7 @@ instance Core.FromJSON DeprecatedEvent where
             Core.<*> (o Core..:? "isDialogEvent")
             Core.<*> (o Core..:? "message")
             Core.<*> (o Core..:? "space")
+            Core.<*> (o Core..:? "thread")
             Core.<*> (o Core..:? "threadKey")
             Core.<*> (o Core..:? "token")
             Core.<*> (o Core..:? "type")
@@ -1725,6 +1819,7 @@ instance Core.ToJSON DeprecatedEvent where
     Core.object
       ( Core.catMaybes
           [ ("action" Core..=) Core.<$> action,
+            ("appCommandMetadata" Core..=) Core.<$> appCommandMetadata,
             ("common" Core..=) Core.<$> common,
             ("configCompleteRedirectUrl" Core..=)
               Core.<$> configCompleteRedirectUrl,
@@ -1733,6 +1828,7 @@ instance Core.ToJSON DeprecatedEvent where
             ("isDialogEvent" Core..=) Core.<$> isDialogEvent,
             ("message" Core..=) Core.<$> message,
             ("space" Core..=) Core.<$> space,
+            ("thread" Core..=) Core.<$> thread,
             ("threadKey" Core..=) Core.<$> threadKey,
             ("token" Core..=) Core.<$> token,
             ("type" Core..=) Core.<$> type',
@@ -1868,7 +1964,7 @@ instance Core.ToJSON DriveLinkData where
 --
 -- /See:/ 'newEmoji' smart constructor.
 data Emoji = Emoji
-  { -- | Output only. A custom emoji.
+  { -- | A custom emoji.
     customEmoji :: (Core.Maybe CustomEmoji),
     -- | Optional. A basic emoji represented by a unicode string.
     unicode :: (Core.Maybe Core.Text)
@@ -1995,11 +2091,13 @@ instance Core.ToJSON FormAction where
           ]
       )
 
--- | An action that describes the behavior when the form is submitted. For example, you can invoke an Apps Script script to handle the form. If the action is triggered, the form values are sent to the server. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | An action that describes the behavior when the form is submitted. For example, you can invoke an Apps Script script to handle the form. If the action is triggered, the form values are sent to the server. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1Action' smart constructor.
 data GoogleAppsCardV1Action = GoogleAppsCardV1Action
-  { -- | A custom function to invoke when the containing element is clicked or otherwise activated. For example usage, see <https://developers.google.com/workspace/chat/read-form-data Read form data>.
+  { -- | Optional. If this is true, then all widgets are considered required by this action. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
+    allWidgetsAreRequired :: (Core.Maybe Core.Bool),
+    -- | A custom function to invoke when the containing element is clicked or otherwise activated. For example usage, see <https://developers.google.com/workspace/chat/read-form-data Read form data>.
     function :: (Core.Maybe Core.Text),
     -- | Optional. Required when opening a <https://developers.google.com/workspace/chat/dialogs dialog>. What to do in response to an interaction with a user, such as a user clicking a button in a card message. If unspecified, the app responds by executing an @action@—like opening a link or running a function—as normal. By specifying an @interaction@, the app can respond in special interactive ways. For example, by setting @interaction@ to @OPEN_DIALOG@, the app can open a <https://developers.google.com/workspace/chat/dialogs dialog>. When specified, a loading indicator isn\'t shown. If specified for an add-on, the entire card is stripped and nothing is shown in the client. <https://developers.google.com/workspace/chat Google Chat apps>:
     interaction :: (Core.Maybe GoogleAppsCardV1Action_Interaction),
@@ -2009,7 +2107,9 @@ data GoogleAppsCardV1Action = GoogleAppsCardV1Action
     parameters :: (Core.Maybe [GoogleAppsCardV1ActionParameter]),
     -- | Indicates whether form values persist after the action. The default value is @false@. If @true@, form values remain after the action is triggered. To let the user make changes while the action is being processed, set <https://developers.google.com/workspace/add-ons/reference/rpc/google.apps.card.v1#loadindicator LoadIndicator> to @NONE@. For <https://developers.google.com/workspace/chat/api/guides/v1/messages/create#create card messages> in Chat apps, you must also set the action\'s <https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages#responsetype ResponseType> to @UPDATE_MESSAGE@ and use the same <https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages#CardWithId card_id> from the card that contained the action. If @false@, the form values are cleared when the action is triggered. To prevent the user from making changes while the action is being processed, set
     -- <https://developers.google.com/workspace/add-ons/reference/rpc/google.apps.card.v1#loadindicator LoadIndicator> to @SPINNER@.
-    persistValues :: (Core.Maybe Core.Bool)
+    persistValues :: (Core.Maybe Core.Bool),
+    -- | Optional. Fill this list with the names of widgets that this Action needs for a valid submission. If the widgets listed here don\'t have a value when this Action is invoked, the form submission is aborted. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
+    requiredWidgets :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2018,11 +2118,13 @@ newGoogleAppsCardV1Action ::
   GoogleAppsCardV1Action
 newGoogleAppsCardV1Action =
   GoogleAppsCardV1Action
-    { function = Core.Nothing,
+    { allWidgetsAreRequired = Core.Nothing,
+      function = Core.Nothing,
       interaction = Core.Nothing,
       loadIndicator = Core.Nothing,
       parameters = Core.Nothing,
-      persistValues = Core.Nothing
+      persistValues = Core.Nothing,
+      requiredWidgets = Core.Nothing
     }
 
 instance Core.FromJSON GoogleAppsCardV1Action where
@@ -2031,26 +2133,30 @@ instance Core.FromJSON GoogleAppsCardV1Action where
       "GoogleAppsCardV1Action"
       ( \o ->
           GoogleAppsCardV1Action
-            Core.<$> (o Core..:? "function")
+            Core.<$> (o Core..:? "allWidgetsAreRequired")
+            Core.<*> (o Core..:? "function")
             Core.<*> (o Core..:? "interaction")
             Core.<*> (o Core..:? "loadIndicator")
             Core.<*> (o Core..:? "parameters")
             Core.<*> (o Core..:? "persistValues")
+            Core.<*> (o Core..:? "requiredWidgets")
       )
 
 instance Core.ToJSON GoogleAppsCardV1Action where
   toJSON GoogleAppsCardV1Action {..} =
     Core.object
       ( Core.catMaybes
-          [ ("function" Core..=) Core.<$> function,
+          [ ("allWidgetsAreRequired" Core..=) Core.<$> allWidgetsAreRequired,
+            ("function" Core..=) Core.<$> function,
             ("interaction" Core..=) Core.<$> interaction,
             ("loadIndicator" Core..=) Core.<$> loadIndicator,
             ("parameters" Core..=) Core.<$> parameters,
-            ("persistValues" Core..=) Core.<$> persistValues
+            ("persistValues" Core..=) Core.<$> persistValues,
+            ("requiredWidgets" Core..=) Core.<$> requiredWidgets
           ]
       )
 
--- | List of string parameters to supply when the action method is invoked. For example, consider three snooze buttons: snooze now, snooze one day, or snooze next week. You might use @action method = snooze()@, passing the snooze type and snooze time in the list of string parameters. To learn more, see <https://developers.google.com/workspace/chat/api/reference/rest/v1/Event#commoneventobject CommonEventObject>. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | List of string parameters to supply when the action method is invoked. For example, consider three snooze buttons: snooze now, snooze one day, or snooze next week. You might use @action method = snooze()@, passing the snooze type and snooze time in the list of string parameters. To learn more, see <https://developers.google.com/workspace/chat/api/reference/rest/v1/Event#commoneventobject CommonEventObject>. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1ActionParameter' smart constructor.
 data GoogleAppsCardV1ActionParameter = GoogleAppsCardV1ActionParameter
@@ -2087,7 +2193,7 @@ instance Core.ToJSON GoogleAppsCardV1ActionParameter where
           [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )
 
--- | The style options for the border of a card or widget, including the border type and color. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | The style options for the border of a card or widget, including the border type and color. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1BorderStyle' smart constructor.
 data GoogleAppsCardV1BorderStyle = GoogleAppsCardV1BorderStyle
@@ -2131,7 +2237,7 @@ instance Core.ToJSON GoogleAppsCardV1BorderStyle where
           ]
       )
 
--- | A text, icon, or text and icon button that users can click. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/design-interactive-card-dialog#add_a_button Add a button>. To make an image a clickable button, specify an @Image@ (not an @ImageComponent@) and set an @onClick@ action. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | A text, icon, or text and icon button that users can click. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/design-interactive-card-dialog#add_a_button Add a button>. To make an image a clickable button, specify an @Image@ (not an @ImageComponent@) and set an @onClick@ action. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1Button' smart constructor.
 data GoogleAppsCardV1Button = GoogleAppsCardV1Button
@@ -2147,7 +2253,7 @@ data GoogleAppsCardV1Button = GoogleAppsCardV1Button
     onClick :: (Core.Maybe GoogleAppsCardV1OnClick),
     -- | The text displayed inside the button.
     text :: (Core.Maybe Core.Text),
-    -- | Optional. The type of a button. If unset, button type defaults to @OUTLINED@. If the @color@ field is set, the button type is forced to @FILLED@ and any value set for this field is ignored. <https://developers.google.com/workspace/chat Google Chat apps>:
+    -- | Optional. The type of a button. If unset, button type defaults to @OUTLINED@. If the @color@ field is set, the button type is forced to @FILLED@ and any value set for this field is ignored.
     type' :: (Core.Maybe GoogleAppsCardV1Button_Type)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2195,7 +2301,7 @@ instance Core.ToJSON GoogleAppsCardV1Button where
           ]
       )
 
--- | A list of buttons layed out horizontally. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/design-interactive-card-dialog#add_a_button Add a button>. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | A list of buttons layed out horizontally. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/design-interactive-card-dialog#add_a_button Add a button>. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1ButtonList' smart constructor.
 newtype GoogleAppsCardV1ButtonList = GoogleAppsCardV1ButtonList
@@ -2221,23 +2327,23 @@ instance Core.ToJSON GoogleAppsCardV1ButtonList where
     Core.object
       (Core.catMaybes [("buttons" Core..=) Core.<$> buttons])
 
--- | A card interface displayed in a Google Chat message or Google Workspace Add-on. Cards support a defined layout, interactive UI elements like buttons, and rich media like images. Use cards to present detailed information, gather information from users, and guide users to take a next step. <https://addons.gsuite.google.com/uikit/builder Card builder> To learn how to build cards, see the following documentation: * For Google Chat apps, see <https://developers.google.com/workspace/chat/design-components-card-dialog Design the components of a card or dialog>. * For Google Workspace Add-ons, see <https://developers.google.com/apps-script/add-ons/concepts/cards Card-based interfaces>. Note: You can add up to 100 widgets per card. Any widgets beyond this limit are ignored. This limit applies to both card messages and dialogs in Google Chat apps, and to cards in Google Workspace Add-ons. __Example: Card message for a Google Chat app__
+-- | A card interface displayed in a Google Chat message or Google Workspace add-on. Cards support a defined layout, interactive UI elements like buttons, and rich media like images. Use cards to present detailed information, gather information from users, and guide users to take a next step. <https://addons.gsuite.google.com/uikit/builder Card builder> To learn how to build cards, see the following documentation: * For Google Chat apps, see <https://developers.google.com/workspace/chat/design-components-card-dialog Design the components of a card or dialog>. * For Google Workspace add-ons, see <https://developers.google.com/apps-script/add-ons/concepts/cards Card-based interfaces>. Note: You can add up to 100 widgets per card. Any widgets beyond this limit are ignored. This limit applies to both card messages and dialogs in Google Chat apps, and to cards in Google Workspace add-ons. __Example: Card message for a Google Chat app__
 -- <<https://developers.google.com/workspace/chat/images/card_api_reference.png Example contact card>> To create the sample card message in Google Chat, use the following JSON:
 -- @{ \"cardsV2\": [ { \"cardId\": \"unique-card-id\", \"card\": { \"header\": { \"title\": \"Sasha\", \"subtitle\": \"Software Engineer\", \"imageUrl\": \"https:\/\/developers.google.com\/workspace\/chat\/images\/quickstart-app-avatar.png\", \"imageType\": \"CIRCLE\", \"imageAltText\": \"Avatar for Sasha\" }, \"sections\": [ { \"header\": \"Contact Info\", \"collapsible\": true, \"uncollapsibleWidgetsCount\": 1, \"widgets\": [ { \"decoratedText\": { \"startIcon\": { \"knownIcon\": \"EMAIL\" }, \"text\": \"sasha\@example.com\" } }, { \"decoratedText\": { \"startIcon\": { \"knownIcon\": \"PERSON\" }, \"text\": \"Online\" } }, { \"decoratedText\": { \"startIcon\": { \"knownIcon\": \"PHONE\" }, \"text\": \"+1 (555) 555-1234\" } }, { \"buttonList\": { \"buttons\": [ { \"text\": \"Share\", \"onClick\": { \"openLink\": { \"url\": \"https:\/\/example.com\/share\" } } }, { \"text\": \"Edit\", \"onClick\": { \"action\": { \"function\": \"goToView\", \"parameters\": [ { \"key\": \"viewType\", \"value\": \"EDIT\" } ] } } } ] } } ] } ] } } ] }@
 --
 -- /See:/ 'newGoogleAppsCardV1Card' smart constructor.
 data GoogleAppsCardV1Card = GoogleAppsCardV1Card
-  { -- | The card\'s actions. Actions are added to the card\'s toolbar menu. <https://developers.google.com/workspace/add-ons Google Workspace Add-ons>: For example, the following JSON constructs a card action menu with @Settings@ and @Send Feedback@ options: @\"card_actions\": [ { \"actionLabel\": \"Settings\", \"onClick\": { \"action\": { \"functionName\": \"goToView\", \"parameters\": [ { \"key\": \"viewType\", \"value\": \"SETTING\" } ], \"loadIndicator\": \"LoadIndicator.SPINNER\" } } }, { \"actionLabel\": \"Send Feedback\", \"onClick\": { \"openLink\": { \"url\": \"https:\/\/example.com\/feedback\" } } } ]@
+  { -- | The card\'s actions. Actions are added to the card\'s toolbar menu. <https://developers.google.com/workspace/add-ons Google Workspace add-ons>: For example, the following JSON constructs a card action menu with @Settings@ and @Send Feedback@ options: @\"card_actions\": [ { \"actionLabel\": \"Settings\", \"onClick\": { \"action\": { \"functionName\": \"goToView\", \"parameters\": [ { \"key\": \"viewType\", \"value\": \"SETTING\" } ], \"loadIndicator\": \"LoadIndicator.SPINNER\" } } }, { \"actionLabel\": \"Send Feedback\", \"onClick\": { \"openLink\": { \"url\": \"https:\/\/example.com\/feedback\" } } } ]@
     cardActions :: (Core.Maybe [GoogleAppsCardV1CardAction]),
-    -- | In Google Workspace Add-ons, sets the display properties of the @peekCardHeader@. <https://developers.google.com/workspace/add-ons Google Workspace Add-ons>:
+    -- | In Google Workspace add-ons, sets the display properties of the @peekCardHeader@. <https://developers.google.com/workspace/add-ons Google Workspace add-ons>:
     displayStyle :: (Core.Maybe GoogleAppsCardV1Card_DisplayStyle),
-    -- | The fixed footer shown at the bottom of this card. Setting @fixedFooter@ without specifying a @primaryButton@ or a @secondaryButton@ causes an error. For Chat apps, you can use fixed footers in <https://developers.google.com/workspace/chat/dialogs dialogs>, but not <https://developers.google.com/workspace/chat/create-messages#create card messages>. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+    -- | The fixed footer shown at the bottom of this card. Setting @fixedFooter@ without specifying a @primaryButton@ or a @secondaryButton@ causes an error. For Chat apps, you can use fixed footers in <https://developers.google.com/workspace/chat/dialogs dialogs>, but not <https://developers.google.com/workspace/chat/create-messages#create card messages>. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
     fixedFooter :: (Core.Maybe GoogleAppsCardV1CardFixedFooter),
     -- | The header of the card. A header usually contains a leading image and a title. Headers always appear at the top of a card.
     header :: (Core.Maybe GoogleAppsCardV1CardHeader),
-    -- | Name of the card. Used as a card identifier in card navigation. <https://developers.google.com/workspace/add-ons Google Workspace Add-ons>:
+    -- | Name of the card. Used as a card identifier in card navigation. <https://developers.google.com/workspace/add-ons Google Workspace add-ons>:
     name :: (Core.Maybe Core.Text),
-    -- | When displaying contextual content, the peek card header acts as a placeholder so that the user can navigate forward between the homepage cards and the contextual cards. <https://developers.google.com/workspace/add-ons Google Workspace Add-ons>:
+    -- | When displaying contextual content, the peek card header acts as a placeholder so that the user can navigate forward between the homepage cards and the contextual cards. <https://developers.google.com/workspace/add-ons Google Workspace add-ons>:
     peekCardHeader :: (Core.Maybe GoogleAppsCardV1CardHeader),
     -- | The divider style between the header, sections and footer.
     sectionDividerStyle :: (Core.Maybe GoogleAppsCardV1Card_SectionDividerStyle),
@@ -2292,7 +2398,7 @@ instance Core.ToJSON GoogleAppsCardV1Card where
           ]
       )
 
--- | A card action is the action associated with the card. For example, an invoice card might include actions such as delete invoice, email invoice, or open the invoice in a browser. <https://developers.google.com/workspace/add-ons Google Workspace Add-ons>:
+-- | A card action is the action associated with the card. For example, an invoice card might include actions such as delete invoice, email invoice, or open the invoice in a browser. <https://developers.google.com/workspace/add-ons Google Workspace add-ons>:
 --
 -- /See:/ 'newGoogleAppsCardV1CardAction' smart constructor.
 data GoogleAppsCardV1CardAction = GoogleAppsCardV1CardAction
@@ -2331,7 +2437,7 @@ instance Core.ToJSON GoogleAppsCardV1CardAction where
           ]
       )
 
--- | A persistent (sticky) footer that that appears at the bottom of the card. Setting @fixedFooter@ without specifying a @primaryButton@ or a @secondaryButton@ causes an error. For Chat apps, you can use fixed footers in <https://developers.google.com/workspace/chat/dialogs dialogs>, but not <https://developers.google.com/workspace/chat/create-messages#create card messages>. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/design-components-card-dialog#add_a_persistent_footer Add a persistent footer>. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | A persistent (sticky) footer that that appears at the bottom of the card. Setting @fixedFooter@ without specifying a @primaryButton@ or a @secondaryButton@ causes an error. For Chat apps, you can use fixed footers in <https://developers.google.com/workspace/chat/dialogs dialogs>, but not <https://developers.google.com/workspace/chat/create-messages#create card messages>. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/design-components-card-dialog#add_a_persistent_footer Add a persistent footer>. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1CardFixedFooter' smart constructor.
 data GoogleAppsCardV1CardFixedFooter = GoogleAppsCardV1CardFixedFooter
@@ -2370,13 +2476,13 @@ instance Core.ToJSON GoogleAppsCardV1CardFixedFooter where
           ]
       )
 
--- | Represents a card header. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/design-components-card-dialog#add_a_header Add a header>. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | Represents a card header. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/design-components-card-dialog#add_a_header Add a header>. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1CardHeader' smart constructor.
 data GoogleAppsCardV1CardHeader = GoogleAppsCardV1CardHeader
   { -- | The alternative text of this image that\'s used for accessibility.
     imageAltText :: (Core.Maybe Core.Text),
-    -- | The shape used to crop the image. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+    -- | The shape used to crop the image. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
     imageType :: (Core.Maybe GoogleAppsCardV1CardHeader_ImageType),
     -- | The HTTPS URL of the image in the card header.
     imageUrl :: (Core.Maybe Core.Text),
@@ -2491,7 +2597,7 @@ instance Core.ToJSON GoogleAppsCardV1CarouselCard where
           ]
       )
 
--- | A text, icon, or text and icon chip that users can click. <https://developers.google.com/workspace/chat Google Chat apps>:
+-- | A text, icon, or text and icon chip that users can click. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1Chip' smart constructor.
 data GoogleAppsCardV1Chip = GoogleAppsCardV1Chip
@@ -2550,7 +2656,7 @@ instance Core.ToJSON GoogleAppsCardV1Chip where
           ]
       )
 
--- | A list of chips layed out horizontally, which can either scroll horizontally or wrap to the next line. <https://developers.google.com/workspace/chat Google Chat apps>:
+-- | A list of chips layed out horizontally, which can either scroll horizontally or wrap to the next line. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1ChipList' smart constructor.
 data GoogleAppsCardV1ChipList = GoogleAppsCardV1ChipList
@@ -2589,7 +2695,7 @@ instance Core.ToJSON GoogleAppsCardV1ChipList where
           ]
       )
 
--- | Represent an expand and collapse control. <https://developers.google.com/workspace/chat Google Chat apps>:
+-- | Represent an expand and collapse control. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1CollapseControl' smart constructor.
 data GoogleAppsCardV1CollapseControl = GoogleAppsCardV1CollapseControl
@@ -2633,7 +2739,7 @@ instance Core.ToJSON GoogleAppsCardV1CollapseControl where
           ]
       )
 
--- | A column. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>
+-- | A column. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>
 --
 -- /See:/ 'newGoogleAppsCardV1Column' smart constructor.
 data GoogleAppsCardV1Column = GoogleAppsCardV1Column
@@ -2683,7 +2789,7 @@ instance Core.ToJSON GoogleAppsCardV1Column where
       )
 
 -- | The @Columns@ widget displays up to 2 columns in a card or dialog. You can add widgets to each column; the widgets appear in the order that they are specified. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/format-structure-card-dialog#display_cards_and_dialogs_in_columns Display cards and dialogs in columns>. The height of each column is determined by the taller column. For example, if the first column is taller than the second column, both columns have the height of the first column. Because each column can contain a different number of widgets, you can\'t define rows or align widgets between the columns. Columns are displayed side-by-side. You can customize the width of each column using the @HorizontalSizeStyle@ field. If the user\'s screen width is too narrow, the second column wraps below the first: * On web, the second column wraps if the screen width is less than or equal to 480 pixels. * On iOS devices, the second column wraps if the screen width is less than or
--- equal to 300 pt. * On Android devices, the second column wraps if the screen width is less than or equal to 320 dp. To include more than two columns, or to use rows, use the @Grid@ widget. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>: The add-on UIs that support columns include: * The dialog displayed when users open the add-on from an email draft. * The dialog displayed when users open the add-on from the __Add attachment__ menu in a Google Calendar event.
+-- equal to 300 pt. * On Android devices, the second column wraps if the screen width is less than or equal to 320 dp. To include more than two columns, or to use rows, use the @Grid@ widget. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>: The add-on UIs that support columns include: * The dialog displayed when users open the add-on from an email draft. * The dialog displayed when users open the add-on from the __Add attachment__ menu in a Google Calendar event.
 --
 -- /See:/ 'newGoogleAppsCardV1Columns' smart constructor.
 newtype GoogleAppsCardV1Columns = GoogleAppsCardV1Columns
@@ -2711,7 +2817,7 @@ instance Core.ToJSON GoogleAppsCardV1Columns where
     Core.object
       (Core.catMaybes [("columnItems" Core..=) Core.<$> columnItems])
 
--- | Lets users input a date, a time, or both a date and a time. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/design-interactive-card-dialog#let_a_user_pick_a_date_and_time Let a user pick a date and time>. Users can input text or use the picker to select dates and times. If users input an invalid date or time, the picker shows an error that prompts users to input the information correctly. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | Lets users input a date, a time, or both a date and a time. Supports form submission validation. When @Action.all_widgets_are_required@ is set to @true@ or this widget is specified in @Action.required_widgets@, the submission action is blocked unless a value is selected. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/design-interactive-card-dialog#let_a_user_pick_a_date_and_time Let a user pick a date and time>. Users can input text or use the picker to select dates and times. If users input an invalid date or time, the picker shows an error that prompts users to input the information correctly. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1DateTimePicker' smart constructor.
 data GoogleAppsCardV1DateTimePicker = GoogleAppsCardV1DateTimePicker
@@ -2770,7 +2876,7 @@ instance Core.ToJSON GoogleAppsCardV1DateTimePicker where
           ]
       )
 
--- | A widget that displays text with optional decorations such as a label above or below the text, an icon in front of the text, a selection widget, or a button after the text. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/add-text-image-card-dialog#display_text_with_decorative_elements Display text with decorative text>. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | A widget that displays text with optional decorations such as a label above or below the text, an icon in front of the text, a selection widget, or a button after the text. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/add-text-image-card-dialog#display_text_with_decorative_elements Display text with decorative text>. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1DecoratedText' smart constructor.
 data GoogleAppsCardV1DecoratedText = GoogleAppsCardV1DecoratedText
@@ -2788,7 +2894,7 @@ data GoogleAppsCardV1DecoratedText = GoogleAppsCardV1DecoratedText
     startIcon :: (Core.Maybe GoogleAppsCardV1Icon),
     -- | A switch widget that a user can click to change its state and trigger an action.
     switchControl :: (Core.Maybe GoogleAppsCardV1SwitchControl),
-    -- | Required. The primary text. Supports simple formatting. For more information about formatting text, see <https://developers.google.com/workspace/chat/format-messages#card-formatting Formatting text in Google Chat apps> and <https://developers.google.com/apps-script/add-ons/concepts/widgets#text_formatting Formatting text in Google Workspace Add-ons>.
+    -- | Required. The primary text. Supports simple formatting. For more information about formatting text, see <https://developers.google.com/workspace/chat/format-messages#card-formatting Formatting text in Google Chat apps> and <https://developers.google.com/apps-script/add-ons/concepts/widgets#text_formatting Formatting text in Google Workspace add-ons>.
     text :: (Core.Maybe Core.Text),
     -- | The text that appears above @text@. Always truncates.
     topLabel :: (Core.Maybe Core.Text),
@@ -2849,7 +2955,7 @@ instance Core.ToJSON GoogleAppsCardV1DecoratedText where
           ]
       )
 
--- | Displays a divider between widgets as a horizontal line. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/format-structure-card-dialog#add_a_horizontal_divider_between_widgets Add a horizontal divider between widgets>. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>: For example, the following JSON creates a divider: @\"divider\": {}@
+-- | Displays a divider between widgets as a horizontal line. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/format-structure-card-dialog#add_a_horizontal_divider_between_widgets Add a horizontal divider between widgets>. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>: For example, the following JSON creates a divider: @\"divider\": {}@
 --
 -- /See:/ 'newGoogleAppsCardV1Divider' smart constructor.
 data GoogleAppsCardV1Divider = GoogleAppsCardV1Divider
@@ -2869,7 +2975,7 @@ instance Core.FromJSON GoogleAppsCardV1Divider where
 instance Core.ToJSON GoogleAppsCardV1Divider where
   toJSON = Core.const Core.emptyObject
 
--- | Displays a grid with a collection of items. Items can only include text or images. For responsive columns, or to include more than text or images, use @Columns@. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/format-structure-card-dialog#display_a_grid_with_a_collection_of_items Display a Grid with a collection of items>. A grid supports any number of columns and items. The number of rows is determined by items divided by columns. A grid with 10 items and 2 columns has 5 rows. A grid with 11 items and 2 columns has 6 rows. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>: For example, the following JSON creates a 2 column grid with a single item:
+-- | Displays a grid with a collection of items. Items can only include text or images. For responsive columns, or to include more than text or images, use @Columns@. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/format-structure-card-dialog#display_a_grid_with_a_collection_of_items Display a Grid with a collection of items>. A grid supports any number of columns and items. The number of rows is determined by items divided by columns. A grid with 10 items and 2 columns has 5 rows. A grid with 11 items and 2 columns has 6 rows. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>: For example, the following JSON creates a 2 column grid with a single item:
 -- @\"grid\": { \"title\": \"A fine collection of items\", \"columnCount\": 2, \"borderStyle\": { \"type\": \"STROKE\", \"cornerRadius\": 4 }, \"items\": [ { \"image\": { \"imageUri\": \"https:\/\/www.example.com\/image.png\", \"cropStyle\": { \"type\": \"SQUARE\" }, \"borderStyle\": { \"type\": \"STROKE\" } }, \"title\": \"An item\", \"textAlignment\": \"CENTER\" } ], \"onClick\": { \"openLink\": { \"url\": \"https:\/\/www.example.com\" } } }@
 --
 -- /See:/ 'newGoogleAppsCardV1Grid' smart constructor.
@@ -2924,7 +3030,7 @@ instance Core.ToJSON GoogleAppsCardV1Grid where
           ]
       )
 
--- | Represents an item in a grid layout. Items can contain text, an image, or both text and an image. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | Represents an item in a grid layout. Items can contain text, an image, or both text and an image. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1GridItem' smart constructor.
 data GoogleAppsCardV1GridItem = GoogleAppsCardV1GridItem
@@ -2978,7 +3084,7 @@ instance Core.ToJSON GoogleAppsCardV1GridItem where
           ]
       )
 
--- | An icon displayed in a widget on a card. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/add-text-image-card-dialog#add_an_icon Add an icon>. Supports <https://developers.google.com/workspace/chat/format-messages#builtinicons built-in> and <https://developers.google.com/workspace/chat/format-messages#customicons custom> icons. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | An icon displayed in a widget on a card. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/add-text-image-card-dialog#add_an_icon Add an icon>. Supports <https://developers.google.com/workspace/chat/format-messages#builtinicons built-in> and <https://developers.google.com/workspace/chat/format-messages#customicons custom> icons. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1Icon' smart constructor.
 data GoogleAppsCardV1Icon = GoogleAppsCardV1Icon
@@ -3032,7 +3138,7 @@ instance Core.ToJSON GoogleAppsCardV1Icon where
           ]
       )
 
--- | An image that is specified by a URL and can have an @onClick@ action. For an example, see <https://developers.google.com/workspace/chat/add-text-image-card-dialog#add_an_image Add an image>. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | An image that is specified by a URL and can have an @onClick@ action. For an example, see <https://developers.google.com/workspace/chat/add-text-image-card-dialog#add_an_image Add an image>. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1Image' smart constructor.
 data GoogleAppsCardV1Image = GoogleAppsCardV1Image
@@ -3076,7 +3182,7 @@ instance Core.ToJSON GoogleAppsCardV1Image where
           ]
       )
 
--- | Represents an image. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | Represents an image. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1ImageComponent' smart constructor.
 data GoogleAppsCardV1ImageComponent = GoogleAppsCardV1ImageComponent
@@ -3125,7 +3231,7 @@ instance Core.ToJSON GoogleAppsCardV1ImageComponent where
           ]
       )
 
--- | Represents the crop style applied to an image. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>: For example, here\'s how to apply a 16:9 aspect ratio: @cropStyle { \"type\": \"RECTANGLE_CUSTOM\", \"aspectRatio\": 16\/9 }@
+-- | Represents the crop style applied to an image. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>: For example, here\'s how to apply a 16:9 aspect ratio: @cropStyle { \"type\": \"RECTANGLE_CUSTOM\", \"aspectRatio\": 16\/9 }@
 --
 -- /See:/ 'newGoogleAppsCardV1ImageCropStyle' smart constructor.
 data GoogleAppsCardV1ImageCropStyle = GoogleAppsCardV1ImageCropStyle
@@ -3257,19 +3363,19 @@ instance Core.ToJSON GoogleAppsCardV1NestedWidget where
           ]
       )
 
--- | Represents how to respond when users click an interactive element on a card, such as a button. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | Represents how to respond when users click an interactive element on a card, such as a button. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1OnClick' smart constructor.
 data GoogleAppsCardV1OnClick = GoogleAppsCardV1OnClick
   { -- | If specified, an action is triggered by this @onClick@.
     action :: (Core.Maybe GoogleAppsCardV1Action),
-    -- | A new card is pushed to the card stack after clicking if specified. <https://developers.google.com/workspace/add-ons Google Workspace Add-ons>:
+    -- | A new card is pushed to the card stack after clicking if specified. <https://developers.google.com/workspace/add-ons Google Workspace add-ons>:
     card :: (Core.Maybe GoogleAppsCardV1Card),
-    -- | An add-on triggers this action when the action needs to open a link. This differs from the @open_link@ above in that this needs to talk to server to get the link. Thus some preparation work is required for web client to do before the open link action response comes back. <https://developers.google.com/workspace/add-ons Google Workspace Add-ons>:
+    -- | An add-on triggers this action when the action needs to open a link. This differs from the @open_link@ above in that this needs to talk to server to get the link. Thus some preparation work is required for web client to do before the open link action response comes back. <https://developers.google.com/workspace/add-ons Google Workspace add-ons>:
     openDynamicLinkAction :: (Core.Maybe GoogleAppsCardV1Action),
     -- | If specified, this @onClick@ triggers an open link action.
     openLink :: (Core.Maybe GoogleAppsCardV1OpenLink),
-    -- | If specified, this @onClick@ opens an overflow menu. <https://developers.google.com/workspace/chat Google Chat apps>:
+    -- | If specified, this @onClick@ opens an overflow menu.
     overflowMenu :: (Core.Maybe GoogleAppsCardV1OverflowMenu)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3311,13 +3417,13 @@ instance Core.ToJSON GoogleAppsCardV1OnClick where
           ]
       )
 
--- | Represents an @onClick@ event that opens a hyperlink. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | Represents an @onClick@ event that opens a hyperlink. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1OpenLink' smart constructor.
 data GoogleAppsCardV1OpenLink = GoogleAppsCardV1OpenLink
-  { -- | Whether the client forgets about a link after opening it, or observes it until the window closes. <https://developers.google.com/workspace/add-ons Google Workspace Add-ons>:
+  { -- | Whether the client forgets about a link after opening it, or observes it until the window closes. <https://developers.google.com/workspace/add-ons Google Workspace add-ons>:
     onClose :: (Core.Maybe GoogleAppsCardV1OpenLink_OnClose),
-    -- | How to open a link. <https://developers.google.com/workspace/add-ons Google Workspace Add-ons>:
+    -- | How to open a link. <https://developers.google.com/workspace/add-ons Google Workspace add-ons>:
     openAs :: (Core.Maybe GoogleAppsCardV1OpenLink_OpenAs),
     -- | The URL to open.
     url :: (Core.Maybe Core.Text)
@@ -3355,7 +3461,7 @@ instance Core.ToJSON GoogleAppsCardV1OpenLink where
           ]
       )
 
--- | A widget that presents a pop-up menu with one or more actions that users can invoke. For example, showing non-primary actions in a card. You can use this widget when actions don\'t fit in the available space. To use, specify this widget in the @OnClick@ action of widgets that support it. For example, in a @Button@. <https://developers.google.com/workspace/chat Google Chat apps>:
+-- | A widget that presents a pop-up menu with one or more actions that users can invoke. For example, showing non-primary actions in a card. You can use this widget when actions don\'t fit in the available space. To use, specify this widget in the @OnClick@ action of widgets that support it. For example, in a @Button@. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1OverflowMenu' smart constructor.
 newtype GoogleAppsCardV1OverflowMenu = GoogleAppsCardV1OverflowMenu
@@ -3380,7 +3486,7 @@ instance Core.ToJSON GoogleAppsCardV1OverflowMenu where
   toJSON GoogleAppsCardV1OverflowMenu {..} =
     Core.object (Core.catMaybes [("items" Core..=) Core.<$> items])
 
--- | An option that users can invoke in an overflow menu. <https://developers.google.com/workspace/chat Google Chat apps>:
+-- | An option that users can invoke in an overflow menu. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1OverflowMenuItem' smart constructor.
 data GoogleAppsCardV1OverflowMenuItem = GoogleAppsCardV1OverflowMenuItem
@@ -3469,15 +3575,15 @@ instance Core.ToJSON GoogleAppsCardV1PlatformDataSource where
           ]
       )
 
--- | A section contains a collection of widgets that are rendered vertically in the order that they\'re specified. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | A section contains a collection of widgets that are rendered vertically in the order that they\'re specified. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1Section' smart constructor.
 data GoogleAppsCardV1Section = GoogleAppsCardV1Section
-  { -- | Optional. Define the expand and collapse button of the section. This button will be shown only if the section is collapsible. If this field isn\'t set, the default button is used. <https://developers.google.com/workspace/chat Google Chat apps>:
+  { -- | Optional. Define the expand and collapse button of the section. This button will be shown only if the section is collapsible. If this field isn\'t set, the default button is used.
     collapseControl :: (Core.Maybe GoogleAppsCardV1CollapseControl),
     -- | Indicates whether this section is collapsible. Collapsible sections hide some or all widgets, but users can expand the section to reveal the hidden widgets by clicking __Show more__. Users can hide the widgets again by clicking __Show less__. To determine which widgets are hidden, specify @uncollapsibleWidgetsCount@.
     collapsible :: (Core.Maybe Core.Bool),
-    -- | Text that appears at the top of a section. Supports simple HTML formatted text. For more information about formatting text, see <https://developers.google.com/workspace/chat/format-messages#card-formatting Formatting text in Google Chat apps> and <https://developers.google.com/apps-script/add-ons/concepts/widgets#text_formatting Formatting text in Google Workspace Add-ons>.
+    -- | Text that appears at the top of a section. Supports simple HTML formatted text. For more information about formatting text, see <https://developers.google.com/workspace/chat/format-messages#card-formatting Formatting text in Google Chat apps> and <https://developers.google.com/apps-script/add-ons/concepts/widgets#text_formatting Formatting text in Google Workspace add-ons>.
     header :: (Core.Maybe Core.Text),
     -- | The number of uncollapsible widgets which remain visible even when a section is collapsed. For example, when a section contains five widgets and the @uncollapsibleWidgetsCount@ is set to @2@, the first two widgets are always shown and the last three are collapsed by default. The @uncollapsibleWidgetsCount@ is taken into account only when @collapsible@ is @true@.
     uncollapsibleWidgetsCount :: (Core.Maybe Core.Int32),
@@ -3524,7 +3630,7 @@ instance Core.ToJSON GoogleAppsCardV1Section where
           ]
       )
 
--- | A widget that creates one or more UI items that users can select. For example, a dropdown menu or checkboxes. You can use this widget to collect data that can be predicted or enumerated. For an example in Google Chat apps, see </workspace/chat/design-interactive-card-dialog#add_selectable_ui_elements Add selectable UI elements>. Chat apps can process the value of items that users select or input. For details about working with form inputs, see <https://developers.google.com/workspace/chat/read-form-data Receive form data>. To collect undefined or abstract data from users, use the TextInput widget. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | A widget that creates one or more UI items that users can select. Supports form submission validation for @dropdown@ and @multiselect@ menus only. When @Action.all_widgets_are_required@ is set to @true@ or this widget is specified in @Action.required_widgets@, the submission action is blocked unless a value is selected. For example, a dropdown menu or checkboxes. You can use this widget to collect data that can be predicted or enumerated. For an example in Google Chat apps, see </workspace/chat/design-interactive-card-dialog#add_selectable_ui_elements Add selectable UI elements>. Chat apps can process the value of items that users select or input. For details about working with form inputs, see <https://developers.google.com/workspace/chat/read-form-data Receive form data>. To collect undefined or abstract data from users, use the TextInput widget. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1SelectionInput' smart constructor.
 data GoogleAppsCardV1SelectionInput = GoogleAppsCardV1SelectionInput
@@ -3600,7 +3706,7 @@ instance Core.ToJSON GoogleAppsCardV1SelectionInput where
           ]
       )
 
--- | An item that users can select in a selection input, such as a checkbox or switch. Supports up to 100 items. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | An item that users can select in a selection input, such as a checkbox or switch. Supports up to 100 items. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1SelectionItem' smart constructor.
 data GoogleAppsCardV1SelectionItem = GoogleAppsCardV1SelectionItem
@@ -3654,7 +3760,7 @@ instance Core.ToJSON GoogleAppsCardV1SelectionItem where
           ]
       )
 
--- | One suggested value that users can enter in a text input field. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | One suggested value that users can enter in a text input field. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1SuggestionItem' smart constructor.
 newtype GoogleAppsCardV1SuggestionItem = GoogleAppsCardV1SuggestionItem
@@ -3681,7 +3787,7 @@ instance Core.ToJSON GoogleAppsCardV1SuggestionItem where
   toJSON GoogleAppsCardV1SuggestionItem {..} =
     Core.object (Core.catMaybes [("text" Core..=) Core.<$> text])
 
--- | Suggested values that users can enter. These values appear when users click inside the text input field. As users type, the suggested values dynamically filter to match what the users have typed. For example, a text input field for programming language might suggest Java, JavaScript, Python, and C++. When users start typing @Jav@, the list of suggestions filters to show @Java@ and @JavaScript@. Suggested values help guide users to enter values that your app can make sense of. When referring to JavaScript, some users might enter @javascript@ and others @java script@. Suggesting @JavaScript@ can standardize how users interact with your app. When specified, @TextInput.type@ is always @SINGLE_LINE@, even if it\'s set to @MULTIPLE_LINE@. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | Suggested values that users can enter. These values appear when users click inside the text input field. As users type, the suggested values dynamically filter to match what the users have typed. For example, a text input field for programming language might suggest Java, JavaScript, Python, and C++. When users start typing @Jav@, the list of suggestions filters to show @Java@ and @JavaScript@. Suggested values help guide users to enter values that your app can make sense of. When referring to JavaScript, some users might enter @javascript@ and others @java script@. Suggesting @JavaScript@ can standardize how users interact with your app. When specified, @TextInput.type@ is always @SINGLE_LINE@, even if it\'s set to @MULTIPLE_LINE@. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1Suggestions' smart constructor.
 newtype GoogleAppsCardV1Suggestions = GoogleAppsCardV1Suggestions
@@ -3706,11 +3812,11 @@ instance Core.ToJSON GoogleAppsCardV1Suggestions where
   toJSON GoogleAppsCardV1Suggestions {..} =
     Core.object (Core.catMaybes [("items" Core..=) Core.<$> items])
 
--- | Either a toggle-style switch or a checkbox inside a @decoratedText@ widget. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>: Only supported in the @decoratedText@ widget.
+-- | Either a toggle-style switch or a checkbox inside a @decoratedText@ widget. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>: Only supported in the @decoratedText@ widget.
 --
 -- /See:/ 'newGoogleAppsCardV1SwitchControl' smart constructor.
 data GoogleAppsCardV1SwitchControl = GoogleAppsCardV1SwitchControl
-  { -- | How the switch appears in the user interface. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+  { -- | How the switch appears in the user interface. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
     controlType :: (Core.Maybe GoogleAppsCardV1SwitchControl_ControlType),
     -- | The name by which the switch widget is identified in a form input event. For details about working with form inputs, see <https://developers.google.com/workspace/chat/read-form-data Receive form data>.
     name :: (Core.Maybe Core.Text),
@@ -3760,15 +3866,15 @@ instance Core.ToJSON GoogleAppsCardV1SwitchControl where
           ]
       )
 
--- | A field in which users can enter text. Supports suggestions and on-change actions. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/design-interactive-card-dialog#add_a_field_in_which_a_user_can_enter_text Add a field in which a user can enter text>. Chat apps receive and can process the value of entered text during form input events. For details about working with form inputs, see <https://developers.google.com/workspace/chat/read-form-data Receive form data>. When you need to collect undefined or abstract data from users, use a text input. To collect defined or enumerated data from users, use the SelectionInput widget. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | A field in which users can enter text. Supports suggestions and on-change actions. Supports form submission validation. When @Action.all_widgets_are_required@ is set to @true@ or this widget is specified in @Action.required_widgets@, the submission action is blocked unless a value is entered. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/design-interactive-card-dialog#add_a_field_in_which_a_user_can_enter_text Add a field in which a user can enter text>. Chat apps receive and can process the value of entered text during form input events. For details about working with form inputs, see <https://developers.google.com/workspace/chat/read-form-data Receive form data>. When you need to collect undefined or abstract data from users, use a text input. To collect defined or enumerated data from users, use the SelectionInput widget. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1TextInput' smart constructor.
 data GoogleAppsCardV1TextInput = GoogleAppsCardV1TextInput
-  { -- | Optional. Specify what action to take when the text input field provides suggestions to users who interact with it. If unspecified, the suggestions are set by @initialSuggestions@ and are processed by the client. If specified, the app takes the action specified here, such as running a custom function. <https://developers.google.com/workspace/add-ons Google Workspace Add-ons>:
+  { -- | Optional. Specify what action to take when the text input field provides suggestions to users who interact with it. If unspecified, the suggestions are set by @initialSuggestions@ and are processed by the client. If specified, the app takes the action specified here, such as running a custom function. <https://developers.google.com/workspace/add-ons Google Workspace add-ons>:
     autoCompleteAction :: (Core.Maybe GoogleAppsCardV1Action),
     -- | Text that appears below the text input field meant to assist users by prompting them to enter a certain value. This text is always visible. Required if @label@ is unspecified. Otherwise, optional.
     hintText :: (Core.Maybe Core.Text),
-    -- | Suggested values that users can enter. These values appear when users click inside the text input field. As users type, the suggested values dynamically filter to match what the users have typed. For example, a text input field for programming language might suggest Java, JavaScript, Python, and C++. When users start typing @Jav@, the list of suggestions filters to show just @Java@ and @JavaScript@. Suggested values help guide users to enter values that your app can make sense of. When referring to JavaScript, some users might enter @javascript@ and others @java script@. Suggesting @JavaScript@ can standardize how users interact with your app. When specified, @TextInput.type@ is always @SINGLE_LINE@, even if it\'s set to @MULTIPLE_LINE@. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+    -- | Suggested values that users can enter. These values appear when users click inside the text input field. As users type, the suggested values dynamically filter to match what the users have typed. For example, a text input field for programming language might suggest Java, JavaScript, Python, and C++. When users start typing @Jav@, the list of suggestions filters to show just @Java@ and @JavaScript@. Suggested values help guide users to enter values that your app can make sense of. When referring to JavaScript, some users might enter @javascript@ and others @java script@. Suggesting @JavaScript@ can standardize how users interact with your app. When specified, @TextInput.type@ is always @SINGLE_LINE@, even if it\'s set to @MULTIPLE_LINE@. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
     initialSuggestions :: (Core.Maybe GoogleAppsCardV1Suggestions),
     -- | The text that appears above the text input field in the user interface. Specify text that helps the user enter the information your app needs. For example, if you are asking someone\'s name, but specifically need their surname, write @surname@ instead of @name@. Required if @hintText@ is unspecified. Otherwise, optional.
     label :: (Core.Maybe Core.Text),
@@ -3780,6 +3886,8 @@ data GoogleAppsCardV1TextInput = GoogleAppsCardV1TextInput
     placeholderText :: (Core.Maybe Core.Text),
     -- | How a text input field appears in the user interface. For example, whether the field is single or multi-line.
     type' :: (Core.Maybe GoogleAppsCardV1TextInput_Type),
+    -- | Specify the input format validation necessary for this text field. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
+    validation :: (Core.Maybe GoogleAppsCardV1Validation),
     -- | The value entered by a user, returned as part of a form input event. For details about working with form inputs, see <https://developers.google.com/workspace/chat/read-form-data Receive form data>.
     value :: (Core.Maybe Core.Text)
   }
@@ -3798,6 +3906,7 @@ newGoogleAppsCardV1TextInput =
       onChangeAction = Core.Nothing,
       placeholderText = Core.Nothing,
       type' = Core.Nothing,
+      validation = Core.Nothing,
       value = Core.Nothing
     }
 
@@ -3815,6 +3924,7 @@ instance Core.FromJSON GoogleAppsCardV1TextInput where
             Core.<*> (o Core..:? "onChangeAction")
             Core.<*> (o Core..:? "placeholderText")
             Core.<*> (o Core..:? "type")
+            Core.<*> (o Core..:? "validation")
             Core.<*> (o Core..:? "value")
       )
 
@@ -3830,15 +3940,16 @@ instance Core.ToJSON GoogleAppsCardV1TextInput where
             ("onChangeAction" Core..=) Core.<$> onChangeAction,
             ("placeholderText" Core..=) Core.<$> placeholderText,
             ("type" Core..=) Core.<$> type',
+            ("validation" Core..=) Core.<$> validation,
             ("value" Core..=) Core.<$> value
           ]
       )
 
--- | A paragraph of text that supports formatting. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/add-text-image-card-dialog#add_a_paragraph_of_formatted_text Add a paragraph of formatted text>. For more information about formatting text, see <https://developers.google.com/workspace/chat/format-messages#card-formatting Formatting text in Google Chat apps> and <https://developers.google.com/apps-script/add-ons/concepts/widgets#text_formatting Formatting text in Google Workspace Add-ons>. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>:
+-- | A paragraph of text that supports formatting. For an example in Google Chat apps, see <https://developers.google.com/workspace/chat/add-text-image-card-dialog#add_a_paragraph_of_formatted_text Add a paragraph of formatted text>. For more information about formatting text, see <https://developers.google.com/workspace/chat/format-messages#card-formatting Formatting text in Google Chat apps> and <https://developers.google.com/apps-script/add-ons/concepts/widgets#text_formatting Formatting text in Google Workspace add-ons>. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
 --
 -- /See:/ 'newGoogleAppsCardV1TextParagraph' smart constructor.
 data GoogleAppsCardV1TextParagraph = GoogleAppsCardV1TextParagraph
-  { -- | The maximum number of lines of text that are displayed in the widget. If the text exceeds the specified maximum number of lines, the excess content is concealed behind a __show more__ button. If the text is equal or shorter than the specified maximum number of lines, a __show more__ button isn\'t displayed. The default value is 0, in which case all context is displayed. Negative values are ignored. <https://developers.google.com/workspace/chat Google Chat apps>:
+  { -- | The maximum number of lines of text that are displayed in the widget. If the text exceeds the specified maximum number of lines, the excess content is concealed behind a __show more__ button. If the text is equal or shorter than the specified maximum number of lines, a __show more__ button isn\'t displayed. The default value is 0, in which case all context is displayed. Negative values are ignored.
     maxLines :: (Core.Maybe Core.Int32),
     -- | The text that\'s shown in the widget.
     text :: (Core.Maybe Core.Text)
@@ -3873,6 +3984,45 @@ instance Core.ToJSON GoogleAppsCardV1TextParagraph where
           ]
       )
 
+-- | Represents the necessary data for validating the widget it\'s attached to. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
+--
+-- /See:/ 'newGoogleAppsCardV1Validation' smart constructor.
+data GoogleAppsCardV1Validation = GoogleAppsCardV1Validation
+  { -- | Specify the character limit for text input widgets. Note that this is only used for text input and is ignored for other widgets. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
+    characterLimit :: (Core.Maybe Core.Int32),
+    -- | Specify the type of the input widgets. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>:
+    inputType :: (Core.Maybe GoogleAppsCardV1Validation_InputType)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleAppsCardV1Validation' with the minimum fields required to make a request.
+newGoogleAppsCardV1Validation ::
+  GoogleAppsCardV1Validation
+newGoogleAppsCardV1Validation =
+  GoogleAppsCardV1Validation
+    { characterLimit = Core.Nothing,
+      inputType = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleAppsCardV1Validation where
+  parseJSON =
+    Core.withObject
+      "GoogleAppsCardV1Validation"
+      ( \o ->
+          GoogleAppsCardV1Validation
+            Core.<$> (o Core..:? "characterLimit")
+            Core.<*> (o Core..:? "inputType")
+      )
+
+instance Core.ToJSON GoogleAppsCardV1Validation where
+  toJSON GoogleAppsCardV1Validation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("characterLimit" Core..=) Core.<$> characterLimit,
+            ("inputType" Core..=) Core.<$> inputType
+          ]
+      )
+
 -- | Each card is made up of widgets. A widget is a composite object that can represent one of text, images, buttons, and other object types.
 --
 -- /See:/ 'newGoogleAppsCardV1Widget' smart constructor.
@@ -3881,7 +4031,7 @@ data GoogleAppsCardV1Widget = GoogleAppsCardV1Widget
     buttonList :: (Core.Maybe GoogleAppsCardV1ButtonList),
     -- | A carousel contains a collection of nested widgets. For example, this is a JSON representation of a carousel that contains two text paragraphs. @{ \"widgets\": [ { \"textParagraph\": { \"text\": \"First text paragraph in the carousel.\" } }, { \"textParagraph\": { \"text\": \"Second text paragraph in the carousel.\" } } ] }@
     carousel :: (Core.Maybe GoogleAppsCardV1Carousel),
-    -- | A list of chips. For example, the following JSON creates two chips. The first is a text chip and the second is an icon chip that opens a link: @\"chipList\": { \"chips\": [ { \"text\": \"Edit\", \"disabled\": true, }, { \"icon\": { \"knownIcon\": \"INVITE\", \"altText\": \"check calendar\" }, \"onClick\": { \"openLink\": { \"url\": \"https:\/\/example.com\/calendar\" } } } ] }@ <https://developers.google.com/workspace/chat Google Chat apps>:
+    -- | A list of chips. For example, the following JSON creates two chips. The first is a text chip and the second is an icon chip that opens a link: @\"chipList\": { \"chips\": [ { \"text\": \"Edit\", \"disabled\": true, }, { \"icon\": { \"knownIcon\": \"INVITE\", \"altText\": \"check calendar\" }, \"onClick\": { \"openLink\": { \"url\": \"https:\/\/example.com\/calendar\" } } } ] }@
     chipList :: (Core.Maybe GoogleAppsCardV1ChipList),
     -- | Displays up to 2 columns. To include more than 2 columns, or to use rows, use the @Grid@ widget. For example, the following JSON creates 2 columns that each contain text paragraphs: @\"columns\": { \"columnItems\": [ { \"horizontalSizeStyle\": \"FILL_AVAILABLE_SPACE\", \"horizontalAlignment\": \"CENTER\", \"verticalAlignment\": \"CENTER\", \"widgets\": [ { \"textParagraph\": { \"text\": \"First column text paragraph\" } } ] }, { \"horizontalSizeStyle\": \"FILL_AVAILABLE_SPACE\", \"horizontalAlignment\": \"CENTER\", \"verticalAlignment\": \"CENTER\", \"widgets\": [ { \"textParagraph\": { \"text\": \"Second column text paragraph\" } } ] } ] }@
     columns :: (Core.Maybe GoogleAppsCardV1Columns),
@@ -3891,7 +4041,7 @@ data GoogleAppsCardV1Widget = GoogleAppsCardV1Widget
     decoratedText :: (Core.Maybe GoogleAppsCardV1DecoratedText),
     -- | Displays a horizontal line divider between widgets. For example, the following JSON creates a divider: @\"divider\": { }@
     divider :: (Core.Maybe GoogleAppsCardV1Divider),
-    -- | Displays a grid with a collection of items. A grid supports any number of columns and items. The number of rows is determined by the upper bounds of the number items divided by the number of columns. A grid with 10 items and 2 columns has 5 rows. A grid with 11 items and 2 columns has 6 rows. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>: For example, the following JSON creates a 2 column grid with a single item: @\"grid\": { \"title\": \"A fine collection of items\", \"columnCount\": 2, \"borderStyle\": { \"type\": \"STROKE\", \"cornerRadius\": 4 }, \"items\": [ { \"image\": { \"imageUri\": \"https:\/\/www.example.com\/image.png\", \"cropStyle\": { \"type\": \"SQUARE\" }, \"borderStyle\": { \"type\": \"STROKE\" } }, \"title\": \"An item\", \"textAlignment\": \"CENTER\" } ], \"onClick\": { \"openLink\": { \"url\": \"https:\/\/www.example.com\" } } }@
+    -- | Displays a grid with a collection of items. A grid supports any number of columns and items. The number of rows is determined by the upper bounds of the number items divided by the number of columns. A grid with 10 items and 2 columns has 5 rows. A grid with 11 items and 2 columns has 6 rows. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>: For example, the following JSON creates a 2 column grid with a single item: @\"grid\": { \"title\": \"A fine collection of items\", \"columnCount\": 2, \"borderStyle\": { \"type\": \"STROKE\", \"cornerRadius\": 4 }, \"items\": [ { \"image\": { \"imageUri\": \"https:\/\/www.example.com\/image.png\", \"cropStyle\": { \"type\": \"SQUARE\" }, \"borderStyle\": { \"type\": \"STROKE\" } }, \"title\": \"An item\", \"textAlignment\": \"CENTER\" } ], \"onClick\": { \"openLink\": { \"url\": \"https:\/\/www.example.com\" } } }@
     grid :: (Core.Maybe GoogleAppsCardV1Grid),
     -- | Specifies whether widgets align to the left, right, or center of a column.
     horizontalAlignment :: (Core.Maybe GoogleAppsCardV1Widget_HorizontalAlignment),
@@ -3901,7 +4051,7 @@ data GoogleAppsCardV1Widget = GoogleAppsCardV1Widget
     selectionInput :: (Core.Maybe GoogleAppsCardV1SelectionInput),
     -- | Displays a text box that users can type into. For example, the following JSON creates a text input for an email address: @\"textInput\": { \"name\": \"mailing_address\", \"label\": \"Mailing Address\" }@ As another example, the following JSON creates a text input for a programming language with static suggestions: @\"textInput\": { \"name\": \"preferred_programing_language\", \"label\": \"Preferred Language\", \"initialSuggestions\": { \"items\": [ { \"text\": \"C++\" }, { \"text\": \"Java\" }, { \"text\": \"JavaScript\" }, { \"text\": \"Python\" } ] } }@
     textInput :: (Core.Maybe GoogleAppsCardV1TextInput),
-    -- | Displays a text paragraph. Supports simple HTML formatted text. For more information about formatting text, see <https://developers.google.com/workspace/chat/format-messages#card-formatting Formatting text in Google Chat apps> and <https://developers.google.com/apps-script/add-ons/concepts/widgets#text_formatting Formatting text in Google Workspace Add-ons>. For example, the following JSON creates a bolded text: @\"textParagraph\": { \"text\": \" *bold text*\" }@
+    -- | Displays a text paragraph. Supports simple HTML formatted text. For more information about formatting text, see <https://developers.google.com/workspace/chat/format-messages#card-formatting Formatting text in Google Chat apps> and <https://developers.google.com/apps-script/add-ons/concepts/widgets#text_formatting Formatting text in Google Workspace add-ons>. For example, the following JSON creates a bolded text: @\"textParagraph\": { \"text\": \" *bold text*\" }@
     textParagraph :: (Core.Maybe GoogleAppsCardV1TextParagraph)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3967,13 +4117,13 @@ instance Core.ToJSON GoogleAppsCardV1Widget where
           ]
       )
 
--- | The supported widgets that you can include in a column. <https://developers.google.com/workspace/extend Google Workspace Add-ons and Chat apps>
+-- | The supported widgets that you can include in a column. <https://developers.google.com/workspace/extend Google Workspace add-ons and Chat apps>
 --
 -- /See:/ 'newGoogleAppsCardV1Widgets' smart constructor.
 data GoogleAppsCardV1Widgets = GoogleAppsCardV1Widgets
   { -- | ButtonList widget.
     buttonList :: (Core.Maybe GoogleAppsCardV1ButtonList),
-    -- | ChipList widget. <https://developers.google.com/workspace/chat Google Chat apps>:
+    -- | ChipList widget.
     chipList :: (Core.Maybe GoogleAppsCardV1ChipList),
     -- | DateTimePicker widget.
     dateTimePicker :: (Core.Maybe GoogleAppsCardV1DateTimePicker),
@@ -5698,11 +5848,11 @@ instance Core.ToJSON SetUpSpaceRequest where
           ]
       )
 
--- | A <https://developers.google.com/workspace/chat/slash-commands slash command> in Google Chat.
+-- | Metadata about a <https://developers.google.com/workspace/chat/commands slash command> in Google Chat.
 --
 -- /See:/ 'newSlashCommand' smart constructor.
 newtype SlashCommand = SlashCommand
-  { -- | The ID of the slash command invoked.
+  { -- | The ID of the slash command.
     commandId :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5806,9 +5956,9 @@ data Space = Space
     membershipCount :: (Core.Maybe MembershipCount),
     -- | Identifier. Resource name of the space. Format: @spaces\/{space}@ Where @{space}@ represents the system-assigned ID for the space. You can obtain the space ID by calling the <https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/list spaces.list()> method or from the space URL. For example, if the space URL is @https:\/\/mail.google.com\/mail\/u\/0\/#chat\/space\/AAAAAAAAA@, the space ID is @AAAAAAAAA@.
     name :: (Core.Maybe Core.Text),
-    -- | Optional. Space permission settings for existing spaces. Input for updating exact space permission settings, where existing permission settings are replaced. Output lists current permission settings.
+    -- | Optional. Space permission settings for existing spaces. Input for updating exact space permission settings, where existing permission settings are replaced. Output lists current permission settings. Reading and updating permission settings supports: - In <https://developers.google.com/workspace/preview Developer Preview>, <https://developers.google.com/workspace/chat/authenticate-authorize-chat-app App authentication> with <https://support.google.com/a?p=chat-app-auth administrator approval> with the @chat.app.spaces@ scope. Only populated and settable when the Chat app created the space. - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user User authentication>
     permissionSettings :: (Core.Maybe PermissionSettings),
-    -- | Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the @PermissionSettings@ field.
+    -- | Optional. Input only. Predefined space permission settings, input only when creating a space. If the field is not set, a collaboration space is created. After you create the space, settings are populated in the @PermissionSettings@ field. Setting predefined permission settings supports: - In <https://developers.google.com/workspace/preview Developer Preview>, <https://developers.google.com/workspace/chat/authenticate-authorize-chat-app App authentication> with <https://support.google.com/a?p=chat-app-auth administrator approval> with the @chat.app.spaces@ or @chat.app.spaces.create@ scopes. - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user User authentication>
     predefinedPermissionSettings :: (Core.Maybe Space_PredefinedPermissionSettings),
     -- | Optional. Whether the space is a DM between a Chat app and a single human.
     singleUserBotDm :: (Core.Maybe Core.Bool),
@@ -6156,6 +6306,50 @@ instance Core.ToJSON SpaceEvent where
             ("spaceBatchUpdatedEventData" Core..=)
               Core.<$> spaceBatchUpdatedEventData,
             ("spaceUpdatedEventData" Core..=) Core.<$> spaceUpdatedEventData
+          ]
+      )
+
+-- | The notification setting of a user in a space.
+--
+-- /See:/ 'newSpaceNotificationSetting' smart constructor.
+data SpaceNotificationSetting = SpaceNotificationSetting
+  { -- | The space notification mute setting.
+    muteSetting :: (Core.Maybe SpaceNotificationSetting_MuteSetting),
+    -- | Identifier. The resource name of the space notification setting. Format: @users\/{user}\/spaces\/{space}\/spaceNotificationSetting@.
+    name :: (Core.Maybe Core.Text),
+    -- | The notification setting.
+    notificationSetting :: (Core.Maybe SpaceNotificationSetting_NotificationSetting)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SpaceNotificationSetting' with the minimum fields required to make a request.
+newSpaceNotificationSetting ::
+  SpaceNotificationSetting
+newSpaceNotificationSetting =
+  SpaceNotificationSetting
+    { muteSetting = Core.Nothing,
+      name = Core.Nothing,
+      notificationSetting = Core.Nothing
+    }
+
+instance Core.FromJSON SpaceNotificationSetting where
+  parseJSON =
+    Core.withObject
+      "SpaceNotificationSetting"
+      ( \o ->
+          SpaceNotificationSetting
+            Core.<$> (o Core..:? "muteSetting")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "notificationSetting")
+      )
+
+instance Core.ToJSON SpaceNotificationSetting where
+  toJSON SpaceNotificationSetting {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("muteSetting" Core..=) Core.<$> muteSetting,
+            ("name" Core..=) Core.<$> name,
+            ("notificationSetting" Core..=) Core.<$> notificationSetting
           ]
       )
 

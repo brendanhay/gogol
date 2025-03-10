@@ -69,9 +69,9 @@ data RedisProjectsLocationsClustersPatch = RedisProjectsLocationsClustersPatch
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: Cluster,
-    -- | Idempotent request UUID.
+    -- | Optional. Idempotent request UUID.
     requestId :: (Core.Maybe Core.Text),
-    -- | Required. Mask of fields to update. At least one path must be supplied in this field. The elements of the repeated paths field may only include these fields from Cluster: * @size_gb@ * @replica_count@
+    -- | Required. Mask of fields to update. At least one path must be supplied in this field. The elements of the repeated paths field may only include these fields from Cluster: * @size_gb@ * @replica_count@ * @cluster_endpoints@
     updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),

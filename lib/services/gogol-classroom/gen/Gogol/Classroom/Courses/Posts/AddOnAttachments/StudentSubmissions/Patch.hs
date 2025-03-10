@@ -139,7 +139,7 @@ instance
   type
     Scopes
       ClassroomCoursesPostsAddOnAttachmentsStudentSubmissionsPatch =
-      '[]
+      '[Classroom'Addons'Teacher]
   requestClient
     ClassroomCoursesPostsAddOnAttachmentsStudentSubmissionsPatch {..} =
       go

@@ -28,27 +28,28 @@ import Control.Monad.Catch
 import Control.Monad.Trans.Resource
 import Data.Aeson
 import Data.ByteString (ByteString)
-import qualified Data.ByteString.Char8 as BS8
-import qualified Data.ByteString.Lazy as LBS
-import qualified Data.CaseInsensitive as CI
+import Data.ByteString.Char8 qualified as BS8
+import Data.ByteString.Lazy qualified as LBS
+import Data.CaseInsensitive qualified as CI
 import Data.Coerce
 import Data.Conduit
-import qualified Data.Conduit.Combinators as Conduit
+import Data.Conduit.Combinators qualified as Conduit
 import Data.DList (DList)
-import qualified Data.DList as DList
+import Data.DList qualified as DList
 import Data.Data
-import Data.Foldable (foldl')
+import Data.Foldable qualified as Foldable
+import Data.Kind (Type)
 import Data.String
 import Data.Text (Text)
-import qualified Data.Text.Encoding as Text
+import Data.Text.Encoding qualified as Text
 import Data.Text.Lazy.Builder (Builder)
-import qualified Data.Text.Lazy.Builder as Build
+import Data.Text.Lazy.Builder qualified as Build
 import GHC.Generics
 import GHC.TypeLits
 import Network.HTTP.Client (HttpException, RequestBody (..))
 import Network.HTTP.Media hiding (Accept)
 import Network.HTTP.Types hiding (Header)
-import qualified Network.HTTP.Types as HTTP
+import Network.HTTP.Types qualified as HTTP
 import Servant.API hiding (Stream)
 
 data AltJSON = AltJSON
@@ -425,13 +426,13 @@ instance (FromJSON a) => FromStream JSON a where
       Right x -> pure $! Right x
 
 class GoogleRequest a where
-  type Rs a :: *
+  type Rs a :: Type
   type Scopes a :: [Symbol]
 
   requestClient :: a -> GClient (Rs a)
 
 class GoogleClient fn where
-  type Fn fn :: *
+  type Fn fn :: Type
 
   buildClient :: Proxy fn -> Request -> Fn fn
 
@@ -441,7 +442,7 @@ data Captures (s :: Symbol) a
 -- | Form a Google style sub-resource, such as @/<capture>:<mode>@.
 data CaptureMode (s :: Symbol) (m :: Symbol) a
 
-data MultipartRelated (cs :: [*]) m
+data MultipartRelated (cs :: [Type]) m
 
 instance
   ( ToBody c m,
@@ -544,7 +545,7 @@ instance
   where
   type Fn (QueryParams s a :> fn) = [a] -> Fn fn
 
-  buildClient Proxy rq = buildClient (Proxy :: Proxy fn) . foldl' go rq
+  buildClient Proxy rq = buildClient (Proxy :: Proxy fn) . Foldable.foldl' go rq
     where
       go r = appendQuery r k . Just . toQueryParam
 

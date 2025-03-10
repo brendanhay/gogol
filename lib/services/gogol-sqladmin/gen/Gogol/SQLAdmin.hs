@@ -36,6 +36,31 @@ module Gogol.SQLAdmin
 
     -- * Resources
 
+    -- ** sql.Backups.CreateBackup
+    SqlBackupsCreateBackupResource,
+    SqlBackupsCreateBackup (..),
+    newSqlBackupsCreateBackup,
+
+    -- ** sql.Backups.DeleteBackup
+    SqlBackupsDeleteBackupResource,
+    SqlBackupsDeleteBackup (..),
+    newSqlBackupsDeleteBackup,
+
+    -- ** sql.Backups.GetBackup
+    SqlBackupsGetBackupResource,
+    SqlBackupsGetBackup (..),
+    newSqlBackupsGetBackup,
+
+    -- ** sql.Backups.ListBackups
+    SqlBackupsListBackupsResource,
+    SqlBackupsListBackups (..),
+    newSqlBackupsListBackups,
+
+    -- ** sql.Backups.UpdateBackup
+    SqlBackupsUpdateBackupResource,
+    SqlBackupsUpdateBackup (..),
+    newSqlBackupsUpdateBackup,
+
     -- ** sql.backupRuns.delete
     SqlBackupRunsDeleteResource,
     SqlBackupRunsDelete (..),
@@ -379,6 +404,19 @@ module Gogol.SQLAdmin
     AvailableDatabaseVersion (..),
     newAvailableDatabaseVersion,
 
+    -- ** Backup
+    Backup (..),
+    newBackup,
+
+    -- ** Backup_BackupKind
+    Backup_BackupKind (..),
+
+    -- ** Backup_State
+    Backup_State (..),
+
+    -- ** Backup_Type
+    Backup_Type (..),
+
     -- ** BackupConfiguration
     BackupConfiguration (..),
     newBackupConfiguration,
@@ -516,6 +554,16 @@ module Gogol.SQLAdmin
     DiskEncryptionStatus (..),
     newDiskEncryptionStatus,
 
+    -- ** DnsNameMapping
+    DnsNameMapping (..),
+    newDnsNameMapping,
+
+    -- ** DnsNameMapping_ConnectionType
+    DnsNameMapping_ConnectionType (..),
+
+    -- ** DnsNameMapping_DnsScope
+    DnsNameMapping_DnsScope (..),
+
     -- ** Empty
     Empty (..),
     newEmpty,
@@ -549,6 +597,10 @@ module Gogol.SQLAdmin
     -- ** ExportContext_SqlExportOptions_PostgresExportOptions
     ExportContext_SqlExportOptions_PostgresExportOptions (..),
     newExportContext_SqlExportOptions_PostgresExportOptions,
+
+    -- ** ExportContext_TdeExportOptions
+    ExportContext_TdeExportOptions (..),
+    newExportContext_TdeExportOptions,
 
     -- ** ExternalSyncSelectedObject
     ExternalSyncSelectedObject (..),
@@ -613,6 +665,10 @@ module Gogol.SQLAdmin
     -- ** ImportContext_SqlImportOptions_PostgresImportOptions
     ImportContext_SqlImportOptions_PostgresImportOptions (..),
     newImportContext_SqlImportOptions_PostgresImportOptions,
+
+    -- ** ImportContext_TdeImportOptions
+    ImportContext_TdeImportOptions (..),
+    newImportContext_TdeImportOptions,
 
     -- ** InsightsConfig
     InsightsConfig (..),
@@ -682,6 +738,10 @@ module Gogol.SQLAdmin
     InstancesTruncateLogRequest (..),
     newInstancesTruncateLogRequest,
 
+    -- ** Interval
+    Interval (..),
+    newInterval,
+
     -- ** IpConfiguration
     IpConfiguration (..),
     newIpConfiguration,
@@ -698,6 +758,10 @@ module Gogol.SQLAdmin
 
     -- ** IpMapping_Type
     IpMapping_Type (..),
+
+    -- ** ListBackupsResponse
+    ListBackupsResponse (..),
+    newListBackupsResponse,
 
     -- ** LocationPreference
     LocationPreference (..),
@@ -993,6 +1057,11 @@ import Gogol.SQLAdmin.Sql.BackupRuns.Delete
 import Gogol.SQLAdmin.Sql.BackupRuns.Get
 import Gogol.SQLAdmin.Sql.BackupRuns.Insert
 import Gogol.SQLAdmin.Sql.BackupRuns.List
+import Gogol.SQLAdmin.Sql.Backups.CreateBackup
+import Gogol.SQLAdmin.Sql.Backups.DeleteBackup
+import Gogol.SQLAdmin.Sql.Backups.GetBackup
+import Gogol.SQLAdmin.Sql.Backups.ListBackups
+import Gogol.SQLAdmin.Sql.Backups.UpdateBackup
 import Gogol.SQLAdmin.Sql.Connect.GenerateEphemeral
 import Gogol.SQLAdmin.Sql.Connect.Get
 import Gogol.SQLAdmin.Sql.Databases.Delete

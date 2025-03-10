@@ -132,7 +132,7 @@ import Gogol.TextToSpeech.Internal.Sum
 --
 -- /See:/ 'newAdvancedVoiceOptions' smart constructor.
 newtype AdvancedVoiceOptions = AdvancedVoiceOptions
-  { -- | Only for Journey voices. If false, the synthesis will be context aware and have higher latency.
+  { -- | Only for Journey voices. If false, the synthesis is context aware and has a higher latency.
     lowLatencyJourneySynthesis :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -246,7 +246,7 @@ instance Core.ToJSON CancelOperationRequest where
 data CustomPronunciationParams = CustomPronunciationParams
   { -- | The phonetic encoding of the phrase.
     phoneticEncoding :: (Core.Maybe CustomPronunciationParams_PhoneticEncoding),
-    -- | The phrase to which the customization will be applied. The phrase can be multiple words (in the case of proper nouns etc), but should not span to a whole sentence.
+    -- | The phrase to which the customization is applied. The phrase can be multiple words, such as proper nouns, but shouldn\'t span the length of the sentence.
     phrase :: (Core.Maybe Core.Text),
     -- | The pronunciation of the phrase. This must be in the phonetic encoding specified above.
     pronunciation :: (Core.Maybe Core.Text)
@@ -288,7 +288,7 @@ instance Core.ToJSON CustomPronunciationParams where
 --
 -- /See:/ 'newCustomPronunciations' smart constructor.
 newtype CustomPronunciations = CustomPronunciations
-  { -- | The pronunciation customizations to be applied.
+  { -- | The pronunciation customizations are applied.
     pronunciations :: (Core.Maybe [CustomPronunciationParams])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -687,7 +687,7 @@ instance Core.ToJSON Status_DetailsItem where
 --
 -- /See:/ 'newSynthesisInput' smart constructor.
 data SynthesisInput = SynthesisInput
-  { -- | Optional. The pronunciation customizations to be applied to the input. If this is set, the input will be synthesized using the given pronunciation customizations. The initial support will be for EFIGS (English, French, Italian, German, Spanish) languages, as provided in VoiceSelectionParams. Journey and Instant Clone voices are not supported yet. In order to customize the pronunciation of a phrase, there must be an exact match of the phrase in the input types. If using SSML, the phrase must not be inside a phoneme tag (entirely or partially).
+  { -- | Optional. The pronunciation customizations are applied to the input. If this is set, the input is synthesized using the given pronunciation customizations. The initial support is for English, French, Italian, German, and Spanish (EFIGS) languages, as provided in VoiceSelectionParams. Journey and Instant Clone voices aren\'t supported. In order to customize the pronunciation of a phrase, there must be an exact match of the phrase in the input types. If using SSML, the phrase must not be inside a phoneme tag.
     customPronunciations :: (Core.Maybe CustomPronunciations),
     -- | The multi-speaker input to be synthesized. Only applicable for multi-speaker synthesis.
     multiSpeakerMarkup :: (Core.Maybe MultiSpeakerMarkup),
@@ -902,7 +902,7 @@ instance Core.ToJSON SynthesizeSpeechResponse where
     Core.object
       (Core.catMaybes [("audioContent" Core..=) Core.<$> audioContent])
 
--- | A Multi-speaker turn.
+-- | A multi-speaker turn.
 --
 -- /See:/ 'newTurn' smart constructor.
 data Turn = Turn
@@ -1024,7 +1024,7 @@ data VoiceSelectionParams = VoiceSelectionParams
     name :: (Core.Maybe Core.Text),
     -- | The preferred gender of the voice. If not set, the service will choose a voice based on the other parameters such as language_code and name. Note that this is only a preference, not requirement; if a voice of the appropriate gender is not available, the synthesizer should substitute a voice with a different gender rather than failing the request.
     ssmlGender :: (Core.Maybe VoiceSelectionParams_SsmlGender),
-    -- | Optional. The configuration for a voice clone. If [VoiceCloneParams.voice/clone/key] is set, the service will choose the voice clone matching the specified configuration.
+    -- | Optional. The configuration for a voice clone. If [VoiceCloneParams.voice/clone/key] is set, the service chooses the voice clone matching the specified configuration.
     voiceClone :: (Core.Maybe VoiceCloneParams)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

@@ -216,6 +216,10 @@ module Gogol.Dataproc.Types
     Binding (..),
     newBinding,
 
+    -- ** BuildInfo
+    BuildInfo (..),
+    newBuildInfo,
+
     -- ** CancelJobRequest
     CancelJobRequest (..),
     newCancelJobRequest,
@@ -387,6 +391,10 @@ module Gogol.Dataproc.Types
     Expr (..),
     newExpr,
 
+    -- ** FallbackReason
+    FallbackReason (..),
+    newFallbackReason,
+
     -- ** FlinkJob
     FlinkJob (..),
     newFlinkJob,
@@ -405,6 +413,10 @@ module Gogol.Dataproc.Types
 
     -- ** GceClusterConfig_PrivateIpv6GoogleAccess
     GceClusterConfig_PrivateIpv6GoogleAccess (..),
+
+    -- ** GceClusterConfig_ResourceManagerTags
+    GceClusterConfig_ResourceManagerTags (..),
+    newGceClusterConfig_ResourceManagerTags,
 
     -- ** GetIamPolicyRequest
     GetIamPolicyRequest (..),
@@ -681,6 +693,14 @@ module Gogol.Dataproc.Types
     -- ** NamespacedGkeDeploymentTarget
     NamespacedGkeDeploymentTarget (..),
     newNamespacedGkeDeploymentTarget,
+
+    -- ** NativeBuildInfoUiData
+    NativeBuildInfoUiData (..),
+    newNativeBuildInfoUiData,
+
+    -- ** NativeSqlExecutionUiData
+    NativeSqlExecutionUiData (..),
+    newNativeSqlExecutionUiData,
 
     -- ** NodeGroup
     NodeGroup (..),

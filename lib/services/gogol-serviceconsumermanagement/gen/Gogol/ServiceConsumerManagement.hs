@@ -125,6 +125,14 @@ module Gogol.ServiceConsumerManagement
     ApplyTenantProjectConfigRequest (..),
     newApplyTenantProjectConfigRequest,
 
+    -- ** Aspect
+    Aspect (..),
+    newAspect,
+
+    -- ** Aspect_Spec
+    Aspect_Spec (..),
+    newAspect_Spec,
+
     -- ** AttachTenantProjectRequest
     AttachTenantProjectRequest (..),
     newAttachTenantProjectRequest,

@@ -108,6 +108,15 @@ module Gogol.AdSense.Internal.Sum
         ..
       ),
 
+    -- * PolicyTopic_Type
+    PolicyTopic_Type
+      ( PolicyTopic_Type_POLICYTOPICTYPEUNSPECIFIED,
+        PolicyTopic_Type_Policy,
+        PolicyTopic_Type_ADVERTISERPREFERENCE,
+        PolicyTopic_Type_Regulatory,
+        ..
+      ),
+
     -- * Site_State
     Site_State
       ( Site_State_STATEUNSPECIFIED,
@@ -751,6 +760,43 @@ pattern PolicyIssue_EntityType_Page = PolicyIssue_EntityType "PAGE"
   PolicyIssue_EntityType
   #-}
 
+-- | Optional. The type of policy topic. For example, \"POLICY\" represents all the policy topics that are related to the Google Publisher Policy (GPP). See https:\/\/support.google.com\/adsense\/answer\/15689616.
+newtype PolicyTopic_Type = PolicyTopic_Type {fromPolicyTopic_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The type is unspecified.
+pattern PolicyTopic_Type_POLICYTOPICTYPEUNSPECIFIED :: PolicyTopic_Type
+pattern PolicyTopic_Type_POLICYTOPICTYPEUNSPECIFIED = PolicyTopic_Type "POLICY_TOPIC_TYPE_UNSPECIFIED"
+
+-- | Topics that are primarily related to the Google Publisher Policy (GPP) https:\/\/support.google.com\/publisherpolicies\/answer\/10502938 or the Google Publisher Restrictions (GPR) policies https:\/\/support.google.com\/publisherpolicies\/answer\/10437795.
+pattern PolicyTopic_Type_Policy :: PolicyTopic_Type
+pattern PolicyTopic_Type_Policy = PolicyTopic_Type "POLICY"
+
+-- | Topics that are related to advertiser preferences. Certain advertisers may choose not to bid on content that are labeled with certain policies.
+pattern PolicyTopic_Type_ADVERTISERPREFERENCE :: PolicyTopic_Type
+pattern PolicyTopic_Type_ADVERTISERPREFERENCE = PolicyTopic_Type "ADVERTISER_PREFERENCE"
+
+-- | Any topics that are a result of a country or regional regulatory requirement body.
+pattern PolicyTopic_Type_Regulatory :: PolicyTopic_Type
+pattern PolicyTopic_Type_Regulatory = PolicyTopic_Type "REGULATORY"
+
+{-# COMPLETE
+  PolicyTopic_Type_POLICYTOPICTYPEUNSPECIFIED,
+  PolicyTopic_Type_Policy,
+  PolicyTopic_Type_ADVERTISERPREFERENCE,
+  PolicyTopic_Type_Regulatory,
+  PolicyTopic_Type
+  #-}
+
 -- | Output only. State of a site.
 newtype Site_State = Site_State {fromSite_State :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -923,7 +969,7 @@ pattern AccountsReportsGenerateDimensions_CUSTOMCHANNELNAME = AccountsReportsGen
 pattern AccountsReportsGenerateDimensions_CUSTOMCHANNELID :: AccountsReportsGenerateDimensions
 pattern AccountsReportsGenerateDimensions_CUSTOMCHANNELID = AccountsReportsGenerateDimensions "CUSTOM_CHANNEL_ID"
 
--- | Unique ID of a hosted client\'s custom channel.
+-- | Not supported.
 pattern AccountsReportsGenerateDimensions_HOSTEDCUSTOMCHANNELID :: AccountsReportsGenerateDimensions
 pattern AccountsReportsGenerateDimensions_HOSTEDCUSTOMCHANNELID = AccountsReportsGenerateDimensions "HOSTED_CUSTOM_CHANNEL_ID"
 
@@ -1476,7 +1522,7 @@ pattern AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELNAME = AccountsReports
 pattern AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELID :: AccountsReportsGenerateCsvDimensions
 pattern AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELID = AccountsReportsGenerateCsvDimensions "CUSTOM_CHANNEL_ID"
 
--- | Unique ID of a hosted client\'s custom channel.
+-- | Not supported.
 pattern AccountsReportsGenerateCsvDimensions_HOSTEDCUSTOMCHANNELID :: AccountsReportsGenerateCsvDimensions
 pattern AccountsReportsGenerateCsvDimensions_HOSTEDCUSTOMCHANNELID = AccountsReportsGenerateCsvDimensions "HOSTED_CUSTOM_CHANNEL_ID"
 

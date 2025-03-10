@@ -327,6 +327,7 @@ module Gogol.ContainerAnalysis.Internal.Sum
       ( ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_None,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA256,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_MD5,
+        ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_GO_MODULE_H1,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA512,
         ..
       ),
@@ -367,6 +368,7 @@ module Gogol.ContainerAnalysis.Internal.Sum
       ( ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_None,
         ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_SHA256,
         ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_MD5,
+        ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_GO_MODULE_H1,
         ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_SHA512,
         ..
       ),
@@ -1794,6 +1796,10 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenance
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_MD5 :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_MD5 = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem "MD5"
 
+-- | Dirhash of a Go module\'s source code which is then hex-encoded.
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_GO_MODULE_H1 :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_GO_MODULE_H1 = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem "GO_MODULE_H1"
+
 -- | Use a sha512 hash.
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA512 :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA512 = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem "SHA512"
@@ -1802,6 +1808,7 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenance
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_None,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA256,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_MD5,
+  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_GO_MODULE_H1,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA512,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem
   #-}
@@ -1962,6 +1969,10 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_SHA256 = Containera
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_MD5 :: ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_MD5 = ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type "MD5"
 
+-- | Dirhash of a Go module\'s source code which is then hex-encoded.
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_GO_MODULE_H1 :: ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_GO_MODULE_H1 = ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type "GO_MODULE_H1"
+
 -- | Use a sha512 hash.
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_SHA512 :: ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_SHA512 = ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type "SHA512"
@@ -1970,6 +1981,7 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_SHA512 = Containera
   ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_None,
   ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_SHA256,
   ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_MD5,
+  ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_GO_MODULE_H1,
   ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_SHA512,
   ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type
   #-}

@@ -875,6 +875,9 @@ module Gogol.DialogFlow
     -- ** GoogleCloudDialogflowCxV3DataStoreConnection_DataStoreType
     GoogleCloudDialogflowCxV3DataStoreConnection_DataStoreType (..),
 
+    -- ** GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode
+    GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode (..),
+
     -- ** GoogleCloudDialogflowCxV3DataStoreConnectionSignals
     GoogleCloudDialogflowCxV3DataStoreConnectionSignals (..),
     newGoogleCloudDialogflowCxV3DataStoreConnectionSignals,
@@ -1968,6 +1971,9 @@ module Gogol.DialogFlow
     -- ** GoogleCloudDialogflowCxV3beta1DataStoreConnection_DataStoreType
     GoogleCloudDialogflowCxV3beta1DataStoreConnection_DataStoreType (..),
 
+    -- ** GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode
+    GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode (..),
+
     -- ** GoogleCloudDialogflowCxV3beta1DeployFlowMetadata
     GoogleCloudDialogflowCxV3beta1DeployFlowMetadata (..),
     newGoogleCloudDialogflowCxV3beta1DeployFlowMetadata,
@@ -2827,6 +2833,17 @@ module Gogol.DialogFlow
     -- ** GoogleCloudDialogflowV2SmartReplyModelMetadata_TrainingModelType
     GoogleCloudDialogflowV2SmartReplyModelMetadata_TrainingModelType (..),
 
+    -- ** GoogleCloudDialogflowV2SpeechWordInfo
+    GoogleCloudDialogflowV2SpeechWordInfo (..),
+    newGoogleCloudDialogflowV2SpeechWordInfo,
+
+    -- ** GoogleCloudDialogflowV2StreamingRecognitionResult
+    GoogleCloudDialogflowV2StreamingRecognitionResult (..),
+    newGoogleCloudDialogflowV2StreamingRecognitionResult,
+
+    -- ** GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType
+    GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType (..),
+
     -- ** GoogleCloudDialogflowV2SuggestArticlesResponse
     GoogleCloudDialogflowV2SuggestArticlesResponse (..),
     newGoogleCloudDialogflowV2SuggestArticlesResponse,
@@ -3352,6 +3369,17 @@ module Gogol.DialogFlow
     GoogleCloudDialogflowV2beta1SmartReplyAnswer (..),
     newGoogleCloudDialogflowV2beta1SmartReplyAnswer,
 
+    -- ** GoogleCloudDialogflowV2beta1SpeechWordInfo
+    GoogleCloudDialogflowV2beta1SpeechWordInfo (..),
+    newGoogleCloudDialogflowV2beta1SpeechWordInfo,
+
+    -- ** GoogleCloudDialogflowV2beta1StreamingRecognitionResult
+    GoogleCloudDialogflowV2beta1StreamingRecognitionResult (..),
+    newGoogleCloudDialogflowV2beta1StreamingRecognitionResult,
+
+    -- ** GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType
+    GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType (..),
+
     -- ** GoogleCloudDialogflowV2beta1SuggestArticlesResponse
     GoogleCloudDialogflowV2beta1SuggestArticlesResponse (..),
     newGoogleCloudDialogflowV2beta1SuggestArticlesResponse,
@@ -3375,6 +3403,13 @@ module Gogol.DialogFlow
     -- ** GoogleCloudDialogflowV2beta1SuggestionResult
     GoogleCloudDialogflowV2beta1SuggestionResult (..),
     newGoogleCloudDialogflowV2beta1SuggestionResult,
+
+    -- ** GoogleCloudDialogflowV2beta1TelephonyDtmfEvents
+    GoogleCloudDialogflowV2beta1TelephonyDtmfEvents (..),
+    newGoogleCloudDialogflowV2beta1TelephonyDtmfEvents,
+
+    -- ** GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+    GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem (..),
 
     -- ** GoogleCloudDialogflowV2beta1WebhookRequest
     GoogleCloudDialogflowV2beta1WebhookRequest (..),

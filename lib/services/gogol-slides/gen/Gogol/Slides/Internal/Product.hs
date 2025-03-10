@@ -692,15 +692,15 @@ instance Core.ToJSON AutoText where
           ]
       )
 
--- | The autofit properties of a Shape.
+-- | The autofit properties of a Shape. This property is only set for shapes that allow text.
 --
 -- /See:/ 'newAutofit' smart constructor.
 data Autofit = Autofit
-  { -- | The autofit type of the shape. If the autofit type is AUTOFIT/TYPE/UNSPECIFIED, the autofit type is inherited from a parent placeholder if it exists. The field is automatically set to NONE if a request is made that might affect text fitting within its bounding text box. In this case the font/scale is applied to the font/size and the line/spacing/reduction is applied to the line_spacing. Both properties are also reset to default values.
+  { -- | The autofit type of the shape. If the autofit type is AUTOFIT/TYPE/UNSPECIFIED, the autofit type is inherited from a parent placeholder if it exists. The field is automatically set to NONE if a request is made that might affect text fitting within its bounding text box. In this case, the font/scale is applied to the font/size and the line/spacing/reduction is applied to the line_spacing. Both properties are also reset to default values.
     autofitType :: (Core.Maybe Autofit_AutofitType),
-    -- | The font scale applied to the shape. For shapes with autofit/type NONE or SHAPE/AUTOFIT, this value is the default value of 1. For TEXT/AUTOFIT, this value multiplied by the font/size gives the font size that is rendered in the editor. This property is read-only.
+    -- | The font scale applied to the shape. For shapes with autofit/type NONE or SHAPE/AUTOFIT, this value is the default value of 1. For TEXT/AUTOFIT, this value multiplied by the font/size gives the font size that\'s rendered in the editor. This property is read-only.
     fontScale :: (Core.Maybe Core.Double),
-    -- | The line spacing reduction applied to the shape. For shapes with autofit/type NONE or SHAPE/AUTOFIT, this value is the default value of 0. For TEXT/AUTOFIT, this value subtracted from the line/spacing gives the line spacing that is rendered in the editor. This property is read-only.
+    -- | The line spacing reduction applied to the shape. For shapes with autofit/type NONE or SHAPE/AUTOFIT, this value is the default value of 0. For TEXT/AUTOFIT, this value subtracted from the line/spacing gives the line spacing that\'s rendered in the editor. This property is read-only.
     lineSpacingReduction :: (Core.Maybe Core.Double)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2415,7 +2415,7 @@ instance Core.ToJSON Line where
 data LineConnection = LineConnection
   { -- | The object ID of the connected page element. Some page elements, such as groups, tables, and lines do not have connection sites and therefore cannot be connected to a connector line.
     connectedObjectId :: (Core.Maybe Core.Text),
-    -- | The index of the connection site on the connected page element. In most cases, it corresponds to the predefined connection site index from the ECMA-376 standard. More information on those connection sites can be found in the description of the \"cnx\" attribute in section 20.1.9.9 and Annex H. \"Predefined DrawingML Shape and Text Geometries\" of \"Office Open XML File Formats-Fundamentals and Markup Language Reference\", part 1 of [ECMA-376 5th edition] (http:\/\/www.ecma-international.org\/publications\/standards\/Ecma-376.htm). The position of each connection site can also be viewed from Slides editor.
+    -- | The index of the connection site on the connected page element. In most cases, it corresponds to the predefined connection site index from the ECMA-376 standard. More information on those connection sites can be found in both the description of the \"cxn\" attribute in section 20.1.9.9 and \"Annex H. Example Predefined DrawingML Shape and Text Geometries\" of \"Office Open XML File Formats - Fundamentals and Markup Language Reference\", part 1 of <https://ecma-international.org/publications-and-standards/standards/ecma-376/ ECMA-376 5th edition>. The position of each connection site can also be viewed from Slides editor.
     connectionSiteIndex :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4320,7 +4320,7 @@ instance Core.ToJSON Shadow where
           ]
       )
 
--- | A PageElement kind representing a generic shape that does not have a more specific classification.
+-- | A PageElement kind representing a generic shape that doesn\'t have a more specific classification. For more information, see <https://developers.google.com/slides/api/guides/transform Size and position page elements>.
 --
 -- /See:/ 'newShape' smart constructor.
 data Shape = Shape

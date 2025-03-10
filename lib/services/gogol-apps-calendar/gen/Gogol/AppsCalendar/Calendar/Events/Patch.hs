@@ -111,7 +111,11 @@ instance Core.GoogleRequest CalendarEventsPatch where
   type Rs CalendarEventsPatch = Event
   type
     Scopes CalendarEventsPatch =
-      '[Calendar'FullControl, Calendar'Events]
+      '[ Calendar'FullControl,
+         Calendar'App'Created,
+         Calendar'Events,
+         Calendar'Events'Owned
+       ]
   requestClient CalendarEventsPatch {..} =
     go
       calendarId

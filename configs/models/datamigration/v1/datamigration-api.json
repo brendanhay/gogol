@@ -761,13 +761,15 @@
                         "DATABASE_ENTITY_VIEW_UNSPECIFIED",
                         "DATABASE_ENTITY_VIEW_BASIC",
                         "DATABASE_ENTITY_VIEW_FULL",
-                        "DATABASE_ENTITY_VIEW_ROOT_SUMMARY"
+                        "DATABASE_ENTITY_VIEW_ROOT_SUMMARY",
+                        "DATABASE_ENTITY_VIEW_FULL_COMPACT"
                       ],
                       "enumDescriptions": [
                         "Unspecified view. Defaults to basic view.",
                         "Default view. Does not return DDLs or Issues.",
                         "Return full entity details including mappings, ddl and issues.",
-                        "Top-most (Database, Schema) nodes which are returned contains summary details for their decendents such as the number of entities per type and issues rollups. When this view is used, only a single page of result is returned and the page_size property of the request is ignored. The returned page will only include the top-most node types."
+                        "Top-most (Database, Schema) nodes which are returned contains summary details for their descendants such as the number of entities per type and issues rollups. When this view is used, only a single page of result is returned and the page_size property of the request is ignored. The returned page will only include the top-most node types.",
+                        "Returns full entity details except for ddls and schema custom features."
                       ],
                       "location": "query",
                       "type": "string"
@@ -2332,7 +2334,7 @@
       }
     }
   },
-  "revision": "20241202",
+  "revision": "20250226",
   "rootUrl": "https://datamigration.googleapis.com/",
   "schemas": {
     "AlloyDbConnectionProfile": {
@@ -2722,22 +2724,34 @@
           "$ref": "DataCacheConfig",
           "description": "Optional. Data cache is an optional feature available for Cloud SQL for MySQL Enterprise Plus edition only. For more information on data cache, see [Data cache overview](https://cloud.google.com/sql/help/mysql-data-cache) in Cloud SQL documentation."
         },
+        "dataDiskProvisionedIops": {
+          "description": "Optional. Provisioned number of I/O operations per second for the data disk. This field is only used for hyperdisk-balanced disk types.",
+          "format": "int64",
+          "type": "string"
+        },
+        "dataDiskProvisionedThroughput": {
+          "description": "Optional. Provisioned throughput measured in MiB per second for the data disk. This field is only used for hyperdisk-balanced disk types.",
+          "format": "int64",
+          "type": "string"
+        },
         "dataDiskSizeGb": {
           "description": "The storage capacity available to the database, in GB. The minimum (and default) size is 10GB.",
           "format": "int64",
           "type": "string"
         },
         "dataDiskType": {
-          "description": "The type of storage: `PD_SSD` (default) or `PD_HDD`.",
+          "description": "The type of storage: `PD_SSD` (default) or `PD_HDD` or `HYPERDISK_BALANCED`.",
           "enum": [
             "SQL_DATA_DISK_TYPE_UNSPECIFIED",
             "PD_SSD",
-            "PD_HDD"
+            "PD_HDD",
+            "HYPERDISK_BALANCED"
           ],
           "enumDescriptions": [
             "Unspecified.",
             "SSD disk.",
-            "HDD disk."
+            "HDD disk.",
+            "A Hyperdisk Balanced data disk."
           ],
           "type": "string"
         },
@@ -2897,6 +2911,10 @@
           "description": "Comment associated with the column.",
           "type": "string"
         },
+        "computed": {
+          "description": "Is the column a computed column.",
+          "type": "boolean"
+        },
         "customFeatures": {
           "additionalProperties": {
             "description": "Properties of the object.",
@@ -3055,14 +3073,16 @@
             "CLOUDSQL",
             "RDS",
             "AURORA",
-            "ALLOYDB"
+            "ALLOYDB",
+            "AZURE_DATABASE"
           ],
           "enumDescriptions": [
             "Use this value for on-premise source database instances and ORACLE.",
             "Cloud SQL is the source instance provider.",
             "Amazon RDS is the source instance provider.",
             "Amazon Aurora is the source instance provider.",
-            "AlloyDB for PostgreSQL is the source instance provider."
+            "AlloyDB for PostgreSQL is the source instance provider.",
+            "Microsoft Azure Database for MySQL/PostgreSQL."
           ],
           "type": "string"
         },
@@ -3079,6 +3099,16 @@
             "The role is destination."
           ],
           "type": "string"
+        },
+        "satisfiesPzi": {
+          "description": "Output only. Reserved for future use.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "satisfiesPzs": {
+          "description": "Output only. Reserved for future use.",
+          "readOnly": true,
+          "type": "boolean"
         },
         "sqlserver": {
           "$ref": "SqlServerConnectionProfile",
@@ -3497,14 +3527,16 @@
             "CLOUDSQL",
             "RDS",
             "AURORA",
-            "ALLOYDB"
+            "ALLOYDB",
+            "AZURE_DATABASE"
           ],
           "enumDescriptions": [
             "Use this value for on-premise source database instances and ORACLE.",
             "Cloud SQL is the source instance provider.",
             "Amazon RDS is the source instance provider.",
             "Amazon Aurora is the source instance provider.",
-            "AlloyDB for PostgreSQL is the source instance provider."
+            "AlloyDB for PostgreSQL is the source instance provider.",
+            "Microsoft Azure Database for MySQL/PostgreSQL."
           ],
           "type": "string"
         }
@@ -3633,8 +3665,44 @@
           "description": "The actual ddl code.",
           "type": "string"
         },
+        "ddlKind": {
+          "description": "The DDL Kind selected for apply, or UNSPECIFIED if the entity wasn't converted yet.",
+          "enum": [
+            "DDL_KIND_UNSPECIFIED",
+            "SOURCE",
+            "DETERMINISTIC",
+            "AI",
+            "USER_EDIT"
+          ],
+          "enumDescriptions": [
+            "The kind of the DDL is unknown.",
+            "DDL of the source entity",
+            "Deterministic converted DDL",
+            "Gemini AI converted DDL",
+            "User edited DDL"
+          ],
+          "type": "string"
+        },
         "ddlType": {
           "description": "Type of DDL (Create, Alter).",
+          "type": "string"
+        },
+        "editedDdlKind": {
+          "description": "If ddl_kind is USER_EDIT, this holds the DDL kind of the original content - DETERMINISTIC or AI. Otherwise, this is DDL_KIND_UNSPECIFIED.",
+          "enum": [
+            "DDL_KIND_UNSPECIFIED",
+            "SOURCE",
+            "DETERMINISTIC",
+            "AI",
+            "USER_EDIT"
+          ],
+          "enumDescriptions": [
+            "The kind of the DDL is unknown.",
+            "DDL of the source entity",
+            "Deterministic converted DDL",
+            "Gemini AI converted DDL",
+            "User edited DDL"
+          ],
           "type": "string"
         },
         "entity": {
@@ -4841,6 +4909,16 @@
           "$ref": "ReverseSshConnectivity",
           "description": "The details needed to communicate to the source over Reverse SSH tunnel connectivity."
         },
+        "satisfiesPzi": {
+          "description": "Output only. Reserved for future use.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "satisfiesPzs": {
+          "description": "Output only. Reserved for future use.",
+          "readOnly": true,
+          "type": "boolean"
+        },
         "source": {
           "description": "Required. The resource name (URI) of the source connection profile.",
           "type": "string"
@@ -5666,6 +5744,16 @@
           "description": "The name of the resource.",
           "type": "string"
         },
+        "satisfiesPzi": {
+          "description": "Output only. Reserved for future use.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "satisfiesPzs": {
+          "description": "Output only. Reserved for future use.",
+          "readOnly": true,
+          "type": "boolean"
+        },
         "state": {
           "description": "Output only. The state of the private connection.",
           "enum": [
@@ -5742,6 +5830,10 @@
         "objectsFilter": {
           "$ref": "MigrationJobObjectsConfig",
           "description": "Optional. The object filter to apply to the migration job."
+        },
+        "restartFailedObjects": {
+          "description": "Optional. If true, only failed objects will be restarted.",
+          "type": "boolean"
         },
         "skipValidation": {
           "description": "Optional. Restart the migration job without running prior configuration verification. Defaults to `false`.",
@@ -6110,7 +6202,7 @@
       "properties": {
         "objectIdentifier": {
           "$ref": "SourceObjectIdentifier",
-          "description": "The object identifier."
+          "description": "Optional. The object identifier."
         }
       },
       "type": "object"
@@ -6120,7 +6212,7 @@
       "id": "SourceObjectIdentifier",
       "properties": {
         "database": {
-          "description": "The database name. This will be required only if the object uses a database name as part of its unique identifier.",
+          "description": "Optional. The database name. This will be required only if the object uses a database name as part of its unique identifier.",
           "type": "string"
         },
         "type": {
@@ -6143,7 +6235,7 @@
       "id": "SourceObjectsConfig",
       "properties": {
         "objectConfigs": {
-          "description": "The list of the objects to be migrated.",
+          "description": "Optional. The list of the objects to be migrated.",
           "items": {
             "$ref": "SourceObjectConfig"
           },

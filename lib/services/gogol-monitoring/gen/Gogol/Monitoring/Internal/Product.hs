@@ -1741,8 +1741,10 @@ instance Core.ToJSON CreateTimeSeriesSummary where
 -- | Criteria specific to the AlertPolicys that this Snooze applies to. The Snooze will suppress alerts that come from one of the AlertPolicys whose names are supplied.
 --
 -- /See:/ 'newCriteria' smart constructor.
-newtype Criteria = Criteria
-  { -- | The specific AlertPolicy names for the alert that should be snoozed. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/alertPolicies\/[POLICY/ID] There is a limit of 16 policies per snooze. This limit is checked during snooze creation.
+data Criteria = Criteria
+  { -- | Optional. The filter string to match on Alert fields when silencing the alerts. It follows the standard https:\/\/google.aip.dev\/160 syntax. A filter string used to apply the snooze to specific incidents that have matching filter values. Filters can be defined for snoozes that apply to one alerting policy. Filters must be a string formatted as one or more resource labels with specific label values. If multiple resource labels are used, then they must be connected with an AND operator. For example, the following filter applies the snooze to incidents that have an instance ID of 1234567890 and a zone of us-central1-a: resource.labels.instance_id=\"1234567890\" AND resource.labels.zone=\"us-central1-a\"
+    filter :: (Core.Maybe Core.Text),
+    -- | The specific AlertPolicy names for the alert that should be snoozed. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/alertPolicies\/[POLICY/ID] There is a limit of 16 policies per snooze. This limit is checked during snooze creation. Exactly 1 alert policy is required if filter is specified at the same time.
     policies :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1750,18 +1752,27 @@ newtype Criteria = Criteria
 -- | Creates a value of 'Criteria' with the minimum fields required to make a request.
 newCriteria ::
   Criteria
-newCriteria = Criteria {policies = Core.Nothing}
+newCriteria =
+  Criteria {filter = Core.Nothing, policies = Core.Nothing}
 
 instance Core.FromJSON Criteria where
   parseJSON =
     Core.withObject
       "Criteria"
-      (\o -> Criteria Core.<$> (o Core..:? "policies"))
+      ( \o ->
+          Criteria
+            Core.<$> (o Core..:? "filter")
+            Core.<*> (o Core..:? "policies")
+      )
 
 instance Core.ToJSON Criteria where
   toJSON Criteria {..} =
     Core.object
-      (Core.catMaybes [("policies" Core..=) Core.<$> policies])
+      ( Core.catMaybes
+          [ ("filter" Core..=) Core.<$> filter,
+            ("policies" Core..=) Core.<$> policies
+          ]
+      )
 
 -- | Use a custom service to designate a service that you want to monitor when none of the other service types (like App Engine, Cloud Run, or a GKE type) matches your intended service.
 --
@@ -5784,7 +5795,7 @@ data SqlCondition = SqlCondition
     hourly :: (Core.Maybe Hourly),
     -- | Schedule the query to execute every so many minutes.
     minutes :: (Core.Maybe Minutes),
-    -- | Required. The Log Analytics SQL query to run, as a string. The query must conform to the required shape. Specifically, the query must not try to filter the input by time. A filter will automatically be applied to filter the input so that the query receives all rows received since the last time the query was run.For example, the following query extracts all log entries containing an HTTP request:SELECT timestamp, log/name, severity, http/request, resource, labels FROM my-project.global./Default./AllLogs WHERE http_request IS NOT NULL
+    -- | Required. The Log Analytics SQL query to run, as a string. The query must conform to the required shape. Specifically, the query must not try to filter the input by time. A filter will automatically be applied to filter the input so that the query receives all rows received since the last time the query was run.For example, the following query extracts all log entries containing an HTTP request: SELECT timestamp, log/name, severity, http/request, resource, labels FROM my-project.global./Default./AllLogs WHERE http_request IS NOT NULL
     query :: (Core.Maybe Core.Text),
     -- | Test the row count against a threshold.
     rowCountTest :: (Core.Maybe RowCountTest)
@@ -6438,6 +6449,8 @@ data UptimeCheckConfig = UptimeCheckConfig
     internalCheckers :: (Core.Maybe [InternalChecker]),
     -- | If this is true, then checks are made only from the \'internal/checkers\'. If it is false, then checks are made only from the \'selected/regions\'. It is an error to provide \'selected/regions\' when is/internal is true, or to provide \'internal/checkers\' when is/internal is false.
     isInternal :: (Core.Maybe Core.Bool),
+    -- | To specify whether to log the results of failed probes to Cloud Logging.
+    logCheckFailures :: (Core.Maybe Core.Bool),
     -- | The monitored resource (https:\/\/cloud.google.com\/monitoring\/api\/resources) associated with the configuration. The following monitored resource types are valid for this field: uptime/url, gce/instance, gae/app, aws/ec2/instance, aws/elb/load/balancer k8s/service servicedirectory/service cloud/run/revision
     monitoredResource :: (Core.Maybe MonitoredResource),
     -- | Identifier. A unique resource name for this Uptime check configuration. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/uptimeCheckConfigs\/[UPTIME/CHECK/ID] [PROJECT/ID/OR/NUMBER] is the Workspace host project associated with the Uptime check.This field should be omitted when creating the Uptime check configuration; on create, the resource name is assigned by the server and included in the response.
@@ -6470,6 +6483,7 @@ newUptimeCheckConfig =
       httpCheck = Core.Nothing,
       internalCheckers = Core.Nothing,
       isInternal = Core.Nothing,
+      logCheckFailures = Core.Nothing,
       monitoredResource = Core.Nothing,
       name = Core.Nothing,
       period = Core.Nothing,
@@ -6493,6 +6507,7 @@ instance Core.FromJSON UptimeCheckConfig where
             Core.<*> (o Core..:? "httpCheck")
             Core.<*> (o Core..:? "internalCheckers")
             Core.<*> (o Core..:? "isInternal")
+            Core.<*> (o Core..:? "logCheckFailures")
             Core.<*> (o Core..:? "monitoredResource")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "period")
@@ -6514,6 +6529,7 @@ instance Core.ToJSON UptimeCheckConfig where
             ("httpCheck" Core..=) Core.<$> httpCheck,
             ("internalCheckers" Core..=) Core.<$> internalCheckers,
             ("isInternal" Core..=) Core.<$> isInternal,
+            ("logCheckFailures" Core..=) Core.<$> logCheckFailures,
             ("monitoredResource" Core..=) Core.<$> monitoredResource,
             ("name" Core..=) Core.<$> name,
             ("period" Core..=) Core.<$> period,

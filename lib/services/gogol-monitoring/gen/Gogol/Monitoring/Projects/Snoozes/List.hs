@@ -66,7 +66,7 @@ data MonitoringProjectsSnoozesList = MonitoringProjectsSnoozesList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Optional. Optional filter to restrict results to the given criteria. The following fields are supported. interval.start/time interval.end/timeFor example: @interval.start_time > \"2022-03-11T00:00:00-08:00\" AND interval.end_time \< \"2022-03-12T00:00:00-08:00\"@
+    -- | Optional. Optional filter to restrict results to the given criteria. The following fields are supported. interval.start/time interval.end/timeFor example: interval.start/time > \"2022-03-11T00:00:00-08:00\" AND interval.end/time \< \"2022-03-12T00:00:00-08:00\"
     filter :: (Core.Maybe Core.Text),
     -- | Optional. The maximum number of results to return for a single query. The server may further constrain the maximum number of results returned in a single page. The value should be in the range 1, 1000. If the value given is outside this range, the server will decide the number of results to be returned.
     pageSize :: (Core.Maybe Core.Int32),

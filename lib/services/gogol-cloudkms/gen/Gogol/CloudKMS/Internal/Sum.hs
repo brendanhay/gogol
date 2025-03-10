@@ -117,6 +117,8 @@ module Gogol.CloudKMS.Internal.Sum
         CryptoKeyVersion_Algorithm_HMAC_SHA512,
         CryptoKeyVersion_Algorithm_HMAC_SHA224,
         CryptoKeyVersion_Algorithm_EXTERNALSYMMETRICENCRYPTION,
+        CryptoKeyVersion_Algorithm_PQ_SIGN_ML_DSA_65,
+        CryptoKeyVersion_Algorithm_PQSIGNSLHDSASHA2128S,
         ..
       ),
 
@@ -184,6 +186,8 @@ module Gogol.CloudKMS.Internal.Sum
         CryptoKeyVersionTemplate_Algorithm_HMAC_SHA512,
         CryptoKeyVersionTemplate_Algorithm_HMAC_SHA224,
         CryptoKeyVersionTemplate_Algorithm_EXTERNALSYMMETRICENCRYPTION,
+        CryptoKeyVersionTemplate_Algorithm_PQ_SIGN_ML_DSA_65,
+        CryptoKeyVersionTemplate_Algorithm_PQSIGNSLHDSASHA2128S,
         ..
       ),
 
@@ -273,6 +277,8 @@ module Gogol.CloudKMS.Internal.Sum
         ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA512,
         ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA224,
         ImportCryptoKeyVersionRequest_Algorithm_EXTERNALSYMMETRICENCRYPTION,
+        ImportCryptoKeyVersionRequest_Algorithm_PQ_SIGN_ML_DSA_65,
+        ImportCryptoKeyVersionRequest_Algorithm_PQSIGNSLHDSASHA2128S,
         ..
       ),
 
@@ -390,6 +396,8 @@ module Gogol.CloudKMS.Internal.Sum
         PublicKey_Algorithm_HMAC_SHA512,
         PublicKey_Algorithm_HMAC_SHA224,
         PublicKey_Algorithm_EXTERNALSYMMETRICENCRYPTION,
+        PublicKey_Algorithm_PQ_SIGN_ML_DSA_65,
+        PublicKey_Algorithm_PQSIGNSLHDSASHA2128S,
         ..
       ),
 
@@ -400,6 +408,14 @@ module Gogol.CloudKMS.Internal.Sum
         PublicKey_ProtectionLevel_Hsm,
         PublicKey_ProtectionLevel_External,
         PublicKey_ProtectionLevel_EXTERNALVPC,
+        ..
+      ),
+
+    -- * PublicKey_PublicKeyFormat
+    PublicKey_PublicKeyFormat
+      ( PublicKey_PublicKeyFormat_PUBLICKEYFORMATUNSPECIFIED,
+        PublicKey_PublicKeyFormat_Pem,
+        PublicKey_PublicKeyFormat_NISTPQC,
         ..
       ),
 
@@ -420,6 +436,14 @@ module Gogol.CloudKMS.Internal.Sum
         RawEncryptResponse_ProtectionLevel_Hsm,
         RawEncryptResponse_ProtectionLevel_External,
         RawEncryptResponse_ProtectionLevel_EXTERNALVPC,
+        ..
+      ),
+
+    -- * ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat
+    ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat
+      ( ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_PUBLICKEYFORMATUNSPECIFIED,
+        ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_Pem,
+        ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_NISTPQC,
         ..
       ),
 
@@ -830,6 +854,14 @@ pattern CryptoKeyVersion_Algorithm_HMAC_SHA224 = CryptoKeyVersion_Algorithm "HMA
 pattern CryptoKeyVersion_Algorithm_EXTERNALSYMMETRICENCRYPTION :: CryptoKeyVersion_Algorithm
 pattern CryptoKeyVersion_Algorithm_EXTERNALSYMMETRICENCRYPTION = CryptoKeyVersion_Algorithm "EXTERNAL_SYMMETRIC_ENCRYPTION"
 
+-- | The post-quantum Module-Lattice-Based Digital Signature Algorithm, at security level 3. Randomized version.
+pattern CryptoKeyVersion_Algorithm_PQ_SIGN_ML_DSA_65 :: CryptoKeyVersion_Algorithm
+pattern CryptoKeyVersion_Algorithm_PQ_SIGN_ML_DSA_65 = CryptoKeyVersion_Algorithm "PQ_SIGN_ML_DSA_65"
+
+-- | The post-quantum stateless hash-based digital signature algorithm, at security level 1. Randomized version.
+pattern CryptoKeyVersion_Algorithm_PQSIGNSLHDSASHA2128S :: CryptoKeyVersion_Algorithm
+pattern CryptoKeyVersion_Algorithm_PQSIGNSLHDSASHA2128S = CryptoKeyVersion_Algorithm "PQ_SIGN_SLH_DSA_SHA2_128S"
+
 {-# COMPLETE
   CryptoKeyVersion_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
   CryptoKeyVersion_Algorithm_GOOGLESYMMETRICENCRYPTION,
@@ -867,6 +899,8 @@ pattern CryptoKeyVersion_Algorithm_EXTERNALSYMMETRICENCRYPTION = CryptoKeyVersio
   CryptoKeyVersion_Algorithm_HMAC_SHA512,
   CryptoKeyVersion_Algorithm_HMAC_SHA224,
   CryptoKeyVersion_Algorithm_EXTERNALSYMMETRICENCRYPTION,
+  CryptoKeyVersion_Algorithm_PQ_SIGN_ML_DSA_65,
+  CryptoKeyVersion_Algorithm_PQSIGNSLHDSASHA2128S,
   CryptoKeyVersion_Algorithm
   #-}
 
@@ -941,7 +975,7 @@ pattern CryptoKeyVersion_State_Enabled = CryptoKeyVersion_State "ENABLED"
 pattern CryptoKeyVersion_State_Disabled :: CryptoKeyVersion_State
 pattern CryptoKeyVersion_State_Disabled = CryptoKeyVersion_State "DISABLED"
 
--- | This version is destroyed, and the key material is no longer stored. This version may only become ENABLED again if this version is reimport_eligible and the original key material is reimported with a call to KeyManagementService.ImportCryptoKeyVersion.
+-- | This key material of this version is destroyed and no longer stored. This version may only become ENABLED again if this version is reimport_eligible and the original key material is reimported with a call to KeyManagementService.ImportCryptoKeyVersion.
 pattern CryptoKeyVersion_State_Destroyed :: CryptoKeyVersion_State
 pattern CryptoKeyVersion_State_Destroyed = CryptoKeyVersion_State "DESTROYED"
 
@@ -1141,6 +1175,14 @@ pattern CryptoKeyVersionTemplate_Algorithm_HMAC_SHA224 = CryptoKeyVersionTemplat
 pattern CryptoKeyVersionTemplate_Algorithm_EXTERNALSYMMETRICENCRYPTION :: CryptoKeyVersionTemplate_Algorithm
 pattern CryptoKeyVersionTemplate_Algorithm_EXTERNALSYMMETRICENCRYPTION = CryptoKeyVersionTemplate_Algorithm "EXTERNAL_SYMMETRIC_ENCRYPTION"
 
+-- | The post-quantum Module-Lattice-Based Digital Signature Algorithm, at security level 3. Randomized version.
+pattern CryptoKeyVersionTemplate_Algorithm_PQ_SIGN_ML_DSA_65 :: CryptoKeyVersionTemplate_Algorithm
+pattern CryptoKeyVersionTemplate_Algorithm_PQ_SIGN_ML_DSA_65 = CryptoKeyVersionTemplate_Algorithm "PQ_SIGN_ML_DSA_65"
+
+-- | The post-quantum stateless hash-based digital signature algorithm, at security level 1. Randomized version.
+pattern CryptoKeyVersionTemplate_Algorithm_PQSIGNSLHDSASHA2128S :: CryptoKeyVersionTemplate_Algorithm
+pattern CryptoKeyVersionTemplate_Algorithm_PQSIGNSLHDSASHA2128S = CryptoKeyVersionTemplate_Algorithm "PQ_SIGN_SLH_DSA_SHA2_128S"
+
 {-# COMPLETE
   CryptoKeyVersionTemplate_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
   CryptoKeyVersionTemplate_Algorithm_GOOGLESYMMETRICENCRYPTION,
@@ -1178,6 +1220,8 @@ pattern CryptoKeyVersionTemplate_Algorithm_EXTERNALSYMMETRICENCRYPTION = CryptoK
   CryptoKeyVersionTemplate_Algorithm_HMAC_SHA512,
   CryptoKeyVersionTemplate_Algorithm_HMAC_SHA224,
   CryptoKeyVersionTemplate_Algorithm_EXTERNALSYMMETRICENCRYPTION,
+  CryptoKeyVersionTemplate_Algorithm_PQ_SIGN_ML_DSA_65,
+  CryptoKeyVersionTemplate_Algorithm_PQSIGNSLHDSASHA2128S,
   CryptoKeyVersionTemplate_Algorithm
   #-}
 
@@ -1538,6 +1582,14 @@ pattern ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA224 = ImportCryptoKeyVer
 pattern ImportCryptoKeyVersionRequest_Algorithm_EXTERNALSYMMETRICENCRYPTION :: ImportCryptoKeyVersionRequest_Algorithm
 pattern ImportCryptoKeyVersionRequest_Algorithm_EXTERNALSYMMETRICENCRYPTION = ImportCryptoKeyVersionRequest_Algorithm "EXTERNAL_SYMMETRIC_ENCRYPTION"
 
+-- | The post-quantum Module-Lattice-Based Digital Signature Algorithm, at security level 3. Randomized version.
+pattern ImportCryptoKeyVersionRequest_Algorithm_PQ_SIGN_ML_DSA_65 :: ImportCryptoKeyVersionRequest_Algorithm
+pattern ImportCryptoKeyVersionRequest_Algorithm_PQ_SIGN_ML_DSA_65 = ImportCryptoKeyVersionRequest_Algorithm "PQ_SIGN_ML_DSA_65"
+
+-- | The post-quantum stateless hash-based digital signature algorithm, at security level 1. Randomized version.
+pattern ImportCryptoKeyVersionRequest_Algorithm_PQSIGNSLHDSASHA2128S :: ImportCryptoKeyVersionRequest_Algorithm
+pattern ImportCryptoKeyVersionRequest_Algorithm_PQSIGNSLHDSASHA2128S = ImportCryptoKeyVersionRequest_Algorithm "PQ_SIGN_SLH_DSA_SHA2_128S"
+
 {-# COMPLETE
   ImportCryptoKeyVersionRequest_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
   ImportCryptoKeyVersionRequest_Algorithm_GOOGLESYMMETRICENCRYPTION,
@@ -1575,6 +1627,8 @@ pattern ImportCryptoKeyVersionRequest_Algorithm_EXTERNALSYMMETRICENCRYPTION = Im
   ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA512,
   ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA224,
   ImportCryptoKeyVersionRequest_Algorithm_EXTERNALSYMMETRICENCRYPTION,
+  ImportCryptoKeyVersionRequest_Algorithm_PQ_SIGN_ML_DSA_65,
+  ImportCryptoKeyVersionRequest_Algorithm_PQSIGNSLHDSASHA2128S,
   ImportCryptoKeyVersionRequest_Algorithm
   #-}
 
@@ -2058,6 +2112,14 @@ pattern PublicKey_Algorithm_HMAC_SHA224 = PublicKey_Algorithm "HMAC_SHA224"
 pattern PublicKey_Algorithm_EXTERNALSYMMETRICENCRYPTION :: PublicKey_Algorithm
 pattern PublicKey_Algorithm_EXTERNALSYMMETRICENCRYPTION = PublicKey_Algorithm "EXTERNAL_SYMMETRIC_ENCRYPTION"
 
+-- | The post-quantum Module-Lattice-Based Digital Signature Algorithm, at security level 3. Randomized version.
+pattern PublicKey_Algorithm_PQ_SIGN_ML_DSA_65 :: PublicKey_Algorithm
+pattern PublicKey_Algorithm_PQ_SIGN_ML_DSA_65 = PublicKey_Algorithm "PQ_SIGN_ML_DSA_65"
+
+-- | The post-quantum stateless hash-based digital signature algorithm, at security level 1. Randomized version.
+pattern PublicKey_Algorithm_PQSIGNSLHDSASHA2128S :: PublicKey_Algorithm
+pattern PublicKey_Algorithm_PQSIGNSLHDSASHA2128S = PublicKey_Algorithm "PQ_SIGN_SLH_DSA_SHA2_128S"
+
 {-# COMPLETE
   PublicKey_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
   PublicKey_Algorithm_GOOGLESYMMETRICENCRYPTION,
@@ -2095,6 +2157,8 @@ pattern PublicKey_Algorithm_EXTERNALSYMMETRICENCRYPTION = PublicKey_Algorithm "E
   PublicKey_Algorithm_HMAC_SHA512,
   PublicKey_Algorithm_HMAC_SHA224,
   PublicKey_Algorithm_EXTERNALSYMMETRICENCRYPTION,
+  PublicKey_Algorithm_PQ_SIGN_ML_DSA_65,
+  PublicKey_Algorithm_PQSIGNSLHDSASHA2128S,
   PublicKey_Algorithm
   #-}
 
@@ -2138,6 +2202,38 @@ pattern PublicKey_ProtectionLevel_EXTERNALVPC = PublicKey_ProtectionLevel "EXTER
   PublicKey_ProtectionLevel_External,
   PublicKey_ProtectionLevel_EXTERNALVPC,
   PublicKey_ProtectionLevel
+  #-}
+
+-- | The PublicKey format specified by the customer through the public/key/format field.
+newtype PublicKey_PublicKeyFormat = PublicKey_PublicKeyFormat {fromPublicKey_PublicKeyFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | If the public/key/format field is not specified: - For PQC algorithms, an error will be returned. - For non-PQC algorithms, the default format is PEM, and the field pem will be populated. Otherwise, the public key will be exported through the public_key field in the requested format.
+pattern PublicKey_PublicKeyFormat_PUBLICKEYFORMATUNSPECIFIED :: PublicKey_PublicKeyFormat
+pattern PublicKey_PublicKeyFormat_PUBLICKEYFORMATUNSPECIFIED = PublicKey_PublicKeyFormat "PUBLIC_KEY_FORMAT_UNSPECIFIED"
+
+-- | The returned public key will be encoded in PEM format. See the <https://tools.ietf.org/html/rfc7468 RFC7468> sections for <https://tools.ietf.org/html/rfc7468#section-2 General Considerations> and [Textual Encoding of Subject Public Key Info] (https:\/\/tools.ietf.org\/html\/rfc7468#section-13) for more information.
+pattern PublicKey_PublicKeyFormat_Pem :: PublicKey_PublicKeyFormat
+pattern PublicKey_PublicKeyFormat_Pem = PublicKey_PublicKeyFormat "PEM"
+
+-- | This is supported only for PQC algorithms. The key material is returned in the format defined by NIST PQC standards (FIPS 203, FIPS 204, and FIPS 205).
+pattern PublicKey_PublicKeyFormat_NISTPQC :: PublicKey_PublicKeyFormat
+pattern PublicKey_PublicKeyFormat_NISTPQC = PublicKey_PublicKeyFormat "NIST_PQC"
+
+{-# COMPLETE
+  PublicKey_PublicKeyFormat_PUBLICKEYFORMATUNSPECIFIED,
+  PublicKey_PublicKeyFormat_Pem,
+  PublicKey_PublicKeyFormat_NISTPQC,
+  PublicKey_PublicKeyFormat
   #-}
 
 -- | The ProtectionLevel of the CryptoKeyVersion used in decryption.
@@ -2222,6 +2318,38 @@ pattern RawEncryptResponse_ProtectionLevel_EXTERNALVPC = RawEncryptResponse_Prot
   RawEncryptResponse_ProtectionLevel_External,
   RawEncryptResponse_ProtectionLevel_EXTERNALVPC,
   RawEncryptResponse_ProtectionLevel
+  #-}
+
+-- | Optional. The PublicKey format specified by the user. This field is required for PQC algorithms. If specified, the public key will be exported through the public_key field in the requested format. Otherwise, the pem field will be populated for non-PQC algorithms, and an error will be returned for PQC algorithms.
+newtype ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat = ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat {fromProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | If the public/key/format field is not specified: - For PQC algorithms, an error will be returned. - For non-PQC algorithms, the default format is PEM, and the field pem will be populated. Otherwise, the public key will be exported through the public_key field in the requested format.
+pattern ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_PUBLICKEYFORMATUNSPECIFIED :: ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat
+pattern ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_PUBLICKEYFORMATUNSPECIFIED = ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat "PUBLIC_KEY_FORMAT_UNSPECIFIED"
+
+-- | The returned public key will be encoded in PEM format. See the <https://tools.ietf.org/html/rfc7468 RFC7468> sections for <https://tools.ietf.org/html/rfc7468#section-2 General Considerations> and [Textual Encoding of Subject Public Key Info] (https:\/\/tools.ietf.org\/html\/rfc7468#section-13) for more information.
+pattern ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_Pem :: ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat
+pattern ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_Pem = ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat "PEM"
+
+-- | This is supported only for PQC algorithms. The key material is returned in the format defined by NIST PQC standards (FIPS 203, FIPS 204, and FIPS 205).
+pattern ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_NISTPQC :: ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat
+pattern ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_NISTPQC = ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat "NIST_PQC"
+
+{-# COMPLETE
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_PUBLICKEYFORMATUNSPECIFIED,
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_Pem,
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_NISTPQC,
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat
   #-}
 
 -- | The fields to include in the response.

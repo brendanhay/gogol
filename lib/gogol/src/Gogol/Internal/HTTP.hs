@@ -19,16 +19,16 @@ import Control.Lens ((%~), (&))
 import Control.Monad.IO.Class (MonadIO (..))
 import Control.Monad.Trans.Resource (MonadResource (..), transResourceT)
 import Data.Monoid (Dual (..), Endo (..))
-import qualified Data.Text.Encoding as Text
-import qualified Data.Text.Lazy as LText
-import qualified Data.Text.Lazy.Builder as Build
+import Data.Text.Encoding qualified as Text
+import Data.Text.Lazy qualified as LText
+import Data.Text.Lazy.Builder qualified as Build
 import GHC.Exts (toList)
 import Gogol.Auth (KnownScopes, authorize)
 import Gogol.Env (Env (..))
 import Gogol.Internal.Logger (logDebug)
 import Gogol.Internal.Multipart
 import Gogol.Types
-import qualified Network.HTTP.Client.Conduit as Client
+import Network.HTTP.Client.Conduit qualified as Client
 import Network.HTTP.Conduit
 import Network.HTTP.Media (RenderHeader (..))
 import Network.HTTP.Types

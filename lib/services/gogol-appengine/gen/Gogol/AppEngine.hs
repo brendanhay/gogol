@@ -283,6 +283,9 @@ module Gogol.AppEngine
     -- ** Application_ServingStatus
     Application_ServingStatus (..),
 
+    -- ** Application_SslPolicy
+    Application_SslPolicy (..),
+
     -- ** AuthorizedCertificate
     AuthorizedCertificate (..),
     newAuthorizedCertificate,

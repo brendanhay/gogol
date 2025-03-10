@@ -145,6 +145,22 @@ module Gogol.Run.Internal.Sum
         ..
       ),
 
+    -- * GoogleCloudRunV2InstanceSplit_Type
+    GoogleCloudRunV2InstanceSplit_Type
+      ( GoogleCloudRunV2InstanceSplit_Type_INSTANCESPLITALLOCATIONTYPEUNSPECIFIED,
+        GoogleCloudRunV2InstanceSplit_Type_INSTANCESPLITALLOCATIONTYPELATEST,
+        GoogleCloudRunV2InstanceSplit_Type_INSTANCESPLITALLOCATIONTYPEREVISION,
+        ..
+      ),
+
+    -- * GoogleCloudRunV2InstanceSplitStatus_Type
+    GoogleCloudRunV2InstanceSplitStatus_Type
+      ( GoogleCloudRunV2InstanceSplitStatus_Type_INSTANCESPLITALLOCATIONTYPEUNSPECIFIED,
+        GoogleCloudRunV2InstanceSplitStatus_Type_INSTANCESPLITALLOCATIONTYPELATEST,
+        GoogleCloudRunV2InstanceSplitStatus_Type_INSTANCESPLITALLOCATIONTYPEREVISION,
+        ..
+      ),
+
     -- * GoogleCloudRunV2Job_LaunchStage
     GoogleCloudRunV2Job_LaunchStage
       ( GoogleCloudRunV2Job_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
@@ -274,6 +290,35 @@ module Gogol.Run.Internal.Sum
         ..
       ),
 
+    -- * GoogleCloudRunV2WorkerPool_LaunchStage
+    GoogleCloudRunV2WorkerPool_LaunchStage
+      ( GoogleCloudRunV2WorkerPool_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
+        GoogleCloudRunV2WorkerPool_LaunchStage_Unimplemented,
+        GoogleCloudRunV2WorkerPool_LaunchStage_Prelaunch,
+        GoogleCloudRunV2WorkerPool_LaunchStage_EARLYACCESS,
+        GoogleCloudRunV2WorkerPool_LaunchStage_Alpha,
+        GoogleCloudRunV2WorkerPool_LaunchStage_Beta,
+        GoogleCloudRunV2WorkerPool_LaunchStage_GA,
+        GoogleCloudRunV2WorkerPool_LaunchStage_Deprecated,
+        ..
+      ),
+
+    -- * GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction
+    GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction
+      ( GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction_ENCRYPTIONKEYREVOCATIONACTIONUNSPECIFIED,
+        GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction_PREVENTNEW,
+        GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction_Shutdown,
+        ..
+      ),
+
+    -- * GoogleCloudRunV2WorkerPoolScaling_ScalingMode
+    GoogleCloudRunV2WorkerPoolScaling_ScalingMode
+      ( GoogleCloudRunV2WorkerPoolScaling_ScalingMode_SCALINGMODEUNSPECIFIED,
+        GoogleCloudRunV2WorkerPoolScaling_ScalingMode_Automatic,
+        GoogleCloudRunV2WorkerPoolScaling_ScalingMode_Manual,
+        ..
+      ),
+
     -- * GoogleDevtoolsCloudbuildV1ApprovalResult_Decision
     GoogleDevtoolsCloudbuildV1ApprovalResult_Decision
       ( GoogleDevtoolsCloudbuildV1ApprovalResult_Decision_DECISIONUNSPECIFIED,
@@ -357,6 +402,7 @@ module Gogol.Run.Internal.Sum
       ( GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_None,
         GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA256,
         GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_MD5,
+        GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_GO_MODULE_H1,
         GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA512,
         ..
       ),
@@ -400,6 +446,7 @@ module Gogol.Run.Internal.Sum
       ( GoogleDevtoolsCloudbuildV1Hash_Type_None,
         GoogleDevtoolsCloudbuildV1Hash_Type_SHA256,
         GoogleDevtoolsCloudbuildV1Hash_Type_MD5,
+        GoogleDevtoolsCloudbuildV1Hash_Type_GO_MODULE_H1,
         GoogleDevtoolsCloudbuildV1Hash_Type_SHA512,
         ..
       ),
@@ -956,6 +1003,70 @@ pattern GoogleCloudRunV2ImageExportStatus_ExportJobState_Finished = GoogleCloudR
   GoogleCloudRunV2ImageExportStatus_ExportJobState
   #-}
 
+-- | The allocation type for this instance split.
+newtype GoogleCloudRunV2InstanceSplit_Type = GoogleCloudRunV2InstanceSplit_Type {fromGoogleCloudRunV2InstanceSplit_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified instance allocation type.
+pattern GoogleCloudRunV2InstanceSplit_Type_INSTANCESPLITALLOCATIONTYPEUNSPECIFIED :: GoogleCloudRunV2InstanceSplit_Type
+pattern GoogleCloudRunV2InstanceSplit_Type_INSTANCESPLITALLOCATIONTYPEUNSPECIFIED = GoogleCloudRunV2InstanceSplit_Type "INSTANCE_SPLIT_ALLOCATION_TYPE_UNSPECIFIED"
+
+-- | Allocates instances to the Service\'s latest ready Revision.
+pattern GoogleCloudRunV2InstanceSplit_Type_INSTANCESPLITALLOCATIONTYPELATEST :: GoogleCloudRunV2InstanceSplit_Type
+pattern GoogleCloudRunV2InstanceSplit_Type_INSTANCESPLITALLOCATIONTYPELATEST = GoogleCloudRunV2InstanceSplit_Type "INSTANCE_SPLIT_ALLOCATION_TYPE_LATEST"
+
+-- | Allocates instances to a Revision by name.
+pattern GoogleCloudRunV2InstanceSplit_Type_INSTANCESPLITALLOCATIONTYPEREVISION :: GoogleCloudRunV2InstanceSplit_Type
+pattern GoogleCloudRunV2InstanceSplit_Type_INSTANCESPLITALLOCATIONTYPEREVISION = GoogleCloudRunV2InstanceSplit_Type "INSTANCE_SPLIT_ALLOCATION_TYPE_REVISION"
+
+{-# COMPLETE
+  GoogleCloudRunV2InstanceSplit_Type_INSTANCESPLITALLOCATIONTYPEUNSPECIFIED,
+  GoogleCloudRunV2InstanceSplit_Type_INSTANCESPLITALLOCATIONTYPELATEST,
+  GoogleCloudRunV2InstanceSplit_Type_INSTANCESPLITALLOCATIONTYPEREVISION,
+  GoogleCloudRunV2InstanceSplit_Type
+  #-}
+
+-- | The allocation type for this instance split.
+newtype GoogleCloudRunV2InstanceSplitStatus_Type = GoogleCloudRunV2InstanceSplitStatus_Type {fromGoogleCloudRunV2InstanceSplitStatus_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified instance allocation type.
+pattern GoogleCloudRunV2InstanceSplitStatus_Type_INSTANCESPLITALLOCATIONTYPEUNSPECIFIED :: GoogleCloudRunV2InstanceSplitStatus_Type
+pattern GoogleCloudRunV2InstanceSplitStatus_Type_INSTANCESPLITALLOCATIONTYPEUNSPECIFIED = GoogleCloudRunV2InstanceSplitStatus_Type "INSTANCE_SPLIT_ALLOCATION_TYPE_UNSPECIFIED"
+
+-- | Allocates instances to the Service\'s latest ready Revision.
+pattern GoogleCloudRunV2InstanceSplitStatus_Type_INSTANCESPLITALLOCATIONTYPELATEST :: GoogleCloudRunV2InstanceSplitStatus_Type
+pattern GoogleCloudRunV2InstanceSplitStatus_Type_INSTANCESPLITALLOCATIONTYPELATEST = GoogleCloudRunV2InstanceSplitStatus_Type "INSTANCE_SPLIT_ALLOCATION_TYPE_LATEST"
+
+-- | Allocates instances to a Revision by name.
+pattern GoogleCloudRunV2InstanceSplitStatus_Type_INSTANCESPLITALLOCATIONTYPEREVISION :: GoogleCloudRunV2InstanceSplitStatus_Type
+pattern GoogleCloudRunV2InstanceSplitStatus_Type_INSTANCESPLITALLOCATIONTYPEREVISION = GoogleCloudRunV2InstanceSplitStatus_Type "INSTANCE_SPLIT_ALLOCATION_TYPE_REVISION"
+
+{-# COMPLETE
+  GoogleCloudRunV2InstanceSplitStatus_Type_INSTANCESPLITALLOCATIONTYPEUNSPECIFIED,
+  GoogleCloudRunV2InstanceSplitStatus_Type_INSTANCESPLITALLOCATIONTYPELATEST,
+  GoogleCloudRunV2InstanceSplitStatus_Type_INSTANCESPLITALLOCATIONTYPEREVISION,
+  GoogleCloudRunV2InstanceSplitStatus_Type
+  #-}
+
 -- | The launch stage as defined by <https://cloud.google.com/terms/launch-stages Google Cloud Platform Launch Stages>. Cloud Run supports @ALPHA@, @BETA@, and @GA@. If no value is specified, GA is assumed. Set the launch stage to a preview stage on input to allow use of preview features in that stage. On read (or output), describes whether the resource uses preview features. For example, if ALPHA is provided as input, but only BETA and GA-level features are used, this field will be BETA on output.
 newtype GoogleCloudRunV2Job_LaunchStage = GoogleCloudRunV2Job_LaunchStage {fromGoogleCloudRunV2Job_LaunchStage :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1489,6 +1600,127 @@ pattern GoogleCloudRunV2VpcAccess_Egress_PRIVATERANGESONLY = GoogleCloudRunV2Vpc
   GoogleCloudRunV2VpcAccess_Egress
   #-}
 
+-- | Optional. The launch stage as defined by <https://cloud.google.com/terms/launch-stages Google Cloud Platform Launch Stages>. Cloud Run supports @ALPHA@, @BETA@, and @GA@. If no value is specified, GA is assumed. Set the launch stage to a preview stage on input to allow use of preview features in that stage. On read (or output), describes whether the resource uses preview features. For example, if ALPHA is provided as input, but only BETA and GA-level features are used, this field will be BETA on output.
+newtype GoogleCloudRunV2WorkerPool_LaunchStage = GoogleCloudRunV2WorkerPool_LaunchStage {fromGoogleCloudRunV2WorkerPool_LaunchStage :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Do not use this default value.
+pattern GoogleCloudRunV2WorkerPool_LaunchStage_LAUNCHSTAGEUNSPECIFIED :: GoogleCloudRunV2WorkerPool_LaunchStage
+pattern GoogleCloudRunV2WorkerPool_LaunchStage_LAUNCHSTAGEUNSPECIFIED = GoogleCloudRunV2WorkerPool_LaunchStage "LAUNCH_STAGE_UNSPECIFIED"
+
+-- | The feature is not yet implemented. Users can not use it.
+pattern GoogleCloudRunV2WorkerPool_LaunchStage_Unimplemented :: GoogleCloudRunV2WorkerPool_LaunchStage
+pattern GoogleCloudRunV2WorkerPool_LaunchStage_Unimplemented = GoogleCloudRunV2WorkerPool_LaunchStage "UNIMPLEMENTED"
+
+-- | Prelaunch features are hidden from users and are only visible internally.
+pattern GoogleCloudRunV2WorkerPool_LaunchStage_Prelaunch :: GoogleCloudRunV2WorkerPool_LaunchStage
+pattern GoogleCloudRunV2WorkerPool_LaunchStage_Prelaunch = GoogleCloudRunV2WorkerPool_LaunchStage "PRELAUNCH"
+
+-- | Early Access features are limited to a closed group of testers. To use these features, you must sign up in advance and sign a Trusted Tester agreement (which includes confidentiality provisions). These features may be unstable, changed in backward-incompatible ways, and are not guaranteed to be released.
+pattern GoogleCloudRunV2WorkerPool_LaunchStage_EARLYACCESS :: GoogleCloudRunV2WorkerPool_LaunchStage
+pattern GoogleCloudRunV2WorkerPool_LaunchStage_EARLYACCESS = GoogleCloudRunV2WorkerPool_LaunchStage "EARLY_ACCESS"
+
+-- | Alpha is a limited availability test for releases before they are cleared for widespread use. By Alpha, all significant design issues are resolved and we are in the process of verifying functionality. Alpha customers need to apply for access, agree to applicable terms, and have their projects allowlisted. Alpha releases don\'t have to be feature complete, no SLAs are provided, and there are no technical support obligations, but they will be far enough along that customers can actually use them in test environments or for limited-use tests -- just like they would in normal production cases.
+pattern GoogleCloudRunV2WorkerPool_LaunchStage_Alpha :: GoogleCloudRunV2WorkerPool_LaunchStage
+pattern GoogleCloudRunV2WorkerPool_LaunchStage_Alpha = GoogleCloudRunV2WorkerPool_LaunchStage "ALPHA"
+
+-- | Beta is the point at which we are ready to open a release for any customer to use. There are no SLA or technical support obligations in a Beta release. Products will be complete from a feature perspective, but may have some open outstanding issues. Beta releases are suitable for limited production use cases.
+pattern GoogleCloudRunV2WorkerPool_LaunchStage_Beta :: GoogleCloudRunV2WorkerPool_LaunchStage
+pattern GoogleCloudRunV2WorkerPool_LaunchStage_Beta = GoogleCloudRunV2WorkerPool_LaunchStage "BETA"
+
+-- | GA features are open to all developers and are considered stable and fully qualified for production use.
+pattern GoogleCloudRunV2WorkerPool_LaunchStage_GA :: GoogleCloudRunV2WorkerPool_LaunchStage
+pattern GoogleCloudRunV2WorkerPool_LaunchStage_GA = GoogleCloudRunV2WorkerPool_LaunchStage "GA"
+
+-- | Deprecated features are scheduled to be shut down and removed. For more information, see the \"Deprecation Policy\" section of our <https://cloud.google.com/terms/ Terms of Service> and the <https://cloud.google.com/terms/deprecation Google Cloud Platform Subject to the Deprecation Policy> documentation.
+pattern GoogleCloudRunV2WorkerPool_LaunchStage_Deprecated :: GoogleCloudRunV2WorkerPool_LaunchStage
+pattern GoogleCloudRunV2WorkerPool_LaunchStage_Deprecated = GoogleCloudRunV2WorkerPool_LaunchStage "DEPRECATED"
+
+{-# COMPLETE
+  GoogleCloudRunV2WorkerPool_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
+  GoogleCloudRunV2WorkerPool_LaunchStage_Unimplemented,
+  GoogleCloudRunV2WorkerPool_LaunchStage_Prelaunch,
+  GoogleCloudRunV2WorkerPool_LaunchStage_EARLYACCESS,
+  GoogleCloudRunV2WorkerPool_LaunchStage_Alpha,
+  GoogleCloudRunV2WorkerPool_LaunchStage_Beta,
+  GoogleCloudRunV2WorkerPool_LaunchStage_GA,
+  GoogleCloudRunV2WorkerPool_LaunchStage_Deprecated,
+  GoogleCloudRunV2WorkerPool_LaunchStage
+  #-}
+
+-- | Optional. The action to take if the encryption key is revoked.
+newtype GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction = GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction {fromGoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified
+pattern GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction_ENCRYPTIONKEYREVOCATIONACTIONUNSPECIFIED :: GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction
+pattern GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction_ENCRYPTIONKEYREVOCATIONACTIONUNSPECIFIED = GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction "ENCRYPTION_KEY_REVOCATION_ACTION_UNSPECIFIED"
+
+-- | Prevents the creation of new instances.
+pattern GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction_PREVENTNEW :: GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction
+pattern GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction_PREVENTNEW = GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction "PREVENT_NEW"
+
+-- | Shuts down existing instances, and prevents creation of new ones.
+pattern GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction_Shutdown :: GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction
+pattern GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction_Shutdown = GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction "SHUTDOWN"
+
+{-# COMPLETE
+  GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction_ENCRYPTIONKEYREVOCATIONACTIONUNSPECIFIED,
+  GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction_PREVENTNEW,
+  GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction_Shutdown,
+  GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction
+  #-}
+
+-- | Optional. The scaling mode for the worker pool.
+newtype GoogleCloudRunV2WorkerPoolScaling_ScalingMode = GoogleCloudRunV2WorkerPoolScaling_ScalingMode {fromGoogleCloudRunV2WorkerPoolScaling_ScalingMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified.
+pattern GoogleCloudRunV2WorkerPoolScaling_ScalingMode_SCALINGMODEUNSPECIFIED :: GoogleCloudRunV2WorkerPoolScaling_ScalingMode
+pattern GoogleCloudRunV2WorkerPoolScaling_ScalingMode_SCALINGMODEUNSPECIFIED = GoogleCloudRunV2WorkerPoolScaling_ScalingMode "SCALING_MODE_UNSPECIFIED"
+
+-- | Automatically scale between min and max instances.
+pattern GoogleCloudRunV2WorkerPoolScaling_ScalingMode_Automatic :: GoogleCloudRunV2WorkerPoolScaling_ScalingMode
+pattern GoogleCloudRunV2WorkerPoolScaling_ScalingMode_Automatic = GoogleCloudRunV2WorkerPoolScaling_ScalingMode "AUTOMATIC"
+
+-- | Scale to exactly min instances and ignore the max instances.
+pattern GoogleCloudRunV2WorkerPoolScaling_ScalingMode_Manual :: GoogleCloudRunV2WorkerPoolScaling_ScalingMode
+pattern GoogleCloudRunV2WorkerPoolScaling_ScalingMode_Manual = GoogleCloudRunV2WorkerPoolScaling_ScalingMode "MANUAL"
+
+{-# COMPLETE
+  GoogleCloudRunV2WorkerPoolScaling_ScalingMode_SCALINGMODEUNSPECIFIED,
+  GoogleCloudRunV2WorkerPoolScaling_ScalingMode_Automatic,
+  GoogleCloudRunV2WorkerPoolScaling_ScalingMode_Manual,
+  GoogleCloudRunV2WorkerPoolScaling_ScalingMode
+  #-}
+
 -- | Required. The decision of this manual approval.
 newtype GoogleDevtoolsCloudbuildV1ApprovalResult_Decision = GoogleDevtoolsCloudbuildV1ApprovalResult_Decision {fromGoogleDevtoolsCloudbuildV1ApprovalResult_Decision :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1839,6 +2071,10 @@ pattern GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA256 =
 pattern GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_MD5 :: GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem
 pattern GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_MD5 = GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem "MD5"
 
+-- | Dirhash of a Go module\'s source code which is then hex-encoded.
+pattern GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_GO_MODULE_H1 :: GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem
+pattern GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_GO_MODULE_H1 = GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem "GO_MODULE_H1"
+
 -- | Use a sha512 hash.
 pattern GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA512 :: GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem
 pattern GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA512 = GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem "SHA512"
@@ -1847,6 +2083,7 @@ pattern GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA512 =
   GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_None,
   GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA256,
   GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_MD5,
+  GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_GO_MODULE_H1,
   GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA512,
   GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem
   #-}
@@ -2022,6 +2259,10 @@ pattern GoogleDevtoolsCloudbuildV1Hash_Type_SHA256 = GoogleDevtoolsCloudbuildV1H
 pattern GoogleDevtoolsCloudbuildV1Hash_Type_MD5 :: GoogleDevtoolsCloudbuildV1Hash_Type
 pattern GoogleDevtoolsCloudbuildV1Hash_Type_MD5 = GoogleDevtoolsCloudbuildV1Hash_Type "MD5"
 
+-- | Dirhash of a Go module\'s source code which is then hex-encoded.
+pattern GoogleDevtoolsCloudbuildV1Hash_Type_GO_MODULE_H1 :: GoogleDevtoolsCloudbuildV1Hash_Type
+pattern GoogleDevtoolsCloudbuildV1Hash_Type_GO_MODULE_H1 = GoogleDevtoolsCloudbuildV1Hash_Type "GO_MODULE_H1"
+
 -- | Use a sha512 hash.
 pattern GoogleDevtoolsCloudbuildV1Hash_Type_SHA512 :: GoogleDevtoolsCloudbuildV1Hash_Type
 pattern GoogleDevtoolsCloudbuildV1Hash_Type_SHA512 = GoogleDevtoolsCloudbuildV1Hash_Type "SHA512"
@@ -2030,6 +2271,7 @@ pattern GoogleDevtoolsCloudbuildV1Hash_Type_SHA512 = GoogleDevtoolsCloudbuildV1H
   GoogleDevtoolsCloudbuildV1Hash_Type_None,
   GoogleDevtoolsCloudbuildV1Hash_Type_SHA256,
   GoogleDevtoolsCloudbuildV1Hash_Type_MD5,
+  GoogleDevtoolsCloudbuildV1Hash_Type_GO_MODULE_H1,
   GoogleDevtoolsCloudbuildV1Hash_Type_SHA512,
   GoogleDevtoolsCloudbuildV1Hash_Type
   #-}

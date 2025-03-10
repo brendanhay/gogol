@@ -41,6 +41,30 @@ module Gogol.PubSub.Internal.Sum
         ..
       ),
 
+    -- * AwsMsk_State
+    AwsMsk_State
+      ( AwsMsk_State_STATEUNSPECIFIED,
+        AwsMsk_State_Active,
+        AwsMsk_State_MSKPERMISSIONDENIED,
+        AwsMsk_State_PUBLISHPERMISSIONDENIED,
+        AwsMsk_State_CLUSTERNOTFOUND,
+        AwsMsk_State_TOPICNOTFOUND,
+        ..
+      ),
+
+    -- * AzureEventHubs_State
+    AzureEventHubs_State
+      ( AzureEventHubs_State_STATEUNSPECIFIED,
+        AzureEventHubs_State_Active,
+        AzureEventHubs_State_EVENTHUBSPERMISSIONDENIED,
+        AzureEventHubs_State_PUBLISHPERMISSIONDENIED,
+        AzureEventHubs_State_NAMESPACENOTFOUND,
+        AzureEventHubs_State_EVENTHUBNOTFOUND,
+        AzureEventHubs_State_SUBSCRIPTIONNOTFOUND,
+        AzureEventHubs_State_RESOURCEGROUPNOTFOUND,
+        ..
+      ),
+
     -- * BigQueryConfig_State
     BigQueryConfig_State
       ( BigQueryConfig_State_STATEUNSPECIFIED,
@@ -71,6 +95,18 @@ module Gogol.PubSub.Internal.Sum
         CloudStorageConfig_State_NOTFOUND,
         CloudStorageConfig_State_INTRANSITLOCATIONRESTRICTION,
         CloudStorageConfig_State_SCHEMAMISMATCH,
+        ..
+      ),
+
+    -- * ConfluentCloud_State
+    ConfluentCloud_State
+      ( ConfluentCloud_State_STATEUNSPECIFIED,
+        ConfluentCloud_State_Active,
+        ConfluentCloud_State_CONFLUENTCLOUDPERMISSIONDENIED,
+        ConfluentCloud_State_PUBLISHPERMISSIONDENIED,
+        ConfluentCloud_State_UNREACHABLEBOOTSTRAPSERVER,
+        ConfluentCloud_State_CLUSTERNOTFOUND,
+        ConfluentCloud_State_TOPICNOTFOUND,
         ..
       ),
 
@@ -227,6 +263,110 @@ pattern AwsKinesis_State_CONSUMERNOTFOUND = AwsKinesis_State "CONSUMER_NOT_FOUND
   AwsKinesis_State
   #-}
 
+-- | Output only. An output-only field that indicates the state of the Amazon MSK ingestion source.
+newtype AwsMsk_State = AwsMsk_State {fromAwsMsk_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. This value is unused.
+pattern AwsMsk_State_STATEUNSPECIFIED :: AwsMsk_State
+pattern AwsMsk_State_STATEUNSPECIFIED = AwsMsk_State "STATE_UNSPECIFIED"
+
+-- | Ingestion is active.
+pattern AwsMsk_State_Active :: AwsMsk_State
+pattern AwsMsk_State_Active = AwsMsk_State "ACTIVE"
+
+-- | Permission denied encountered while consuming data from Amazon MSK.
+pattern AwsMsk_State_MSKPERMISSIONDENIED :: AwsMsk_State
+pattern AwsMsk_State_MSKPERMISSIONDENIED = AwsMsk_State "MSK_PERMISSION_DENIED"
+
+-- | Permission denied encountered while publishing to the topic.
+pattern AwsMsk_State_PUBLISHPERMISSIONDENIED :: AwsMsk_State
+pattern AwsMsk_State_PUBLISHPERMISSIONDENIED = AwsMsk_State "PUBLISH_PERMISSION_DENIED"
+
+-- | The provided MSK cluster wasn\'t found.
+pattern AwsMsk_State_CLUSTERNOTFOUND :: AwsMsk_State
+pattern AwsMsk_State_CLUSTERNOTFOUND = AwsMsk_State "CLUSTER_NOT_FOUND"
+
+-- | The provided topic wasn\'t found.
+pattern AwsMsk_State_TOPICNOTFOUND :: AwsMsk_State
+pattern AwsMsk_State_TOPICNOTFOUND = AwsMsk_State "TOPIC_NOT_FOUND"
+
+{-# COMPLETE
+  AwsMsk_State_STATEUNSPECIFIED,
+  AwsMsk_State_Active,
+  AwsMsk_State_MSKPERMISSIONDENIED,
+  AwsMsk_State_PUBLISHPERMISSIONDENIED,
+  AwsMsk_State_CLUSTERNOTFOUND,
+  AwsMsk_State_TOPICNOTFOUND,
+  AwsMsk_State
+  #-}
+
+-- | Output only. An output-only field that indicates the state of the Event Hubs ingestion source.
+newtype AzureEventHubs_State = AzureEventHubs_State {fromAzureEventHubs_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. This value is unused.
+pattern AzureEventHubs_State_STATEUNSPECIFIED :: AzureEventHubs_State
+pattern AzureEventHubs_State_STATEUNSPECIFIED = AzureEventHubs_State "STATE_UNSPECIFIED"
+
+-- | Ingestion is active.
+pattern AzureEventHubs_State_Active :: AzureEventHubs_State
+pattern AzureEventHubs_State_Active = AzureEventHubs_State "ACTIVE"
+
+-- | Permission denied encountered while consuming data from Event Hubs. This can happen when @client_id@, or @tenant_id@ are invalid. Or the right permissions haven\'t been granted.
+pattern AzureEventHubs_State_EVENTHUBSPERMISSIONDENIED :: AzureEventHubs_State
+pattern AzureEventHubs_State_EVENTHUBSPERMISSIONDENIED = AzureEventHubs_State "EVENT_HUBS_PERMISSION_DENIED"
+
+-- | Permission denied encountered while publishing to the topic.
+pattern AzureEventHubs_State_PUBLISHPERMISSIONDENIED :: AzureEventHubs_State
+pattern AzureEventHubs_State_PUBLISHPERMISSIONDENIED = AzureEventHubs_State "PUBLISH_PERMISSION_DENIED"
+
+-- | The provided Event Hubs namespace couldn\'t be found.
+pattern AzureEventHubs_State_NAMESPACENOTFOUND :: AzureEventHubs_State
+pattern AzureEventHubs_State_NAMESPACENOTFOUND = AzureEventHubs_State "NAMESPACE_NOT_FOUND"
+
+-- | The provided Event Hub couldn\'t be found.
+pattern AzureEventHubs_State_EVENTHUBNOTFOUND :: AzureEventHubs_State
+pattern AzureEventHubs_State_EVENTHUBNOTFOUND = AzureEventHubs_State "EVENT_HUB_NOT_FOUND"
+
+-- | The provided Event Hubs subscription couldn\'t be found.
+pattern AzureEventHubs_State_SUBSCRIPTIONNOTFOUND :: AzureEventHubs_State
+pattern AzureEventHubs_State_SUBSCRIPTIONNOTFOUND = AzureEventHubs_State "SUBSCRIPTION_NOT_FOUND"
+
+-- | The provided Event Hubs resource group couldn\'t be found.
+pattern AzureEventHubs_State_RESOURCEGROUPNOTFOUND :: AzureEventHubs_State
+pattern AzureEventHubs_State_RESOURCEGROUPNOTFOUND = AzureEventHubs_State "RESOURCE_GROUP_NOT_FOUND"
+
+{-# COMPLETE
+  AzureEventHubs_State_STATEUNSPECIFIED,
+  AzureEventHubs_State_Active,
+  AzureEventHubs_State_EVENTHUBSPERMISSIONDENIED,
+  AzureEventHubs_State_PUBLISHPERMISSIONDENIED,
+  AzureEventHubs_State_NAMESPACENOTFOUND,
+  AzureEventHubs_State_EVENTHUBNOTFOUND,
+  AzureEventHubs_State_SUBSCRIPTIONNOTFOUND,
+  AzureEventHubs_State_RESOURCEGROUPNOTFOUND,
+  AzureEventHubs_State
+  #-}
+
 -- | Output only. An output-only field that indicates whether or not the subscription can receive messages.
 newtype BigQueryConfig_State = BigQueryConfig_State {fromBigQueryConfig_State :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -366,6 +506,58 @@ pattern CloudStorageConfig_State_SCHEMAMISMATCH = CloudStorageConfig_State "SCHE
   CloudStorageConfig_State_INTRANSITLOCATIONRESTRICTION,
   CloudStorageConfig_State_SCHEMAMISMATCH,
   CloudStorageConfig_State
+  #-}
+
+-- | Output only. An output-only field that indicates the state of the Confluent Cloud ingestion source.
+newtype ConfluentCloud_State = ConfluentCloud_State {fromConfluentCloud_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. This value is unused.
+pattern ConfluentCloud_State_STATEUNSPECIFIED :: ConfluentCloud_State
+pattern ConfluentCloud_State_STATEUNSPECIFIED = ConfluentCloud_State "STATE_UNSPECIFIED"
+
+-- | Ingestion is active.
+pattern ConfluentCloud_State_Active :: ConfluentCloud_State
+pattern ConfluentCloud_State_Active = ConfluentCloud_State "ACTIVE"
+
+-- | Permission denied encountered while consuming data from Confluent Cloud.
+pattern ConfluentCloud_State_CONFLUENTCLOUDPERMISSIONDENIED :: ConfluentCloud_State
+pattern ConfluentCloud_State_CONFLUENTCLOUDPERMISSIONDENIED = ConfluentCloud_State "CONFLUENT_CLOUD_PERMISSION_DENIED"
+
+-- | Permission denied encountered while publishing to the topic.
+pattern ConfluentCloud_State_PUBLISHPERMISSIONDENIED :: ConfluentCloud_State
+pattern ConfluentCloud_State_PUBLISHPERMISSIONDENIED = ConfluentCloud_State "PUBLISH_PERMISSION_DENIED"
+
+-- | The provided bootstrap server address is unreachable.
+pattern ConfluentCloud_State_UNREACHABLEBOOTSTRAPSERVER :: ConfluentCloud_State
+pattern ConfluentCloud_State_UNREACHABLEBOOTSTRAPSERVER = ConfluentCloud_State "UNREACHABLE_BOOTSTRAP_SERVER"
+
+-- | The provided cluster wasn\'t found.
+pattern ConfluentCloud_State_CLUSTERNOTFOUND :: ConfluentCloud_State
+pattern ConfluentCloud_State_CLUSTERNOTFOUND = ConfluentCloud_State "CLUSTER_NOT_FOUND"
+
+-- | The provided topic wasn\'t found.
+pattern ConfluentCloud_State_TOPICNOTFOUND :: ConfluentCloud_State
+pattern ConfluentCloud_State_TOPICNOTFOUND = ConfluentCloud_State "TOPIC_NOT_FOUND"
+
+{-# COMPLETE
+  ConfluentCloud_State_STATEUNSPECIFIED,
+  ConfluentCloud_State_Active,
+  ConfluentCloud_State_CONFLUENTCLOUDPERMISSIONDENIED,
+  ConfluentCloud_State_PUBLISHPERMISSIONDENIED,
+  ConfluentCloud_State_UNREACHABLEBOOTSTRAPSERVER,
+  ConfluentCloud_State_CLUSTERNOTFOUND,
+  ConfluentCloud_State_TOPICNOTFOUND,
+  ConfluentCloud_State
   #-}
 
 -- | Optional. The minimum severity level of Platform Logs that will be written.

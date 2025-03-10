@@ -32,9 +32,9 @@ import Control.Monad.IO.Class
 import Crypto.Hash.Algorithms (SHA256 (..))
 import Crypto.PubKey.RSA.PKCS15 (signSafer)
 import Data.Aeson
-import qualified Data.ByteString.Char8 as BS8
-import qualified Data.Text as Text
-import qualified Data.Text.Encoding as Text
+import Data.ByteString.Char8 qualified as BS8
+import Data.Text qualified as Text
+import Data.Text.Encoding qualified as Text
 import Data.Time.Clock.POSIX
 import Gogol.Auth.Scope (KnownScopes (..), concatScopes)
 import Gogol.Compute.Metadata
@@ -42,7 +42,7 @@ import Gogol.Internal.Auth
 import Gogol.Internal.Logger
 import Gogol.Prelude hiding (buildText)
 import Network.HTTP.Conduit hiding (Request)
-import qualified Network.HTTP.Conduit as Client
+import Network.HTTP.Conduit qualified as Client
 
 -- | The maximum lifetime of a @service_account@ token which is 1 hour, in seconds.
 maxTokenLifetime :: Seconds

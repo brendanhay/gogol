@@ -214,6 +214,13 @@ module Gogol.Compute.Types
     AllocationAggregateReservationReservedResourceInfoAccelerator (..),
     newAllocationAggregateReservationReservedResourceInfoAccelerator,
 
+    -- ** AllocationReservationSharingPolicy
+    AllocationReservationSharingPolicy (..),
+    newAllocationReservationSharingPolicy,
+
+    -- ** AllocationReservationSharingPolicy_ServiceShareType
+    AllocationReservationSharingPolicy_ServiceShareType (..),
+
     -- ** AllocationResourceStatus
     AllocationResourceStatus (..),
     newAllocationResourceStatus,
@@ -221,6 +228,10 @@ module Gogol.Compute.Types
     -- ** AllocationResourceStatusSpecificSKUAllocation
     AllocationResourceStatusSpecificSKUAllocation (..),
     newAllocationResourceStatusSpecificSKUAllocation,
+
+    -- ** AllocationResourceStatusSpecificSKUAllocation_Utilizations
+    AllocationResourceStatusSpecificSKUAllocation_Utilizations (..),
+    newAllocationResourceStatusSpecificSKUAllocation_Utilizations,
 
     -- ** AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk
     AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk (..),
@@ -444,6 +455,10 @@ module Gogol.Compute.Types
     BackendBucketUsedBy (..),
     newBackendBucketUsedBy,
 
+    -- ** BackendCustomMetric
+    BackendCustomMetric (..),
+    newBackendCustomMetric,
+
     -- ** BackendService
     BackendService (..),
     newBackendService,
@@ -513,6 +528,10 @@ module Gogol.Compute.Types
 
     -- ** BackendServiceConnectionTrackingPolicy_TrackingMode
     BackendServiceConnectionTrackingPolicy_TrackingMode (..),
+
+    -- ** BackendServiceCustomMetric
+    BackendServiceCustomMetric (..),
+    newBackendServiceCustomMetric,
 
     -- ** BackendServiceFailoverPolicy
     BackendServiceFailoverPolicy (..),
@@ -635,6 +654,24 @@ module Gogol.Compute.Types
     -- ** BfdStatusPacketCounts
     BfdStatusPacketCounts (..),
     newBfdStatusPacketCounts,
+
+    -- ** BgpRoute
+    BgpRoute (..),
+    newBgpRoute,
+
+    -- ** BgpRoute_Origin
+    BgpRoute_Origin (..),
+
+    -- ** BgpRouteAsPath
+    BgpRouteAsPath (..),
+    newBgpRouteAsPath,
+
+    -- ** BgpRouteAsPath_Type
+    BgpRouteAsPath_Type (..),
+
+    -- ** BgpRouteNetworkLayerReachabilityInformation
+    BgpRouteNetworkLayerReachabilityInformation (..),
+    newBgpRouteNetworkLayerReachabilityInformation,
 
     -- ** Binding
     Binding (..),
@@ -1105,6 +1142,21 @@ module Gogol.Compute.Types
     -- ** FirewallPoliciesListAssociationsResponse
     FirewallPoliciesListAssociationsResponse (..),
     newFirewallPoliciesListAssociationsResponse,
+
+    -- ** FirewallPoliciesScopedList
+    FirewallPoliciesScopedList (..),
+    newFirewallPoliciesScopedList,
+
+    -- ** FirewallPoliciesScopedList_Warning
+    FirewallPoliciesScopedList_Warning (..),
+    newFirewallPoliciesScopedList_Warning,
+
+    -- ** FirewallPoliciesScopedList_Warning_Code
+    FirewallPoliciesScopedList_Warning_Code (..),
+
+    -- ** FirewallPoliciesScopedList_Warning_DataItem
+    FirewallPoliciesScopedList_Warning_DataItem (..),
+    newFirewallPoliciesScopedList_Warning_DataItem,
 
     -- ** FirewallPolicy
     FirewallPolicy (..),
@@ -1795,6 +1847,10 @@ module Gogol.Compute.Types
     InstanceGroupManagerResizeRequestsListResponse_Warning_DataItem (..),
     newInstanceGroupManagerResizeRequestsListResponse_Warning_DataItem,
 
+    -- ** InstanceGroupManagerResourcePolicies
+    InstanceGroupManagerResourcePolicies (..),
+    newInstanceGroupManagerResourcePolicies,
+
     -- ** InstanceGroupManagerStandbyPolicy
     InstanceGroupManagerStandbyPolicy (..),
     newInstanceGroupManagerStandbyPolicy,
@@ -2183,6 +2239,20 @@ module Gogol.Compute.Types
     -- ** InstancesRemoveResourcePoliciesRequest
     InstancesRemoveResourcePoliciesRequest (..),
     newInstancesRemoveResourcePoliciesRequest,
+
+    -- ** InstancesReportHostAsFaultyRequest
+    InstancesReportHostAsFaultyRequest (..),
+    newInstancesReportHostAsFaultyRequest,
+
+    -- ** InstancesReportHostAsFaultyRequest_DisruptionSchedule
+    InstancesReportHostAsFaultyRequest_DisruptionSchedule (..),
+
+    -- ** InstancesReportHostAsFaultyRequestFaultReason
+    InstancesReportHostAsFaultyRequestFaultReason (..),
+    newInstancesReportHostAsFaultyRequestFaultReason,
+
+    -- ** InstancesReportHostAsFaultyRequestFaultReason_Behavior
+    InstancesReportHostAsFaultyRequestFaultReason_Behavior (..),
 
     -- ** InstancesScopedList
     InstancesScopedList (..),
@@ -3073,6 +3143,25 @@ module Gogol.Compute.Types
     NetworkEndpointWithHealthStatus (..),
     newNetworkEndpointWithHealthStatus,
 
+    -- ** NetworkFirewallPolicyAggregatedList
+    NetworkFirewallPolicyAggregatedList (..),
+    newNetworkFirewallPolicyAggregatedList,
+
+    -- ** NetworkFirewallPolicyAggregatedList_Items
+    NetworkFirewallPolicyAggregatedList_Items (..),
+    newNetworkFirewallPolicyAggregatedList_Items,
+
+    -- ** NetworkFirewallPolicyAggregatedList_Warning
+    NetworkFirewallPolicyAggregatedList_Warning (..),
+    newNetworkFirewallPolicyAggregatedList_Warning,
+
+    -- ** NetworkFirewallPolicyAggregatedList_Warning_Code
+    NetworkFirewallPolicyAggregatedList_Warning_Code (..),
+
+    -- ** NetworkFirewallPolicyAggregatedList_Warning_DataItem
+    NetworkFirewallPolicyAggregatedList_Warning_DataItem (..),
+    newNetworkFirewallPolicyAggregatedList_Warning_DataItem,
+
     -- ** NetworkInterface
     NetworkInterface (..),
     newNetworkInterface,
@@ -3223,6 +3312,9 @@ module Gogol.Compute.Types
 
     -- ** NetworkRoutingConfig_BgpInterRegionCost
     NetworkRoutingConfig_BgpInterRegionCost (..),
+
+    -- ** NetworkRoutingConfig_EffectiveBgpInterRegionCost
+    NetworkRoutingConfig_EffectiveBgpInterRegionCost (..),
 
     -- ** NetworkRoutingConfig_RoutingMode
     NetworkRoutingConfig_RoutingMode (..),
@@ -4451,6 +4543,17 @@ module Gogol.Compute.Types
     RouteList_Warning_DataItem (..),
     newRouteList_Warning_DataItem,
 
+    -- ** RoutePolicy
+    RoutePolicy (..),
+    newRoutePolicy,
+
+    -- ** RoutePolicy_Type
+    RoutePolicy_Type (..),
+
+    -- ** RoutePolicyPolicyTerm
+    RoutePolicyPolicyTerm (..),
+    newRoutePolicyPolicyTerm,
+
     -- ** Router
     Router (..),
     newRouter,
@@ -4610,6 +4713,40 @@ module Gogol.Compute.Types
     -- ** RouterStatusResponse
     RouterStatusResponse (..),
     newRouterStatusResponse,
+
+    -- ** RoutersGetRoutePolicyResponse
+    RoutersGetRoutePolicyResponse (..),
+    newRoutersGetRoutePolicyResponse,
+
+    -- ** RoutersListBgpRoutes
+    RoutersListBgpRoutes (..),
+    newRoutersListBgpRoutes,
+
+    -- ** RoutersListBgpRoutes_Warning
+    RoutersListBgpRoutes_Warning (..),
+    newRoutersListBgpRoutes_Warning,
+
+    -- ** RoutersListBgpRoutes_Warning_Code
+    RoutersListBgpRoutes_Warning_Code (..),
+
+    -- ** RoutersListBgpRoutes_Warning_DataItem
+    RoutersListBgpRoutes_Warning_DataItem (..),
+    newRoutersListBgpRoutes_Warning_DataItem,
+
+    -- ** RoutersListRoutePolicies
+    RoutersListRoutePolicies (..),
+    newRoutersListRoutePolicies,
+
+    -- ** RoutersListRoutePolicies_Warning
+    RoutersListRoutePolicies_Warning (..),
+    newRoutersListRoutePolicies_Warning,
+
+    -- ** RoutersListRoutePolicies_Warning_Code
+    RoutersListRoutePolicies_Warning_Code (..),
+
+    -- ** RoutersListRoutePolicies_Warning_DataItem
+    RoutersListRoutePolicies_Warning_DataItem (..),
+    newRoutersListRoutePolicies_Warning_DataItem,
 
     -- ** RoutersPreviewResponse
     RoutersPreviewResponse (..),
@@ -6412,6 +6549,12 @@ module Gogol.Compute.Types
 
     -- ** NetworksListPeeringRoutesDirection
     NetworksListPeeringRoutesDirection (..),
+
+    -- ** RoutersListBgpRoutesAddressFamily
+    RoutersListBgpRoutesAddressFamily (..),
+
+    -- ** RoutersListBgpRoutesRouteType
+    RoutersListBgpRoutesRouteType (..),
   )
 where
 

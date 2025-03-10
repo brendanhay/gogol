@@ -23,7 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists user workloads ConfigMaps. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- Lists user workloads ConfigMaps. This method is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference> for @composer.projects.locations.environments.userWorkloadsConfigMaps.list@.
 module Gogol.Composer.Projects.Locations.Environments.UserWorkloadsConfigMaps.List
@@ -55,7 +55,7 @@ type ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ListUserWorkloadsConfigMapsResponse
 
--- | Lists user workloads ConfigMaps. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- | Lists user workloads ConfigMaps. This method is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ 'newComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsList' smart constructor.
 data ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsList = ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsList

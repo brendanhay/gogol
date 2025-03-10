@@ -71,7 +71,7 @@ data BigQueryDatasetsList = BigQueryDatasetsList
     all :: (Core.Maybe Core.Bool),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | An expression for filtering the results of the request by label. The syntax is @labels.[:]@. Multiple filters can be ANDed together by connecting with a space. Example: @labels.department:receiving labels.active@. See <https://cloud.google.com/bigquery/docs/filtering-labels#filtering_datasets_using_labels Filtering datasets using labels> for details.
+    -- | An expression for filtering the results of the request by label. The syntax is @labels.[:]@. Multiple filters can be AND-ed together by connecting with a space. Example: @labels.department:receiving labels.active@. See <https://cloud.google.com/bigquery/docs/filtering-labels#filtering_datasets_using_labels Filtering datasets using labels> for details.
     filter :: (Core.Maybe Core.Text),
     -- | The maximum number of results to return in a single response page. Leverage the page tokens to iterate through the entire collection.
     maxResults :: (Core.Maybe Core.Word32),

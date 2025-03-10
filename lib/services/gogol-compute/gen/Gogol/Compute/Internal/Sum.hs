@@ -317,8 +317,10 @@ module Gogol.Compute.Internal.Sum
       ( AllocationAggregateReservation_VmFamily_VM_FAMILY_CLOUD_TPU_DEVICE_CT3,
         AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPULITEDEVICECT5L,
         AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPULITEPODSLICECT5LP,
+        AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPULITEPODSLICECT6E,
         AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPUPODSLICECT3P,
         AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPUPODSLICECT4P,
+        AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPUPODSLICECT5P,
         ..
       ),
 
@@ -327,6 +329,14 @@ module Gogol.Compute.Internal.Sum
       ( AllocationAggregateReservation_WorkloadType_Batch,
         AllocationAggregateReservation_WorkloadType_Serving,
         AllocationAggregateReservation_WorkloadType_Unspecified,
+        ..
+      ),
+
+    -- * AllocationReservationSharingPolicy_ServiceShareType
+    AllocationReservationSharingPolicy_ServiceShareType
+      ( AllocationReservationSharingPolicy_ServiceShareType_ALLOWALL,
+        AllocationReservationSharingPolicy_ServiceShareType_DISALLOWALL,
+        AllocationReservationSharingPolicy_ServiceShareType_SERVICESHARETYPEUNSPECIFIED,
         ..
       ),
 
@@ -561,6 +571,7 @@ module Gogol.Compute.Internal.Sum
     -- * Backend_BalancingMode
     Backend_BalancingMode
       ( Backend_BalancingMode_Connection,
+        Backend_BalancingMode_CUSTOMMETRICS,
         Backend_BalancingMode_Rate,
         Backend_BalancingMode_Utilization,
         ..
@@ -661,6 +672,7 @@ module Gogol.Compute.Internal.Sum
         BackendService_LocalityLbPolicy_RINGHASH,
         BackendService_LocalityLbPolicy_ROUNDROBIN,
         BackendService_LocalityLbPolicy_WEIGHTEDMAGLEV,
+        BackendService_LocalityLbPolicy_WEIGHTEDROUNDROBIN,
         ..
       ),
 
@@ -828,6 +840,7 @@ module Gogol.Compute.Internal.Sum
         BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_RINGHASH,
         BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_ROUNDROBIN,
         BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_WEIGHTEDMAGLEV,
+        BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_WEIGHTEDROUNDROBIN,
         ..
       ),
 
@@ -931,6 +944,21 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * BgpRoute_Origin
+    BgpRoute_Origin
+      ( BgpRoute_Origin_BGPORIGINEGP,
+        BgpRoute_Origin_BGPORIGINIGP,
+        BgpRoute_Origin_BGPORIGININCOMPLETE,
+        ..
+      ),
+
+    -- * BgpRouteAsPath_Type
+    BgpRouteAsPath_Type
+      ( BgpRouteAsPath_Type_ASPATHTYPESEQUENCE,
+        BgpRouteAsPath_Type_ASPATHTYPESET,
+        ..
+      ),
+
     -- * BulkInsertOperationStatus_Status
     BulkInsertOperationStatus_Status
       ( BulkInsertOperationStatus_Status_Creating,
@@ -971,6 +999,7 @@ module Gogol.Compute.Internal.Sum
       ( Commitment_Type_ACCELERATOROPTIMIZED,
         Commitment_Type_ACCELERATOR_OPTIMIZED_A3,
         Commitment_Type_ACCELERATOROPTIMIZEDA3MEGA,
+        Commitment_Type_ACCELERATOROPTIMIZEDA3ULTRA,
         Commitment_Type_COMPUTEOPTIMIZED,
         Commitment_Type_COMPUTEOPTIMIZEDC2D,
         Commitment_Type_COMPUTE_OPTIMIZED_C3,
@@ -1515,6 +1544,40 @@ module Gogol.Compute.Internal.Sum
     FirewallLogConfig_Metadata
       ( FirewallLogConfig_Metadata_EXCLUDEALLMETADATA,
         FirewallLogConfig_Metadata_INCLUDEALLMETADATA,
+        ..
+      ),
+
+    -- * FirewallPoliciesScopedList_Warning_Code
+    FirewallPoliciesScopedList_Warning_Code
+      ( FirewallPoliciesScopedList_Warning_Code_CLEANUPFAILED,
+        FirewallPoliciesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+        FirewallPoliciesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
+        FirewallPoliciesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+        FirewallPoliciesScopedList_Warning_Code_EXPERIMENTALTYPEUSED,
+        FirewallPoliciesScopedList_Warning_Code_EXTERNALAPIWARNING,
+        FirewallPoliciesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
+        FirewallPoliciesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        FirewallPoliciesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+        FirewallPoliciesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+        FirewallPoliciesScopedList_Warning_Code_LISTOVERHEADQUOTAEXCEED,
+        FirewallPoliciesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+        FirewallPoliciesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+        FirewallPoliciesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        FirewallPoliciesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        FirewallPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+        FirewallPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+        FirewallPoliciesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
+        FirewallPoliciesScopedList_Warning_Code_NOTCRITICALERROR,
+        FirewallPoliciesScopedList_Warning_Code_NORESULTSONPAGE,
+        FirewallPoliciesScopedList_Warning_Code_PARTIALSUCCESS,
+        FirewallPoliciesScopedList_Warning_Code_QUOTAINFOUNAVAILABLE,
+        FirewallPoliciesScopedList_Warning_Code_REQUIREDTOSAGREEMENT,
+        FirewallPoliciesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+        FirewallPoliciesScopedList_Warning_Code_RESOURCENOTDELETED,
+        FirewallPoliciesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+        FirewallPoliciesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+        FirewallPoliciesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
+        FirewallPoliciesScopedList_Warning_Code_Unreachable,
         ..
       ),
 
@@ -2831,6 +2894,23 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * InstancesReportHostAsFaultyRequest_DisruptionSchedule
+    InstancesReportHostAsFaultyRequest_DisruptionSchedule
+      ( InstancesReportHostAsFaultyRequest_DisruptionSchedule_DISRUPTIONSCHEDULEUNSPECIFIED,
+        InstancesReportHostAsFaultyRequest_DisruptionSchedule_Future,
+        InstancesReportHostAsFaultyRequest_DisruptionSchedule_Immediate,
+        ..
+      ),
+
+    -- * InstancesReportHostAsFaultyRequestFaultReason_Behavior
+    InstancesReportHostAsFaultyRequestFaultReason_Behavior
+      ( InstancesReportHostAsFaultyRequestFaultReason_Behavior_BEHAVIORUNSPECIFIED,
+        InstancesReportHostAsFaultyRequestFaultReason_Behavior_Performance,
+        InstancesReportHostAsFaultyRequestFaultReason_Behavior_SILENTDATACORRUPTION,
+        InstancesReportHostAsFaultyRequestFaultReason_Behavior_UNRECOVERABLEGPUERROR,
+        ..
+      ),
+
     -- * InstancesScopedList_Warning_Code
     InstancesScopedList_Warning_Code
       ( InstancesScopedList_Warning_Code_CLEANUPFAILED,
@@ -3028,7 +3108,8 @@ module Gogol.Compute.Internal.Sum
 
     -- * InterconnectAttachment_Bandwidth
     InterconnectAttachment_Bandwidth
-      ( InterconnectAttachment_Bandwidth_BPS100M,
+      ( InterconnectAttachment_Bandwidth_BPS100G,
+        InterconnectAttachment_Bandwidth_BPS100M,
         InterconnectAttachment_Bandwidth_BPS10G,
         InterconnectAttachment_Bandwidth_BPS1G,
         InterconnectAttachment_Bandwidth_BPS200M,
@@ -4092,6 +4173,40 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * NetworkFirewallPolicyAggregatedList_Warning_Code
+    NetworkFirewallPolicyAggregatedList_Warning_Code
+      ( NetworkFirewallPolicyAggregatedList_Warning_Code_CLEANUPFAILED,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_EXTERNALAPIWARNING,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_LISTOVERHEADQUOTAEXCEED,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_NOTCRITICALERROR,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_NORESULTSONPAGE,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_PARTIALSUCCESS,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_QUOTAINFOUNAVAILABLE,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_RESOURCENOTDELETED,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
+        NetworkFirewallPolicyAggregatedList_Warning_Code_Unreachable,
+        ..
+      ),
+
     -- * NetworkInterface_Ipv6AccessType
     NetworkInterface_Ipv6AccessType
       ( NetworkInterface_Ipv6AccessType_External,
@@ -4390,6 +4505,13 @@ module Gogol.Compute.Internal.Sum
     NetworkRoutingConfig_BgpInterRegionCost
       ( NetworkRoutingConfig_BgpInterRegionCost_ADDCOSTTOMED,
         NetworkRoutingConfig_BgpInterRegionCost_Default,
+        ..
+      ),
+
+    -- * NetworkRoutingConfig_EffectiveBgpInterRegionCost
+    NetworkRoutingConfig_EffectiveBgpInterRegionCost
+      ( NetworkRoutingConfig_EffectiveBgpInterRegionCost_ADDCOSTTOMED,
+        NetworkRoutingConfig_EffectiveBgpInterRegionCost_Default,
         ..
       ),
 
@@ -5902,6 +6024,8 @@ module Gogol.Compute.Internal.Sum
       ( RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Hierarchy,
         RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Network,
         RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_NETWORKREGIONAL,
+        RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_SYSTEMGLOBAL,
+        RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_SYSTEMREGIONAL,
         RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspecified,
         ..
       ),
@@ -6280,6 +6404,13 @@ module Gogol.Compute.Internal.Sum
         ..
       ),
 
+    -- * RoutePolicy_Type
+    RoutePolicy_Type
+      ( RoutePolicy_Type_ROUTEPOLICYTYPEEXPORT,
+        RoutePolicy_Type_ROUTEPOLICYTYPEIMPORT,
+        ..
+      ),
+
     -- * RouterAggregatedList_Warning_Code
     RouterAggregatedList_Warning_Code
       ( RouterAggregatedList_Warning_Code_CLEANUPFAILED,
@@ -6479,6 +6610,74 @@ module Gogol.Compute.Internal.Sum
         RouterStatusBgpPeerStatus_StatusReason_IPV6PEERONIPV4ONLYCONNECTION,
         RouterStatusBgpPeerStatus_StatusReason_MD5AUTHINTERNALPROBLEM,
         RouterStatusBgpPeerStatus_StatusReason_STATUSREASONUNSPECIFIED,
+        ..
+      ),
+
+    -- * RoutersListBgpRoutes_Warning_Code
+    RoutersListBgpRoutes_Warning_Code
+      ( RoutersListBgpRoutes_Warning_Code_CLEANUPFAILED,
+        RoutersListBgpRoutes_Warning_Code_DEPRECATEDRESOURCEUSED,
+        RoutersListBgpRoutes_Warning_Code_DEPRECATEDTYPEUSED,
+        RoutersListBgpRoutes_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+        RoutersListBgpRoutes_Warning_Code_EXPERIMENTALTYPEUSED,
+        RoutersListBgpRoutes_Warning_Code_EXTERNALAPIWARNING,
+        RoutersListBgpRoutes_Warning_Code_FIELDVALUEOVERRIDEN,
+        RoutersListBgpRoutes_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        RoutersListBgpRoutes_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+        RoutersListBgpRoutes_Warning_Code_LARGEDEPLOYMENTWARNING,
+        RoutersListBgpRoutes_Warning_Code_LISTOVERHEADQUOTAEXCEED,
+        RoutersListBgpRoutes_Warning_Code_MISSINGTYPEDEPENDENCY,
+        RoutersListBgpRoutes_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+        RoutersListBgpRoutes_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        RoutersListBgpRoutes_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        RoutersListBgpRoutes_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+        RoutersListBgpRoutes_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+        RoutersListBgpRoutes_Warning_Code_NEXTHOPNOTRUNNING,
+        RoutersListBgpRoutes_Warning_Code_NOTCRITICALERROR,
+        RoutersListBgpRoutes_Warning_Code_NORESULTSONPAGE,
+        RoutersListBgpRoutes_Warning_Code_PARTIALSUCCESS,
+        RoutersListBgpRoutes_Warning_Code_QUOTAINFOUNAVAILABLE,
+        RoutersListBgpRoutes_Warning_Code_REQUIREDTOSAGREEMENT,
+        RoutersListBgpRoutes_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+        RoutersListBgpRoutes_Warning_Code_RESOURCENOTDELETED,
+        RoutersListBgpRoutes_Warning_Code_SCHEMAVALIDATIONIGNORED,
+        RoutersListBgpRoutes_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+        RoutersListBgpRoutes_Warning_Code_UNDECLAREDPROPERTIES,
+        RoutersListBgpRoutes_Warning_Code_Unreachable,
+        ..
+      ),
+
+    -- * RoutersListRoutePolicies_Warning_Code
+    RoutersListRoutePolicies_Warning_Code
+      ( RoutersListRoutePolicies_Warning_Code_CLEANUPFAILED,
+        RoutersListRoutePolicies_Warning_Code_DEPRECATEDRESOURCEUSED,
+        RoutersListRoutePolicies_Warning_Code_DEPRECATEDTYPEUSED,
+        RoutersListRoutePolicies_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+        RoutersListRoutePolicies_Warning_Code_EXPERIMENTALTYPEUSED,
+        RoutersListRoutePolicies_Warning_Code_EXTERNALAPIWARNING,
+        RoutersListRoutePolicies_Warning_Code_FIELDVALUEOVERRIDEN,
+        RoutersListRoutePolicies_Warning_Code_INJECTEDKERNELSDEPRECATED,
+        RoutersListRoutePolicies_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+        RoutersListRoutePolicies_Warning_Code_LARGEDEPLOYMENTWARNING,
+        RoutersListRoutePolicies_Warning_Code_LISTOVERHEADQUOTAEXCEED,
+        RoutersListRoutePolicies_Warning_Code_MISSINGTYPEDEPENDENCY,
+        RoutersListRoutePolicies_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+        RoutersListRoutePolicies_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+        RoutersListRoutePolicies_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+        RoutersListRoutePolicies_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+        RoutersListRoutePolicies_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+        RoutersListRoutePolicies_Warning_Code_NEXTHOPNOTRUNNING,
+        RoutersListRoutePolicies_Warning_Code_NOTCRITICALERROR,
+        RoutersListRoutePolicies_Warning_Code_NORESULTSONPAGE,
+        RoutersListRoutePolicies_Warning_Code_PARTIALSUCCESS,
+        RoutersListRoutePolicies_Warning_Code_QUOTAINFOUNAVAILABLE,
+        RoutersListRoutePolicies_Warning_Code_REQUIREDTOSAGREEMENT,
+        RoutersListRoutePolicies_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+        RoutersListRoutePolicies_Warning_Code_RESOURCENOTDELETED,
+        RoutersListRoutePolicies_Warning_Code_SCHEMAVALIDATIONIGNORED,
+        RoutersListRoutePolicies_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+        RoutersListRoutePolicies_Warning_Code_UNDECLAREDPROPERTIES,
+        RoutersListRoutePolicies_Warning_Code_Unreachable,
         ..
       ),
 
@@ -6722,6 +6921,7 @@ module Gogol.Compute.Internal.Sum
     -- * SecurityPolicyDdosProtectionConfig_DdosProtection
     SecurityPolicyDdosProtectionConfig_DdosProtection
       ( SecurityPolicyDdosProtectionConfig_DdosProtection_Advanced,
+        SecurityPolicyDdosProtectionConfig_DdosProtection_ADVANCEDPREVIEW,
         SecurityPolicyDdosProtectionConfig_DdosProtection_Standard,
         ..
       ),
@@ -9136,6 +9336,22 @@ module Gogol.Compute.Internal.Sum
         NetworksListPeeringRoutesDirection_Outgoing,
         ..
       ),
+
+    -- * RoutersListBgpRoutesAddressFamily
+    RoutersListBgpRoutesAddressFamily
+      ( RoutersListBgpRoutesAddressFamily_IPV4,
+        RoutersListBgpRoutesAddressFamily_IPV6,
+        RoutersListBgpRoutesAddressFamily_UNSPECIFIEDIPVERSION,
+        ..
+      ),
+
+    -- * RoutersListBgpRoutesRouteType
+    RoutersListBgpRoutesRouteType
+      ( RoutersListBgpRoutesRouteType_Advertised,
+        RoutersListBgpRoutesRouteType_Learned,
+        RoutersListBgpRoutesRouteType_UNSPECIFIEDROUTETYPE,
+        ..
+      ),
   )
 where
 
@@ -10474,18 +10690,26 @@ pattern AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPULITEDEVICECT5L =
 pattern AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPULITEPODSLICECT5LP :: AllocationAggregateReservation_VmFamily
 pattern AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPULITEPODSLICECT5LP = AllocationAggregateReservation_VmFamily "VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT5LP"
 
+pattern AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPULITEPODSLICECT6E :: AllocationAggregateReservation_VmFamily
+pattern AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPULITEPODSLICECT6E = AllocationAggregateReservation_VmFamily "VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT6E"
+
 pattern AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPUPODSLICECT3P :: AllocationAggregateReservation_VmFamily
 pattern AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPUPODSLICECT3P = AllocationAggregateReservation_VmFamily "VM_FAMILY_CLOUD_TPU_POD_SLICE_CT3P"
 
 pattern AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPUPODSLICECT4P :: AllocationAggregateReservation_VmFamily
 pattern AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPUPODSLICECT4P = AllocationAggregateReservation_VmFamily "VM_FAMILY_CLOUD_TPU_POD_SLICE_CT4P"
 
+pattern AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPUPODSLICECT5P :: AllocationAggregateReservation_VmFamily
+pattern AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPUPODSLICECT5P = AllocationAggregateReservation_VmFamily "VM_FAMILY_CLOUD_TPU_POD_SLICE_CT5P"
+
 {-# COMPLETE
   AllocationAggregateReservation_VmFamily_VM_FAMILY_CLOUD_TPU_DEVICE_CT3,
   AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPULITEDEVICECT5L,
   AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPULITEPODSLICECT5LP,
+  AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPULITEPODSLICECT6E,
   AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPUPODSLICECT3P,
   AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPUPODSLICECT4P,
+  AllocationAggregateReservation_VmFamily_VMFAMILYCLOUDTPUPODSLICECT5P,
   AllocationAggregateReservation_VmFamily
   #-}
 
@@ -10518,6 +10742,37 @@ pattern AllocationAggregateReservation_WorkloadType_Unspecified = AllocationAggr
   AllocationAggregateReservation_WorkloadType_Serving,
   AllocationAggregateReservation_WorkloadType_Unspecified,
   AllocationAggregateReservation_WorkloadType
+  #-}
+
+-- | Sharing config for all Google Cloud services.
+newtype AllocationReservationSharingPolicy_ServiceShareType = AllocationReservationSharingPolicy_ServiceShareType {fromAllocationReservationSharingPolicy_ServiceShareType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Allow all Google Cloud managed services to share reservations.
+pattern AllocationReservationSharingPolicy_ServiceShareType_ALLOWALL :: AllocationReservationSharingPolicy_ServiceShareType
+pattern AllocationReservationSharingPolicy_ServiceShareType_ALLOWALL = AllocationReservationSharingPolicy_ServiceShareType "ALLOW_ALL"
+
+-- | [Default] Disallow sharing with all Google Cloud services.
+pattern AllocationReservationSharingPolicy_ServiceShareType_DISALLOWALL :: AllocationReservationSharingPolicy_ServiceShareType
+pattern AllocationReservationSharingPolicy_ServiceShareType_DISALLOWALL = AllocationReservationSharingPolicy_ServiceShareType "DISALLOW_ALL"
+
+pattern AllocationReservationSharingPolicy_ServiceShareType_SERVICESHARETYPEUNSPECIFIED :: AllocationReservationSharingPolicy_ServiceShareType
+pattern AllocationReservationSharingPolicy_ServiceShareType_SERVICESHARETYPEUNSPECIFIED = AllocationReservationSharingPolicy_ServiceShareType "SERVICE_SHARE_TYPE_UNSPECIFIED"
+
+{-# COMPLETE
+  AllocationReservationSharingPolicy_ServiceShareType_ALLOWALL,
+  AllocationReservationSharingPolicy_ServiceShareType_DISALLOWALL,
+  AllocationReservationSharingPolicy_ServiceShareType_SERVICESHARETYPEUNSPECIFIED,
+  AllocationReservationSharingPolicy_ServiceShareType
   #-}
 
 -- | Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. The default is SCSI. For performance characteristics of SCSI over NVMe, see Local SSD performance.
@@ -11536,6 +11791,10 @@ newtype Backend_BalancingMode = Backend_BalancingMode {fromBackend_BalancingMode
 pattern Backend_BalancingMode_Connection :: Backend_BalancingMode
 pattern Backend_BalancingMode_Connection = Backend_BalancingMode "CONNECTION"
 
+-- | Based on custom defined and reported metrics.
+pattern Backend_BalancingMode_CUSTOMMETRICS :: Backend_BalancingMode
+pattern Backend_BalancingMode_CUSTOMMETRICS = Backend_BalancingMode "CUSTOM_METRICS"
+
 -- | Balance based on requests per second (RPS).
 pattern Backend_BalancingMode_Rate :: Backend_BalancingMode
 pattern Backend_BalancingMode_Rate = Backend_BalancingMode "RATE"
@@ -11546,6 +11805,7 @@ pattern Backend_BalancingMode_Utilization = Backend_BalancingMode "UTILIZATION"
 
 {-# COMPLETE
   Backend_BalancingMode_Connection,
+  Backend_BalancingMode_CUSTOMMETRICS,
   Backend_BalancingMode_Rate,
   Backend_BalancingMode_Utilization,
   Backend_BalancingMode
@@ -11964,6 +12224,10 @@ pattern BackendService_LocalityLbPolicy_ROUNDROBIN = BackendService_LocalityLbPo
 pattern BackendService_LocalityLbPolicy_WEIGHTEDMAGLEV :: BackendService_LocalityLbPolicy
 pattern BackendService_LocalityLbPolicy_WEIGHTEDMAGLEV = BackendService_LocalityLbPolicy "WEIGHTED_MAGLEV"
 
+-- | Per-endpoint weighted round-robin Load Balancing using weights computed from Backend reported Custom Metrics. If set, the Backend Service responses are expected to contain non-standard HTTP response header field X-Endpoint-Load-Metrics. The reported metrics to use for computing the weights are specified via the backends[].customMetrics fields.
+pattern BackendService_LocalityLbPolicy_WEIGHTEDROUNDROBIN :: BackendService_LocalityLbPolicy
+pattern BackendService_LocalityLbPolicy_WEIGHTEDROUNDROBIN = BackendService_LocalityLbPolicy "WEIGHTED_ROUND_ROBIN"
+
 {-# COMPLETE
   BackendService_LocalityLbPolicy_INVALIDLBPOLICY,
   BackendService_LocalityLbPolicy_LEASTREQUEST,
@@ -11973,6 +12237,7 @@ pattern BackendService_LocalityLbPolicy_WEIGHTEDMAGLEV = BackendService_Locality
   BackendService_LocalityLbPolicy_RINGHASH,
   BackendService_LocalityLbPolicy_ROUNDROBIN,
   BackendService_LocalityLbPolicy_WEIGHTEDMAGLEV,
+  BackendService_LocalityLbPolicy_WEIGHTEDROUNDROBIN,
   BackendService_LocalityLbPolicy
   #-}
 
@@ -12718,6 +12983,10 @@ pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_ROUNDROBIN = 
 pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_WEIGHTEDMAGLEV :: BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name
 pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_WEIGHTEDMAGLEV = BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name "WEIGHTED_MAGLEV"
 
+-- | Per-endpoint weighted round-robin Load Balancing using weights computed from Backend reported Custom Metrics. If set, the Backend Service responses are expected to contain non-standard HTTP response header field X-Endpoint-Load-Metrics. The reported metrics to use for computing the weights are specified via the backends[].customMetrics fields.
+pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_WEIGHTEDROUNDROBIN :: BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name
+pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_WEIGHTEDROUNDROBIN = BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name "WEIGHTED_ROUND_ROBIN"
+
 {-# COMPLETE
   BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_INVALIDLBPOLICY,
   BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_LEASTREQUEST,
@@ -12727,6 +12996,7 @@ pattern BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_WEIGHTEDMAGLE
   BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_RINGHASH,
   BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_ROUNDROBIN,
   BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_WEIGHTEDMAGLEV,
+  BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name_WEIGHTEDROUNDROBIN,
   BackendServiceLocalityLoadBalancingPolicyConfigPolicy_Name
   #-}
 
@@ -13141,6 +13411,60 @@ pattern BfdStatus_LocalState_UP = BfdStatus_LocalState "UP"
   BfdStatus_LocalState
   #-}
 
+-- | [Output only] BGP origin (EGP, IGP or INCOMPLETE)
+newtype BgpRoute_Origin = BgpRoute_Origin {fromBgpRoute_Origin :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+pattern BgpRoute_Origin_BGPORIGINEGP :: BgpRoute_Origin
+pattern BgpRoute_Origin_BGPORIGINEGP = BgpRoute_Origin "BGP_ORIGIN_EGP"
+
+pattern BgpRoute_Origin_BGPORIGINIGP :: BgpRoute_Origin
+pattern BgpRoute_Origin_BGPORIGINIGP = BgpRoute_Origin "BGP_ORIGIN_IGP"
+
+pattern BgpRoute_Origin_BGPORIGININCOMPLETE :: BgpRoute_Origin
+pattern BgpRoute_Origin_BGPORIGININCOMPLETE = BgpRoute_Origin "BGP_ORIGIN_INCOMPLETE"
+
+{-# COMPLETE
+  BgpRoute_Origin_BGPORIGINEGP,
+  BgpRoute_Origin_BGPORIGINIGP,
+  BgpRoute_Origin_BGPORIGININCOMPLETE,
+  BgpRoute_Origin
+  #-}
+
+-- | [Output only] Type of AS-PATH segment (SEQUENCE or SET)
+newtype BgpRouteAsPath_Type = BgpRouteAsPath_Type {fromBgpRouteAsPath_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+pattern BgpRouteAsPath_Type_ASPATHTYPESEQUENCE :: BgpRouteAsPath_Type
+pattern BgpRouteAsPath_Type_ASPATHTYPESEQUENCE = BgpRouteAsPath_Type "AS_PATH_TYPE_SEQUENCE"
+
+pattern BgpRouteAsPath_Type_ASPATHTYPESET :: BgpRouteAsPath_Type
+pattern BgpRouteAsPath_Type_ASPATHTYPESET = BgpRouteAsPath_Type "AS_PATH_TYPE_SET"
+
+{-# COMPLETE
+  BgpRouteAsPath_Type_ASPATHTYPESEQUENCE,
+  BgpRouteAsPath_Type_ASPATHTYPESET,
+  BgpRouteAsPath_Type
+  #-}
+
 -- | [Output Only] Creation status of BulkInsert operation - information if the flow is rolling forward or rolling back.
 newtype BulkInsertOperationStatus_Status = BulkInsertOperationStatus_Status {fromBulkInsertOperationStatus_Status :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -13177,7 +13501,7 @@ pattern BulkInsertOperationStatus_Status_STATUSUNSPECIFIED = BulkInsertOperation
   BulkInsertOperationStatus_Status
   #-}
 
--- | The category of the commitment. Category MACHINE specifies commitments composed of machine resources such as VCPU or MEMORY, listed in resources. Category LICENSE specifies commitments composed of software licenses, listed in licenseResources. Note that only MACHINE commitments should have a Type specified.
+-- | The category of the commitment; specifies whether the commitment is for hardware or software resources. Category MACHINE specifies that you are committing to hardware machine resources such as VCPU or MEMORY, listed in resources. Category LICENSE specifies that you are committing to software licenses, listed in licenseResources. Note that if you specify MACHINE commitments, then you must also specify a type to indicate the machine series of the hardware resource that you are committing to.
 newtype Commitment_Category = Commitment_Category {fromCommitment_Category :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -13206,7 +13530,7 @@ pattern Commitment_Category_Machine = Commitment_Category "MACHINE"
   Commitment_Category
   #-}
 
--- | The plan for this commitment, which determines duration and discount rate. The currently supported plans are TWELVE/MONTH (1 year), and THIRTY/SIX_MONTH (3 years).
+-- | The minimum time duration that you commit to purchasing resources. The plan that you choose determines the preset term length of the commitment (which is 1 year or 3 years) and affects the discount rate that you receive for your resources. Committing to a longer time duration typically gives you a higher discount rate. The supported values for this field are TWELVE/MONTH (1 year), and THIRTY/SIX_MONTH (3 years).
 newtype Commitment_Plan = Commitment_Plan {fromCommitment_Plan :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -13235,7 +13559,7 @@ pattern Commitment_Plan_TWELVEMONTH = Commitment_Plan "TWELVE_MONTH"
   Commitment_Plan
   #-}
 
--- | [Output Only] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). One of the following values: NOT/YET/ACTIVE, ACTIVE, EXPIRED.
+-- | [Output Only] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). Status can be one of the following values: NOT/YET/ACTIVE, ACTIVE, or EXPIRED.
 newtype Commitment_Status = Commitment_Status {fromCommitment_Status :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -13273,7 +13597,7 @@ pattern Commitment_Status_NOTYETACTIVE = Commitment_Status "NOT_YET_ACTIVE"
   Commitment_Status
   #-}
 
--- | The type of commitment, which affects the discount rate and the eligible resources. Type MEMORY/OPTIMIZED specifies a commitment that will only apply to memory optimized machines. Type ACCELERATOR/OPTIMIZED specifies a commitment that will only apply to accelerator optimized machines.
+-- | The type of commitment; specifies the machine series for which you want to commit to purchasing resources. The choice of machine series affects the discount rate and the eligible resource types. The type must be one of the following: ACCELERATOR/OPTIMIZED, ACCELERATOR/OPTIMIZED/A3, ACCELERATOR/OPTIMIZED/A3/MEGA, COMPUTE/OPTIMIZED, COMPUTE/OPTIMIZED/C2D, COMPUTE/OPTIMIZED/C3, COMPUTE/OPTIMIZED/C3D, COMPUTE/OPTIMIZED/H3, GENERAL/PURPOSE, GENERAL/PURPOSE/C4, GENERAL/PURPOSE/E2, GENERAL/PURPOSE/N2, GENERAL/PURPOSE/N2D, GENERAL/PURPOSE/N4, GENERAL/PURPOSE/T2D, GRAPHICS/OPTIMIZED, MEMORY/OPTIMIZED, MEMORY/OPTIMIZED/M3, MEMORY/OPTIMIZED/X4, STORAGE/OPTIMIZED/Z3. For example, type MEMORY/OPTIMIZED specifies a commitment that applies only to eligible resources of memory optimized M1 and M2 machine series. Type GENERAL/PURPOSE specifies a commitment that applies only to eligible resources of general purpose N1 machine series.
 newtype Commitment_Type = Commitment_Type {fromCommitment_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -13294,6 +13618,9 @@ pattern Commitment_Type_ACCELERATOR_OPTIMIZED_A3 = Commitment_Type "ACCELERATOR_
 
 pattern Commitment_Type_ACCELERATOROPTIMIZEDA3MEGA :: Commitment_Type
 pattern Commitment_Type_ACCELERATOROPTIMIZEDA3MEGA = Commitment_Type "ACCELERATOR_OPTIMIZED_A3_MEGA"
+
+pattern Commitment_Type_ACCELERATOROPTIMIZEDA3ULTRA :: Commitment_Type
+pattern Commitment_Type_ACCELERATOROPTIMIZEDA3ULTRA = Commitment_Type "ACCELERATOR_OPTIMIZED_A3_ULTRA"
 
 pattern Commitment_Type_COMPUTEOPTIMIZED :: Commitment_Type
 pattern Commitment_Type_COMPUTEOPTIMIZED = Commitment_Type "COMPUTE_OPTIMIZED"
@@ -13355,6 +13682,7 @@ pattern Commitment_Type_MEMORYOPTIMIZEDX432TB = Commitment_Type "MEMORY_OPTIMIZE
 pattern Commitment_Type_STORAGE_OPTIMIZED_Z3 :: Commitment_Type
 pattern Commitment_Type_STORAGE_OPTIMIZED_Z3 = Commitment_Type "STORAGE_OPTIMIZED_Z3"
 
+-- | Note for internal users: When adding a new enum Type for v1, make sure to also add it in the comment for the @optional Type type@ definition. This ensures that the public documentation displays the new enum Type.
 pattern Commitment_Type_TYPEUNSPECIFIED :: Commitment_Type
 pattern Commitment_Type_TYPEUNSPECIFIED = Commitment_Type "TYPE_UNSPECIFIED"
 
@@ -13362,6 +13690,7 @@ pattern Commitment_Type_TYPEUNSPECIFIED = Commitment_Type "TYPE_UNSPECIFIED"
   Commitment_Type_ACCELERATOROPTIMIZED,
   Commitment_Type_ACCELERATOR_OPTIMIZED_A3,
   Commitment_Type_ACCELERATOROPTIMIZEDA3MEGA,
+  Commitment_Type_ACCELERATOROPTIMIZEDA3ULTRA,
   Commitment_Type_COMPUTEOPTIMIZED,
   Commitment_Type_COMPUTEOPTIMIZEDC2D,
   Commitment_Type_COMPUTE_OPTIMIZED_C3,
@@ -15788,6 +16117,168 @@ pattern FirewallLogConfig_Metadata_INCLUDEALLMETADATA = FirewallLogConfig_Metada
   FirewallLogConfig_Metadata_EXCLUDEALLMETADATA,
   FirewallLogConfig_Metadata_INCLUDEALLMETADATA,
   FirewallLogConfig_Metadata
+  #-}
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+newtype FirewallPoliciesScopedList_Warning_Code = FirewallPoliciesScopedList_Warning_Code {fromFirewallPoliciesScopedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Warning about failed cleanup of transient changes made by a failed operation.
+pattern FirewallPoliciesScopedList_Warning_Code_CLEANUPFAILED :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_CLEANUPFAILED = FirewallPoliciesScopedList_Warning_Code "CLEANUP_FAILED"
+
+-- | A link to a deprecated resource was created.
+pattern FirewallPoliciesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED = FirewallPoliciesScopedList_Warning_Code "DEPRECATED_RESOURCE_USED"
+
+-- | When deploying and at least one of the resources has a type marked as deprecated
+pattern FirewallPoliciesScopedList_Warning_Code_DEPRECATEDTYPEUSED :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_DEPRECATEDTYPEUSED = FirewallPoliciesScopedList_Warning_Code "DEPRECATED_TYPE_USED"
+
+-- | The user created a boot disk that is larger than image size.
+pattern FirewallPoliciesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE = FirewallPoliciesScopedList_Warning_Code "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+
+-- | When deploying and at least one of the resources has a type marked as experimental
+pattern FirewallPoliciesScopedList_Warning_Code_EXPERIMENTALTYPEUSED :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_EXPERIMENTALTYPEUSED = FirewallPoliciesScopedList_Warning_Code "EXPERIMENTAL_TYPE_USED"
+
+-- | Warning that is present in an external api call
+pattern FirewallPoliciesScopedList_Warning_Code_EXTERNALAPIWARNING :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_EXTERNALAPIWARNING = FirewallPoliciesScopedList_Warning_Code "EXTERNAL_API_WARNING"
+
+-- | Warning that value of a field has been overridden. Deprecated unused field.
+pattern FirewallPoliciesScopedList_Warning_Code_FIELDVALUEOVERRIDEN :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_FIELDVALUEOVERRIDEN = FirewallPoliciesScopedList_Warning_Code "FIELD_VALUE_OVERRIDEN"
+
+-- | The operation involved use of an injected kernel, which is deprecated.
+pattern FirewallPoliciesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED = FirewallPoliciesScopedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern FirewallPoliciesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = FirewallPoliciesScopedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
+-- | When deploying a deployment with a exceedingly large number of resources
+pattern FirewallPoliciesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING = FirewallPoliciesScopedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
+
+-- | Resource can\'t be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.
+pattern FirewallPoliciesScopedList_Warning_Code_LISTOVERHEADQUOTAEXCEED :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_LISTOVERHEADQUOTAEXCEED = FirewallPoliciesScopedList_Warning_Code "LIST_OVERHEAD_QUOTA_EXCEED"
+
+-- | A resource depends on a missing type
+pattern FirewallPoliciesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY = FirewallPoliciesScopedList_Warning_Code "MISSING_TYPE_DEPENDENCY"
+
+-- | The route\'s nextHopIp address is not assigned to an instance on the network.
+pattern FirewallPoliciesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = FirewallPoliciesScopedList_Warning_Code "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+
+-- | The route\'s next hop instance cannot ip forward.
+pattern FirewallPoliciesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = FirewallPoliciesScopedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern FirewallPoliciesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = FirewallPoliciesScopedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not exist.
+pattern FirewallPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND = FirewallPoliciesScopedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_FOUND"
+
+-- | The route\'s nextHopInstance URL refers to an instance that is not on the same network as the route.
+pattern FirewallPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK = FirewallPoliciesScopedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+
+-- | The route\'s next hop instance does not have a status of RUNNING.
+pattern FirewallPoliciesScopedList_Warning_Code_NEXTHOPNOTRUNNING :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_NEXTHOPNOTRUNNING = FirewallPoliciesScopedList_Warning_Code "NEXT_HOP_NOT_RUNNING"
+
+-- | Error which is not critical. We decided to continue the process despite the mentioned error.
+pattern FirewallPoliciesScopedList_Warning_Code_NOTCRITICALERROR :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_NOTCRITICALERROR = FirewallPoliciesScopedList_Warning_Code "NOT_CRITICAL_ERROR"
+
+-- | No results are present on a particular list page.
+pattern FirewallPoliciesScopedList_Warning_Code_NORESULTSONPAGE :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_NORESULTSONPAGE = FirewallPoliciesScopedList_Warning_Code "NO_RESULTS_ON_PAGE"
+
+-- | Success is reported, but some results may be missing due to errors
+pattern FirewallPoliciesScopedList_Warning_Code_PARTIALSUCCESS :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_PARTIALSUCCESS = FirewallPoliciesScopedList_Warning_Code "PARTIAL_SUCCESS"
+
+-- | Quota information is not available to client requests (e.g: regions.list).
+pattern FirewallPoliciesScopedList_Warning_Code_QUOTAINFOUNAVAILABLE :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_QUOTAINFOUNAVAILABLE = FirewallPoliciesScopedList_Warning_Code "QUOTA_INFO_UNAVAILABLE"
+
+-- | The user attempted to use a resource that requires a TOS they have not accepted.
+pattern FirewallPoliciesScopedList_Warning_Code_REQUIREDTOSAGREEMENT :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_REQUIREDTOSAGREEMENT = FirewallPoliciesScopedList_Warning_Code "REQUIRED_TOS_AGREEMENT"
+
+-- | Warning that a resource is in use.
+pattern FirewallPoliciesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING = FirewallPoliciesScopedList_Warning_Code "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+
+-- | One or more of the resources set to auto-delete could not be deleted because they were in use.
+pattern FirewallPoliciesScopedList_Warning_Code_RESOURCENOTDELETED :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_RESOURCENOTDELETED = FirewallPoliciesScopedList_Warning_Code "RESOURCE_NOT_DELETED"
+
+-- | When a resource schema validation is ignored.
+pattern FirewallPoliciesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED = FirewallPoliciesScopedList_Warning_Code "SCHEMA_VALIDATION_IGNORED"
+
+-- | Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
+pattern FirewallPoliciesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE = FirewallPoliciesScopedList_Warning_Code "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+
+-- | When undeclared properties in the schema are present
+pattern FirewallPoliciesScopedList_Warning_Code_UNDECLAREDPROPERTIES :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_UNDECLAREDPROPERTIES = FirewallPoliciesScopedList_Warning_Code "UNDECLARED_PROPERTIES"
+
+-- | A given scope cannot be reached.
+pattern FirewallPoliciesScopedList_Warning_Code_Unreachable :: FirewallPoliciesScopedList_Warning_Code
+pattern FirewallPoliciesScopedList_Warning_Code_Unreachable = FirewallPoliciesScopedList_Warning_Code "UNREACHABLE"
+
+{-# COMPLETE
+  FirewallPoliciesScopedList_Warning_Code_CLEANUPFAILED,
+  FirewallPoliciesScopedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+  FirewallPoliciesScopedList_Warning_Code_DEPRECATEDTYPEUSED,
+  FirewallPoliciesScopedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+  FirewallPoliciesScopedList_Warning_Code_EXPERIMENTALTYPEUSED,
+  FirewallPoliciesScopedList_Warning_Code_EXTERNALAPIWARNING,
+  FirewallPoliciesScopedList_Warning_Code_FIELDVALUEOVERRIDEN,
+  FirewallPoliciesScopedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  FirewallPoliciesScopedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+  FirewallPoliciesScopedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+  FirewallPoliciesScopedList_Warning_Code_LISTOVERHEADQUOTAEXCEED,
+  FirewallPoliciesScopedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+  FirewallPoliciesScopedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+  FirewallPoliciesScopedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  FirewallPoliciesScopedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  FirewallPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+  FirewallPoliciesScopedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+  FirewallPoliciesScopedList_Warning_Code_NEXTHOPNOTRUNNING,
+  FirewallPoliciesScopedList_Warning_Code_NOTCRITICALERROR,
+  FirewallPoliciesScopedList_Warning_Code_NORESULTSONPAGE,
+  FirewallPoliciesScopedList_Warning_Code_PARTIALSUCCESS,
+  FirewallPoliciesScopedList_Warning_Code_QUOTAINFOUNAVAILABLE,
+  FirewallPoliciesScopedList_Warning_Code_REQUIREDTOSAGREEMENT,
+  FirewallPoliciesScopedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+  FirewallPoliciesScopedList_Warning_Code_RESOURCENOTDELETED,
+  FirewallPoliciesScopedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+  FirewallPoliciesScopedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+  FirewallPoliciesScopedList_Warning_Code_UNDECLAREDPROPERTIES,
+  FirewallPoliciesScopedList_Warning_Code_Unreachable,
+  FirewallPoliciesScopedList_Warning_Code
   #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
@@ -21704,6 +22195,71 @@ pattern InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspe
   InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
   #-}
 
+-- | The disruption schedule for the VM. Default to IMMEDIATE.
+newtype InstancesReportHostAsFaultyRequest_DisruptionSchedule = InstancesReportHostAsFaultyRequest_DisruptionSchedule {fromInstancesReportHostAsFaultyRequest_DisruptionSchedule :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not used. Required as per aip\/126.
+pattern InstancesReportHostAsFaultyRequest_DisruptionSchedule_DISRUPTIONSCHEDULEUNSPECIFIED :: InstancesReportHostAsFaultyRequest_DisruptionSchedule
+pattern InstancesReportHostAsFaultyRequest_DisruptionSchedule_DISRUPTIONSCHEDULEUNSPECIFIED = InstancesReportHostAsFaultyRequest_DisruptionSchedule "DISRUPTION_SCHEDULE_UNSPECIFIED"
+
+-- | Delay disruption for caller control. Will be default soon.
+pattern InstancesReportHostAsFaultyRequest_DisruptionSchedule_Future :: InstancesReportHostAsFaultyRequest_DisruptionSchedule
+pattern InstancesReportHostAsFaultyRequest_DisruptionSchedule_Future = InstancesReportHostAsFaultyRequest_DisruptionSchedule "FUTURE"
+
+-- | Default value. Disrupt the VM immediately.
+pattern InstancesReportHostAsFaultyRequest_DisruptionSchedule_Immediate :: InstancesReportHostAsFaultyRequest_DisruptionSchedule
+pattern InstancesReportHostAsFaultyRequest_DisruptionSchedule_Immediate = InstancesReportHostAsFaultyRequest_DisruptionSchedule "IMMEDIATE"
+
+{-# COMPLETE
+  InstancesReportHostAsFaultyRequest_DisruptionSchedule_DISRUPTIONSCHEDULEUNSPECIFIED,
+  InstancesReportHostAsFaultyRequest_DisruptionSchedule_Future,
+  InstancesReportHostAsFaultyRequest_DisruptionSchedule_Immediate,
+  InstancesReportHostAsFaultyRequest_DisruptionSchedule
+  #-}
+
+newtype InstancesReportHostAsFaultyRequestFaultReason_Behavior = InstancesReportHostAsFaultyRequestFaultReason_Behavior {fromInstancesReportHostAsFaultyRequestFaultReason_Behavior :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Public reportable behaviors
+pattern InstancesReportHostAsFaultyRequestFaultReason_Behavior_BEHAVIORUNSPECIFIED :: InstancesReportHostAsFaultyRequestFaultReason_Behavior
+pattern InstancesReportHostAsFaultyRequestFaultReason_Behavior_BEHAVIORUNSPECIFIED = InstancesReportHostAsFaultyRequestFaultReason_Behavior "BEHAVIOR_UNSPECIFIED"
+
+pattern InstancesReportHostAsFaultyRequestFaultReason_Behavior_Performance :: InstancesReportHostAsFaultyRequestFaultReason_Behavior
+pattern InstancesReportHostAsFaultyRequestFaultReason_Behavior_Performance = InstancesReportHostAsFaultyRequestFaultReason_Behavior "PERFORMANCE"
+
+pattern InstancesReportHostAsFaultyRequestFaultReason_Behavior_SILENTDATACORRUPTION :: InstancesReportHostAsFaultyRequestFaultReason_Behavior
+pattern InstancesReportHostAsFaultyRequestFaultReason_Behavior_SILENTDATACORRUPTION = InstancesReportHostAsFaultyRequestFaultReason_Behavior "SILENT_DATA_CORRUPTION"
+
+pattern InstancesReportHostAsFaultyRequestFaultReason_Behavior_UNRECOVERABLEGPUERROR :: InstancesReportHostAsFaultyRequestFaultReason_Behavior
+pattern InstancesReportHostAsFaultyRequestFaultReason_Behavior_UNRECOVERABLEGPUERROR = InstancesReportHostAsFaultyRequestFaultReason_Behavior "UNRECOVERABLE_GPU_ERROR"
+
+{-# COMPLETE
+  InstancesReportHostAsFaultyRequestFaultReason_Behavior_BEHAVIORUNSPECIFIED,
+  InstancesReportHostAsFaultyRequestFaultReason_Behavior_Performance,
+  InstancesReportHostAsFaultyRequestFaultReason_Behavior_SILENTDATACORRUPTION,
+  InstancesReportHostAsFaultyRequestFaultReason_Behavior_UNRECOVERABLEGPUERROR,
+  InstancesReportHostAsFaultyRequestFaultReason_Behavior
+  #-}
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
 newtype InstancesScopedList_Warning_Code = InstancesScopedList_Warning_Code {fromInstancesScopedList_Warning_Code :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -22581,7 +23137,7 @@ pattern Interconnect_State_Unprovisioned = Interconnect_State "UNPROVISIONED"
   Interconnect_State
   #-}
 
--- | Provisioned bandwidth capacity for the interconnect attachment. For attachments of type DEDICATED, the user can set the bandwidth. For attachments of type PARTNER, the Google Partner that is operating the interconnect must set the bandwidth. Output only for PARTNER type, mutable for PARTNER/PROVIDER and DEDICATED, and can take one of the following values: - BPS/50M: 50 Mbit\/s - BPS/100M: 100 Mbit\/s - BPS/200M: 200 Mbit\/s - BPS/300M: 300 Mbit\/s - BPS/400M: 400 Mbit\/s - BPS/500M: 500 Mbit\/s - BPS/1G: 1 Gbit\/s - BPS/2G: 2 Gbit\/s - BPS/5G: 5 Gbit\/s - BPS/10G: 10 Gbit\/s - BPS/20G: 20 Gbit\/s - BPS_50G: 50 Gbit\/s
+-- | Provisioned bandwidth capacity for the interconnect attachment. For attachments of type DEDICATED, the user can set the bandwidth. For attachments of type PARTNER, the Google Partner that is operating the interconnect must set the bandwidth. Output only for PARTNER type, mutable for PARTNER/PROVIDER and DEDICATED, and can take one of the following values: - BPS/50M: 50 Mbit\/s - BPS/100M: 100 Mbit\/s - BPS/200M: 200 Mbit\/s - BPS/300M: 300 Mbit\/s - BPS/400M: 400 Mbit\/s - BPS/500M: 500 Mbit\/s - BPS/1G: 1 Gbit\/s - BPS/2G: 2 Gbit\/s - BPS/5G: 5 Gbit\/s - BPS/10G: 10 Gbit\/s - BPS/20G: 20 Gbit\/s - BPS/50G: 50 Gbit\/s - BPS/100G: 100 Gbit\/s
 newtype InterconnectAttachment_Bandwidth = InterconnectAttachment_Bandwidth {fromInterconnectAttachment_Bandwidth :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -22593,6 +23149,10 @@ newtype InterconnectAttachment_Bandwidth = InterconnectAttachment_Bandwidth {fro
       Core.FromJSON,
       Core.FromJSONKey
     )
+
+-- | 100 Gbit\/s
+pattern InterconnectAttachment_Bandwidth_BPS100G :: InterconnectAttachment_Bandwidth
+pattern InterconnectAttachment_Bandwidth_BPS100G = InterconnectAttachment_Bandwidth "BPS_100G"
 
 -- | 100 Mbit\/s
 pattern InterconnectAttachment_Bandwidth_BPS100M :: InterconnectAttachment_Bandwidth
@@ -22643,6 +23203,7 @@ pattern InterconnectAttachment_Bandwidth_BPS5G :: InterconnectAttachment_Bandwid
 pattern InterconnectAttachment_Bandwidth_BPS5G = InterconnectAttachment_Bandwidth "BPS_5G"
 
 {-# COMPLETE
+  InterconnectAttachment_Bandwidth_BPS100G,
   InterconnectAttachment_Bandwidth_BPS100M,
   InterconnectAttachment_Bandwidth_BPS10G,
   InterconnectAttachment_Bandwidth_BPS1G,
@@ -22658,7 +23219,7 @@ pattern InterconnectAttachment_Bandwidth_BPS5G = InterconnectAttachment_Bandwidt
   InterconnectAttachment_Bandwidth
   #-}
 
--- | Desired availability domain for the attachment. Only available for type PARTNER, at creation time, and can take one of the following values: - AVAILABILITY/DOMAIN/ANY - AVAILABILITY/DOMAIN/1 - AVAILABILITY/DOMAIN/2 For improved reliability, customers should configure a pair of attachments, one per availability domain. The selected availability domain will be provided to the Partner via the pairing key, so that the provisioned circuit will lie in the specified domain. If not specified, the value will default to AVAILABILITY/DOMAIN/ANY.
+-- | Input only. Desired availability domain for the attachment. Only available for type PARTNER, at creation time, and can take one of the following values: - AVAILABILITY/DOMAIN/ANY - AVAILABILITY/DOMAIN/1 - AVAILABILITY/DOMAIN/2 For improved reliability, customers should configure a pair of attachments, one per availability domain. The selected availability domain will be provided to the Partner via the pairing key, so that the provisioned circuit will lie in the specified domain. If not specified, the value will default to AVAILABILITY/DOMAIN/ANY.
 newtype InterconnectAttachment_EdgeAvailabilityDomain = InterconnectAttachment_EdgeAvailabilityDomain {fromInterconnectAttachment_EdgeAvailabilityDomain :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -27370,6 +27931,168 @@ pattern NetworkEndpointGroupsScopedList_Warning_Code_Unreachable = NetworkEndpoi
   NetworkEndpointGroupsScopedList_Warning_Code
   #-}
 
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+newtype NetworkFirewallPolicyAggregatedList_Warning_Code = NetworkFirewallPolicyAggregatedList_Warning_Code {fromNetworkFirewallPolicyAggregatedList_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Warning about failed cleanup of transient changes made by a failed operation.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_CLEANUPFAILED :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_CLEANUPFAILED = NetworkFirewallPolicyAggregatedList_Warning_Code "CLEANUP_FAILED"
+
+-- | A link to a deprecated resource was created.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED = NetworkFirewallPolicyAggregatedList_Warning_Code "DEPRECATED_RESOURCE_USED"
+
+-- | When deploying and at least one of the resources has a type marked as deprecated
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_DEPRECATEDTYPEUSED :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_DEPRECATEDTYPEUSED = NetworkFirewallPolicyAggregatedList_Warning_Code "DEPRECATED_TYPE_USED"
+
+-- | The user created a boot disk that is larger than image size.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE = NetworkFirewallPolicyAggregatedList_Warning_Code "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+
+-- | When deploying and at least one of the resources has a type marked as experimental
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED = NetworkFirewallPolicyAggregatedList_Warning_Code "EXPERIMENTAL_TYPE_USED"
+
+-- | Warning that is present in an external api call
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_EXTERNALAPIWARNING :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_EXTERNALAPIWARNING = NetworkFirewallPolicyAggregatedList_Warning_Code "EXTERNAL_API_WARNING"
+
+-- | Warning that value of a field has been overridden. Deprecated unused field.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN = NetworkFirewallPolicyAggregatedList_Warning_Code "FIELD_VALUE_OVERRIDEN"
+
+-- | The operation involved use of an injected kernel, which is deprecated.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED = NetworkFirewallPolicyAggregatedList_Warning_Code "INJECTED_KERNELS_DEPRECATED"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = NetworkFirewallPolicyAggregatedList_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
+-- | When deploying a deployment with a exceedingly large number of resources
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING = NetworkFirewallPolicyAggregatedList_Warning_Code "LARGE_DEPLOYMENT_WARNING"
+
+-- | Resource can\'t be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_LISTOVERHEADQUOTAEXCEED :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_LISTOVERHEADQUOTAEXCEED = NetworkFirewallPolicyAggregatedList_Warning_Code "LIST_OVERHEAD_QUOTA_EXCEED"
+
+-- | A resource depends on a missing type
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY = NetworkFirewallPolicyAggregatedList_Warning_Code "MISSING_TYPE_DEPENDENCY"
+
+-- | The route\'s nextHopIp address is not assigned to an instance on the network.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = NetworkFirewallPolicyAggregatedList_Warning_Code "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+
+-- | The route\'s next hop instance cannot ip forward.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD = NetworkFirewallPolicyAggregatedList_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = NetworkFirewallPolicyAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not exist.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND = NetworkFirewallPolicyAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_FOUND"
+
+-- | The route\'s nextHopInstance URL refers to an instance that is not on the same network as the route.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK = NetworkFirewallPolicyAggregatedList_Warning_Code "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+
+-- | The route\'s next hop instance does not have a status of RUNNING.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPNOTRUNNING :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPNOTRUNNING = NetworkFirewallPolicyAggregatedList_Warning_Code "NEXT_HOP_NOT_RUNNING"
+
+-- | Error which is not critical. We decided to continue the process despite the mentioned error.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_NOTCRITICALERROR :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_NOTCRITICALERROR = NetworkFirewallPolicyAggregatedList_Warning_Code "NOT_CRITICAL_ERROR"
+
+-- | No results are present on a particular list page.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_NORESULTSONPAGE :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_NORESULTSONPAGE = NetworkFirewallPolicyAggregatedList_Warning_Code "NO_RESULTS_ON_PAGE"
+
+-- | Success is reported, but some results may be missing due to errors
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_PARTIALSUCCESS :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_PARTIALSUCCESS = NetworkFirewallPolicyAggregatedList_Warning_Code "PARTIAL_SUCCESS"
+
+-- | Quota information is not available to client requests (e.g: regions.list).
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_QUOTAINFOUNAVAILABLE :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_QUOTAINFOUNAVAILABLE = NetworkFirewallPolicyAggregatedList_Warning_Code "QUOTA_INFO_UNAVAILABLE"
+
+-- | The user attempted to use a resource that requires a TOS they have not accepted.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT = NetworkFirewallPolicyAggregatedList_Warning_Code "REQUIRED_TOS_AGREEMENT"
+
+-- | Warning that a resource is in use.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING = NetworkFirewallPolicyAggregatedList_Warning_Code "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+
+-- | One or more of the resources set to auto-delete could not be deleted because they were in use.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_RESOURCENOTDELETED :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_RESOURCENOTDELETED = NetworkFirewallPolicyAggregatedList_Warning_Code "RESOURCE_NOT_DELETED"
+
+-- | When a resource schema validation is ignored.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED = NetworkFirewallPolicyAggregatedList_Warning_Code "SCHEMA_VALIDATION_IGNORED"
+
+-- | Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE = NetworkFirewallPolicyAggregatedList_Warning_Code "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+
+-- | When undeclared properties in the schema are present
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_UNDECLAREDPROPERTIES :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_UNDECLAREDPROPERTIES = NetworkFirewallPolicyAggregatedList_Warning_Code "UNDECLARED_PROPERTIES"
+
+-- | A given scope cannot be reached.
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_Unreachable :: NetworkFirewallPolicyAggregatedList_Warning_Code
+pattern NetworkFirewallPolicyAggregatedList_Warning_Code_Unreachable = NetworkFirewallPolicyAggregatedList_Warning_Code "UNREACHABLE"
+
+{-# COMPLETE
+  NetworkFirewallPolicyAggregatedList_Warning_Code_CLEANUPFAILED,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_DEPRECATEDRESOURCEUSED,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_DEPRECATEDTYPEUSED,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_EXPERIMENTALTYPEUSED,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_EXTERNALAPIWARNING,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_FIELDVALUEOVERRIDEN,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_LARGEDEPLOYMENTWARNING,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_LISTOVERHEADQUOTAEXCEED,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_MISSINGTYPEDEPENDENCY,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_NEXTHOPNOTRUNNING,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_NOTCRITICALERROR,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_NORESULTSONPAGE,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_PARTIALSUCCESS,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_QUOTAINFOUNAVAILABLE,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_REQUIREDTOSAGREEMENT,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_RESOURCENOTDELETED,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_SCHEMAVALIDATIONIGNORED,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_UNDECLAREDPROPERTIES,
+  NetworkFirewallPolicyAggregatedList_Warning_Code_Unreachable,
+  NetworkFirewallPolicyAggregatedList_Warning_Code
+  #-}
+
 -- | [Output Only] One of EXTERNAL, INTERNAL to indicate whether the IP can be accessed from the Internet. This field is always inherited from its subnetwork. Valid only if stackType is IPV4_IPV6.
 newtype NetworkInterface_Ipv6AccessType = NetworkInterface_Ipv6AccessType {fromNetworkInterface_Ipv6AccessType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -28554,6 +29277,31 @@ pattern NetworkRoutingConfig_BgpInterRegionCost_Default = NetworkRoutingConfig_B
   NetworkRoutingConfig_BgpInterRegionCost_ADDCOSTTOMED,
   NetworkRoutingConfig_BgpInterRegionCost_Default,
   NetworkRoutingConfig_BgpInterRegionCost
+  #-}
+
+-- | [Output Only] Effective value of the bgp/inter/region_cost field.
+newtype NetworkRoutingConfig_EffectiveBgpInterRegionCost = NetworkRoutingConfig_EffectiveBgpInterRegionCost {fromNetworkRoutingConfig_EffectiveBgpInterRegionCost :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+pattern NetworkRoutingConfig_EffectiveBgpInterRegionCost_ADDCOSTTOMED :: NetworkRoutingConfig_EffectiveBgpInterRegionCost
+pattern NetworkRoutingConfig_EffectiveBgpInterRegionCost_ADDCOSTTOMED = NetworkRoutingConfig_EffectiveBgpInterRegionCost "ADD_COST_TO_MED"
+
+pattern NetworkRoutingConfig_EffectiveBgpInterRegionCost_Default :: NetworkRoutingConfig_EffectiveBgpInterRegionCost
+pattern NetworkRoutingConfig_EffectiveBgpInterRegionCost_Default = NetworkRoutingConfig_EffectiveBgpInterRegionCost "DEFAULT"
+
+{-# COMPLETE
+  NetworkRoutingConfig_EffectiveBgpInterRegionCost_ADDCOSTTOMED,
+  NetworkRoutingConfig_EffectiveBgpInterRegionCost_Default,
+  NetworkRoutingConfig_EffectiveBgpInterRegionCost
   #-}
 
 -- | The network-wide routing mode to use. If set to REGIONAL, this network\'s Cloud Routers will only advertise routes with subnets of this network in the same region as the router. If set to GLOBAL, this network\'s Cloud Routers will advertise routes with all subnets of this network, across regions.
@@ -35336,6 +36084,12 @@ pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirew
 pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_NETWORKREGIONAL :: RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
 pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_NETWORKREGIONAL = RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type "NETWORK_REGIONAL"
 
+pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_SYSTEMGLOBAL :: RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
+pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_SYSTEMGLOBAL = RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type "SYSTEM_GLOBAL"
+
+pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_SYSTEMREGIONAL :: RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
+pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_SYSTEMREGIONAL = RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type "SYSTEM_REGIONAL"
+
 pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspecified :: RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
 pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspecified = RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type "UNSPECIFIED"
 
@@ -35343,6 +36097,8 @@ pattern RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirew
   RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Hierarchy,
   RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Network,
   RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_NETWORKREGIONAL,
+  RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_SYSTEMGLOBAL,
+  RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_SYSTEMREGIONAL,
   RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type_Unspecified,
   RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy_Type
   #-}
@@ -35910,7 +36666,7 @@ pattern ReservationsScopedList_Warning_Code_Unreachable = ReservationsScopedList
   ReservationsScopedList_Warning_Code
   #-}
 
--- | Type of resource for which this commitment applies. Possible values are VCPU, MEMORY, LOCAL_SSD, and ACCELERATOR.
+-- | The type of hardware resource that you want to specify. You can specify any of the following values: - VCPU - MEMORY - LOCAL_SSD - ACCELERATOR Specify as a separate entry in the list for each individual resource type.
 newtype ResourceCommitment_Type = ResourceCommitment_Type {fromResourceCommitment_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -37033,6 +37789,32 @@ pattern RouteList_Warning_Code_Unreachable = RouteList_Warning_Code "UNREACHABLE
   RouteList_Warning_Code
   #-}
 
+newtype RoutePolicy_Type = RoutePolicy_Type {fromRoutePolicy_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The Route Policy is an Export Policy.
+pattern RoutePolicy_Type_ROUTEPOLICYTYPEEXPORT :: RoutePolicy_Type
+pattern RoutePolicy_Type_ROUTEPOLICYTYPEEXPORT = RoutePolicy_Type "ROUTE_POLICY_TYPE_EXPORT"
+
+-- | The Route Policy is an Import Policy.
+pattern RoutePolicy_Type_ROUTEPOLICYTYPEIMPORT :: RoutePolicy_Type
+pattern RoutePolicy_Type_ROUTEPOLICYTYPEIMPORT = RoutePolicy_Type "ROUTE_POLICY_TYPE_IMPORT"
+
+{-# COMPLETE
+  RoutePolicy_Type_ROUTEPOLICYTYPEEXPORT,
+  RoutePolicy_Type_ROUTEPOLICYTYPEIMPORT,
+  RoutePolicy_Type
+  #-}
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
 newtype RouterAggregatedList_Warning_Code = RouterAggregatedList_Warning_Code {fromRouterAggregatedList_Warning_Code :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -37862,6 +38644,330 @@ pattern RouterStatusBgpPeerStatus_StatusReason_STATUSREASONUNSPECIFIED = RouterS
   RouterStatusBgpPeerStatus_StatusReason_MD5AUTHINTERNALPROBLEM,
   RouterStatusBgpPeerStatus_StatusReason_STATUSREASONUNSPECIFIED,
   RouterStatusBgpPeerStatus_StatusReason
+  #-}
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+newtype RoutersListBgpRoutes_Warning_Code = RoutersListBgpRoutes_Warning_Code {fromRoutersListBgpRoutes_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Warning about failed cleanup of transient changes made by a failed operation.
+pattern RoutersListBgpRoutes_Warning_Code_CLEANUPFAILED :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_CLEANUPFAILED = RoutersListBgpRoutes_Warning_Code "CLEANUP_FAILED"
+
+-- | A link to a deprecated resource was created.
+pattern RoutersListBgpRoutes_Warning_Code_DEPRECATEDRESOURCEUSED :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_DEPRECATEDRESOURCEUSED = RoutersListBgpRoutes_Warning_Code "DEPRECATED_RESOURCE_USED"
+
+-- | When deploying and at least one of the resources has a type marked as deprecated
+pattern RoutersListBgpRoutes_Warning_Code_DEPRECATEDTYPEUSED :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_DEPRECATEDTYPEUSED = RoutersListBgpRoutes_Warning_Code "DEPRECATED_TYPE_USED"
+
+-- | The user created a boot disk that is larger than image size.
+pattern RoutersListBgpRoutes_Warning_Code_DISKSIZELARGERTHANIMAGESIZE :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_DISKSIZELARGERTHANIMAGESIZE = RoutersListBgpRoutes_Warning_Code "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+
+-- | When deploying and at least one of the resources has a type marked as experimental
+pattern RoutersListBgpRoutes_Warning_Code_EXPERIMENTALTYPEUSED :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_EXPERIMENTALTYPEUSED = RoutersListBgpRoutes_Warning_Code "EXPERIMENTAL_TYPE_USED"
+
+-- | Warning that is present in an external api call
+pattern RoutersListBgpRoutes_Warning_Code_EXTERNALAPIWARNING :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_EXTERNALAPIWARNING = RoutersListBgpRoutes_Warning_Code "EXTERNAL_API_WARNING"
+
+-- | Warning that value of a field has been overridden. Deprecated unused field.
+pattern RoutersListBgpRoutes_Warning_Code_FIELDVALUEOVERRIDEN :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_FIELDVALUEOVERRIDEN = RoutersListBgpRoutes_Warning_Code "FIELD_VALUE_OVERRIDEN"
+
+-- | The operation involved use of an injected kernel, which is deprecated.
+pattern RoutersListBgpRoutes_Warning_Code_INJECTEDKERNELSDEPRECATED :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_INJECTEDKERNELSDEPRECATED = RoutersListBgpRoutes_Warning_Code "INJECTED_KERNELS_DEPRECATED"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern RoutersListBgpRoutes_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = RoutersListBgpRoutes_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
+-- | When deploying a deployment with a exceedingly large number of resources
+pattern RoutersListBgpRoutes_Warning_Code_LARGEDEPLOYMENTWARNING :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_LARGEDEPLOYMENTWARNING = RoutersListBgpRoutes_Warning_Code "LARGE_DEPLOYMENT_WARNING"
+
+-- | Resource can\'t be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.
+pattern RoutersListBgpRoutes_Warning_Code_LISTOVERHEADQUOTAEXCEED :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_LISTOVERHEADQUOTAEXCEED = RoutersListBgpRoutes_Warning_Code "LIST_OVERHEAD_QUOTA_EXCEED"
+
+-- | A resource depends on a missing type
+pattern RoutersListBgpRoutes_Warning_Code_MISSINGTYPEDEPENDENCY :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_MISSINGTYPEDEPENDENCY = RoutersListBgpRoutes_Warning_Code "MISSING_TYPE_DEPENDENCY"
+
+-- | The route\'s nextHopIp address is not assigned to an instance on the network.
+pattern RoutersListBgpRoutes_Warning_Code_NEXTHOPADDRESSNOTASSIGNED :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = RoutersListBgpRoutes_Warning_Code "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+
+-- | The route\'s next hop instance cannot ip forward.
+pattern RoutersListBgpRoutes_Warning_Code_NEXTHOPCANNOTIPFORWARD :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_NEXTHOPCANNOTIPFORWARD = RoutersListBgpRoutes_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern RoutersListBgpRoutes_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = RoutersListBgpRoutes_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not exist.
+pattern RoutersListBgpRoutes_Warning_Code_NEXTHOPINSTANCENOTFOUND :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_NEXTHOPINSTANCENOTFOUND = RoutersListBgpRoutes_Warning_Code "NEXT_HOP_INSTANCE_NOT_FOUND"
+
+-- | The route\'s nextHopInstance URL refers to an instance that is not on the same network as the route.
+pattern RoutersListBgpRoutes_Warning_Code_NEXTHOPINSTANCENOTONNETWORK :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_NEXTHOPINSTANCENOTONNETWORK = RoutersListBgpRoutes_Warning_Code "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+
+-- | The route\'s next hop instance does not have a status of RUNNING.
+pattern RoutersListBgpRoutes_Warning_Code_NEXTHOPNOTRUNNING :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_NEXTHOPNOTRUNNING = RoutersListBgpRoutes_Warning_Code "NEXT_HOP_NOT_RUNNING"
+
+-- | Error which is not critical. We decided to continue the process despite the mentioned error.
+pattern RoutersListBgpRoutes_Warning_Code_NOTCRITICALERROR :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_NOTCRITICALERROR = RoutersListBgpRoutes_Warning_Code "NOT_CRITICAL_ERROR"
+
+-- | No results are present on a particular list page.
+pattern RoutersListBgpRoutes_Warning_Code_NORESULTSONPAGE :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_NORESULTSONPAGE = RoutersListBgpRoutes_Warning_Code "NO_RESULTS_ON_PAGE"
+
+-- | Success is reported, but some results may be missing due to errors
+pattern RoutersListBgpRoutes_Warning_Code_PARTIALSUCCESS :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_PARTIALSUCCESS = RoutersListBgpRoutes_Warning_Code "PARTIAL_SUCCESS"
+
+-- | Quota information is not available to client requests (e.g: regions.list).
+pattern RoutersListBgpRoutes_Warning_Code_QUOTAINFOUNAVAILABLE :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_QUOTAINFOUNAVAILABLE = RoutersListBgpRoutes_Warning_Code "QUOTA_INFO_UNAVAILABLE"
+
+-- | The user attempted to use a resource that requires a TOS they have not accepted.
+pattern RoutersListBgpRoutes_Warning_Code_REQUIREDTOSAGREEMENT :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_REQUIREDTOSAGREEMENT = RoutersListBgpRoutes_Warning_Code "REQUIRED_TOS_AGREEMENT"
+
+-- | Warning that a resource is in use.
+pattern RoutersListBgpRoutes_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING = RoutersListBgpRoutes_Warning_Code "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+
+-- | One or more of the resources set to auto-delete could not be deleted because they were in use.
+pattern RoutersListBgpRoutes_Warning_Code_RESOURCENOTDELETED :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_RESOURCENOTDELETED = RoutersListBgpRoutes_Warning_Code "RESOURCE_NOT_DELETED"
+
+-- | When a resource schema validation is ignored.
+pattern RoutersListBgpRoutes_Warning_Code_SCHEMAVALIDATIONIGNORED :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_SCHEMAVALIDATIONIGNORED = RoutersListBgpRoutes_Warning_Code "SCHEMA_VALIDATION_IGNORED"
+
+-- | Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
+pattern RoutersListBgpRoutes_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE = RoutersListBgpRoutes_Warning_Code "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+
+-- | When undeclared properties in the schema are present
+pattern RoutersListBgpRoutes_Warning_Code_UNDECLAREDPROPERTIES :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_UNDECLAREDPROPERTIES = RoutersListBgpRoutes_Warning_Code "UNDECLARED_PROPERTIES"
+
+-- | A given scope cannot be reached.
+pattern RoutersListBgpRoutes_Warning_Code_Unreachable :: RoutersListBgpRoutes_Warning_Code
+pattern RoutersListBgpRoutes_Warning_Code_Unreachable = RoutersListBgpRoutes_Warning_Code "UNREACHABLE"
+
+{-# COMPLETE
+  RoutersListBgpRoutes_Warning_Code_CLEANUPFAILED,
+  RoutersListBgpRoutes_Warning_Code_DEPRECATEDRESOURCEUSED,
+  RoutersListBgpRoutes_Warning_Code_DEPRECATEDTYPEUSED,
+  RoutersListBgpRoutes_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+  RoutersListBgpRoutes_Warning_Code_EXPERIMENTALTYPEUSED,
+  RoutersListBgpRoutes_Warning_Code_EXTERNALAPIWARNING,
+  RoutersListBgpRoutes_Warning_Code_FIELDVALUEOVERRIDEN,
+  RoutersListBgpRoutes_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  RoutersListBgpRoutes_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+  RoutersListBgpRoutes_Warning_Code_LARGEDEPLOYMENTWARNING,
+  RoutersListBgpRoutes_Warning_Code_LISTOVERHEADQUOTAEXCEED,
+  RoutersListBgpRoutes_Warning_Code_MISSINGTYPEDEPENDENCY,
+  RoutersListBgpRoutes_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+  RoutersListBgpRoutes_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  RoutersListBgpRoutes_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  RoutersListBgpRoutes_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+  RoutersListBgpRoutes_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+  RoutersListBgpRoutes_Warning_Code_NEXTHOPNOTRUNNING,
+  RoutersListBgpRoutes_Warning_Code_NOTCRITICALERROR,
+  RoutersListBgpRoutes_Warning_Code_NORESULTSONPAGE,
+  RoutersListBgpRoutes_Warning_Code_PARTIALSUCCESS,
+  RoutersListBgpRoutes_Warning_Code_QUOTAINFOUNAVAILABLE,
+  RoutersListBgpRoutes_Warning_Code_REQUIREDTOSAGREEMENT,
+  RoutersListBgpRoutes_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+  RoutersListBgpRoutes_Warning_Code_RESOURCENOTDELETED,
+  RoutersListBgpRoutes_Warning_Code_SCHEMAVALIDATIONIGNORED,
+  RoutersListBgpRoutes_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+  RoutersListBgpRoutes_Warning_Code_UNDECLAREDPROPERTIES,
+  RoutersListBgpRoutes_Warning_Code_Unreachable,
+  RoutersListBgpRoutes_Warning_Code
+  #-}
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
+newtype RoutersListRoutePolicies_Warning_Code = RoutersListRoutePolicies_Warning_Code {fromRoutersListRoutePolicies_Warning_Code :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Warning about failed cleanup of transient changes made by a failed operation.
+pattern RoutersListRoutePolicies_Warning_Code_CLEANUPFAILED :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_CLEANUPFAILED = RoutersListRoutePolicies_Warning_Code "CLEANUP_FAILED"
+
+-- | A link to a deprecated resource was created.
+pattern RoutersListRoutePolicies_Warning_Code_DEPRECATEDRESOURCEUSED :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_DEPRECATEDRESOURCEUSED = RoutersListRoutePolicies_Warning_Code "DEPRECATED_RESOURCE_USED"
+
+-- | When deploying and at least one of the resources has a type marked as deprecated
+pattern RoutersListRoutePolicies_Warning_Code_DEPRECATEDTYPEUSED :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_DEPRECATEDTYPEUSED = RoutersListRoutePolicies_Warning_Code "DEPRECATED_TYPE_USED"
+
+-- | The user created a boot disk that is larger than image size.
+pattern RoutersListRoutePolicies_Warning_Code_DISKSIZELARGERTHANIMAGESIZE :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_DISKSIZELARGERTHANIMAGESIZE = RoutersListRoutePolicies_Warning_Code "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+
+-- | When deploying and at least one of the resources has a type marked as experimental
+pattern RoutersListRoutePolicies_Warning_Code_EXPERIMENTALTYPEUSED :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_EXPERIMENTALTYPEUSED = RoutersListRoutePolicies_Warning_Code "EXPERIMENTAL_TYPE_USED"
+
+-- | Warning that is present in an external api call
+pattern RoutersListRoutePolicies_Warning_Code_EXTERNALAPIWARNING :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_EXTERNALAPIWARNING = RoutersListRoutePolicies_Warning_Code "EXTERNAL_API_WARNING"
+
+-- | Warning that value of a field has been overridden. Deprecated unused field.
+pattern RoutersListRoutePolicies_Warning_Code_FIELDVALUEOVERRIDEN :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_FIELDVALUEOVERRIDEN = RoutersListRoutePolicies_Warning_Code "FIELD_VALUE_OVERRIDEN"
+
+-- | The operation involved use of an injected kernel, which is deprecated.
+pattern RoutersListRoutePolicies_Warning_Code_INJECTEDKERNELSDEPRECATED :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_INJECTEDKERNELSDEPRECATED = RoutersListRoutePolicies_Warning_Code "INJECTED_KERNELS_DEPRECATED"
+
+-- | A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP\/HTTPS\/HTTP2.
+pattern RoutersListRoutePolicies_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB = RoutersListRoutePolicies_Warning_Code "INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB"
+
+-- | When deploying a deployment with a exceedingly large number of resources
+pattern RoutersListRoutePolicies_Warning_Code_LARGEDEPLOYMENTWARNING :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_LARGEDEPLOYMENTWARNING = RoutersListRoutePolicies_Warning_Code "LARGE_DEPLOYMENT_WARNING"
+
+-- | Resource can\'t be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.
+pattern RoutersListRoutePolicies_Warning_Code_LISTOVERHEADQUOTAEXCEED :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_LISTOVERHEADQUOTAEXCEED = RoutersListRoutePolicies_Warning_Code "LIST_OVERHEAD_QUOTA_EXCEED"
+
+-- | A resource depends on a missing type
+pattern RoutersListRoutePolicies_Warning_Code_MISSINGTYPEDEPENDENCY :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_MISSINGTYPEDEPENDENCY = RoutersListRoutePolicies_Warning_Code "MISSING_TYPE_DEPENDENCY"
+
+-- | The route\'s nextHopIp address is not assigned to an instance on the network.
+pattern RoutersListRoutePolicies_Warning_Code_NEXTHOPADDRESSNOTASSIGNED :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_NEXTHOPADDRESSNOTASSIGNED = RoutersListRoutePolicies_Warning_Code "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+
+-- | The route\'s next hop instance cannot ip forward.
+pattern RoutersListRoutePolicies_Warning_Code_NEXTHOPCANNOTIPFORWARD :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_NEXTHOPCANNOTIPFORWARD = RoutersListRoutePolicies_Warning_Code "NEXT_HOP_CANNOT_IP_FORWARD"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
+pattern RoutersListRoutePolicies_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE = RoutersListRoutePolicies_Warning_Code "NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE"
+
+-- | The route\'s nextHopInstance URL refers to an instance that does not exist.
+pattern RoutersListRoutePolicies_Warning_Code_NEXTHOPINSTANCENOTFOUND :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_NEXTHOPINSTANCENOTFOUND = RoutersListRoutePolicies_Warning_Code "NEXT_HOP_INSTANCE_NOT_FOUND"
+
+-- | The route\'s nextHopInstance URL refers to an instance that is not on the same network as the route.
+pattern RoutersListRoutePolicies_Warning_Code_NEXTHOPINSTANCENOTONNETWORK :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_NEXTHOPINSTANCENOTONNETWORK = RoutersListRoutePolicies_Warning_Code "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+
+-- | The route\'s next hop instance does not have a status of RUNNING.
+pattern RoutersListRoutePolicies_Warning_Code_NEXTHOPNOTRUNNING :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_NEXTHOPNOTRUNNING = RoutersListRoutePolicies_Warning_Code "NEXT_HOP_NOT_RUNNING"
+
+-- | Error which is not critical. We decided to continue the process despite the mentioned error.
+pattern RoutersListRoutePolicies_Warning_Code_NOTCRITICALERROR :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_NOTCRITICALERROR = RoutersListRoutePolicies_Warning_Code "NOT_CRITICAL_ERROR"
+
+-- | No results are present on a particular list page.
+pattern RoutersListRoutePolicies_Warning_Code_NORESULTSONPAGE :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_NORESULTSONPAGE = RoutersListRoutePolicies_Warning_Code "NO_RESULTS_ON_PAGE"
+
+-- | Success is reported, but some results may be missing due to errors
+pattern RoutersListRoutePolicies_Warning_Code_PARTIALSUCCESS :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_PARTIALSUCCESS = RoutersListRoutePolicies_Warning_Code "PARTIAL_SUCCESS"
+
+-- | Quota information is not available to client requests (e.g: regions.list).
+pattern RoutersListRoutePolicies_Warning_Code_QUOTAINFOUNAVAILABLE :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_QUOTAINFOUNAVAILABLE = RoutersListRoutePolicies_Warning_Code "QUOTA_INFO_UNAVAILABLE"
+
+-- | The user attempted to use a resource that requires a TOS they have not accepted.
+pattern RoutersListRoutePolicies_Warning_Code_REQUIREDTOSAGREEMENT :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_REQUIREDTOSAGREEMENT = RoutersListRoutePolicies_Warning_Code "REQUIRED_TOS_AGREEMENT"
+
+-- | Warning that a resource is in use.
+pattern RoutersListRoutePolicies_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING = RoutersListRoutePolicies_Warning_Code "RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING"
+
+-- | One or more of the resources set to auto-delete could not be deleted because they were in use.
+pattern RoutersListRoutePolicies_Warning_Code_RESOURCENOTDELETED :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_RESOURCENOTDELETED = RoutersListRoutePolicies_Warning_Code "RESOURCE_NOT_DELETED"
+
+-- | When a resource schema validation is ignored.
+pattern RoutersListRoutePolicies_Warning_Code_SCHEMAVALIDATIONIGNORED :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_SCHEMAVALIDATIONIGNORED = RoutersListRoutePolicies_Warning_Code "SCHEMA_VALIDATION_IGNORED"
+
+-- | Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
+pattern RoutersListRoutePolicies_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE = RoutersListRoutePolicies_Warning_Code "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+
+-- | When undeclared properties in the schema are present
+pattern RoutersListRoutePolicies_Warning_Code_UNDECLAREDPROPERTIES :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_UNDECLAREDPROPERTIES = RoutersListRoutePolicies_Warning_Code "UNDECLARED_PROPERTIES"
+
+-- | A given scope cannot be reached.
+pattern RoutersListRoutePolicies_Warning_Code_Unreachable :: RoutersListRoutePolicies_Warning_Code
+pattern RoutersListRoutePolicies_Warning_Code_Unreachable = RoutersListRoutePolicies_Warning_Code "UNREACHABLE"
+
+{-# COMPLETE
+  RoutersListRoutePolicies_Warning_Code_CLEANUPFAILED,
+  RoutersListRoutePolicies_Warning_Code_DEPRECATEDRESOURCEUSED,
+  RoutersListRoutePolicies_Warning_Code_DEPRECATEDTYPEUSED,
+  RoutersListRoutePolicies_Warning_Code_DISKSIZELARGERTHANIMAGESIZE,
+  RoutersListRoutePolicies_Warning_Code_EXPERIMENTALTYPEUSED,
+  RoutersListRoutePolicies_Warning_Code_EXTERNALAPIWARNING,
+  RoutersListRoutePolicies_Warning_Code_FIELDVALUEOVERRIDEN,
+  RoutersListRoutePolicies_Warning_Code_INJECTEDKERNELSDEPRECATED,
+  RoutersListRoutePolicies_Warning_Code_INVALIDHEALTHCHECKFORDYNAMICWIEGHTEDLB,
+  RoutersListRoutePolicies_Warning_Code_LARGEDEPLOYMENTWARNING,
+  RoutersListRoutePolicies_Warning_Code_LISTOVERHEADQUOTAEXCEED,
+  RoutersListRoutePolicies_Warning_Code_MISSINGTYPEDEPENDENCY,
+  RoutersListRoutePolicies_Warning_Code_NEXTHOPADDRESSNOTASSIGNED,
+  RoutersListRoutePolicies_Warning_Code_NEXTHOPCANNOTIPFORWARD,
+  RoutersListRoutePolicies_Warning_Code_NEXTHOPINSTANCEHASNOIPV6INTERFACE,
+  RoutersListRoutePolicies_Warning_Code_NEXTHOPINSTANCENOTFOUND,
+  RoutersListRoutePolicies_Warning_Code_NEXTHOPINSTANCENOTONNETWORK,
+  RoutersListRoutePolicies_Warning_Code_NEXTHOPNOTRUNNING,
+  RoutersListRoutePolicies_Warning_Code_NOTCRITICALERROR,
+  RoutersListRoutePolicies_Warning_Code_NORESULTSONPAGE,
+  RoutersListRoutePolicies_Warning_Code_PARTIALSUCCESS,
+  RoutersListRoutePolicies_Warning_Code_QUOTAINFOUNAVAILABLE,
+  RoutersListRoutePolicies_Warning_Code_REQUIREDTOSAGREEMENT,
+  RoutersListRoutePolicies_Warning_Code_RESOURCEINUSEBYOTHERRESOURCEWARNING,
+  RoutersListRoutePolicies_Warning_Code_RESOURCENOTDELETED,
+  RoutersListRoutePolicies_Warning_Code_SCHEMAVALIDATIONIGNORED,
+  RoutersListRoutePolicies_Warning_Code_SINGLEINSTANCEPROPERTYTEMPLATE,
+  RoutersListRoutePolicies_Warning_Code_UNDECLAREDPROPERTIES,
+  RoutersListRoutePolicies_Warning_Code_Unreachable,
+  RoutersListRoutePolicies_Warning_Code
   #-}
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine returns NO/RESULTS/ON_PAGE if there are no results in the response.
@@ -38872,11 +39978,15 @@ newtype SecurityPolicyDdosProtectionConfig_DdosProtection = SecurityPolicyDdosPr
 pattern SecurityPolicyDdosProtectionConfig_DdosProtection_Advanced :: SecurityPolicyDdosProtectionConfig_DdosProtection
 pattern SecurityPolicyDdosProtectionConfig_DdosProtection_Advanced = SecurityPolicyDdosProtectionConfig_DdosProtection "ADVANCED"
 
+pattern SecurityPolicyDdosProtectionConfig_DdosProtection_ADVANCEDPREVIEW :: SecurityPolicyDdosProtectionConfig_DdosProtection
+pattern SecurityPolicyDdosProtectionConfig_DdosProtection_ADVANCEDPREVIEW = SecurityPolicyDdosProtectionConfig_DdosProtection "ADVANCED_PREVIEW"
+
 pattern SecurityPolicyDdosProtectionConfig_DdosProtection_Standard :: SecurityPolicyDdosProtectionConfig_DdosProtection
 pattern SecurityPolicyDdosProtectionConfig_DdosProtection_Standard = SecurityPolicyDdosProtectionConfig_DdosProtection "STANDARD"
 
 {-# COMPLETE
   SecurityPolicyDdosProtectionConfig_DdosProtection_Advanced,
+  SecurityPolicyDdosProtectionConfig_DdosProtection_ADVANCEDPREVIEW,
   SecurityPolicyDdosProtectionConfig_DdosProtection_Standard,
   SecurityPolicyDdosProtectionConfig_DdosProtection
   #-}
@@ -43036,7 +44146,7 @@ pattern Subnetwork_PrivateIpv6GoogleAccess_ENABLEOUTBOUNDVMACCESSTOGOOGLE = Subn
   Subnetwork_PrivateIpv6GoogleAccess
   #-}
 
--- | The purpose of the resource. This field can be either PRIVATE, GLOBAL/MANAGED/PROXY, REGIONAL/MANAGED/PROXY, PEER/MIGRATION or PRIVATE/SERVICE/CONNECT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL/MANAGED/PROXY or REGIONAL/MANAGED/PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE/SERVICE/CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER/MIGRATION is used for subnet migration from one peered VPC to another. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn\'t supported if the subnet purpose field is set to GLOBAL/MANAGED/PROXY or REGIONAL/MANAGED/PROXY.
+-- | The purpose of the resource. This field can be either PRIVATE, GLOBAL/MANAGED/PROXY, REGIONAL/MANAGED/PROXY, PEER/MIGRATION, PRIVATE/SERVICE/CONNECT or PRIVATE/NAT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL/MANAGED/PROXY or REGIONAL/MANAGED/PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE/SERVICE/CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER/MIGRATION is used for subnet migration from one peered VPC to another. A subnet with purpose set to PRIVATE/NAT is used for Private NAT IP address by Private NAT Gateway. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn\'t supported if the subnet purpose field is set to GLOBAL/MANAGED/PROXY or REGIONAL/MANAGED/PROXY.
 newtype Subnetwork_Purpose = Subnetwork_Purpose {fromSubnetwork_Purpose :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -47823,7 +48933,7 @@ pattern UsableSubnetwork_Ipv6AccessType_Internal = UsableSubnetwork_Ipv6AccessTy
   UsableSubnetwork_Ipv6AccessType
   #-}
 
--- | The purpose of the resource. This field can be either PRIVATE, GLOBAL/MANAGED/PROXY, REGIONAL/MANAGED/PROXY, PEER/MIGRATION or PRIVATE/SERVICE/CONNECT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL/MANAGED/PROXY or REGIONAL/MANAGED/PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE/SERVICE/CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER/MIGRATION is used for subnet migration from one peered VPC to another. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn\'t supported if the subnet purpose field is set to GLOBAL/MANAGED/PROXY or REGIONAL/MANAGED/PROXY.
+-- | The purpose of the resource. This field can be either PRIVATE, GLOBAL/MANAGED/PROXY, REGIONAL/MANAGED/PROXY, PEER/MIGRATION, PRIVATE/SERVICE/CONNECT or PRIVATE/NAT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL/MANAGED/PROXY or REGIONAL/MANAGED/PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE/SERVICE/CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER/MIGRATION is used for subnet migration from one peered VPC to another. A subnet with purpose set to PRIVATE/NAT is used for Private NAT IP address by Private NAT Gateway. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn\'t supported if the subnet purpose field is set to GLOBAL/MANAGED/PROXY or REGIONAL/MANAGED/PROXY.
 newtype UsableSubnetwork_Purpose = UsableSubnetwork_Purpose {fromUsableSubnetwork_Purpose :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -49896,4 +51006,62 @@ pattern NetworksListPeeringRoutesDirection_Outgoing = NetworksListPeeringRoutesD
   NetworksListPeeringRoutesDirection_Incoming,
   NetworksListPeeringRoutesDirection_Outgoing,
   NetworksListPeeringRoutesDirection
+  #-}
+
+-- | (Required) limit results to this address family (either IPv4 or IPv6)
+newtype RoutersListBgpRoutesAddressFamily = RoutersListBgpRoutesAddressFamily {fromRoutersListBgpRoutesAddressFamily :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+pattern RoutersListBgpRoutesAddressFamily_IPV4 :: RoutersListBgpRoutesAddressFamily
+pattern RoutersListBgpRoutesAddressFamily_IPV4 = RoutersListBgpRoutesAddressFamily "IPV4"
+
+pattern RoutersListBgpRoutesAddressFamily_IPV6 :: RoutersListBgpRoutesAddressFamily
+pattern RoutersListBgpRoutesAddressFamily_IPV6 = RoutersListBgpRoutesAddressFamily "IPV6"
+
+pattern RoutersListBgpRoutesAddressFamily_UNSPECIFIEDIPVERSION :: RoutersListBgpRoutesAddressFamily
+pattern RoutersListBgpRoutesAddressFamily_UNSPECIFIEDIPVERSION = RoutersListBgpRoutesAddressFamily "UNSPECIFIED_IP_VERSION"
+
+{-# COMPLETE
+  RoutersListBgpRoutesAddressFamily_IPV4,
+  RoutersListBgpRoutesAddressFamily_IPV6,
+  RoutersListBgpRoutesAddressFamily_UNSPECIFIEDIPVERSION,
+  RoutersListBgpRoutesAddressFamily
+  #-}
+
+-- | (Required) limit results to this type of route (either LEARNED or ADVERTISED)
+newtype RoutersListBgpRoutesRouteType = RoutersListBgpRoutesRouteType {fromRoutersListBgpRoutesRouteType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+pattern RoutersListBgpRoutesRouteType_Advertised :: RoutersListBgpRoutesRouteType
+pattern RoutersListBgpRoutesRouteType_Advertised = RoutersListBgpRoutesRouteType "ADVERTISED"
+
+pattern RoutersListBgpRoutesRouteType_Learned :: RoutersListBgpRoutesRouteType
+pattern RoutersListBgpRoutesRouteType_Learned = RoutersListBgpRoutesRouteType "LEARNED"
+
+pattern RoutersListBgpRoutesRouteType_UNSPECIFIEDROUTETYPE :: RoutersListBgpRoutesRouteType
+pattern RoutersListBgpRoutesRouteType_UNSPECIFIEDROUTETYPE = RoutersListBgpRoutesRouteType "UNSPECIFIED_ROUTE_TYPE"
+
+{-# COMPLETE
+  RoutersListBgpRoutesRouteType_Advertised,
+  RoutersListBgpRoutesRouteType_Learned,
+  RoutersListBgpRoutesRouteType_UNSPECIFIEDROUTETYPE,
+  RoutersListBgpRoutesRouteType
   #-}

@@ -123,6 +123,10 @@ module Gogol.Drive.Types
     ContentRestriction (..),
     newContentRestriction,
 
+    -- ** DownloadRestriction
+    DownloadRestriction (..),
+    newDownloadRestriction,
+
     -- ** Drive
     Drive (..),
     newDrive,

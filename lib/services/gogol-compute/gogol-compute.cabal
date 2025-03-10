@@ -277,6 +277,7 @@ library
     Gogol.Compute.Instances.ListReferrers
     Gogol.Compute.Instances.PerformMaintenance
     Gogol.Compute.Instances.RemoveResourcePolicies
+    Gogol.Compute.Instances.ReportHostAsFaulty
     Gogol.Compute.Instances.Reset
     Gogol.Compute.Instances.Resume
     Gogol.Compute.Instances.SendDiagnosticInterrupt
@@ -386,18 +387,23 @@ library
     Gogol.Compute.NetworkEndpointGroups.ListNetworkEndpoints
     Gogol.Compute.NetworkEndpointGroups.TestIamPermissions
     Gogol.Compute.NetworkFirewallPolicies.AddAssociation
+    Gogol.Compute.NetworkFirewallPolicies.AddPacketMirroringRule
     Gogol.Compute.NetworkFirewallPolicies.AddRule
+    Gogol.Compute.NetworkFirewallPolicies.AggregatedList
     Gogol.Compute.NetworkFirewallPolicies.CloneRules
     Gogol.Compute.NetworkFirewallPolicies.Delete
     Gogol.Compute.NetworkFirewallPolicies.Get
     Gogol.Compute.NetworkFirewallPolicies.GetAssociation
     Gogol.Compute.NetworkFirewallPolicies.GetIamPolicy
+    Gogol.Compute.NetworkFirewallPolicies.GetPacketMirroringRule
     Gogol.Compute.NetworkFirewallPolicies.GetRule
     Gogol.Compute.NetworkFirewallPolicies.Insert
     Gogol.Compute.NetworkFirewallPolicies.List
     Gogol.Compute.NetworkFirewallPolicies.Patch
+    Gogol.Compute.NetworkFirewallPolicies.PatchPacketMirroringRule
     Gogol.Compute.NetworkFirewallPolicies.PatchRule
     Gogol.Compute.NetworkFirewallPolicies.RemoveAssociation
+    Gogol.Compute.NetworkFirewallPolicies.RemovePacketMirroringRule
     Gogol.Compute.NetworkFirewallPolicies.RemoveRule
     Gogol.Compute.NetworkFirewallPolicies.SetIamPolicy
     Gogol.Compute.NetworkFirewallPolicies.TestIamPermissions
@@ -668,15 +674,21 @@ library
     Gogol.Compute.ResourcePolicies.TestIamPermissions
     Gogol.Compute.Routers.AggregatedList
     Gogol.Compute.Routers.Delete
+    Gogol.Compute.Routers.DeleteRoutePolicy
     Gogol.Compute.Routers.Get
     Gogol.Compute.Routers.GetNatIpInfo
     Gogol.Compute.Routers.GetNatMappingInfo
+    Gogol.Compute.Routers.GetRoutePolicy
     Gogol.Compute.Routers.GetRouterStatus
     Gogol.Compute.Routers.Insert
     Gogol.Compute.Routers.List
+    Gogol.Compute.Routers.ListBgpRoutes
+    Gogol.Compute.Routers.ListRoutePolicies
     Gogol.Compute.Routers.Patch
+    Gogol.Compute.Routers.PatchRoutePolicy
     Gogol.Compute.Routers.Preview
     Gogol.Compute.Routers.Update
+    Gogol.Compute.Routers.UpdateRoutePolicy
     Gogol.Compute.Routes.Delete
     Gogol.Compute.Routes.Get
     Gogol.Compute.Routes.Insert

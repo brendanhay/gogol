@@ -119,7 +119,7 @@ instance
   type
     Scopes
       ClassroomCoursesCourseWorkMaterialsAddOnAttachmentsDelete =
-      '[]
+      '[Classroom'Addons'Teacher]
   requestClient
     ClassroomCoursesCourseWorkMaterialsAddOnAttachmentsDelete {..} =
       go

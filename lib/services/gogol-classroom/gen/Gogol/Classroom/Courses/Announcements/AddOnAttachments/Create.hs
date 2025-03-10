@@ -122,7 +122,7 @@ instance
       AddOnAttachment
   type
     Scopes ClassroomCoursesAnnouncementsAddOnAttachmentsCreate =
-      '[]
+      '[Classroom'Addons'Teacher]
   requestClient
     ClassroomCoursesAnnouncementsAddOnAttachmentsCreate {..} =
       go

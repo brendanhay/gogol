@@ -70,7 +70,11 @@ instance Core.GoogleRequest CalendarFreebusyQuery where
   type Rs CalendarFreebusyQuery = FreeBusyResponse
   type
     Scopes CalendarFreebusyQuery =
-      '[Calendar'FullControl, Calendar'Readonly]
+      '[ Calendar'FullControl,
+         Calendar'Events'Freebusy,
+         Calendar'Freebusy,
+         Calendar'Readonly
+       ]
   requestClient CalendarFreebusyQuery {..} =
     go (Core.Just Core.AltJSON) payload appsCalendarService
     where

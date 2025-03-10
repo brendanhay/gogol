@@ -4,8 +4,8 @@ import Data.Aeson hiding (Array, Bool, String)
 import Data.List (sortOn)
 import Data.Maybe
 import Data.Text (Text)
-import qualified Data.Text as Text
-import qualified Data.Text.Lazy as LText
+import Data.Text qualified as Text
+import Data.Text.Lazy qualified as LText
 import Data.Text.Manipulate
 import Gen.Types.Help
 import Gen.Types.Id

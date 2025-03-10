@@ -1674,7 +1674,9 @@ instance Core.ToJSON FolderEntities where
 --
 -- /See:/ 'newGalleryReference' smart constructor.
 data GalleryReference = GalleryReference
-  { -- | The name of the host for the community gallery template.
+  { -- | ID for the gallery template that is generated once during first sync and travels with the template redirects.
+    galleryTemplateId :: (Core.Maybe Core.Text),
+    -- | The name of the host for the community gallery template.
     host :: (Core.Maybe Core.Text),
     -- | If a user has manually edited the community gallery template.
     isModified :: (Core.Maybe Core.Bool),
@@ -1696,7 +1698,8 @@ newGalleryReference ::
   GalleryReference
 newGalleryReference =
   GalleryReference
-    { host = Core.Nothing,
+    { galleryTemplateId = Core.Nothing,
+      host = Core.Nothing,
       isModified = Core.Nothing,
       owner = Core.Nothing,
       repository = Core.Nothing,
@@ -1711,7 +1714,8 @@ instance Core.FromJSON GalleryReference where
       "GalleryReference"
       ( \o ->
           GalleryReference
-            Core.<$> (o Core..:? "host")
+            Core.<$> (o Core..:? "galleryTemplateId")
+            Core.<*> (o Core..:? "host")
             Core.<*> (o Core..:? "isModified")
             Core.<*> (o Core..:? "owner")
             Core.<*> (o Core..:? "repository")
@@ -1724,7 +1728,8 @@ instance Core.ToJSON GalleryReference where
   toJSON GalleryReference {..} =
     Core.object
       ( Core.catMaybes
-          [ ("host" Core..=) Core.<$> host,
+          [ ("galleryTemplateId" Core..=) Core.<$> galleryTemplateId,
+            ("host" Core..=) Core.<$> host,
             ("isModified" Core..=) Core.<$> isModified,
             ("owner" Core..=) Core.<$> owner,
             ("repository" Core..=) Core.<$> repository,
@@ -1736,8 +1741,10 @@ instance Core.ToJSON GalleryReference where
 
 --
 -- /See:/ 'newGetContainerSnippetResponse' smart constructor.
-newtype GetContainerSnippetResponse = GetContainerSnippetResponse
-  { -- | Tagging snippet for a Container.
+data GetContainerSnippetResponse = GetContainerSnippetResponse
+  { -- | Server container config param for manually provisioning a tagging server.
+    containerConfig :: (Core.Maybe Core.Text),
+    -- | Tagging snippet for a Container.
     snippet :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1746,20 +1753,29 @@ newtype GetContainerSnippetResponse = GetContainerSnippetResponse
 newGetContainerSnippetResponse ::
   GetContainerSnippetResponse
 newGetContainerSnippetResponse =
-  GetContainerSnippetResponse {snippet = Core.Nothing}
+  GetContainerSnippetResponse
+    { containerConfig = Core.Nothing,
+      snippet = Core.Nothing
+    }
 
 instance Core.FromJSON GetContainerSnippetResponse where
   parseJSON =
     Core.withObject
       "GetContainerSnippetResponse"
       ( \o ->
-          GetContainerSnippetResponse Core.<$> (o Core..:? "snippet")
+          GetContainerSnippetResponse
+            Core.<$> (o Core..:? "containerConfig")
+            Core.<*> (o Core..:? "snippet")
       )
 
 instance Core.ToJSON GetContainerSnippetResponse where
   toJSON GetContainerSnippetResponse {..} =
     Core.object
-      (Core.catMaybes [("snippet" Core..=) Core.<$> snippet])
+      ( Core.catMaybes
+          [ ("containerConfig" Core..=) Core.<$> containerConfig,
+            ("snippet" Core..=) Core.<$> snippet
+          ]
+      )
 
 -- | The changes that have occurred in the workspace since the base container version.
 --

@@ -81,6 +81,8 @@ library
     Gogol.Chat.Spaces.SpaceEvents.List
     Gogol.Chat.Types
     Gogol.Chat.Users.Spaces.GetSpaceReadState
+    Gogol.Chat.Users.Spaces.SpaceNotificationSetting.Get
+    Gogol.Chat.Users.Spaces.SpaceNotificationSetting.Patch
     Gogol.Chat.Users.Spaces.Threads.GetThreadReadState
     Gogol.Chat.Users.Spaces.UpdateSpaceReadState
 

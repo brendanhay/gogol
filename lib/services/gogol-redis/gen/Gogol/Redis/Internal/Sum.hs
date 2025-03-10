@@ -284,6 +284,15 @@ module Gogol.Redis.Internal.Sum
         DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEUSERGRANTEDALLPERMISSIONS,
         DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEDATAEXPORTTOEXTERNALCLOUDSTORAGEBUCKET,
         DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEDATAEXPORTTOPUBLICCLOUDSTORAGEBUCKET,
+        DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEWEAKPASSWORDHASHALGORITHM,
+        DatabaseResourceHealthSignalData_SignalType_SIGNALTYPENOUSERPASSWORDPOLICY,
+        DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEHOTNODE,
+        DatabaseResourceHealthSignalData_SignalType_SIGNALTYPENOPOINTINTIMERECOVERY,
+        DatabaseResourceHealthSignalData_SignalType_SIGNALTYPERESOURCESUSPENDED,
+        DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEEXPENSIVECOMMANDS,
+        DatabaseResourceHealthSignalData_SignalType_SIGNALTYPENOMAINTENANCEPOLICYCONFIGURED,
+        DatabaseResourceHealthSignalData_SignalType_SIGNALTYPENODELETIONPROTECTION,
+        DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEINEFFICIENTQUERY,
         ..
       ),
 
@@ -349,7 +358,20 @@ module Gogol.Redis.Internal.Sum
         DatabaseResourceMetadata_InstanceType_SUBRESOURCETYPEPRIMARY,
         DatabaseResourceMetadata_InstanceType_SUBRESOURCETYPESECONDARY,
         DatabaseResourceMetadata_InstanceType_SUBRESOURCETYPEREADREPLICA,
+        DatabaseResourceMetadata_InstanceType_SUBRESOURCETYPEEXTERNALPRIMARY,
         DatabaseResourceMetadata_InstanceType_SUBRESOURCETYPEOTHER,
+        ..
+      ),
+
+    -- * DatabaseResourceMetadata_SuspensionReason
+    DatabaseResourceMetadata_SuspensionReason
+      ( DatabaseResourceMetadata_SuspensionReason_SUSPENSIONREASONUNSPECIFIED,
+        DatabaseResourceMetadata_SuspensionReason_WIPEOUTHIDEEVENT,
+        DatabaseResourceMetadata_SuspensionReason_WIPEOUTPURGEEVENT,
+        DatabaseResourceMetadata_SuspensionReason_BILLINGDISABLED,
+        DatabaseResourceMetadata_SuspensionReason_ABUSERDETECTED,
+        DatabaseResourceMetadata_SuspensionReason_ENCRYPTIONKEYINACCESSIBLE,
+        DatabaseResourceMetadata_SuspensionReason_REPLICATEDCLUSTERENCRYPTIONKEYINACCESSIBLE,
         ..
       ),
 
@@ -445,6 +467,37 @@ module Gogol.Redis.Internal.Sum
         DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEUSERGRANTEDALLPERMISSIONS,
         DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEDATAEXPORTTOEXTERNALCLOUDSTORAGEBUCKET,
         DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEDATAEXPORTTOPUBLICCLOUDSTORAGEBUCKET,
+        DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEWEAKPASSWORDHASHALGORITHM,
+        DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPENOUSERPASSWORDPOLICY,
+        DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEHOTNODE,
+        DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPENOPOINTINTIMERECOVERY,
+        DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPERESOURCESUSPENDED,
+        DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEEXPENSIVECOMMANDS,
+        DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPENOMAINTENANCEPOLICYCONFIGURED,
+        DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPENODELETIONPROTECTION,
+        DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEINEFFICIENTQUERY,
+        ..
+      ),
+
+    -- * EncryptionInfo_EncryptionType
+    EncryptionInfo_EncryptionType
+      ( EncryptionInfo_EncryptionType_TYPEUNSPECIFIED,
+        EncryptionInfo_EncryptionType_GOOGLEDEFAULTENCRYPTION,
+        EncryptionInfo_EncryptionType_CUSTOMERMANAGEDENCRYPTION,
+        ..
+      ),
+
+    -- * EncryptionInfo_KmsKeyPrimaryState
+    EncryptionInfo_KmsKeyPrimaryState
+      ( EncryptionInfo_KmsKeyPrimaryState_KMSKEYSTATEUNSPECIFIED,
+        EncryptionInfo_KmsKeyPrimaryState_Enabled,
+        EncryptionInfo_KmsKeyPrimaryState_PERMISSIONDENIED,
+        EncryptionInfo_KmsKeyPrimaryState_Disabled,
+        EncryptionInfo_KmsKeyPrimaryState_Destroyed,
+        EncryptionInfo_KmsKeyPrimaryState_DESTROYSCHEDULED,
+        EncryptionInfo_KmsKeyPrimaryState_EKMKEYUNREACHABLEDETECTED,
+        EncryptionInfo_KmsKeyPrimaryState_BILLINGDISABLED,
+        EncryptionInfo_KmsKeyPrimaryState_UNKNOWNFAILURE,
         ..
       ),
 
@@ -460,6 +513,8 @@ module Gogol.Redis.Internal.Sum
     Entitlement_Type
       ( Entitlement_Type_ENTITLEMENTTYPEUNSPECIFIED,
         Entitlement_Type_Gemini,
+        Entitlement_Type_Native,
+        Entitlement_Type_GCASTANDARD,
         ..
       ),
 
@@ -542,6 +597,9 @@ module Gogol.Redis.Internal.Sum
         ObservabilityMetricData_MetricType_NETWORKCONNECTIONS,
         ObservabilityMetricData_MetricType_STORAGEUTILIZATION,
         ObservabilityMetricData_MetricType_STORAGEUSEDBYTES,
+        ObservabilityMetricData_MetricType_NODECOUNT,
+        ObservabilityMetricData_MetricType_MEMORYUSEDBYTES,
+        ObservabilityMetricData_MetricType_PROCESSINGUNITCOUNT,
         ..
       ),
 
@@ -698,6 +756,16 @@ module Gogol.Redis.Internal.Sum
         RetentionSettings_RetentionUnit_Time,
         RetentionSettings_RetentionUnit_Duration,
         RetentionSettings_RetentionUnit_RETENTIONUNITOTHER,
+        ..
+      ),
+
+    -- * UpdateInfo_TargetNodeType
+    UpdateInfo_TargetNodeType
+      ( UpdateInfo_TargetNodeType_NODETYPEUNSPECIFIED,
+        UpdateInfo_TargetNodeType_REDISSHAREDCORENANO,
+        UpdateInfo_TargetNodeType_REDISHIGHMEMMEDIUM,
+        UpdateInfo_TargetNodeType_REDISHIGHMEMXLARGE,
+        UpdateInfo_TargetNodeType_REDISSTANDARDSMALL,
         ..
       ),
 
@@ -1799,6 +1867,42 @@ pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEDATAEXPORTTOEXTERN
 pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEDATAEXPORTTOPUBLICCLOUDSTORAGEBUCKET :: DatabaseResourceHealthSignalData_SignalType
 pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEDATAEXPORTTOPUBLICCLOUDSTORAGEBUCKET = DatabaseResourceHealthSignalData_SignalType "SIGNAL_TYPE_DATA_EXPORT_TO_PUBLIC_CLOUD_STORAGE_BUCKET"
 
+-- | Detects if a database instance is using a weak password hash algorithm.
+pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEWEAKPASSWORDHASHALGORITHM :: DatabaseResourceHealthSignalData_SignalType
+pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEWEAKPASSWORDHASHALGORITHM = DatabaseResourceHealthSignalData_SignalType "SIGNAL_TYPE_WEAK_PASSWORD_HASH_ALGORITHM"
+
+-- | Detects if a database instance has no user password policy set.
+pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPENOUSERPASSWORDPOLICY :: DatabaseResourceHealthSignalData_SignalType
+pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPENOUSERPASSWORDPOLICY = DatabaseResourceHealthSignalData_SignalType "SIGNAL_TYPE_NO_USER_PASSWORD_POLICY"
+
+-- | Detects if a database instance\/cluster has a hot node.
+pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEHOTNODE :: DatabaseResourceHealthSignalData_SignalType
+pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEHOTNODE = DatabaseResourceHealthSignalData_SignalType "SIGNAL_TYPE_HOT_NODE"
+
+-- | Detects if a database instance has no point in time recovery enabled.
+pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPENOPOINTINTIMERECOVERY :: DatabaseResourceHealthSignalData_SignalType
+pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPENOPOINTINTIMERECOVERY = DatabaseResourceHealthSignalData_SignalType "SIGNAL_TYPE_NO_POINT_IN_TIME_RECOVERY"
+
+-- | Detects if a database instance\/cluster is suspended.
+pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPERESOURCESUSPENDED :: DatabaseResourceHealthSignalData_SignalType
+pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPERESOURCESUSPENDED = DatabaseResourceHealthSignalData_SignalType "SIGNAL_TYPE_RESOURCE_SUSPENDED"
+
+-- | Detects that expensive commands are being run on a database instance impacting overall performance.
+pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEEXPENSIVECOMMANDS :: DatabaseResourceHealthSignalData_SignalType
+pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEEXPENSIVECOMMANDS = DatabaseResourceHealthSignalData_SignalType "SIGNAL_TYPE_EXPENSIVE_COMMANDS"
+
+-- | Indicates that the instance does not have a maintenance policy configured.
+pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPENOMAINTENANCEPOLICYCONFIGURED :: DatabaseResourceHealthSignalData_SignalType
+pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPENOMAINTENANCEPOLICYCONFIGURED = DatabaseResourceHealthSignalData_SignalType "SIGNAL_TYPE_NO_MAINTENANCE_POLICY_CONFIGURED"
+
+-- | Deletion Protection Disabled for the resource
+pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPENODELETIONPROTECTION :: DatabaseResourceHealthSignalData_SignalType
+pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPENODELETIONPROTECTION = DatabaseResourceHealthSignalData_SignalType "SIGNAL_TYPE_NO_DELETION_PROTECTION"
+
+-- | Indicates that the instance has inefficient queries detected.
+pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEINEFFICIENTQUERY :: DatabaseResourceHealthSignalData_SignalType
+pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEINEFFICIENTQUERY = DatabaseResourceHealthSignalData_SignalType "SIGNAL_TYPE_INEFFICIENT_QUERY"
+
 {-# COMPLETE
   DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEUNSPECIFIED,
   DatabaseResourceHealthSignalData_SignalType_SIGNALTYPENOTPROTECTEDBYAUTOMATICFAILOVER,
@@ -1879,6 +1983,15 @@ pattern DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEDATAEXPORTTOPUBLIC
   DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEUSERGRANTEDALLPERMISSIONS,
   DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEDATAEXPORTTOEXTERNALCLOUDSTORAGEBUCKET,
   DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEDATAEXPORTTOPUBLICCLOUDSTORAGEBUCKET,
+  DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEWEAKPASSWORDHASHALGORITHM,
+  DatabaseResourceHealthSignalData_SignalType_SIGNALTYPENOUSERPASSWORDPOLICY,
+  DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEHOTNODE,
+  DatabaseResourceHealthSignalData_SignalType_SIGNALTYPENOPOINTINTIMERECOVERY,
+  DatabaseResourceHealthSignalData_SignalType_SIGNALTYPERESOURCESUSPENDED,
+  DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEEXPENSIVECOMMANDS,
+  DatabaseResourceHealthSignalData_SignalType_SIGNALTYPENOMAINTENANCEPOLICYCONFIGURED,
+  DatabaseResourceHealthSignalData_SignalType_SIGNALTYPENODELETIONPROTECTION,
+  DatabaseResourceHealthSignalData_SignalType_SIGNALTYPEINEFFICIENTQUERY,
   DatabaseResourceHealthSignalData_SignalType
   #-}
 
@@ -2106,6 +2219,7 @@ newtype DatabaseResourceMetadata_InstanceType = DatabaseResourceMetadata_Instanc
       Core.FromJSONKey
     )
 
+-- | Unspecified.
 pattern DatabaseResourceMetadata_InstanceType_INSTANCETYPEUNSPECIFIED :: DatabaseResourceMetadata_InstanceType
 pattern DatabaseResourceMetadata_InstanceType_INSTANCETYPEUNSPECIFIED = DatabaseResourceMetadata_InstanceType "INSTANCE_TYPE_UNSPECIFIED"
 
@@ -2141,6 +2255,10 @@ pattern DatabaseResourceMetadata_InstanceType_SUBRESOURCETYPESECONDARY = Databas
 pattern DatabaseResourceMetadata_InstanceType_SUBRESOURCETYPEREADREPLICA :: DatabaseResourceMetadata_InstanceType
 pattern DatabaseResourceMetadata_InstanceType_SUBRESOURCETYPEREADREPLICA = DatabaseResourceMetadata_InstanceType "SUB_RESOURCE_TYPE_READ_REPLICA"
 
+-- | An instance acting as an external primary.
+pattern DatabaseResourceMetadata_InstanceType_SUBRESOURCETYPEEXTERNALPRIMARY :: DatabaseResourceMetadata_InstanceType
+pattern DatabaseResourceMetadata_InstanceType_SUBRESOURCETYPEEXTERNALPRIMARY = DatabaseResourceMetadata_InstanceType "SUB_RESOURCE_TYPE_EXTERNAL_PRIMARY"
+
 -- | For rest of the other categories.
 pattern DatabaseResourceMetadata_InstanceType_SUBRESOURCETYPEOTHER :: DatabaseResourceMetadata_InstanceType
 pattern DatabaseResourceMetadata_InstanceType_SUBRESOURCETYPEOTHER = DatabaseResourceMetadata_InstanceType "SUB_RESOURCE_TYPE_OTHER"
@@ -2155,8 +2273,61 @@ pattern DatabaseResourceMetadata_InstanceType_SUBRESOURCETYPEOTHER = DatabaseRes
   DatabaseResourceMetadata_InstanceType_SUBRESOURCETYPEPRIMARY,
   DatabaseResourceMetadata_InstanceType_SUBRESOURCETYPESECONDARY,
   DatabaseResourceMetadata_InstanceType_SUBRESOURCETYPEREADREPLICA,
+  DatabaseResourceMetadata_InstanceType_SUBRESOURCETYPEEXTERNALPRIMARY,
   DatabaseResourceMetadata_InstanceType_SUBRESOURCETYPEOTHER,
   DatabaseResourceMetadata_InstanceType
+  #-}
+
+-- | Optional. Suspension reason for the resource.
+newtype DatabaseResourceMetadata_SuspensionReason = DatabaseResourceMetadata_SuspensionReason {fromDatabaseResourceMetadata_SuspensionReason :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Suspension reason is unspecified.
+pattern DatabaseResourceMetadata_SuspensionReason_SUSPENSIONREASONUNSPECIFIED :: DatabaseResourceMetadata_SuspensionReason
+pattern DatabaseResourceMetadata_SuspensionReason_SUSPENSIONREASONUNSPECIFIED = DatabaseResourceMetadata_SuspensionReason "SUSPENSION_REASON_UNSPECIFIED"
+
+-- | Wipeout hide event.
+pattern DatabaseResourceMetadata_SuspensionReason_WIPEOUTHIDEEVENT :: DatabaseResourceMetadata_SuspensionReason
+pattern DatabaseResourceMetadata_SuspensionReason_WIPEOUTHIDEEVENT = DatabaseResourceMetadata_SuspensionReason "WIPEOUT_HIDE_EVENT"
+
+-- | Wipeout purge event.
+pattern DatabaseResourceMetadata_SuspensionReason_WIPEOUTPURGEEVENT :: DatabaseResourceMetadata_SuspensionReason
+pattern DatabaseResourceMetadata_SuspensionReason_WIPEOUTPURGEEVENT = DatabaseResourceMetadata_SuspensionReason "WIPEOUT_PURGE_EVENT"
+
+-- | Billing disabled for project
+pattern DatabaseResourceMetadata_SuspensionReason_BILLINGDISABLED :: DatabaseResourceMetadata_SuspensionReason
+pattern DatabaseResourceMetadata_SuspensionReason_BILLINGDISABLED = DatabaseResourceMetadata_SuspensionReason "BILLING_DISABLED"
+
+-- | Abuse detected for resource
+pattern DatabaseResourceMetadata_SuspensionReason_ABUSERDETECTED :: DatabaseResourceMetadata_SuspensionReason
+pattern DatabaseResourceMetadata_SuspensionReason_ABUSERDETECTED = DatabaseResourceMetadata_SuspensionReason "ABUSER_DETECTED"
+
+-- | Encryption key inaccessible.
+pattern DatabaseResourceMetadata_SuspensionReason_ENCRYPTIONKEYINACCESSIBLE :: DatabaseResourceMetadata_SuspensionReason
+pattern DatabaseResourceMetadata_SuspensionReason_ENCRYPTIONKEYINACCESSIBLE = DatabaseResourceMetadata_SuspensionReason "ENCRYPTION_KEY_INACCESSIBLE"
+
+-- | Replicated cluster encryption key inaccessible.
+pattern DatabaseResourceMetadata_SuspensionReason_REPLICATEDCLUSTERENCRYPTIONKEYINACCESSIBLE :: DatabaseResourceMetadata_SuspensionReason
+pattern DatabaseResourceMetadata_SuspensionReason_REPLICATEDCLUSTERENCRYPTIONKEYINACCESSIBLE = DatabaseResourceMetadata_SuspensionReason "REPLICATED_CLUSTER_ENCRYPTION_KEY_INACCESSIBLE"
+
+{-# COMPLETE
+  DatabaseResourceMetadata_SuspensionReason_SUSPENSIONREASONUNSPECIFIED,
+  DatabaseResourceMetadata_SuspensionReason_WIPEOUTHIDEEVENT,
+  DatabaseResourceMetadata_SuspensionReason_WIPEOUTPURGEEVENT,
+  DatabaseResourceMetadata_SuspensionReason_BILLINGDISABLED,
+  DatabaseResourceMetadata_SuspensionReason_ABUSERDETECTED,
+  DatabaseResourceMetadata_SuspensionReason_ENCRYPTIONKEYINACCESSIBLE,
+  DatabaseResourceMetadata_SuspensionReason_REPLICATEDCLUSTERENCRYPTIONKEYINACCESSIBLE,
+  DatabaseResourceMetadata_SuspensionReason
   #-}
 
 -- | Required. Recommendation state
@@ -2534,6 +2705,42 @@ pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEDATAEXPORT
 pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEDATAEXPORTTOPUBLICCLOUDSTORAGEBUCKET :: DatabaseResourceRecommendationSignalData_SignalType
 pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEDATAEXPORTTOPUBLICCLOUDSTORAGEBUCKET = DatabaseResourceRecommendationSignalData_SignalType "SIGNAL_TYPE_DATA_EXPORT_TO_PUBLIC_CLOUD_STORAGE_BUCKET"
 
+-- | Detects if a database instance is using a weak password hash algorithm.
+pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEWEAKPASSWORDHASHALGORITHM :: DatabaseResourceRecommendationSignalData_SignalType
+pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEWEAKPASSWORDHASHALGORITHM = DatabaseResourceRecommendationSignalData_SignalType "SIGNAL_TYPE_WEAK_PASSWORD_HASH_ALGORITHM"
+
+-- | Detects if a database instance has no user password policy set.
+pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPENOUSERPASSWORDPOLICY :: DatabaseResourceRecommendationSignalData_SignalType
+pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPENOUSERPASSWORDPOLICY = DatabaseResourceRecommendationSignalData_SignalType "SIGNAL_TYPE_NO_USER_PASSWORD_POLICY"
+
+-- | Detects if a database instance\/cluster has a hot node.
+pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEHOTNODE :: DatabaseResourceRecommendationSignalData_SignalType
+pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEHOTNODE = DatabaseResourceRecommendationSignalData_SignalType "SIGNAL_TYPE_HOT_NODE"
+
+-- | Detects if a database instance has no point in time recovery enabled.
+pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPENOPOINTINTIMERECOVERY :: DatabaseResourceRecommendationSignalData_SignalType
+pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPENOPOINTINTIMERECOVERY = DatabaseResourceRecommendationSignalData_SignalType "SIGNAL_TYPE_NO_POINT_IN_TIME_RECOVERY"
+
+-- | Detects if a database instance\/cluster is suspended.
+pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPERESOURCESUSPENDED :: DatabaseResourceRecommendationSignalData_SignalType
+pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPERESOURCESUSPENDED = DatabaseResourceRecommendationSignalData_SignalType "SIGNAL_TYPE_RESOURCE_SUSPENDED"
+
+-- | Detects that expensive commands are being run on a database instance impacting overall performance.
+pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEEXPENSIVECOMMANDS :: DatabaseResourceRecommendationSignalData_SignalType
+pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEEXPENSIVECOMMANDS = DatabaseResourceRecommendationSignalData_SignalType "SIGNAL_TYPE_EXPENSIVE_COMMANDS"
+
+-- | Indicates that the instance does not have a maintenance policy configured.
+pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPENOMAINTENANCEPOLICYCONFIGURED :: DatabaseResourceRecommendationSignalData_SignalType
+pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPENOMAINTENANCEPOLICYCONFIGURED = DatabaseResourceRecommendationSignalData_SignalType "SIGNAL_TYPE_NO_MAINTENANCE_POLICY_CONFIGURED"
+
+-- | Deletion Protection Disabled for the resource
+pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPENODELETIONPROTECTION :: DatabaseResourceRecommendationSignalData_SignalType
+pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPENODELETIONPROTECTION = DatabaseResourceRecommendationSignalData_SignalType "SIGNAL_TYPE_NO_DELETION_PROTECTION"
+
+-- | Indicates that the instance has inefficient queries detected.
+pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEINEFFICIENTQUERY :: DatabaseResourceRecommendationSignalData_SignalType
+pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEINEFFICIENTQUERY = DatabaseResourceRecommendationSignalData_SignalType "SIGNAL_TYPE_INEFFICIENT_QUERY"
+
 {-# COMPLETE
   DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEUNSPECIFIED,
   DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPENOTPROTECTEDBYAUTOMATICFAILOVER,
@@ -2614,7 +2821,110 @@ pattern DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEDATAEXPORT
   DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEUSERGRANTEDALLPERMISSIONS,
   DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEDATAEXPORTTOEXTERNALCLOUDSTORAGEBUCKET,
   DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEDATAEXPORTTOPUBLICCLOUDSTORAGEBUCKET,
+  DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEWEAKPASSWORDHASHALGORITHM,
+  DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPENOUSERPASSWORDPOLICY,
+  DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEHOTNODE,
+  DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPENOPOINTINTIMERECOVERY,
+  DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPERESOURCESUSPENDED,
+  DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEEXPENSIVECOMMANDS,
+  DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPENOMAINTENANCEPOLICYCONFIGURED,
+  DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPENODELETIONPROTECTION,
+  DatabaseResourceRecommendationSignalData_SignalType_SIGNALTYPEINEFFICIENTQUERY,
   DatabaseResourceRecommendationSignalData_SignalType
+  #-}
+
+-- | Output only. Type of encryption.
+newtype EncryptionInfo_EncryptionType = EncryptionInfo_EncryptionType {fromEncryptionInfo_EncryptionType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Encryption type not specified. Defaults to GOOGLE/DEFAULT/ENCRYPTION.
+pattern EncryptionInfo_EncryptionType_TYPEUNSPECIFIED :: EncryptionInfo_EncryptionType
+pattern EncryptionInfo_EncryptionType_TYPEUNSPECIFIED = EncryptionInfo_EncryptionType "TYPE_UNSPECIFIED"
+
+-- | The data is encrypted at rest with a key that is fully managed by Google. No key version will be populated. This is the default state.
+pattern EncryptionInfo_EncryptionType_GOOGLEDEFAULTENCRYPTION :: EncryptionInfo_EncryptionType
+pattern EncryptionInfo_EncryptionType_GOOGLEDEFAULTENCRYPTION = EncryptionInfo_EncryptionType "GOOGLE_DEFAULT_ENCRYPTION"
+
+-- | The data is encrypted at rest with a key that is managed by the customer. KMS key versions will be populated.
+pattern EncryptionInfo_EncryptionType_CUSTOMERMANAGEDENCRYPTION :: EncryptionInfo_EncryptionType
+pattern EncryptionInfo_EncryptionType_CUSTOMERMANAGEDENCRYPTION = EncryptionInfo_EncryptionType "CUSTOMER_MANAGED_ENCRYPTION"
+
+{-# COMPLETE
+  EncryptionInfo_EncryptionType_TYPEUNSPECIFIED,
+  EncryptionInfo_EncryptionType_GOOGLEDEFAULTENCRYPTION,
+  EncryptionInfo_EncryptionType_CUSTOMERMANAGEDENCRYPTION,
+  EncryptionInfo_EncryptionType
+  #-}
+
+-- | Output only. The state of the primary version of the KMS key perceived by the system. This field is not populated in backups.
+newtype EncryptionInfo_KmsKeyPrimaryState = EncryptionInfo_KmsKeyPrimaryState {fromEncryptionInfo_KmsKeyPrimaryState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The default value. This value is unused.
+pattern EncryptionInfo_KmsKeyPrimaryState_KMSKEYSTATEUNSPECIFIED :: EncryptionInfo_KmsKeyPrimaryState
+pattern EncryptionInfo_KmsKeyPrimaryState_KMSKEYSTATEUNSPECIFIED = EncryptionInfo_KmsKeyPrimaryState "KMS_KEY_STATE_UNSPECIFIED"
+
+-- | The KMS key is enabled and correctly configured.
+pattern EncryptionInfo_KmsKeyPrimaryState_Enabled :: EncryptionInfo_KmsKeyPrimaryState
+pattern EncryptionInfo_KmsKeyPrimaryState_Enabled = EncryptionInfo_KmsKeyPrimaryState "ENABLED"
+
+-- | Permission denied on the KMS key.
+pattern EncryptionInfo_KmsKeyPrimaryState_PERMISSIONDENIED :: EncryptionInfo_KmsKeyPrimaryState
+pattern EncryptionInfo_KmsKeyPrimaryState_PERMISSIONDENIED = EncryptionInfo_KmsKeyPrimaryState "PERMISSION_DENIED"
+
+-- | The KMS key is disabled.
+pattern EncryptionInfo_KmsKeyPrimaryState_Disabled :: EncryptionInfo_KmsKeyPrimaryState
+pattern EncryptionInfo_KmsKeyPrimaryState_Disabled = EncryptionInfo_KmsKeyPrimaryState "DISABLED"
+
+-- | The KMS key is destroyed.
+pattern EncryptionInfo_KmsKeyPrimaryState_Destroyed :: EncryptionInfo_KmsKeyPrimaryState
+pattern EncryptionInfo_KmsKeyPrimaryState_Destroyed = EncryptionInfo_KmsKeyPrimaryState "DESTROYED"
+
+-- | The KMS key is scheduled to be destroyed.
+pattern EncryptionInfo_KmsKeyPrimaryState_DESTROYSCHEDULED :: EncryptionInfo_KmsKeyPrimaryState
+pattern EncryptionInfo_KmsKeyPrimaryState_DESTROYSCHEDULED = EncryptionInfo_KmsKeyPrimaryState "DESTROY_SCHEDULED"
+
+-- | The EKM key is unreachable.
+pattern EncryptionInfo_KmsKeyPrimaryState_EKMKEYUNREACHABLEDETECTED :: EncryptionInfo_KmsKeyPrimaryState
+pattern EncryptionInfo_KmsKeyPrimaryState_EKMKEYUNREACHABLEDETECTED = EncryptionInfo_KmsKeyPrimaryState "EKM_KEY_UNREACHABLE_DETECTED"
+
+-- | Billing is disabled for the project.
+pattern EncryptionInfo_KmsKeyPrimaryState_BILLINGDISABLED :: EncryptionInfo_KmsKeyPrimaryState
+pattern EncryptionInfo_KmsKeyPrimaryState_BILLINGDISABLED = EncryptionInfo_KmsKeyPrimaryState "BILLING_DISABLED"
+
+-- | All other unknown failures.
+pattern EncryptionInfo_KmsKeyPrimaryState_UNKNOWNFAILURE :: EncryptionInfo_KmsKeyPrimaryState
+pattern EncryptionInfo_KmsKeyPrimaryState_UNKNOWNFAILURE = EncryptionInfo_KmsKeyPrimaryState "UNKNOWN_FAILURE"
+
+{-# COMPLETE
+  EncryptionInfo_KmsKeyPrimaryState_KMSKEYSTATEUNSPECIFIED,
+  EncryptionInfo_KmsKeyPrimaryState_Enabled,
+  EncryptionInfo_KmsKeyPrimaryState_PERMISSIONDENIED,
+  EncryptionInfo_KmsKeyPrimaryState_Disabled,
+  EncryptionInfo_KmsKeyPrimaryState_Destroyed,
+  EncryptionInfo_KmsKeyPrimaryState_DESTROYSCHEDULED,
+  EncryptionInfo_KmsKeyPrimaryState_EKMKEYUNREACHABLEDETECTED,
+  EncryptionInfo_KmsKeyPrimaryState_BILLINGDISABLED,
+  EncryptionInfo_KmsKeyPrimaryState_UNKNOWNFAILURE,
+  EncryptionInfo_KmsKeyPrimaryState
   #-}
 
 -- | The current state of user\'s accessibility to a feature\/benefit.
@@ -2661,16 +2971,27 @@ newtype Entitlement_Type = Entitlement_Type {fromEntitlement_Type :: Core.Text}
       Core.FromJSONKey
     )
 
+-- | The entitlement type is unspecified.
 pattern Entitlement_Type_ENTITLEMENTTYPEUNSPECIFIED :: Entitlement_Type
 pattern Entitlement_Type_ENTITLEMENTTYPEUNSPECIFIED = Entitlement_Type "ENTITLEMENT_TYPE_UNSPECIFIED"
 
--- | The root entitlement representing Gemini package ownership.
+-- | The root entitlement representing Gemini package ownership.This will no longer be supported in the future.
 pattern Entitlement_Type_Gemini :: Entitlement_Type
 pattern Entitlement_Type_Gemini = Entitlement_Type "GEMINI"
+
+-- | The entitlement representing Native Tier, This will be the default Entitlement going forward with GCA Enablement.
+pattern Entitlement_Type_Native :: Entitlement_Type
+pattern Entitlement_Type_Native = Entitlement_Type "NATIVE"
+
+-- | The entitlement representing GCA-Standard Tier.
+pattern Entitlement_Type_GCASTANDARD :: Entitlement_Type
+pattern Entitlement_Type_GCASTANDARD = Entitlement_Type "GCA_STANDARD"
 
 {-# COMPLETE
   Entitlement_Type_ENTITLEMENTTYPEUNSPECIFIED,
   Entitlement_Type_Gemini,
+  Entitlement_Type_Native,
+  Entitlement_Type_GCASTANDARD,
   Entitlement_Type
   #-}
 
@@ -3001,6 +3322,18 @@ pattern ObservabilityMetricData_MetricType_STORAGEUTILIZATION = ObservabilityMet
 pattern ObservabilityMetricData_MetricType_STORAGEUSEDBYTES :: ObservabilityMetricData_MetricType
 pattern ObservabilityMetricData_MetricType_STORAGEUSEDBYTES = ObservabilityMetricData_MetricType "STORAGE_USED_BYTES"
 
+-- | Node count for a resource. It represents the number of node units in a bigtable\/spanner instance.
+pattern ObservabilityMetricData_MetricType_NODECOUNT :: ObservabilityMetricData_MetricType
+pattern ObservabilityMetricData_MetricType_NODECOUNT = ObservabilityMetricData_MetricType "NODE_COUNT"
+
+-- | Memory used by a resource (in bytes).
+pattern ObservabilityMetricData_MetricType_MEMORYUSEDBYTES :: ObservabilityMetricData_MetricType
+pattern ObservabilityMetricData_MetricType_MEMORYUSEDBYTES = ObservabilityMetricData_MetricType "MEMORY_USED_BYTES"
+
+-- | Processing units used by a resource. It represents the number of processing units in a spanner instance.
+pattern ObservabilityMetricData_MetricType_PROCESSINGUNITCOUNT :: ObservabilityMetricData_MetricType
+pattern ObservabilityMetricData_MetricType_PROCESSINGUNITCOUNT = ObservabilityMetricData_MetricType "PROCESSING_UNIT_COUNT"
+
 {-# COMPLETE
   ObservabilityMetricData_MetricType_METRICTYPEUNSPECIFIED,
   ObservabilityMetricData_MetricType_CPUUTILIZATION,
@@ -3008,6 +3341,9 @@ pattern ObservabilityMetricData_MetricType_STORAGEUSEDBYTES = ObservabilityMetri
   ObservabilityMetricData_MetricType_NETWORKCONNECTIONS,
   ObservabilityMetricData_MetricType_STORAGEUTILIZATION,
   ObservabilityMetricData_MetricType_STORAGEUSEDBYTES,
+  ObservabilityMetricData_MetricType_NODECOUNT,
+  ObservabilityMetricData_MetricType_MEMORYUSEDBYTES,
+  ObservabilityMetricData_MetricType_PROCESSINGUNITCOUNT,
   ObservabilityMetricData_MetricType
   #-}
 
@@ -3668,6 +4004,48 @@ pattern RetentionSettings_RetentionUnit_RETENTIONUNITOTHER = RetentionSettings_R
   RetentionSettings_RetentionUnit_Duration,
   RetentionSettings_RetentionUnit_RETENTIONUNITOTHER,
   RetentionSettings_RetentionUnit
+  #-}
+
+-- | Target node type for redis cluster.
+newtype UpdateInfo_TargetNodeType = UpdateInfo_TargetNodeType {fromUpdateInfo_TargetNodeType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Node type unspecified
+pattern UpdateInfo_TargetNodeType_NODETYPEUNSPECIFIED :: UpdateInfo_TargetNodeType
+pattern UpdateInfo_TargetNodeType_NODETYPEUNSPECIFIED = UpdateInfo_TargetNodeType "NODE_TYPE_UNSPECIFIED"
+
+-- | Redis shared core nano node_type.
+pattern UpdateInfo_TargetNodeType_REDISSHAREDCORENANO :: UpdateInfo_TargetNodeType
+pattern UpdateInfo_TargetNodeType_REDISSHAREDCORENANO = UpdateInfo_TargetNodeType "REDIS_SHARED_CORE_NANO"
+
+-- | Redis highmem medium node_type.
+pattern UpdateInfo_TargetNodeType_REDISHIGHMEMMEDIUM :: UpdateInfo_TargetNodeType
+pattern UpdateInfo_TargetNodeType_REDISHIGHMEMMEDIUM = UpdateInfo_TargetNodeType "REDIS_HIGHMEM_MEDIUM"
+
+-- | Redis highmem xlarge node_type.
+pattern UpdateInfo_TargetNodeType_REDISHIGHMEMXLARGE :: UpdateInfo_TargetNodeType
+pattern UpdateInfo_TargetNodeType_REDISHIGHMEMXLARGE = UpdateInfo_TargetNodeType "REDIS_HIGHMEM_XLARGE"
+
+-- | Redis standard small node_type.
+pattern UpdateInfo_TargetNodeType_REDISSTANDARDSMALL :: UpdateInfo_TargetNodeType
+pattern UpdateInfo_TargetNodeType_REDISSTANDARDSMALL = UpdateInfo_TargetNodeType "REDIS_STANDARD_SMALL"
+
+{-# COMPLETE
+  UpdateInfo_TargetNodeType_NODETYPEUNSPECIFIED,
+  UpdateInfo_TargetNodeType_REDISSHAREDCORENANO,
+  UpdateInfo_TargetNodeType_REDISHIGHMEMMEDIUM,
+  UpdateInfo_TargetNodeType_REDISHIGHMEMXLARGE,
+  UpdateInfo_TargetNodeType_REDISSTANDARDSMALL,
+  UpdateInfo_TargetNodeType
   #-}
 
 -- | Required. The day of week that maintenance updates occur.

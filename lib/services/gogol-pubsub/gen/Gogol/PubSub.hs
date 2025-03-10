@@ -294,6 +294,20 @@ module Gogol.PubSub
     -- ** AwsKinesis_State
     AwsKinesis_State (..),
 
+    -- ** AwsMsk
+    AwsMsk (..),
+    newAwsMsk,
+
+    -- ** AwsMsk_State
+    AwsMsk_State (..),
+
+    -- ** AzureEventHubs
+    AzureEventHubs (..),
+    newAzureEventHubs,
+
+    -- ** AzureEventHubs_State
+    AzureEventHubs_State (..),
+
     -- ** BigQueryConfig
     BigQueryConfig (..),
     newBigQueryConfig,
@@ -322,6 +336,13 @@ module Gogol.PubSub
     -- ** CommitSchemaRequest
     CommitSchemaRequest (..),
     newCommitSchemaRequest,
+
+    -- ** ConfluentCloud
+    ConfluentCloud (..),
+    newConfluentCloud,
+
+    -- ** ConfluentCloud_State
+    ConfluentCloud_State (..),
 
     -- ** CreateSnapshotRequest
     CreateSnapshotRequest (..),
@@ -355,6 +376,10 @@ module Gogol.PubSub
     IngestionDataSourceSettings (..),
     newIngestionDataSourceSettings,
 
+    -- ** JavaScriptUDF
+    JavaScriptUDF (..),
+    newJavaScriptUDF,
+
     -- ** ListSchemaRevisionsResponse
     ListSchemaRevisionsResponse (..),
     newListSchemaRevisionsResponse,
@@ -386,6 +411,10 @@ module Gogol.PubSub
     -- ** MessageStoragePolicy
     MessageStoragePolicy (..),
     newMessageStoragePolicy,
+
+    -- ** MessageTransform
+    MessageTransform (..),
+    newMessageTransform,
 
     -- ** ModifyAckDeadlineRequest
     ModifyAckDeadlineRequest (..),

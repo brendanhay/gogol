@@ -74,7 +74,9 @@ newCalendarAclDelete calendarId ruleId =
 
 instance Core.GoogleRequest CalendarAclDelete where
   type Rs CalendarAclDelete = ()
-  type Scopes CalendarAclDelete = '[Calendar'FullControl]
+  type
+    Scopes CalendarAclDelete =
+      '[Calendar'FullControl, Calendar'Acls]
   requestClient CalendarAclDelete {..} =
     go calendarId ruleId (Core.Just Core.AltJSON) appsCalendarService
     where

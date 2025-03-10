@@ -248,6 +248,10 @@ module Gogol.ContainerAnalysis.Types
     ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects,
 
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule,
+
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact
     ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact,
@@ -340,6 +344,18 @@ module Gogol.ContainerAnalysis.Types
     ContaineranalysisGoogleDevtoolsCloudbuildV1ConnectedRepository (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1ConnectedRepository,
 
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1Dependency,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency
+    ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository
+    ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository,
+
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1DeveloperConnectConfig
     ContaineranalysisGoogleDevtoolsCloudbuildV1DeveloperConnectConfig (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1DeveloperConnectConfig,
@@ -429,6 +445,10 @@ module Gogol.ContainerAnalysis.Types
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan
     ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule,
 
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact
     ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact (..),

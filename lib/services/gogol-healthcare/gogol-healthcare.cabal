@@ -132,6 +132,7 @@ library
     Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.TestIamPermissions
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.ApplyAdminConsents
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.ApplyConsents
+    Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Bulkexportgroup
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Create
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Deidentify
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Delete
@@ -141,6 +142,7 @@ library
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Binaryread
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Binaryupdate
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Binaryvread
+    Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Bulkexport
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Capabilities
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.ConditionalDelete
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.ConditionalPatch
@@ -165,6 +167,8 @@ library
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.GetIamPolicy
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Import
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.List
+    Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Operations.Deletefhiroperation
+    Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Operations.Getfhiroperationstatus
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Patch
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Rollback
     Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.SetIamPolicy

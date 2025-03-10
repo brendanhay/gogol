@@ -130,6 +130,29 @@ module Gogol.AndroidEnterprise.Internal.Sum
         ..
       ),
 
+    -- * Enterprise_EnterpriseType
+    Enterprise_EnterpriseType
+      ( Enterprise_EnterpriseType_EnterpriseTypeUnspecified,
+        Enterprise_EnterpriseType_ManagedGoogleDomain,
+        Enterprise_EnterpriseType_ManagedGooglePlayAccountsEnterprise,
+        ..
+      ),
+
+    -- * Enterprise_ManagedGoogleDomainType
+    Enterprise_ManagedGoogleDomainType
+      ( Enterprise_ManagedGoogleDomainType_ManagedGoogleDomainTypeUnspecified,
+        Enterprise_ManagedGoogleDomainType_TypeTeam,
+        Enterprise_ManagedGoogleDomainType_TypeDomain,
+        ..
+      ),
+
+    -- * EnterpriseUpgradeEvent_UpgradeState
+    EnterpriseUpgradeEvent_UpgradeState
+      ( EnterpriseUpgradeEvent_UpgradeState_UpgradeStateUnspecified,
+        EnterpriseUpgradeEvent_UpgradeState_UpgradeStateSucceeded,
+        ..
+      ),
+
     -- * Entitlement_Reason
     Entitlement_Reason
       ( Entitlement_Reason_Free,
@@ -217,6 +240,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
         Notification_NotificationType_ProductAvailabilityChange,
         Notification_NotificationType_NewDevice,
         Notification_NotificationType_DeviceReportUpdate,
+        Notification_NotificationType_EnterpriseUpgrade,
         ..
       ),
 
@@ -391,22 +415,6 @@ module Gogol.AndroidEnterprise.Internal.Sum
         WebApp_DisplayMode_MinimalUi,
         WebApp_DisplayMode_Standalone,
         WebApp_DisplayMode_FullScreen,
-        ..
-      ),
-
-    -- * EnterprisesCreateEnrollmentTokenDeviceType
-    EnterprisesCreateEnrollmentTokenDeviceType
-      ( EnterprisesCreateEnrollmentTokenDeviceType_Unknown,
-        EnterprisesCreateEnrollmentTokenDeviceType_DedicatedDevice,
-        EnterprisesCreateEnrollmentTokenDeviceType_KnowledgeWorker,
-        ..
-      ),
-
-    -- * EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType
-    EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType
-      ( EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType_EnrollmentTokenTypeUnspecified,
-        EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType_UserlessDevice,
-        EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType_UserDevice,
         ..
       ),
 
@@ -852,6 +860,97 @@ pattern EnrollmentToken_EnrollmentTokenType_UserDevice = EnrollmentToken_Enrollm
   EnrollmentToken_EnrollmentTokenType
   #-}
 
+-- | The type of the enterprise.
+newtype Enterprise_EnterpriseType = Enterprise_EnterpriseType {fromEnterprise_EnterpriseType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This value is not used.
+pattern Enterprise_EnterpriseType_EnterpriseTypeUnspecified :: Enterprise_EnterpriseType
+pattern Enterprise_EnterpriseType_EnterpriseTypeUnspecified = Enterprise_EnterpriseType "enterpriseTypeUnspecified"
+
+-- | The enterprise belongs to a managed Google domain.
+pattern Enterprise_EnterpriseType_ManagedGoogleDomain :: Enterprise_EnterpriseType
+pattern Enterprise_EnterpriseType_ManagedGoogleDomain = Enterprise_EnterpriseType "managedGoogleDomain"
+
+-- | The enterprise is a managed Google Play Accounts enterprise.
+pattern Enterprise_EnterpriseType_ManagedGooglePlayAccountsEnterprise :: Enterprise_EnterpriseType
+pattern Enterprise_EnterpriseType_ManagedGooglePlayAccountsEnterprise = Enterprise_EnterpriseType "managedGooglePlayAccountsEnterprise"
+
+{-# COMPLETE
+  Enterprise_EnterpriseType_EnterpriseTypeUnspecified,
+  Enterprise_EnterpriseType_ManagedGoogleDomain,
+  Enterprise_EnterpriseType_ManagedGooglePlayAccountsEnterprise,
+  Enterprise_EnterpriseType
+  #-}
+
+-- | The type of managed Google domain
+newtype Enterprise_ManagedGoogleDomainType = Enterprise_ManagedGoogleDomainType {fromEnterprise_ManagedGoogleDomainType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The managed Google domain type is not specified.
+pattern Enterprise_ManagedGoogleDomainType_ManagedGoogleDomainTypeUnspecified :: Enterprise_ManagedGoogleDomainType
+pattern Enterprise_ManagedGoogleDomainType_ManagedGoogleDomainTypeUnspecified = Enterprise_ManagedGoogleDomainType "managedGoogleDomainTypeUnspecified"
+
+-- | The managed Google domain is an email-verified team.
+pattern Enterprise_ManagedGoogleDomainType_TypeTeam :: Enterprise_ManagedGoogleDomainType
+pattern Enterprise_ManagedGoogleDomainType_TypeTeam = Enterprise_ManagedGoogleDomainType "typeTeam"
+
+-- | The managed Google domain is domain-verified.
+pattern Enterprise_ManagedGoogleDomainType_TypeDomain :: Enterprise_ManagedGoogleDomainType
+pattern Enterprise_ManagedGoogleDomainType_TypeDomain = Enterprise_ManagedGoogleDomainType "typeDomain"
+
+{-# COMPLETE
+  Enterprise_ManagedGoogleDomainType_ManagedGoogleDomainTypeUnspecified,
+  Enterprise_ManagedGoogleDomainType_TypeTeam,
+  Enterprise_ManagedGoogleDomainType_TypeDomain,
+  Enterprise_ManagedGoogleDomainType
+  #-}
+
+-- | The upgrade state.
+newtype EnterpriseUpgradeEvent_UpgradeState = EnterpriseUpgradeEvent_UpgradeState {fromEnterpriseUpgradeEvent_UpgradeState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. This value is not used.
+pattern EnterpriseUpgradeEvent_UpgradeState_UpgradeStateUnspecified :: EnterpriseUpgradeEvent_UpgradeState
+pattern EnterpriseUpgradeEvent_UpgradeState_UpgradeStateUnspecified = EnterpriseUpgradeEvent_UpgradeState "upgradeStateUnspecified"
+
+-- | The upgrade has succeeded.
+pattern EnterpriseUpgradeEvent_UpgradeState_UpgradeStateSucceeded :: EnterpriseUpgradeEvent_UpgradeState
+pattern EnterpriseUpgradeEvent_UpgradeState_UpgradeStateSucceeded = EnterpriseUpgradeEvent_UpgradeState "upgradeStateSucceeded"
+
+{-# COMPLETE
+  EnterpriseUpgradeEvent_UpgradeState_UpgradeStateUnspecified,
+  EnterpriseUpgradeEvent_UpgradeState_UpgradeStateSucceeded,
+  EnterpriseUpgradeEvent_UpgradeState
+  #-}
+
 -- | The reason for the entitlement. For example, \"free\" for free apps. This property is temporary: it will be replaced by the acquisition kind field of group licenses.
 newtype Entitlement_Reason = Entitlement_Reason {fromEntitlement_Reason :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1182,6 +1281,10 @@ pattern Notification_NotificationType_NewDevice = Notification_NotificationType 
 pattern Notification_NotificationType_DeviceReportUpdate :: Notification_NotificationType
 pattern Notification_NotificationType_DeviceReportUpdate = Notification_NotificationType "deviceReportUpdate"
 
+-- | Notification about an enterprise upgrade. __Note:__ This feature is not generally available.
+pattern Notification_NotificationType_EnterpriseUpgrade :: Notification_NotificationType
+pattern Notification_NotificationType_EnterpriseUpgrade = Notification_NotificationType "enterpriseUpgrade"
+
 {-# COMPLETE
   Notification_NotificationType_Unknown,
   Notification_NotificationType_TestNotification,
@@ -1193,6 +1296,7 @@ pattern Notification_NotificationType_DeviceReportUpdate = Notification_Notifica
   Notification_NotificationType_ProductAvailabilityChange,
   Notification_NotificationType_NewDevice,
   Notification_NotificationType_DeviceReportUpdate,
+  Notification_NotificationType_EnterpriseUpgrade,
   Notification_NotificationType
   #-}
 
@@ -1863,70 +1967,6 @@ pattern WebApp_DisplayMode_FullScreen = WebApp_DisplayMode "fullScreen"
   WebApp_DisplayMode_Standalone,
   WebApp_DisplayMode_FullScreen,
   WebApp_DisplayMode
-  #-}
-
--- | Deprecated: Use enrollment_token instead. this field will be removed in the future.
-newtype EnterprisesCreateEnrollmentTokenDeviceType = EnterprisesCreateEnrollmentTokenDeviceType {fromEnterprisesCreateEnrollmentTokenDeviceType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | This value is unused
-pattern EnterprisesCreateEnrollmentTokenDeviceType_Unknown :: EnterprisesCreateEnrollmentTokenDeviceType
-pattern EnterprisesCreateEnrollmentTokenDeviceType_Unknown = EnterprisesCreateEnrollmentTokenDeviceType "unknown"
-
--- | This device is a dedicated device.
-pattern EnterprisesCreateEnrollmentTokenDeviceType_DedicatedDevice :: EnterprisesCreateEnrollmentTokenDeviceType
-pattern EnterprisesCreateEnrollmentTokenDeviceType_DedicatedDevice = EnterprisesCreateEnrollmentTokenDeviceType "dedicatedDevice"
-
--- | This device is required to have an authenticated user.
-pattern EnterprisesCreateEnrollmentTokenDeviceType_KnowledgeWorker :: EnterprisesCreateEnrollmentTokenDeviceType
-pattern EnterprisesCreateEnrollmentTokenDeviceType_KnowledgeWorker = EnterprisesCreateEnrollmentTokenDeviceType "knowledgeWorker"
-
-{-# COMPLETE
-  EnterprisesCreateEnrollmentTokenDeviceType_Unknown,
-  EnterprisesCreateEnrollmentTokenDeviceType_DedicatedDevice,
-  EnterprisesCreateEnrollmentTokenDeviceType_KnowledgeWorker,
-  EnterprisesCreateEnrollmentTokenDeviceType
-  #-}
-
--- | [Required] The type of the enrollment token.
-newtype EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType = EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType {fromEnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | The value is unused.
-pattern EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType_EnrollmentTokenTypeUnspecified :: EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType
-pattern EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType_EnrollmentTokenTypeUnspecified = EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType "enrollmentTokenTypeUnspecified"
-
--- | The enrollment token is for a userless device.
-pattern EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType_UserlessDevice :: EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType
-pattern EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType_UserlessDevice = EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType "userlessDevice"
-
--- | The enrollment token is for a user device.
-pattern EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType_UserDevice :: EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType
-pattern EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType_UserDevice = EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType "userDevice"
-
-{-# COMPLETE
-  EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType_EnrollmentTokenTypeUnspecified,
-  EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType_UserlessDevice,
-  EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType_UserDevice,
-  EnterprisesCreateEnrollmentTokenEnrollmentTokenEnrollmentTokenType
   #-}
 
 -- | The type of credential to return with the service account. Required.

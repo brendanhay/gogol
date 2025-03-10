@@ -186,6 +186,9 @@ module Gogol.WebSecurityScanner
     -- ** ScanConfig_RiskLevel
     ScanConfig_RiskLevel (..),
 
+    -- ** ScanConfig_TargetPlatformsItem
+    ScanConfig_TargetPlatformsItem (..),
+
     -- ** ScanConfig_UserAgent
     ScanConfig_UserAgent (..),
 

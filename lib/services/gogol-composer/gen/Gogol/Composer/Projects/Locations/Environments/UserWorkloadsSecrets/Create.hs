@@ -23,7 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a user workloads Secret. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- Creates a user workloads Secret. This method is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference> for @composer.projects.locations.environments.userWorkloadsSecrets.create@.
 module Gogol.Composer.Projects.Locations.Environments.UserWorkloadsSecrets.Create
@@ -54,7 +54,7 @@ type ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] UserWorkloadsSecret
     Core.:> Core.Post '[Core.JSON] UserWorkloadsSecret
 
--- | Creates a user workloads Secret. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- | Creates a user workloads Secret. This method is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ 'newComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsCreate' smart constructor.
 data ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsCreate = ComposerProjectsLocationsEnvironmentsUserWorkloadsSecretsCreate

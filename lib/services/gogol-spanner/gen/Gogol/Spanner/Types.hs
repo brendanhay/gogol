@@ -36,6 +36,34 @@ module Gogol.Spanner.Types
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AdaptMessageRequest
+    AdaptMessageRequest (..),
+    newAdaptMessageRequest,
+
+    -- ** AdaptMessageRequest_Attachments
+    AdaptMessageRequest_Attachments (..),
+    newAdaptMessageRequest_Attachments,
+
+    -- ** AdaptMessageResponse
+    AdaptMessageResponse (..),
+    newAdaptMessageResponse,
+
+    -- ** AdaptMessageResponse_StateUpdates
+    AdaptMessageResponse_StateUpdates (..),
+    newAdaptMessageResponse_StateUpdates,
+
+    -- ** AdapterSession
+    AdapterSession (..),
+    newAdapterSession,
+
+    -- ** AddSplitPointsRequest
+    AddSplitPointsRequest (..),
+    newAddSplitPointsRequest,
+
+    -- ** AddSplitPointsResponse
+    AddSplitPointsResponse (..),
+    newAddSplitPointsResponse,
+
     -- ** AsymmetricAutoscalingOption
     AsymmetricAutoscalingOption (..),
     newAsymmetricAutoscalingOption,
@@ -69,6 +97,10 @@ module Gogol.Spanner.Types
     -- ** BackupInfo
     BackupInfo (..),
     newBackupInfo,
+
+    -- ** BackupInstancePartition
+    BackupInstancePartition (..),
+    newBackupInstancePartition,
 
     -- ** BackupSchedule
     BackupSchedule (..),
@@ -401,6 +433,10 @@ module Gogol.Spanner.Types
     -- ** InstanceReplicaSelection
     InstanceReplicaSelection (..),
     newInstanceReplicaSelection,
+
+    -- ** Key
+    Key (..),
+    newKey,
 
     -- ** KeyRange
     KeyRange (..),
@@ -749,6 +785,10 @@ module Gogol.Spanner.Types
     -- ** SingleRegionQuorum
     SingleRegionQuorum (..),
     newSingleRegionQuorum,
+
+    -- ** SplitPoints
+    SplitPoints (..),
+    newSplitPoints,
 
     -- ** Statement
     Statement (..),

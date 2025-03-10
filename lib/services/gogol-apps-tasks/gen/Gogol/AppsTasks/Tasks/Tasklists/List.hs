@@ -67,7 +67,7 @@ data TasksTasklistsList = TasksTasklistsList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Maximum number of task lists returned on one page. Optional. The default is 20 (max allowed: 100).
+    -- | Maximum number of task lists returned on one page. Optional. The default is 1000 (max allowed: 1000).
     maxResults :: (Core.Maybe Core.Int32),
     -- | Token specifying the result page to return. Optional.
     pageToken :: (Core.Maybe Core.Text),

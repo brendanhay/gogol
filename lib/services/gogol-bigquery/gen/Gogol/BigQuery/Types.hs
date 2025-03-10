@@ -113,6 +113,10 @@ module Gogol.BigQuery.Types
     AvroOptions (..),
     newAvroOptions,
 
+    -- ** BatchDeleteRowAccessPoliciesRequest
+    BatchDeleteRowAccessPoliciesRequest (..),
+    newBatchDeleteRowAccessPoliciesRequest,
+
     -- ** BiEngineReason
     BiEngineReason (..),
     newBiEngineReason,
@@ -981,6 +985,17 @@ module Gogol.BigQuery.Types
     -- ** StorageDescriptor
     StorageDescriptor (..),
     newStorageDescriptor,
+
+    -- ** StoredColumnsUnusedReason
+    StoredColumnsUnusedReason (..),
+    newStoredColumnsUnusedReason,
+
+    -- ** StoredColumnsUnusedReason_Code
+    StoredColumnsUnusedReason_Code (..),
+
+    -- ** StoredColumnsUsage
+    StoredColumnsUsage (..),
+    newStoredColumnsUsage,
 
     -- ** Streamingbuffer
     Streamingbuffer (..),

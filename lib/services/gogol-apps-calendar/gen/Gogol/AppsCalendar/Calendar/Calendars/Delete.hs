@@ -68,7 +68,9 @@ newCalendarCalendarsDelete calendarId =
 
 instance Core.GoogleRequest CalendarCalendarsDelete where
   type Rs CalendarCalendarsDelete = ()
-  type Scopes CalendarCalendarsDelete = '[Calendar'FullControl]
+  type
+    Scopes CalendarCalendarsDelete =
+      '[Calendar'FullControl, Calendar'App'Created, Calendar'Calendars]
   requestClient CalendarCalendarsDelete {..} =
     go calendarId (Core.Just Core.AltJSON) appsCalendarService
     where

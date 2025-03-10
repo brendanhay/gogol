@@ -2,7 +2,7 @@ module Gen.Types.Map where
 
 import Control.Lens
 import Data.Map.Strict (Map)
-import qualified Data.Map.Strict as Map
+import Data.Map.Strict qualified as Map
 import Data.Maybe
 
 vMapMaybe ::

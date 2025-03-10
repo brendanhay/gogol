@@ -66,6 +66,7 @@ library
     Gogol.AndroidManagement.Enterprises.EnrollmentTokens.Delete
     Gogol.AndroidManagement.Enterprises.EnrollmentTokens.Get
     Gogol.AndroidManagement.Enterprises.EnrollmentTokens.List
+    Gogol.AndroidManagement.Enterprises.GenerateEnterpriseUpgradeUrl
     Gogol.AndroidManagement.Enterprises.Get
     Gogol.AndroidManagement.Enterprises.List
     Gogol.AndroidManagement.Enterprises.MigrationTokens.Create

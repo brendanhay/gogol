@@ -195,9 +195,9 @@ module Gogol.DeploymentManager
     ErrorInfo (..),
     newErrorInfo,
 
-    -- ** ErrorInfo_Metadata
-    ErrorInfo_Metadata (..),
-    newErrorInfo_Metadata,
+    -- ** ErrorInfo_Metadatas
+    ErrorInfo_Metadatas (..),
+    newErrorInfo_Metadatas,
 
     -- ** Expr
     Expr (..),

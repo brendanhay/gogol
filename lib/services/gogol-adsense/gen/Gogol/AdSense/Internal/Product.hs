@@ -1399,10 +1399,12 @@ instance Core.ToJSON PolicyIssue where
 --
 -- /See:/ 'newPolicyTopic' smart constructor.
 data PolicyTopic = PolicyTopic
-  { -- | Required. Indicates if this is a policy violation or not. When the value is true, issues that are instances of this topic must be addressed to remain in compliance with the partner\'s agreements with Google. A false value indicates that it\'s not mandatory to fix the issues but advertising demand might be restricted.
+  { -- | Required. Deprecated. Policy topics no longer have a \"must-fix\" classification.
     mustFix :: (Core.Maybe Core.Bool),
     -- | Required. The policy topic. For example, \"sexual-content\" or \"ads-obscuring-content\".\"
-    topic :: (Core.Maybe Core.Text)
+    topic :: (Core.Maybe Core.Text),
+    -- | Optional. The type of policy topic. For example, \"POLICY\" represents all the policy topics that are related to the Google Publisher Policy (GPP). See https:\/\/support.google.com\/adsense\/answer\/15689616.
+    type' :: (Core.Maybe PolicyTopic_Type)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1410,7 +1412,11 @@ data PolicyTopic = PolicyTopic
 newPolicyTopic ::
   PolicyTopic
 newPolicyTopic =
-  PolicyTopic {mustFix = Core.Nothing, topic = Core.Nothing}
+  PolicyTopic
+    { mustFix = Core.Nothing,
+      topic = Core.Nothing,
+      type' = Core.Nothing
+    }
 
 instance Core.FromJSON PolicyTopic where
   parseJSON =
@@ -1420,6 +1426,7 @@ instance Core.FromJSON PolicyTopic where
           PolicyTopic
             Core.<$> (o Core..:? "mustFix")
             Core.<*> (o Core..:? "topic")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON PolicyTopic where
@@ -1427,7 +1434,8 @@ instance Core.ToJSON PolicyTopic where
     Core.object
       ( Core.catMaybes
           [ ("mustFix" Core..=) Core.<$> mustFix,
-            ("topic" Core..=) Core.<$> topic
+            ("topic" Core..=) Core.<$> topic,
+            ("type" Core..=) Core.<$> type'
           ]
       )
 

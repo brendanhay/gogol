@@ -95,6 +95,14 @@ module Gogol.Vault.Internal.Product
     CountArtifactsResponse (..),
     newCountArtifactsResponse,
 
+    -- * DriveDocumentIds
+    DriveDocumentIds (..),
+    newDriveDocumentIds,
+
+    -- * DriveDocumentInfo
+    DriveDocumentInfo (..),
+    newDriveDocumentInfo,
+
     -- * DriveExportOptions
     DriveExportOptions (..),
     newDriveExportOptions,
@@ -118,6 +126,14 @@ module Gogol.Vault.Internal.Product
     -- * ExportStats
     ExportStats (..),
     newExportStats,
+
+    -- * GeminiExportOptions
+    GeminiExportOptions (..),
+    newGeminiExportOptions,
+
+    -- * GeminiOptions
+    GeminiOptions (..),
+    newGeminiOptions,
 
     -- * GroupsCountResult
     GroupsCountResult (..),
@@ -954,6 +970,56 @@ instance Core.ToJSON CountArtifactsResponse where
           ]
       )
 
+-- | Specify Drive documents by document ID.
+--
+-- /See:/ 'newDriveDocumentIds' smart constructor.
+newtype DriveDocumentIds = DriveDocumentIds
+  { -- | Required. A list of Drive document IDs.
+    ids :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DriveDocumentIds' with the minimum fields required to make a request.
+newDriveDocumentIds ::
+  DriveDocumentIds
+newDriveDocumentIds = DriveDocumentIds {ids = Core.Nothing}
+
+instance Core.FromJSON DriveDocumentIds where
+  parseJSON =
+    Core.withObject
+      "DriveDocumentIds"
+      (\o -> DriveDocumentIds Core.<$> (o Core..:? "ids"))
+
+instance Core.ToJSON DriveDocumentIds where
+  toJSON DriveDocumentIds {..} =
+    Core.object (Core.catMaybes [("ids" Core..=) Core.<$> ids])
+
+-- | The Drive documents to search.
+--
+-- /See:/ 'newDriveDocumentInfo' smart constructor.
+newtype DriveDocumentInfo = DriveDocumentInfo
+  { -- | Specify Drive documents by document ID.
+    documentIds :: (Core.Maybe DriveDocumentIds)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DriveDocumentInfo' with the minimum fields required to make a request.
+newDriveDocumentInfo ::
+  DriveDocumentInfo
+newDriveDocumentInfo =
+  DriveDocumentInfo {documentIds = Core.Nothing}
+
+instance Core.FromJSON DriveDocumentInfo where
+  parseJSON =
+    Core.withObject
+      "DriveDocumentInfo"
+      (\o -> DriveDocumentInfo Core.<$> (o Core..:? "documentIds"))
+
+instance Core.ToJSON DriveDocumentInfo where
+  toJSON DriveDocumentInfo {..} =
+    Core.object
+      (Core.catMaybes [("documentIds" Core..=) Core.<$> documentIds])
+
 -- | Options for Drive exports.
 --
 -- /See:/ 'newDriveExportOptions' smart constructor.
@@ -984,7 +1050,7 @@ instance Core.ToJSON DriveExportOptions where
           [("includeAccessInfo" Core..=) Core.<$> includeAccessInfo]
       )
 
--- | Additional options for Drive search
+-- | Additional options for Drive search.
 --
 -- /See:/ 'newDriveOptions' smart constructor.
 data DriveOptions = DriveOptions
@@ -1143,6 +1209,8 @@ data ExportOptions = ExportOptions
     calendarOptions :: (Core.Maybe CalendarExportOptions),
     -- | Options for Drive exports.
     driveOptions :: (Core.Maybe DriveExportOptions),
+    -- | Option available for Gemini export.
+    geminiOptions :: (Core.Maybe GeminiExportOptions),
     -- | Options for Groups exports.
     groupsOptions :: (Core.Maybe GroupsExportOptions),
     -- | Options for Chat exports.
@@ -1163,6 +1231,7 @@ newExportOptions =
   ExportOptions
     { calendarOptions = Core.Nothing,
       driveOptions = Core.Nothing,
+      geminiOptions = Core.Nothing,
       groupsOptions = Core.Nothing,
       hangoutsChatOptions = Core.Nothing,
       mailOptions = Core.Nothing,
@@ -1178,6 +1247,7 @@ instance Core.FromJSON ExportOptions where
           ExportOptions
             Core.<$> (o Core..:? "calendarOptions")
             Core.<*> (o Core..:? "driveOptions")
+            Core.<*> (o Core..:? "geminiOptions")
             Core.<*> (o Core..:? "groupsOptions")
             Core.<*> (o Core..:? "hangoutsChatOptions")
             Core.<*> (o Core..:? "mailOptions")
@@ -1191,6 +1261,7 @@ instance Core.ToJSON ExportOptions where
       ( Core.catMaybes
           [ ("calendarOptions" Core..=) Core.<$> calendarOptions,
             ("driveOptions" Core..=) Core.<$> driveOptions,
+            ("geminiOptions" Core..=) Core.<$> geminiOptions,
             ("groupsOptions" Core..=) Core.<$> groupsOptions,
             ("hangoutsChatOptions" Core..=) Core.<$> hangoutsChatOptions,
             ("mailOptions" Core..=) Core.<$> mailOptions,
@@ -1252,6 +1323,50 @@ instance Core.ToJSON ExportStats where
               Core.<$> totalArtifactCount
           ]
       )
+
+-- | The options for Gemini exports.
+--
+-- /See:/ 'newGeminiExportOptions' smart constructor.
+newtype GeminiExportOptions = GeminiExportOptions
+  { -- | The file format for exported messages.
+    exportFormat :: (Core.Maybe GeminiExportOptions_ExportFormat)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GeminiExportOptions' with the minimum fields required to make a request.
+newGeminiExportOptions ::
+  GeminiExportOptions
+newGeminiExportOptions =
+  GeminiExportOptions {exportFormat = Core.Nothing}
+
+instance Core.FromJSON GeminiExportOptions where
+  parseJSON =
+    Core.withObject
+      "GeminiExportOptions"
+      (\o -> GeminiExportOptions Core.<$> (o Core..:? "exportFormat"))
+
+instance Core.ToJSON GeminiExportOptions where
+  toJSON GeminiExportOptions {..} =
+    Core.object
+      (Core.catMaybes [("exportFormat" Core..=) Core.<$> exportFormat])
+
+-- | Additional options for Gemini search
+--
+-- /See:/ 'newGeminiOptions' smart constructor.
+data GeminiOptions = GeminiOptions
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GeminiOptions' with the minimum fields required to make a request.
+newGeminiOptions ::
+  GeminiOptions
+newGeminiOptions = GeminiOptions
+
+instance Core.FromJSON GeminiOptions where
+  parseJSON =
+    Core.withObject "GeminiOptions" (\o -> Core.pure GeminiOptions)
+
+instance Core.ToJSON GeminiOptions where
+  toJSON = Core.const Core.emptyObject
 
 -- | Groups specific count metrics.
 --
@@ -2387,10 +2502,14 @@ data Query = Query
     corpus :: (Core.Maybe Query_Corpus),
     -- | The data source to search.
     dataScope :: (Core.Maybe Query_DataScope),
+    -- | Required when __SearchMethod__ is **DRIVE_DOCUMENT**.
+    driveDocumentInfo :: (Core.Maybe DriveDocumentInfo),
     -- | Set Drive search-specific options.
     driveOptions :: (Core.Maybe DriveOptions),
     -- | The end time for the search query. Specify in GMT. The value is rounded to 12 AM on the specified date.
     endTime :: (Core.Maybe Core.DateTime),
+    -- | Set Gemini search-specific options.
+    geminiOptions :: (Core.Maybe GeminiOptions),
     -- | Required when __SearchMethod__ is __ROOM__. (read-only)
     hangoutsChatInfo :: (Core.Maybe HangoutsChatInfo),
     -- | Set Chat search-specific options. (read-only)
@@ -2429,8 +2548,10 @@ newQuery =
       calendarOptions = Core.Nothing,
       corpus = Core.Nothing,
       dataScope = Core.Nothing,
+      driveDocumentInfo = Core.Nothing,
       driveOptions = Core.Nothing,
       endTime = Core.Nothing,
+      geminiOptions = Core.Nothing,
       hangoutsChatInfo = Core.Nothing,
       hangoutsChatOptions = Core.Nothing,
       mailOptions = Core.Nothing,
@@ -2456,8 +2577,10 @@ instance Core.FromJSON Query where
             Core.<*> (o Core..:? "calendarOptions")
             Core.<*> (o Core..:? "corpus")
             Core.<*> (o Core..:? "dataScope")
+            Core.<*> (o Core..:? "driveDocumentInfo")
             Core.<*> (o Core..:? "driveOptions")
             Core.<*> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "geminiOptions")
             Core.<*> (o Core..:? "hangoutsChatInfo")
             Core.<*> (o Core..:? "hangoutsChatOptions")
             Core.<*> (o Core..:? "mailOptions")
@@ -2481,8 +2604,10 @@ instance Core.ToJSON Query where
             ("calendarOptions" Core..=) Core.<$> calendarOptions,
             ("corpus" Core..=) Core.<$> corpus,
             ("dataScope" Core..=) Core.<$> dataScope,
+            ("driveDocumentInfo" Core..=) Core.<$> driveDocumentInfo,
             ("driveOptions" Core..=) Core.<$> driveOptions,
             ("endTime" Core..=) Core.<$> endTime,
+            ("geminiOptions" Core..=) Core.<$> geminiOptions,
             ("hangoutsChatInfo" Core..=) Core.<$> hangoutsChatInfo,
             ("hangoutsChatOptions" Core..=) Core.<$> hangoutsChatOptions,
             ("mailOptions" Core..=) Core.<$> mailOptions,

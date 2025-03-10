@@ -857,7 +857,7 @@ pattern NestingLevel_BulletAlignment_End = NestingLevel_BulletAlignment "END"
   NestingLevel_BulletAlignment
   #-}
 
--- | The type of glyph used by bullets when paragraphs at this level of nesting are ordered. The glyph type determines the type of glyph used to replace placeholders within the glyph/format when paragraphs at this level of nesting are ordered. For example, if the nesting level is 0, the glyph/format is @%0.@ and the glyph type is DECIMAL, then the rendered glyph would replace the placeholder @%0@ in the glyph format with a number corresponding to list item\'s order within the list.
+-- | The type of glyph used by bullets when paragraphs at this level of nesting is ordered. The glyph type determines the type of glyph used to replace placeholders within the glyph/format when paragraphs at this level of nesting are ordered. For example, if the nesting level is 0, the glyph/format is @%0.@ and the glyph type is DECIMAL, then the rendered glyph would replace the placeholder @%0@ in the glyph format with a number corresponding to the list item\'s order within the list.
 newtype NestingLevel_GlyphType = NestingLevel_GlyphType {fromNestingLevel_GlyphType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype

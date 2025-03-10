@@ -467,7 +467,7 @@ pattern EnvironmentConfig_ResilienceMode_HIGHRESILIENCE = EnvironmentConfig_Resi
   EnvironmentConfig_ResilienceMode
   #-}
 
--- | Optional. Indicates the user requested specifc connection type between Tenant and Customer projects. You cannot set networking connection type in public IP environment.
+-- | Optional. Indicates the user requested specific connection type between Tenant and Customer projects. You cannot set networking connection type in public IP environment.
 newtype NetworkingConfig_ConnectionType = NetworkingConfig_ConnectionType {fromNetworkingConfig_ConnectionType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -602,7 +602,7 @@ pattern OperationMetadata_State_Failed = OperationMetadata_State "FAILED"
   OperationMetadata_State
   #-}
 
--- | Optional. Whether or not the web server uses custom plugins. If unspecified, the field defaults to @PLUGINS_ENABLED@. This field is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- | Optional. Whether or not the web server uses custom plugins. If unspecified, the field defaults to @PLUGINS_ENABLED@. This field is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 newtype SoftwareConfig_WebServerPluginsMode = SoftwareConfig_WebServerPluginsMode {fromSoftwareConfig_WebServerPluginsMode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype

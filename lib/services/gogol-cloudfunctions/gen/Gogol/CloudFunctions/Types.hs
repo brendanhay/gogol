@@ -76,6 +76,10 @@ module Gogol.CloudFunctions.Types
     Date (..),
     newDate,
 
+    -- ** DetachFunctionRequest
+    DetachFunctionRequest (..),
+    newDetachFunctionRequest,
+
     -- ** EventFilter
     EventFilter (..),
     newEventFilter,

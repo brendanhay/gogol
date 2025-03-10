@@ -88,7 +88,11 @@ instance Core.GoogleRequest CalendarEventsImport where
   type Rs CalendarEventsImport = Event
   type
     Scopes CalendarEventsImport =
-      '[Calendar'FullControl, Calendar'Events]
+      '[ Calendar'FullControl,
+         Calendar'App'Created,
+         Calendar'Events,
+         Calendar'Events'Owned
+       ]
   requestClient CalendarEventsImport {..} =
     go
       calendarId

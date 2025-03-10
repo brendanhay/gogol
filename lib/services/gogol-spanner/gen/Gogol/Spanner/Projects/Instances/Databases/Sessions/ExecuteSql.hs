@@ -23,7 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Executes an SQL statement, returning all results in a single reply. This method cannot be used to return a result set larger than 10 MiB; if the query yields more data than that, the query fails with a @FAILED_PRECONDITION@ error. Operations inside read-write transactions might return @ABORTED@. If this occurs, the application should restart the transaction from the beginning. See Transaction for more details. Larger result sets can be fetched in streaming fashion by calling ExecuteStreamingSql instead.
+-- Executes an SQL statement, returning all results in a single reply. This method cannot be used to return a result set larger than 10 MiB; if the query yields more data than that, the query fails with a @FAILED_PRECONDITION@ error. Operations inside read-write transactions might return @ABORTED@. If this occurs, the application should restart the transaction from the beginning. See Transaction for more details. Larger result sets can be fetched in streaming fashion by calling ExecuteStreamingSql instead. The query string can be SQL or <https://cloud.google.com/spanner/docs/reference/standard-sql/graph-intro Graph Query Language (GQL)>.
 --
 -- /See:/ <https://cloud.google.com/spanner/ Cloud Spanner API Reference> for @spanner.projects.instances.databases.sessions.executeSql@.
 module Gogol.Spanner.Projects.Instances.Databases.Sessions.ExecuteSql
@@ -53,7 +53,7 @@ type SpannerProjectsInstancesDatabasesSessionsExecuteSqlResource =
     Core.:> Core.ReqBody '[Core.JSON] ExecuteSqlRequest
     Core.:> Core.Post '[Core.JSON] ResultSet
 
--- | Executes an SQL statement, returning all results in a single reply. This method cannot be used to return a result set larger than 10 MiB; if the query yields more data than that, the query fails with a @FAILED_PRECONDITION@ error. Operations inside read-write transactions might return @ABORTED@. If this occurs, the application should restart the transaction from the beginning. See Transaction for more details. Larger result sets can be fetched in streaming fashion by calling ExecuteStreamingSql instead.
+-- | Executes an SQL statement, returning all results in a single reply. This method cannot be used to return a result set larger than 10 MiB; if the query yields more data than that, the query fails with a @FAILED_PRECONDITION@ error. Operations inside read-write transactions might return @ABORTED@. If this occurs, the application should restart the transaction from the beginning. See Transaction for more details. Larger result sets can be fetched in streaming fashion by calling ExecuteStreamingSql instead. The query string can be SQL or <https://cloud.google.com/spanner/docs/reference/standard-sql/graph-intro Graph Query Language (GQL)>.
 --
 -- /See:/ 'newSpannerProjectsInstancesDatabasesSessionsExecuteSql' smart constructor.
 data SpannerProjectsInstancesDatabasesSessionsExecuteSql = SpannerProjectsInstancesDatabasesSessionsExecuteSql

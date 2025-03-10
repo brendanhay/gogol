@@ -827,6 +827,10 @@ module Gogol.YouTube.Internal.Product
     VideoTopicDetails (..),
     newVideoTopicDetails,
 
+    -- * VideoTrainability
+    VideoTrainability (..),
+    newVideoTrainability,
+
     -- * WatchSettings
     WatchSettings (..),
     newWatchSettings,
@@ -3030,7 +3034,9 @@ instance Core.ToJSON ChannelStatistics where
 --
 -- /See:/ 'newChannelStatus' smart constructor.
 data ChannelStatus = ChannelStatus
-  { -- | If true, then the user is linked to either a YouTube username or G+ account. Otherwise, the user doesn\'t have a public YouTube identity.
+  { -- | Whether the channel is considered ypp monetization enabled. See go\/yppornot for more details.
+    isChannelMonetizationEnabled :: (Core.Maybe Core.Bool),
+    -- | If true, then the user is linked to either a YouTube username or G+ account. Otherwise, the user doesn\'t have a public YouTube identity.
     isLinked :: (Core.Maybe Core.Bool),
     -- | The long uploads status of this channel. See https:\/\/support.google.com\/youtube\/answer\/71673 for more information.
     longUploadsStatus :: (Core.Maybe ChannelStatus_LongUploadsStatus),
@@ -3046,7 +3052,8 @@ newChannelStatus ::
   ChannelStatus
 newChannelStatus =
   ChannelStatus
-    { isLinked = Core.Nothing,
+    { isChannelMonetizationEnabled = Core.Nothing,
+      isLinked = Core.Nothing,
       longUploadsStatus = Core.Nothing,
       madeForKids = Core.Nothing,
       privacyStatus = Core.Nothing,
@@ -3059,7 +3066,8 @@ instance Core.FromJSON ChannelStatus where
       "ChannelStatus"
       ( \o ->
           ChannelStatus
-            Core.<$> (o Core..:? "isLinked")
+            Core.<$> (o Core..:? "isChannelMonetizationEnabled")
+            Core.<*> (o Core..:? "isLinked")
             Core.<*> (o Core..:? "longUploadsStatus")
             Core.<*> (o Core..:? "madeForKids")
             Core.<*> (o Core..:? "privacyStatus")
@@ -3070,7 +3078,9 @@ instance Core.ToJSON ChannelStatus where
   toJSON ChannelStatus {..} =
     Core.object
       ( Core.catMaybes
-          [ ("isLinked" Core..=) Core.<$> isLinked,
+          [ ("isChannelMonetizationEnabled" Core..=)
+              Core.<$> isChannelMonetizationEnabled,
+            ("isLinked" Core..=) Core.<$> isLinked,
             ("longUploadsStatus" Core..=) Core.<$> longUploadsStatus,
             ("madeForKids" Core..=) Core.<$> madeForKids,
             ("privacyStatus" Core..=) Core.<$> privacyStatus,
@@ -11263,7 +11273,7 @@ instance Core.ToJSON VideoSuggestions where
           ]
       )
 
--- | A single tag suggestion with it\'s relevance information.
+-- | A single tag suggestion with its relevance information.
 --
 -- /See:/ 'newVideoSuggestionsTagSuggestion' smart constructor.
 data VideoSuggestionsTagSuggestion = VideoSuggestionsTagSuggestion
@@ -11343,6 +11353,55 @@ instance Core.ToJSON VideoTopicDetails where
           [ ("relevantTopicIds" Core..=) Core.<$> relevantTopicIds,
             ("topicCategories" Core..=) Core.<$> topicCategories,
             ("topicIds" Core..=) Core.<$> topicIds
+          ]
+      )
+
+-- | Specifies who is allowed to train on the video.
+--
+-- /See:/ 'newVideoTrainability' smart constructor.
+data VideoTrainability = VideoTrainability
+  { -- | Etag of this resource.
+    etag :: (Core.Maybe Core.Text),
+    -- | Identifies what kind of resource this is. Value: the fixed string \"youtube#videoTrainability\".
+    kind :: Core.Text,
+    -- | Specifies who is allowed to train on the video. Valid values are: - a single string \"all\" - a single string \"none\" - a list of allowed parties
+    permitted :: (Core.Maybe [Core.Text]),
+    -- | The ID of the video.
+    videoId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'VideoTrainability' with the minimum fields required to make a request.
+newVideoTrainability ::
+  VideoTrainability
+newVideoTrainability =
+  VideoTrainability
+    { etag = Core.Nothing,
+      kind = "youtube#videoTrainability",
+      permitted = Core.Nothing,
+      videoId = Core.Nothing
+    }
+
+instance Core.FromJSON VideoTrainability where
+  parseJSON =
+    Core.withObject
+      "VideoTrainability"
+      ( \o ->
+          VideoTrainability
+            Core.<$> (o Core..:? "etag")
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#videoTrainability")
+            Core.<*> (o Core..:? "permitted")
+            Core.<*> (o Core..:? "videoId")
+      )
+
+instance Core.ToJSON VideoTrainability where
+  toJSON VideoTrainability {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("etag" Core..=) Core.<$> etag,
+            Core.Just ("kind" Core..= kind),
+            ("permitted" Core..=) Core.<$> permitted,
+            ("videoId" Core..=) Core.<$> videoId
           ]
       )
 

@@ -17,11 +17,11 @@ import Data.Foldable (foldr')
 import Data.Monoid
 import Data.Set (Set)
 import Data.Text (Text)
-import qualified Data.Text as Text
-import qualified Data.Text.Lazy as LText
+import Data.Text qualified as Text
+import Data.Text.Lazy qualified as LText
 import Filesystem.Path.CurrentOS hiding (FilePath, root)
 import Gen.Formatting (failure, shown)
-import qualified Gen.JSON as JS
+import Gen.JSON qualified as JS
 import Gen.Types
 import System.Directory.Tree hiding (file)
 import Text.EDE hiding (failure, render)

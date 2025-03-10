@@ -526,7 +526,9 @@ data Application = Application
     -- | The service account associated with the application. This is the app-level default identity. If no identity provided during create version, Admin API will fallback to this one.
     serviceAccount :: (Core.Maybe Core.Text),
     -- | Serving status of this application.
-    servingStatus :: (Core.Maybe Application_ServingStatus)
+    servingStatus :: (Core.Maybe Application_ServingStatus),
+    -- | The SSL policy that will be applied to the application. If set to Modern it will restrict traffic with TLS \< 1.2 and allow only Modern Ciphers suite
+    sslPolicy :: (Core.Maybe Application_SslPolicy)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -550,7 +552,8 @@ newApplication =
       locationId = Core.Nothing,
       name = Core.Nothing,
       serviceAccount = Core.Nothing,
-      servingStatus = Core.Nothing
+      servingStatus = Core.Nothing,
+      sslPolicy = Core.Nothing
     }
 
 instance Core.FromJSON Application where
@@ -575,6 +578,7 @@ instance Core.FromJSON Application where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "servingStatus")
+            Core.<*> (o Core..:? "sslPolicy")
       )
 
 instance Core.ToJSON Application where
@@ -598,7 +602,8 @@ instance Core.ToJSON Application where
             ("locationId" Core..=) Core.<$> locationId,
             ("name" Core..=) Core.<$> name,
             ("serviceAccount" Core..=) Core.<$> serviceAccount,
-            ("servingStatus" Core..=) Core.<$> servingStatus
+            ("servingStatus" Core..=) Core.<$> servingStatus,
+            ("sslPolicy" Core..=) Core.<$> sslPolicy
           ]
       )
 
@@ -3932,7 +3937,7 @@ instance Core.ToJSON SslSettings where
 --
 -- /See:/ 'newStandardSchedulerSettings' smart constructor.
 data StandardSchedulerSettings = StandardSchedulerSettings
-  { -- | Maximum number of instances to run for this version. Set to zero to disable max_instances configuration.
+  { -- | Maximum number of instances to run for this version. Set to 2147483647 to disable max_instances configuration.
     maxInstances :: (Core.Maybe Core.Int32),
     -- | Minimum number of instances to run for this version. Set to zero to disable min_instances configuration.
     minInstances :: (Core.Maybe Core.Int32),

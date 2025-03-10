@@ -87,7 +87,9 @@ newCalendarAclPatch calendarId payload ruleId =
 
 instance Core.GoogleRequest CalendarAclPatch where
   type Rs CalendarAclPatch = AclRule
-  type Scopes CalendarAclPatch = '[Calendar'FullControl]
+  type
+    Scopes CalendarAclPatch =
+      '[Calendar'FullControl, Calendar'Acls]
   requestClient CalendarAclPatch {..} =
     go
       calendarId

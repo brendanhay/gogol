@@ -7100,7 +7100,7 @@ data Users = Users
     etag :: (Core.Maybe Core.Text),
     -- | Kind of resource this is.
     kind :: Core.Text,
-    -- | Token used to access next page of this result.
+    -- | Token used to access next page of this result. The page token is only valid for three days.
     nextPageToken :: (Core.Maybe Core.Text),
     -- | Event that triggered this response (only used in case of Push Response)
     triggerEvent :: (Core.Maybe Core.Text),

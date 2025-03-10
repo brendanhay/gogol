@@ -1163,7 +1163,7 @@ instance Core.ToJSON Location_Metadata where
 --
 -- /See:/ 'newMultisliceParams' smart constructor.
 data MultisliceParams = MultisliceParams
-  { -- | Required. Number of nodes with this spec. The system will attempt to provison \"node_count\" nodes as part of the request. This needs to be > 1.
+  { -- | Required. Number of nodes with this spec. The system will attempt to provision \"node_count\" nodes as part of the request. This needs to be > 1.
     nodeCount :: (Core.Maybe Core.Int32),
     -- | Optional. Prefix of node/ids in case of multislice request. Should follow the @^[A-Za-z0-9_.~+%-]+$@ regex format. If node/count = 3 and node/id/prefix = \"np\", node ids of nodes created will be \"np-0\", \"np-1\", \"np-2\". If this field is not provided we use queued/resource/id as the node/id/prefix.
     nodeIdPrefix :: (Core.Maybe Core.Text)
@@ -1328,8 +1328,10 @@ data Node = Node
     multisliceNode :: (Core.Maybe Core.Bool),
     -- | Output only. Immutable. The name of the TPU.
     name :: (Core.Maybe Core.Text),
-    -- | Network configurations for the TPU node.
+    -- | Network configurations for the TPU node. network/config and network/configs are mutually exclusive, you can only specify one of them. If both are specified, an error will be returned.
     networkConfig :: (Core.Maybe NetworkConfig),
+    -- | Optional. Repeated network configurations for the TPU node. This field is used to specify multiple networks configs for the TPU node. network/config and network/configs are mutually exclusive, you can only specify one of them. If both are specified, an error will be returned.
+    networkConfigs :: (Core.Maybe [NetworkConfig]),
     -- | Output only. The network endpoints where TPU workers can be accessed and sent work. It is recommended that runtime clients of the node reach out to the 0th entry in this map first.
     networkEndpoints :: (Core.Maybe [NetworkEndpoint]),
     -- | Output only. The qualified name of the QueuedResource that requested this Node.
@@ -1371,6 +1373,7 @@ newNode =
       multisliceNode = Core.Nothing,
       name = Core.Nothing,
       networkConfig = Core.Nothing,
+      networkConfigs = Core.Nothing,
       networkEndpoints = Core.Nothing,
       queuedResource = Core.Nothing,
       runtimeVersion = Core.Nothing,
@@ -1403,6 +1406,7 @@ instance Core.FromJSON Node where
             Core.<*> (o Core..:? "multisliceNode")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "networkConfig")
+            Core.<*> (o Core..:? "networkConfigs")
             Core.<*> (o Core..:? "networkEndpoints")
             Core.<*> (o Core..:? "queuedResource")
             Core.<*> (o Core..:? "runtimeVersion")
@@ -1433,6 +1437,7 @@ instance Core.ToJSON Node where
             ("multisliceNode" Core..=) Core.<$> multisliceNode,
             ("name" Core..=) Core.<$> name,
             ("networkConfig" Core..=) Core.<$> networkConfig,
+            ("networkConfigs" Core..=) Core.<$> networkConfigs,
             ("networkEndpoints" Core..=) Core.<$> networkEndpoints,
             ("queuedResource" Core..=) Core.<$> queuedResource,
             ("runtimeVersion" Core..=) Core.<$> runtimeVersion,

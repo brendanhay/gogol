@@ -2,14 +2,14 @@ module Gen.Text where
 
 import Control.Error
 import Data.Char
-import qualified Data.Foldable as Fold
-import qualified Data.Map.Strict as Map
-import qualified Data.Set as Set
+import Data.Foldable qualified as Fold
+import Data.Map.Strict qualified as Map
+import Data.Set qualified as Set
 import Data.Text (Text)
-import qualified Data.Text as Text
+import Data.Text qualified as Text
 import Data.Text.ICU (Regex)
 import Data.Text.ICU.Replace (Replace)
-import qualified Data.Text.ICU.Replace as RE
+import Data.Text.ICU.Replace qualified as RE
 import Data.Text.Manipulate
 import Text.Parsec.Language (haskellDef)
 import Text.Parsec.Token (reservedNames)

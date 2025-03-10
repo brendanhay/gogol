@@ -7,8 +7,8 @@ module Gen.Formatting
 where
 
 import Control.Monad.Except
-import qualified Data.Text.Lazy as LText
-import qualified Data.Text.Lazy.Builder as Build
+import Data.Text.Lazy qualified as LText
+import Data.Text.Lazy.Builder qualified as Build
 import Formatting hiding (base, left, right)
 import Formatting.Internal (runFormat)
 import Formatting.Time hiding (fmt)

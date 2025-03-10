@@ -23,7 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Runs a function in an Apps Script project. The script project must be deployed for use with the Apps Script API and the calling application must share the same Cloud Platform project. This method requires authorization with an OAuth 2.0 token that includes at least one of the scopes listed in the <#authorization-scopes Authorization> section; script projects that do not require authorization cannot be executed through this API. To find the correct scopes to include in the authentication token, open the script project __Overview__ page and scroll down to \"Project OAuth Scopes.\" The error @403, PERMISSION_DENIED: The caller does not have permission@ indicates that the Cloud Platform project used to authorize the request is not the same as the one used by the script.
+--
 --
 -- /See:/ <https://developers.google.com/apps-script/api/ Apps Script API Reference> for @script.scripts.run@.
 module Gogol.Script.Scripts.Run
@@ -54,7 +54,6 @@ type ScriptScriptsRunResource =
     Core.:> Core.ReqBody '[Core.JSON] ExecutionRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Runs a function in an Apps Script project. The script project must be deployed for use with the Apps Script API and the calling application must share the same Cloud Platform project. This method requires authorization with an OAuth 2.0 token that includes at least one of the scopes listed in the <#authorization-scopes Authorization> section; script projects that do not require authorization cannot be executed through this API. To find the correct scopes to include in the authentication token, open the script project __Overview__ page and scroll down to \"Project OAuth Scopes.\" The error @403, PERMISSION_DENIED: The caller does not have permission@ indicates that the Cloud Platform project used to authorize the request is not the same as the one used by the script.
 --
 -- /See:/ 'newScriptScriptsRun' smart constructor.
 data ScriptScriptsRun = ScriptScriptsRun

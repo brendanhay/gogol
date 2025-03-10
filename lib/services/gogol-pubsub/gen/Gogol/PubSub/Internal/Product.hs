@@ -43,6 +43,14 @@ module Gogol.PubSub.Internal.Product
     AwsKinesis (..),
     newAwsKinesis,
 
+    -- * AwsMsk
+    AwsMsk (..),
+    newAwsMsk,
+
+    -- * AzureEventHubs
+    AzureEventHubs (..),
+    newAzureEventHubs,
+
     -- * BigQueryConfig
     BigQueryConfig (..),
     newBigQueryConfig,
@@ -62,6 +70,10 @@ module Gogol.PubSub.Internal.Product
     -- * CommitSchemaRequest
     CommitSchemaRequest (..),
     newCommitSchemaRequest,
+
+    -- * ConfluentCloud
+    ConfluentCloud (..),
+    newConfluentCloud,
 
     -- * CreateSnapshotRequest
     CreateSnapshotRequest (..),
@@ -95,6 +107,10 @@ module Gogol.PubSub.Internal.Product
     IngestionDataSourceSettings (..),
     newIngestionDataSourceSettings,
 
+    -- * JavaScriptUDF
+    JavaScriptUDF (..),
+    newJavaScriptUDF,
+
     -- * ListSchemaRevisionsResponse
     ListSchemaRevisionsResponse (..),
     newListSchemaRevisionsResponse,
@@ -126,6 +142,10 @@ module Gogol.PubSub.Internal.Product
     -- * MessageStoragePolicy
     MessageStoragePolicy (..),
     newMessageStoragePolicy,
+
+    -- * MessageTransform
+    MessageTransform (..),
+    newMessageTransform,
 
     -- * ModifyAckDeadlineRequest
     ModifyAckDeadlineRequest (..),
@@ -320,7 +340,7 @@ instance Core.ToJSON AcknowledgeRequest where
   toJSON AcknowledgeRequest {..} =
     Core.object (Core.catMaybes [("ackIds" Core..=) Core.<$> ackIds])
 
--- | Information about an associated Analytics Hub subscription (https:\/\/cloud.google.com\/bigquery\/docs\/analytics-hub-manage-subscriptions).
+-- | Information about an associated <https://cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions Analytics Hub subscription>.
 --
 -- /See:/ 'newAnalyticsHubSubscriptionInfo' smart constructor.
 data AnalyticsHubSubscriptionInfo = AnalyticsHubSubscriptionInfo
@@ -467,6 +487,129 @@ instance Core.ToJSON AwsKinesis where
             ("gcpServiceAccount" Core..=) Core.<$> gcpServiceAccount,
             ("state" Core..=) Core.<$> state,
             ("streamArn" Core..=) Core.<$> streamArn
+          ]
+      )
+
+-- | Ingestion settings for Amazon MSK.
+--
+-- /See:/ 'newAwsMsk' smart constructor.
+data AwsMsk = AwsMsk
+  { -- | Required. AWS role ARN to be used for Federated Identity authentication with Amazon MSK. Check the Pub\/Sub docs for how to set up this role and the required permissions that need to be attached to it.
+    awsRoleArn :: (Core.Maybe Core.Text),
+    -- | Required. The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+    clusterArn :: (Core.Maybe Core.Text),
+    -- | Required. The GCP service account to be used for Federated Identity authentication with Amazon MSK (via a @AssumeRoleWithWebIdentity@ call for the provided role). The @aws_role_arn@ must be set up with @accounts.google.com:sub@ equals to this service account number.
+    gcpServiceAccount :: (Core.Maybe Core.Text),
+    -- | Output only. An output-only field that indicates the state of the Amazon MSK ingestion source.
+    state :: (Core.Maybe AwsMsk_State),
+    -- | Required. The name of the topic in the Amazon MSK cluster that Pub\/Sub will import from.
+    topic :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AwsMsk' with the minimum fields required to make a request.
+newAwsMsk ::
+  AwsMsk
+newAwsMsk =
+  AwsMsk
+    { awsRoleArn = Core.Nothing,
+      clusterArn = Core.Nothing,
+      gcpServiceAccount = Core.Nothing,
+      state = Core.Nothing,
+      topic = Core.Nothing
+    }
+
+instance Core.FromJSON AwsMsk where
+  parseJSON =
+    Core.withObject
+      "AwsMsk"
+      ( \o ->
+          AwsMsk
+            Core.<$> (o Core..:? "awsRoleArn")
+            Core.<*> (o Core..:? "clusterArn")
+            Core.<*> (o Core..:? "gcpServiceAccount")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "topic")
+      )
+
+instance Core.ToJSON AwsMsk where
+  toJSON AwsMsk {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("awsRoleArn" Core..=) Core.<$> awsRoleArn,
+            ("clusterArn" Core..=) Core.<$> clusterArn,
+            ("gcpServiceAccount" Core..=) Core.<$> gcpServiceAccount,
+            ("state" Core..=) Core.<$> state,
+            ("topic" Core..=) Core.<$> topic
+          ]
+      )
+
+-- | Ingestion settings for Azure Event Hubs.
+--
+-- /See:/ 'newAzureEventHubs' smart constructor.
+data AzureEventHubs = AzureEventHubs
+  { -- | Optional. The client id of the Azure application that is being used to authenticate Pub\/Sub.
+    clientId :: (Core.Maybe Core.Text),
+    -- | Optional. The name of the Event Hub.
+    eventHub :: (Core.Maybe Core.Text),
+    -- | Optional. The GCP service account to be used for Federated Identity authentication.
+    gcpServiceAccount :: (Core.Maybe Core.Text),
+    -- | Optional. The name of the Event Hubs namespace.
+    namespace :: (Core.Maybe Core.Text),
+    -- | Optional. Name of the resource group within the azure subscription.
+    resourceGroup :: (Core.Maybe Core.Text),
+    -- | Output only. An output-only field that indicates the state of the Event Hubs ingestion source.
+    state :: (Core.Maybe AzureEventHubs_State),
+    -- | Optional. The Azure subscription id.
+    subscriptionId :: (Core.Maybe Core.Text),
+    -- | Optional. The tenant id of the Azure application that is being used to authenticate Pub\/Sub.
+    tenantId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AzureEventHubs' with the minimum fields required to make a request.
+newAzureEventHubs ::
+  AzureEventHubs
+newAzureEventHubs =
+  AzureEventHubs
+    { clientId = Core.Nothing,
+      eventHub = Core.Nothing,
+      gcpServiceAccount = Core.Nothing,
+      namespace = Core.Nothing,
+      resourceGroup = Core.Nothing,
+      state = Core.Nothing,
+      subscriptionId = Core.Nothing,
+      tenantId = Core.Nothing
+    }
+
+instance Core.FromJSON AzureEventHubs where
+  parseJSON =
+    Core.withObject
+      "AzureEventHubs"
+      ( \o ->
+          AzureEventHubs
+            Core.<$> (o Core..:? "clientId")
+            Core.<*> (o Core..:? "eventHub")
+            Core.<*> (o Core..:? "gcpServiceAccount")
+            Core.<*> (o Core..:? "namespace")
+            Core.<*> (o Core..:? "resourceGroup")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "subscriptionId")
+            Core.<*> (o Core..:? "tenantId")
+      )
+
+instance Core.ToJSON AzureEventHubs where
+  toJSON AzureEventHubs {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("clientId" Core..=) Core.<$> clientId,
+            ("eventHub" Core..=) Core.<$> eventHub,
+            ("gcpServiceAccount" Core..=) Core.<$> gcpServiceAccount,
+            ("namespace" Core..=) Core.<$> namespace,
+            ("resourceGroup" Core..=) Core.<$> resourceGroup,
+            ("state" Core..=) Core.<$> state,
+            ("subscriptionId" Core..=) Core.<$> subscriptionId,
+            ("tenantId" Core..=) Core.<$> tenantId
           ]
       )
 
@@ -663,7 +806,7 @@ data CloudStorageConfig = CloudStorageConfig
     filenameSuffix :: (Core.Maybe Core.Text),
     -- | Optional. The maximum bytes that can be written to a Cloud Storage file before a new file is created. Min 1 KB, max 10 GiB. The max_bytes limit may be exceeded in cases where messages are larger than the limit.
     maxBytes :: (Core.Maybe Core.Int64),
-    -- | Optional. The maximum duration that can elapse before a new Cloud Storage file is created. Min 1 minute, max 10 minutes, default 5 minutes. May not exceed the subscription\'s acknowledgement deadline.
+    -- | Optional. The maximum duration that can elapse before a new Cloud Storage file is created. Min 1 minute, max 10 minutes, default 5 minutes. May not exceed the subscription\'s acknowledgment deadline.
     maxDuration :: (Core.Maybe Core.Duration),
     -- | Optional. The maximum number of messages that can be written to a Cloud Storage file before a new file is created. Min 1000 messages.
     maxMessages :: (Core.Maybe Core.Int64),
@@ -755,6 +898,65 @@ instance Core.ToJSON CommitSchemaRequest where
   toJSON CommitSchemaRequest {..} =
     Core.object (Core.catMaybes [("schema" Core..=) Core.<$> schema])
 
+-- | Ingestion settings for Confluent Cloud.
+--
+-- /See:/ 'newConfluentCloud' smart constructor.
+data ConfluentCloud = ConfluentCloud
+  { -- | Required. The address of the bootstrap server. The format is url:port.
+    bootstrapServer :: (Core.Maybe Core.Text),
+    -- | Required. The id of the cluster.
+    clusterId :: (Core.Maybe Core.Text),
+    -- | Required. The GCP service account to be used for Federated Identity authentication with @identity_pool_id@.
+    gcpServiceAccount :: (Core.Maybe Core.Text),
+    -- | Required. The id of the identity pool to be used for Federated Identity authentication with Confluent Cloud. See https:\/\/docs.confluent.io\/cloud\/current\/security\/authenticate\/workload-identities\/identity-providers\/oauth\/identity-pools.html#add-oauth-identity-pools.
+    identityPoolId :: (Core.Maybe Core.Text),
+    -- | Output only. An output-only field that indicates the state of the Confluent Cloud ingestion source.
+    state :: (Core.Maybe ConfluentCloud_State),
+    -- | Required. The name of the topic in the Confluent Cloud cluster that Pub\/Sub will import from.
+    topic :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ConfluentCloud' with the minimum fields required to make a request.
+newConfluentCloud ::
+  ConfluentCloud
+newConfluentCloud =
+  ConfluentCloud
+    { bootstrapServer = Core.Nothing,
+      clusterId = Core.Nothing,
+      gcpServiceAccount = Core.Nothing,
+      identityPoolId = Core.Nothing,
+      state = Core.Nothing,
+      topic = Core.Nothing
+    }
+
+instance Core.FromJSON ConfluentCloud where
+  parseJSON =
+    Core.withObject
+      "ConfluentCloud"
+      ( \o ->
+          ConfluentCloud
+            Core.<$> (o Core..:? "bootstrapServer")
+            Core.<*> (o Core..:? "clusterId")
+            Core.<*> (o Core..:? "gcpServiceAccount")
+            Core.<*> (o Core..:? "identityPoolId")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "topic")
+      )
+
+instance Core.ToJSON ConfluentCloud where
+  toJSON ConfluentCloud {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("bootstrapServer" Core..=) Core.<$> bootstrapServer,
+            ("clusterId" Core..=) Core.<$> clusterId,
+            ("gcpServiceAccount" Core..=) Core.<$> gcpServiceAccount,
+            ("identityPoolId" Core..=) Core.<$> identityPoolId,
+            ("state" Core..=) Core.<$> state,
+            ("topic" Core..=) Core.<$> topic
+          ]
+      )
+
 -- | Request for the @CreateSnapshot@ method.
 --
 -- /See:/ 'newCreateSnapshotRequest' smart constructor.
@@ -827,7 +1029,7 @@ instance Core.ToJSON CreateSnapshotRequest_Labels where
 data DeadLetterPolicy = DeadLetterPolicy
   { -- | Optional. The name of the topic to which dead letter messages should be published. Format is @projects\/{project}\/topics\/{topic}@.The Pub\/Sub service account associated with the enclosing subscription\'s parent project (i.e., service-{project_number}\@gcp-sa-pubsub.iam.gserviceaccount.com) must have permission to Publish() to this topic. The operation will fail if the topic does not exist. Users should ensure that there is a subscription attached to this topic since messages published to a topic with no subscriptions are lost.
     deadLetterTopic :: (Core.Maybe Core.Text),
-    -- | Optional. The maximum number of delivery attempts for any message. The value must be between 5 and 100. The number of delivery attempts is defined as 1 + (the sum of number of NACKs and number of times the acknowledgement deadline has been exceeded for the message). A NACK is any call to ModifyAckDeadline with a 0 deadline. Note that client libraries may automatically extend ack_deadlines. This field will be honored on a best effort basis. If this parameter is 0, a default value of 5 is used.
+    -- | Optional. The maximum number of delivery attempts for any message. The value must be between 5 and 100. The number of delivery attempts is defined as 1 + (the sum of number of NACKs and number of times the acknowledgment deadline has been exceeded for the message). A NACK is any call to ModifyAckDeadline with a 0 deadline. Note that client libraries may automatically extend ack_deadlines. This field will be honored on a best effort basis. If this parameter is 0, a default value of 5 is used.
     maxDeliveryAttempts :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -977,8 +1179,14 @@ instance Core.ToJSON Expr where
 data IngestionDataSourceSettings = IngestionDataSourceSettings
   { -- | Optional. Amazon Kinesis Data Streams.
     awsKinesis :: (Core.Maybe AwsKinesis),
+    -- | Optional. Amazon MSK.
+    awsMsk :: (Core.Maybe AwsMsk),
+    -- | Optional. Azure Event Hubs.
+    azureEventHubs :: (Core.Maybe AzureEventHubs),
     -- | Optional. Cloud Storage.
     cloudStorage :: (Core.Maybe CloudStorage),
+    -- | Optional. Confluent Cloud.
+    confluentCloud :: (Core.Maybe ConfluentCloud),
     -- | Optional. Platform Logs settings. If unset, no Platform Logs will be generated.
     platformLogsSettings :: (Core.Maybe PlatformLogsSettings)
   }
@@ -990,7 +1198,10 @@ newIngestionDataSourceSettings ::
 newIngestionDataSourceSettings =
   IngestionDataSourceSettings
     { awsKinesis = Core.Nothing,
+      awsMsk = Core.Nothing,
+      azureEventHubs = Core.Nothing,
       cloudStorage = Core.Nothing,
+      confluentCloud = Core.Nothing,
       platformLogsSettings = Core.Nothing
     }
 
@@ -1001,7 +1212,10 @@ instance Core.FromJSON IngestionDataSourceSettings where
       ( \o ->
           IngestionDataSourceSettings
             Core.<$> (o Core..:? "awsKinesis")
+            Core.<*> (o Core..:? "awsMsk")
+            Core.<*> (o Core..:? "azureEventHubs")
             Core.<*> (o Core..:? "cloudStorage")
+            Core.<*> (o Core..:? "confluentCloud")
             Core.<*> (o Core..:? "platformLogsSettings")
       )
 
@@ -1010,8 +1224,47 @@ instance Core.ToJSON IngestionDataSourceSettings where
     Core.object
       ( Core.catMaybes
           [ ("awsKinesis" Core..=) Core.<$> awsKinesis,
+            ("awsMsk" Core..=) Core.<$> awsMsk,
+            ("azureEventHubs" Core..=) Core.<$> azureEventHubs,
             ("cloudStorage" Core..=) Core.<$> cloudStorage,
+            ("confluentCloud" Core..=) Core.<$> confluentCloud,
             ("platformLogsSettings" Core..=) Core.<$> platformLogsSettings
+          ]
+      )
+
+-- | User-defined JavaScript function that can transform or filter a Pub\/Sub message.
+--
+-- /See:/ 'newJavaScriptUDF' smart constructor.
+data JavaScriptUDF = JavaScriptUDF
+  { -- | Required. JavaScript code that contains a function @function_name@ with the below signature: @\/** * Transforms a Pub\/Sub message. * \@return {(Object)>|null)} - To * filter a message, return \`null\`. To transform a message return a map * with the following keys: * - (required) \'data\' : {string} * - (optional) \'attributes\' : {Object} * Returning empty \`attributes\` will remove all attributes from the * message. * * \@param {(Object)>} Pub\/Sub * message. Keys: * - (required) \'data\' : {string} * - (required) \'attributes\' : {Object} * * \@param {Object} metadata - Pub\/Sub message metadata. * Keys: * - (required) \'message_id\' : {string} * - (optional) \'publish_time\': {string} YYYY-MM-DDTHH:MM:SSZ format * - (optional) \'ordering_key\': {string} *\/ function (message, metadata) { }@
+    code :: (Core.Maybe Core.Text),
+    -- | Required. Name of the JavasScript function that should applied to Pub\/Sub messages.
+    functionName :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'JavaScriptUDF' with the minimum fields required to make a request.
+newJavaScriptUDF ::
+  JavaScriptUDF
+newJavaScriptUDF =
+  JavaScriptUDF {code = Core.Nothing, functionName = Core.Nothing}
+
+instance Core.FromJSON JavaScriptUDF where
+  parseJSON =
+    Core.withObject
+      "JavaScriptUDF"
+      ( \o ->
+          JavaScriptUDF
+            Core.<$> (o Core..:? "code")
+            Core.<*> (o Core..:? "functionName")
+      )
+
+instance Core.ToJSON JavaScriptUDF where
+  toJSON JavaScriptUDF {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("code" Core..=) Core.<$> code,
+            ("functionName" Core..=) Core.<$> functionName
           ]
       )
 
@@ -1325,6 +1578,45 @@ instance Core.ToJSON MessageStoragePolicy where
           [ ("allowedPersistenceRegions" Core..=)
               Core.<$> allowedPersistenceRegions,
             ("enforceInTransit" Core..=) Core.<$> enforceInTransit
+          ]
+      )
+
+-- | All supported message transforms types.
+--
+-- /See:/ 'newMessageTransform' smart constructor.
+data MessageTransform = MessageTransform
+  { -- | Optional. If set to true, the transform is enabled. If false, the transform is disabled and will not be applied to messages. Defaults to @true@.
+    enabled :: (Core.Maybe Core.Bool),
+    -- | Optional. JavaScript User Defined Function. If multiple JavaScriptUDF\'s are specified on a resource, each must have a unique @function_name@.
+    javascriptUdf :: (Core.Maybe JavaScriptUDF)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MessageTransform' with the minimum fields required to make a request.
+newMessageTransform ::
+  MessageTransform
+newMessageTransform =
+  MessageTransform
+    { enabled = Core.Nothing,
+      javascriptUdf = Core.Nothing
+    }
+
+instance Core.FromJSON MessageTransform where
+  parseJSON =
+    Core.withObject
+      "MessageTransform"
+      ( \o ->
+          MessageTransform
+            Core.<$> (o Core..:? "enabled")
+            Core.<*> (o Core..:? "javascriptUdf")
+      )
+
+instance Core.ToJSON MessageTransform where
+  toJSON MessageTransform {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("enabled" Core..=) Core.<$> enabled,
+            ("javascriptUdf" Core..=) Core.<$> javascriptUdf
           ]
       )
 
@@ -1886,7 +2178,7 @@ instance Core.ToJSON ReceivedMessage where
           ]
       )
 
--- | A policy that specifies how Pub\/Sub retries message delivery. Retry delay will be exponential based on provided minimum and maximum backoffs. https:\/\/en.wikipedia.org\/wiki\/Exponential_backoff. RetryPolicy will be triggered on NACKs or acknowledgement deadline exceeded events for a given message. Retry Policy is implemented on a best effort basis. At times, the delay between consecutive deliveries may not match the configuration. That is, delay can be more or less than configured backoff.
+-- | A policy that specifies how Pub\/Sub retries message delivery. Retry delay will be exponential based on provided minimum and maximum backoffs. https:\/\/en.wikipedia.org\/wiki\/Exponential_backoff. RetryPolicy will be triggered on NACKs or acknowledgment deadline exceeded events for a given message. Retry Policy is implemented on a best effort basis. At times, the delay between consecutive deliveries may not match the configuration. That is, delay can be more or less than configured backoff.
 --
 -- /See:/ 'newRetryPolicy' smart constructor.
 data RetryPolicy = RetryPolicy
@@ -2223,7 +2515,7 @@ data Subscription = Subscription
     deadLetterPolicy :: (Core.Maybe DeadLetterPolicy),
     -- | Optional. Indicates whether the subscription is detached from its topic. Detached subscriptions don\'t receive messages from their topic and don\'t retain any backlog. @Pull@ and @StreamingPull@ requests will return FAILED_PRECONDITION. If the subscription is a push subscription, pushes to the endpoint will not be made.
     detached :: (Core.Maybe Core.Bool),
-    -- | Optional. If true, Pub\/Sub provides the following guarantees for the delivery of a message with a given value of @message_id@ on this subscription: * The message sent to a subscriber is guaranteed not to be resent before the message\'s acknowledgement deadline expires. * An acknowledged message will not be resent to a subscriber. Note that subscribers may still receive multiple copies of a message when @enable_exactly_once_delivery@ is true if the message was published multiple times by a publisher client. These copies are considered distinct by Pub\/Sub and have distinct @message_id@ values.
+    -- | Optional. If true, Pub\/Sub provides the following guarantees for the delivery of a message with a given value of @message_id@ on this subscription: * The message sent to a subscriber is guaranteed not to be resent before the message\'s acknowledgment deadline expires. * An acknowledged message will not be resent to a subscriber. Note that subscribers may still receive multiple copies of a message when @enable_exactly_once_delivery@ is true if the message was published multiple times by a publisher client. These copies are considered distinct by Pub\/Sub and have distinct @message_id@ values.
     enableExactlyOnceDelivery :: (Core.Maybe Core.Bool),
     -- | Optional. If true, messages published with the same @ordering_key@ in @PubsubMessage@ will be delivered to the subscribers in the order in which they are received by the Pub\/Sub system. Otherwise, they may be delivered in any order.
     enableMessageOrdering :: (Core.Maybe Core.Bool),
@@ -2235,13 +2527,15 @@ data Subscription = Subscription
     labels :: (Core.Maybe Subscription_Labels),
     -- | Optional. How long to retain unacknowledged messages in the subscription\'s backlog, from the moment a message is published. If @retain_acked_messages@ is true, then this also configures the retention of acknowledged messages, and thus configures how far back in time a @Seek@ can be done. Defaults to 7 days. Cannot be more than 31 days or less than 10 minutes.
     messageRetentionDuration :: (Core.Maybe Core.Duration),
+    -- | Optional. Transforms to be applied to messages before they are delivered to subscribers. Transforms are applied in the order specified.
+    messageTransforms :: (Core.Maybe [MessageTransform]),
     -- | Required. The name of the subscription. It must have the format @\"projects\/{project}\/subscriptions\/{subscription}\"@. @{subscription}@ must start with a letter, and contain only letters (@[A-Za-z]@), numbers (@[0-9]@), dashes (@-@), underscores (@_@), periods (@.@), tildes (@~@), plus (@+@) or percent signs (@%@). It must be between 3 and 255 characters in length, and it must not start with @\"goog\"@.
     name :: (Core.Maybe Core.Text),
     -- | Optional. If push delivery is used with this subscription, this field is used to configure it.
     pushConfig :: (Core.Maybe PushConfig),
     -- | Optional. Indicates whether to retain acknowledged messages. If true, then messages are not expunged from the subscription\'s backlog, even if they are acknowledged, until they fall out of the @message_retention_duration@ window. This must be true if you would like to [@Seek@ to a timestamp] (https:\/\/cloud.google.com\/pubsub\/docs\/replay-overview#seek/to/a_time) in the past to replay previously-acknowledged messages.
     retainAckedMessages :: (Core.Maybe Core.Bool),
-    -- | Optional. A policy that specifies how Pub\/Sub retries message delivery for this subscription. If not set, the default retry policy is applied. This generally implies that messages will be retried as soon as possible for healthy subscribers. RetryPolicy will be triggered on NACKs or acknowledgement deadline exceeded events for a given message.
+    -- | Optional. A policy that specifies how Pub\/Sub retries message delivery for this subscription. If not set, the default retry policy is applied. This generally implies that messages will be retried as soon as possible for healthy subscribers. RetryPolicy will be triggered on NACKs or acknowledgment deadline exceeded events for a given message.
     retryPolicy :: (Core.Maybe RetryPolicy),
     -- | Output only. An output-only field indicating whether or not the subscription can receive messages.
     state :: (Core.Maybe Subscription_State),
@@ -2269,6 +2563,7 @@ newSubscription =
       filter = Core.Nothing,
       labels = Core.Nothing,
       messageRetentionDuration = Core.Nothing,
+      messageTransforms = Core.Nothing,
       name = Core.Nothing,
       pushConfig = Core.Nothing,
       retainAckedMessages = Core.Nothing,
@@ -2296,6 +2591,7 @@ instance Core.FromJSON Subscription where
             Core.<*> (o Core..:? "filter")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "messageRetentionDuration")
+            Core.<*> (o Core..:? "messageTransforms")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "pushConfig")
             Core.<*> (o Core..:? "retainAckedMessages")
@@ -2324,6 +2620,7 @@ instance Core.ToJSON Subscription where
             ("labels" Core..=) Core.<$> labels,
             ("messageRetentionDuration" Core..=)
               Core.<$> messageRetentionDuration,
+            ("messageTransforms" Core..=) Core.<$> messageTransforms,
             ("name" Core..=) Core.<$> name,
             ("pushConfig" Core..=) Core.<$> pushConfig,
             ("retainAckedMessages" Core..=) Core.<$> retainAckedMessages,
@@ -2473,6 +2770,8 @@ data Topic = Topic
     messageRetentionDuration :: (Core.Maybe Core.Duration),
     -- | Optional. Policy constraining the set of Google Cloud Platform regions where messages published to the topic may be stored. If not present, then no constraints are in effect.
     messageStoragePolicy :: (Core.Maybe MessageStoragePolicy),
+    -- | Optional. Transforms to be applied to messages published to the topic. Transforms are applied in the order specified.
+    messageTransforms :: (Core.Maybe [MessageTransform]),
     -- | Required. The name of the topic. It must have the format @\"projects\/{project}\/topics\/{topic}\"@. @{topic}@ must start with a letter, and contain only letters (@[A-Za-z]@), numbers (@[0-9]@), dashes (@-@), underscores (@_@), periods (@.@), tildes (@~@), plus (@+@) or percent signs (@%@). It must be between 3 and 255 characters in length, and it must not start with @\"goog\"@.
     name :: (Core.Maybe Core.Text),
     -- | Optional. Reserved for future use. This field is set only in responses from the server; it is ignored if it is set in any requests.
@@ -2494,6 +2793,7 @@ newTopic =
       labels = Core.Nothing,
       messageRetentionDuration = Core.Nothing,
       messageStoragePolicy = Core.Nothing,
+      messageTransforms = Core.Nothing,
       name = Core.Nothing,
       satisfiesPzs = Core.Nothing,
       schemaSettings = Core.Nothing,
@@ -2511,6 +2811,7 @@ instance Core.FromJSON Topic where
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "messageRetentionDuration")
             Core.<*> (o Core..:? "messageStoragePolicy")
+            Core.<*> (o Core..:? "messageTransforms")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "schemaSettings")
@@ -2528,6 +2829,7 @@ instance Core.ToJSON Topic where
             ("messageRetentionDuration" Core..=)
               Core.<$> messageRetentionDuration,
             ("messageStoragePolicy" Core..=) Core.<$> messageStoragePolicy,
+            ("messageTransforms" Core..=) Core.<$> messageTransforms,
             ("name" Core..=) Core.<$> name,
             ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
             ("schemaSettings" Core..=) Core.<$> schemaSettings,

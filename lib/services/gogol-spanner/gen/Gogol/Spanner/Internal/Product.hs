@@ -23,7 +23,35 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Spanner.Internal.Product
-  ( -- * AsymmetricAutoscalingOption
+  ( -- * AdaptMessageRequest
+    AdaptMessageRequest (..),
+    newAdaptMessageRequest,
+
+    -- * AdaptMessageRequest_Attachments
+    AdaptMessageRequest_Attachments (..),
+    newAdaptMessageRequest_Attachments,
+
+    -- * AdaptMessageResponse
+    AdaptMessageResponse (..),
+    newAdaptMessageResponse,
+
+    -- * AdaptMessageResponse_StateUpdates
+    AdaptMessageResponse_StateUpdates (..),
+    newAdaptMessageResponse_StateUpdates,
+
+    -- * AdapterSession
+    AdapterSession (..),
+    newAdapterSession,
+
+    -- * AddSplitPointsRequest
+    AddSplitPointsRequest (..),
+    newAddSplitPointsRequest,
+
+    -- * AddSplitPointsResponse
+    AddSplitPointsResponse (..),
+    newAddSplitPointsResponse,
+
+    -- * AsymmetricAutoscalingOption
     AsymmetricAutoscalingOption (..),
     newAsymmetricAutoscalingOption,
 
@@ -50,6 +78,10 @@ module Gogol.Spanner.Internal.Product
     -- * BackupInfo
     BackupInfo (..),
     newBackupInfo,
+
+    -- * BackupInstancePartition
+    BackupInstancePartition (..),
+    newBackupInstancePartition,
 
     -- * BackupSchedule
     BackupSchedule (..),
@@ -322,6 +354,10 @@ module Gogol.Spanner.Internal.Product
     -- * InstanceReplicaSelection
     InstanceReplicaSelection (..),
     newInstanceReplicaSelection,
+
+    -- * Key
+    Key (..),
+    newKey,
 
     -- * KeyRange
     KeyRange (..),
@@ -635,6 +671,10 @@ module Gogol.Spanner.Internal.Product
     SingleRegionQuorum (..),
     newSingleRegionQuorum,
 
+    -- * SplitPoints
+    SplitPoints (..),
+    newSplitPoints,
+
     -- * Statement
     Statement (..),
     newStatement,
@@ -735,6 +775,228 @@ where
 
 import Gogol.Prelude qualified as Core
 import Gogol.Spanner.Internal.Sum
+
+-- | Message sent by the client to the adapter.
+--
+-- /See:/ 'newAdaptMessageRequest' smart constructor.
+data AdaptMessageRequest = AdaptMessageRequest
+  { -- | Optional. Opaque request state passed by the client to the server.
+    attachments :: (Core.Maybe AdaptMessageRequest_Attachments),
+    -- | Optional. Uninterpreted bytes from the underlying wire protocol.
+    payload :: (Core.Maybe Core.Base64),
+    -- | Required. Identifier for the underlying wire protocol.
+    protocol :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AdaptMessageRequest' with the minimum fields required to make a request.
+newAdaptMessageRequest ::
+  AdaptMessageRequest
+newAdaptMessageRequest =
+  AdaptMessageRequest
+    { attachments = Core.Nothing,
+      payload = Core.Nothing,
+      protocol = Core.Nothing
+    }
+
+instance Core.FromJSON AdaptMessageRequest where
+  parseJSON =
+    Core.withObject
+      "AdaptMessageRequest"
+      ( \o ->
+          AdaptMessageRequest
+            Core.<$> (o Core..:? "attachments")
+            Core.<*> (o Core..:? "payload")
+            Core.<*> (o Core..:? "protocol")
+      )
+
+instance Core.ToJSON AdaptMessageRequest where
+  toJSON AdaptMessageRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("attachments" Core..=) Core.<$> attachments,
+            ("payload" Core..=) Core.<$> payload,
+            ("protocol" Core..=) Core.<$> protocol
+          ]
+      )
+
+-- | Optional. Opaque request state passed by the client to the server.
+--
+-- /See:/ 'newAdaptMessageRequest_Attachments' smart constructor.
+newtype AdaptMessageRequest_Attachments = AdaptMessageRequest_Attachments
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AdaptMessageRequest_Attachments' with the minimum fields required to make a request.
+newAdaptMessageRequest_Attachments ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  AdaptMessageRequest_Attachments
+newAdaptMessageRequest_Attachments additional =
+  AdaptMessageRequest_Attachments {additional = additional}
+
+instance Core.FromJSON AdaptMessageRequest_Attachments where
+  parseJSON =
+    Core.withObject
+      "AdaptMessageRequest_Attachments"
+      ( \o ->
+          AdaptMessageRequest_Attachments Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON AdaptMessageRequest_Attachments where
+  toJSON AdaptMessageRequest_Attachments {..} = Core.toJSON additional
+
+-- | Message sent by the adapter to the client.
+--
+-- /See:/ 'newAdaptMessageResponse' smart constructor.
+data AdaptMessageResponse = AdaptMessageResponse
+  { -- | Optional. Uninterpreted bytes from the underlying wire protocol.
+    payload :: (Core.Maybe Core.Base64),
+    -- | Optional. Opaque state updates to be applied by the client.
+    stateUpdates :: (Core.Maybe AdaptMessageResponse_StateUpdates)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AdaptMessageResponse' with the minimum fields required to make a request.
+newAdaptMessageResponse ::
+  AdaptMessageResponse
+newAdaptMessageResponse =
+  AdaptMessageResponse
+    { payload = Core.Nothing,
+      stateUpdates = Core.Nothing
+    }
+
+instance Core.FromJSON AdaptMessageResponse where
+  parseJSON =
+    Core.withObject
+      "AdaptMessageResponse"
+      ( \o ->
+          AdaptMessageResponse
+            Core.<$> (o Core..:? "payload")
+            Core.<*> (o Core..:? "stateUpdates")
+      )
+
+instance Core.ToJSON AdaptMessageResponse where
+  toJSON AdaptMessageResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("payload" Core..=) Core.<$> payload,
+            ("stateUpdates" Core..=) Core.<$> stateUpdates
+          ]
+      )
+
+-- | Optional. Opaque state updates to be applied by the client.
+--
+-- /See:/ 'newAdaptMessageResponse_StateUpdates' smart constructor.
+newtype AdaptMessageResponse_StateUpdates = AdaptMessageResponse_StateUpdates
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AdaptMessageResponse_StateUpdates' with the minimum fields required to make a request.
+newAdaptMessageResponse_StateUpdates ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  AdaptMessageResponse_StateUpdates
+newAdaptMessageResponse_StateUpdates additional =
+  AdaptMessageResponse_StateUpdates {additional = additional}
+
+instance Core.FromJSON AdaptMessageResponse_StateUpdates where
+  parseJSON =
+    Core.withObject
+      "AdaptMessageResponse_StateUpdates"
+      ( \o ->
+          AdaptMessageResponse_StateUpdates
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON AdaptMessageResponse_StateUpdates where
+  toJSON AdaptMessageResponse_StateUpdates {..} =
+    Core.toJSON additional
+
+-- | A session in the Cloud Spanner Adapter API.
+--
+-- /See:/ 'newAdapterSession' smart constructor.
+newtype AdapterSession = AdapterSession
+  { -- | Identifier. The name of the session. This is always system-assigned.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AdapterSession' with the minimum fields required to make a request.
+newAdapterSession ::
+  AdapterSession
+newAdapterSession = AdapterSession {name = Core.Nothing}
+
+instance Core.FromJSON AdapterSession where
+  parseJSON =
+    Core.withObject
+      "AdapterSession"
+      (\o -> AdapterSession Core.<$> (o Core..:? "name"))
+
+instance Core.ToJSON AdapterSession where
+  toJSON AdapterSession {..} =
+    Core.object (Core.catMaybes [("name" Core..=) Core.<$> name])
+
+-- | The request for AddSplitPoints.
+--
+-- /See:/ 'newAddSplitPointsRequest' smart constructor.
+data AddSplitPointsRequest = AddSplitPointsRequest
+  { -- | Optional. A user-supplied tag associated with the split points. For example, \"initial/data/load\", \"special/event/1\". Defaults to \"CloudAddSplitPointsAPI\" if not specified. The length of the tag must not exceed 50 characters,else will be trimmed. Only valid UTF8 characters are allowed.
+    initiator :: (Core.Maybe Core.Text),
+    -- | Required. The split points to add.
+    splitPoints :: (Core.Maybe [SplitPoints])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AddSplitPointsRequest' with the minimum fields required to make a request.
+newAddSplitPointsRequest ::
+  AddSplitPointsRequest
+newAddSplitPointsRequest =
+  AddSplitPointsRequest
+    { initiator = Core.Nothing,
+      splitPoints = Core.Nothing
+    }
+
+instance Core.FromJSON AddSplitPointsRequest where
+  parseJSON =
+    Core.withObject
+      "AddSplitPointsRequest"
+      ( \o ->
+          AddSplitPointsRequest
+            Core.<$> (o Core..:? "initiator")
+            Core.<*> (o Core..:? "splitPoints")
+      )
+
+instance Core.ToJSON AddSplitPointsRequest where
+  toJSON AddSplitPointsRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("initiator" Core..=) Core.<$> initiator,
+            ("splitPoints" Core..=) Core.<$> splitPoints
+          ]
+      )
+
+-- | The response for AddSplitPoints.
+--
+-- /See:/ 'newAddSplitPointsResponse' smart constructor.
+data AddSplitPointsResponse = AddSplitPointsResponse
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AddSplitPointsResponse' with the minimum fields required to make a request.
+newAddSplitPointsResponse ::
+  AddSplitPointsResponse
+newAddSplitPointsResponse = AddSplitPointsResponse
+
+instance Core.FromJSON AddSplitPointsResponse where
+  parseJSON =
+    Core.withObject
+      "AddSplitPointsResponse"
+      (\o -> Core.pure AddSplitPointsResponse)
+
+instance Core.ToJSON AddSplitPointsResponse where
+  toJSON = Core.const Core.emptyObject
 
 -- | AsymmetricAutoscalingOption specifies the scaling of replicas identified by the given selection.
 --
@@ -975,6 +1237,8 @@ data Backup = Backup
     freeableSizeBytes :: (Core.Maybe Core.Int64),
     -- | Output only. Populated only for backups in an incremental backup chain. Backups share the same chain id if and only if they belong to the same incremental backup chain. Use this field to determine which backups are part of the same incremental backup chain. The ordering of backups in the chain can be determined by ordering the backup @version_time@.
     incrementalBackupChainId :: (Core.Maybe Core.Text),
+    -- | Output only. The instance partition(s) storing the backup. This is the same as the list of the instance partition(s) that the database had footprint in at the backup\'s @version_time@.
+    instancePartitions :: (Core.Maybe [BackupInstancePartition]),
     -- | Output only. The max allowed expiration time of the backup, with microseconds granularity. A backup\'s expiration time can be configured in multiple APIs: CreateBackup, UpdateBackup, CopyBackup. When updating or copying an existing backup, the expiration time specified must be less than @Backup.max_expire_time@.
     maxExpireTime :: (Core.Maybe Core.DateTime),
     -- | Output only for the CreateBackup operation. Required for the UpdateBackup operation. A globally unique identifier for the backup which cannot be changed. Values are of the form @projects\/\/instances\/\/backups\/a-z*[a-z0-9]@ The final segment of the name must be between 2 and 60 characters in length. The backup is stored in the location(s) specified in the instance configuration of the instance containing the backup, identified by the prefix of the backup name of the form @projects\/\/instances\/@.
@@ -1009,6 +1273,7 @@ newBackup =
       expireTime = Core.Nothing,
       freeableSizeBytes = Core.Nothing,
       incrementalBackupChainId = Core.Nothing,
+      instancePartitions = Core.Nothing,
       maxExpireTime = Core.Nothing,
       name = Core.Nothing,
       oldestVersionTime = Core.Nothing,
@@ -1038,6 +1303,7 @@ instance Core.FromJSON Backup where
             Core.<*> (o Core..:? "expireTime")
             Core.<*> (o Core..:? "freeableSizeBytes" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "incrementalBackupChainId")
+            Core.<*> (o Core..:? "instancePartitions")
             Core.<*> (o Core..:? "maxExpireTime")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "oldestVersionTime")
@@ -1067,6 +1333,7 @@ instance Core.ToJSON Backup where
               Core.<$> freeableSizeBytes,
             ("incrementalBackupChainId" Core..=)
               Core.<$> incrementalBackupChainId,
+            ("instancePartitions" Core..=) Core.<$> instancePartitions,
             ("maxExpireTime" Core..=) Core.<$> maxExpireTime,
             ("name" Core..=) Core.<$> name,
             ("oldestVersionTime" Core..=) Core.<$> oldestVersionTime,
@@ -1127,11 +1394,41 @@ instance Core.ToJSON BackupInfo where
           ]
       )
 
+-- | Instance partition information for the backup.
+--
+-- /See:/ 'newBackupInstancePartition' smart constructor.
+newtype BackupInstancePartition = BackupInstancePartition
+  { -- | A unique identifier for the instance partition. Values are of the form @projects\/\/instances\/\/instancePartitions\/@
+    instancePartition :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BackupInstancePartition' with the minimum fields required to make a request.
+newBackupInstancePartition ::
+  BackupInstancePartition
+newBackupInstancePartition =
+  BackupInstancePartition {instancePartition = Core.Nothing}
+
+instance Core.FromJSON BackupInstancePartition where
+  parseJSON =
+    Core.withObject
+      "BackupInstancePartition"
+      ( \o ->
+          BackupInstancePartition Core.<$> (o Core..:? "instancePartition")
+      )
+
+instance Core.ToJSON BackupInstancePartition where
+  toJSON BackupInstancePartition {..} =
+    Core.object
+      ( Core.catMaybes
+          [("instancePartition" Core..=) Core.<$> instancePartition]
+      )
+
 -- | BackupSchedule expresses the automated backup creation specification for a Spanner database.
 --
 -- /See:/ 'newBackupSchedule' smart constructor.
 data BackupSchedule = BackupSchedule
-  { -- | Optional. The encryption configuration that will be used to encrypt the backup. If this field is not specified, the backup will use the same encryption configuration as the database.
+  { -- | Optional. The encryption configuration that is used to encrypt the backup. If this field is not specified, the backup uses the same encryption configuration as the database.
     encryptionConfig :: (Core.Maybe CreateBackupEncryptionConfig),
     -- | The schedule creates only full backups.
     fullBackupSpec :: (Core.Maybe FullBackupSpec),
@@ -2397,15 +2694,15 @@ instance Core.ToJSON CreateSessionRequest where
     Core.object
       (Core.catMaybes [("session" Core..=) Core.<$> session])
 
--- | CrontabSpec can be used to specify the version time and frequency at which the backup should be created.
+-- | CrontabSpec can be used to specify the version time and frequency at which the backup is created.
 --
 -- /See:/ 'newCrontabSpec' smart constructor.
 data CrontabSpec = CrontabSpec
-  { -- | Output only. Schedule backups will contain an externally consistent copy of the database at the version time specified in @schedule_spec.cron_spec@. However, Spanner may not initiate the creation of the scheduled backups at that version time. Spanner will initiate the creation of scheduled backups within the time window bounded by the version/time specified in @schedule_spec.cron_spec@ and version/time + @creation_window@.
+  { -- | Output only. Scheduled backups contain an externally consistent copy of the database at the version time specified in @schedule_spec.cron_spec@. However, Spanner might not initiate the creation of the scheduled backups at that version time. Spanner initiates the creation of scheduled backups within the time window bounded by the version/time specified in @schedule_spec.cron_spec@ and version/time + @creation_window@.
     creationWindow :: (Core.Maybe Core.Duration),
-    -- | Required. Textual representation of the crontab. User can customize the backup frequency and the backup version time using the cron expression. The version time must be in UTC timzeone. The backup will contain an externally consistent copy of the database at the version time. Allowed frequencies are 12 hour, 1 day, 1 week and 1 month. Examples of valid cron specifications: * @0 2\/12 * * *@ : every 12 hours at (2, 14) hours past midnight in UTC. * @0 2,14 * * *@ : every 12 hours at (2,14) hours past midnight in UTC. * @0 2 * * *@ : once a day at 2 past midnight in UTC. * @0 2 * * 0@ : once a week every Sunday at 2 past midnight in UTC. * @0 2 8 * *@ : once a month on 8th day at 2 past midnight in UTC.
+    -- | Required. Textual representation of the crontab. User can customize the backup frequency and the backup version time using the cron expression. The version time must be in UTC timezone. The backup will contain an externally consistent copy of the database at the version time. Full backups must be scheduled a minimum of 12 hours apart and incremental backups must be scheduled a minimum of 4 hours apart. Examples of valid cron specifications: * @0 2\/12 * * *@ : every 12 hours at (2, 14) hours past midnight in UTC. * @0 2,14 * * *@ : every 12 hours at (2, 14) hours past midnight in UTC. * @0 *\/4 * * *@ : (incremental backups only) every 4 hours at (0, 4, 8, 12, 16, 20) hours past midnight in UTC. * @0 2 * * *@ : once a day at 2 past midnight in UTC. * @0 2 * * 0@ : once a week every Sunday at 2 past midnight in UTC. * @0 2 8 * *@ : once a month on 8th day at 2 past midnight in UTC.
     text :: (Core.Maybe Core.Text),
-    -- | Output only. The time zone of the times in @CrontabSpec.text@. Currently only UTC is supported.
+    -- | Output only. The time zone of the times in @CrontabSpec.text@. Currently, only UTC is supported.
     timeZone :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2923,7 +3220,9 @@ instance Core.ToJSON ExcludeReplicas where
 --
 -- /See:/ 'newExecuteBatchDmlRequest' smart constructor.
 data ExecuteBatchDmlRequest = ExecuteBatchDmlRequest
-  { -- | Common options for this request.
+  { -- | Optional. If set to true, this request marks the end of the transaction. The transaction should be committed or aborted after these statements execute, and attempts to execute any other requests against this transaction (including reads and queries) will be rejected. Setting this option may cause some error reporting to be deferred until commit time (e.g. validation of unique constraints). Given this, successful execution of statements should not be assumed until a subsequent Commit call completes successfully.
+    lastStatements :: (Core.Maybe Core.Bool),
+    -- | Common options for this request.
     requestOptions :: (Core.Maybe RequestOptions),
     -- | Required. A per-transaction sequence number used to identify this request. This field makes each request idempotent such that if the request is received multiple times, at most one will succeed. The sequence number must be monotonically increasing within the transaction. If a request arrives for the first time with an out-of-order sequence number, the transaction may be aborted. Replays of previously handled requests will yield the same response as the first execution.
     seqno :: (Core.Maybe Core.Int64),
@@ -2939,7 +3238,8 @@ newExecuteBatchDmlRequest ::
   ExecuteBatchDmlRequest
 newExecuteBatchDmlRequest =
   ExecuteBatchDmlRequest
-    { requestOptions = Core.Nothing,
+    { lastStatements = Core.Nothing,
+      requestOptions = Core.Nothing,
       seqno = Core.Nothing,
       statements = Core.Nothing,
       transaction = Core.Nothing
@@ -2951,7 +3251,8 @@ instance Core.FromJSON ExecuteBatchDmlRequest where
       "ExecuteBatchDmlRequest"
       ( \o ->
           ExecuteBatchDmlRequest
-            Core.<$> (o Core..:? "requestOptions")
+            Core.<$> (o Core..:? "lastStatements")
+            Core.<*> (o Core..:? "requestOptions")
             Core.<*> (o Core..:? "seqno" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "statements")
             Core.<*> (o Core..:? "transaction")
@@ -2961,7 +3262,8 @@ instance Core.ToJSON ExecuteBatchDmlRequest where
   toJSON ExecuteBatchDmlRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("requestOptions" Core..=) Core.<$> requestOptions,
+          [ ("lastStatements" Core..=) Core.<$> lastStatements,
+            ("requestOptions" Core..=) Core.<$> requestOptions,
             ("seqno" Core..=) Core.. Core.AsText Core.<$> seqno,
             ("statements" Core..=) Core.<$> statements,
             ("transaction" Core..=) Core.<$> transaction
@@ -3021,6 +3323,8 @@ data ExecuteSqlRequest = ExecuteSqlRequest
     dataBoostEnabled :: (Core.Maybe Core.Bool),
     -- | Directed read options for this request.
     directedReadOptions :: (Core.Maybe DirectedReadOptions),
+    -- | Optional. If set to true, this statement marks the end of the transaction. The transaction should be committed or aborted after this statement executes, and attempts to execute any other requests against this transaction (including reads and queries) will be rejected. For DML statements, setting this option may cause some error reporting to be deferred until commit time (e.g. validation of unique constraints). Given this, successful execution of a DML statement should not be assumed until a subsequent Commit call completes successfully.
+    lastStatement :: (Core.Maybe Core.Bool),
     -- | It is not always possible for Cloud Spanner to infer the right SQL type from a JSON value. For example, values of type @BYTES@ and values of type @STRING@ both appear in params as JSON strings. In these cases, @param_types@ can be used to specify the exact SQL type for some or all of the SQL statement parameters. See the definition of Type for more information about SQL types.
     paramTypes :: (Core.Maybe ExecuteSqlRequest_ParamTypes),
     -- | Parameter names and values that bind to placeholders in the SQL string. A parameter placeholder consists of the @\@@ character followed by the parameter name (for example, @\@firstName@). Parameter names must conform to the naming requirements of identifiers as specified at https:\/\/cloud.google.com\/spanner\/docs\/lexical#identifiers. Parameters can appear anywhere that a literal value is expected. The same parameter name can be used more than once, for example: @\"WHERE id > \@msg_id AND id \< \@msg_id + 100\"@ It is an error to execute a SQL statement with unbound parameters.
@@ -3051,6 +3355,7 @@ newExecuteSqlRequest =
   ExecuteSqlRequest
     { dataBoostEnabled = Core.Nothing,
       directedReadOptions = Core.Nothing,
+      lastStatement = Core.Nothing,
       paramTypes = Core.Nothing,
       params = Core.Nothing,
       partitionToken = Core.Nothing,
@@ -3071,6 +3376,7 @@ instance Core.FromJSON ExecuteSqlRequest where
           ExecuteSqlRequest
             Core.<$> (o Core..:? "dataBoostEnabled")
             Core.<*> (o Core..:? "directedReadOptions")
+            Core.<*> (o Core..:? "lastStatement")
             Core.<*> (o Core..:? "paramTypes")
             Core.<*> (o Core..:? "params")
             Core.<*> (o Core..:? "partitionToken")
@@ -3089,6 +3395,7 @@ instance Core.ToJSON ExecuteSqlRequest where
       ( Core.catMaybes
           [ ("dataBoostEnabled" Core..=) Core.<$> dataBoostEnabled,
             ("directedReadOptions" Core..=) Core.<$> directedReadOptions,
+            ("lastStatement" Core..=) Core.<$> lastStatement,
             ("paramTypes" Core..=) Core.<$> paramTypes,
             ("params" Core..=) Core.<$> params,
             ("partitionToken" Core..=) Core.<$> partitionToken,
@@ -3609,7 +3916,7 @@ data Instance = Instance
     config :: (Core.Maybe Core.Text),
     -- | Output only. The time at which the instance was created.
     createTime :: (Core.Maybe Core.DateTime),
-    -- | Optional. Controls the default backup behavior for new databases within the instance. Note that @AUTOMATIC@ is not permitted for free instances, as backups and backup schedules are not allowed for free instances. In the @GetInstance@ or @ListInstances@ response, if the value of default/backup/schedule_type is unset or NONE, no default backup schedule will be created for new databases within the instance.
+    -- | Optional. Controls the default backup schedule behavior for new databases within the instance. By default, a backup schedule is created automatically when a new database is created in a new instance. Note that the @AUTOMATIC@ value isn\'t permitted for free instances, as backups and backup schedules aren\'t supported for free instances. In the @GetInstance@ or @ListInstances@ response, if the value of @default_backup_schedule_type@ isn\'t set, or set to @NONE@, Spanner doesn\'t create a default backup schedule for new databases in the instance.
     defaultBackupScheduleType :: (Core.Maybe Instance_DefaultBackupScheduleType),
     -- | Required. The descriptive name for this instance as it appears in UIs. Must be unique per project and between 4 and 30 characters in length.
     displayName :: (Core.Maybe Core.Text),
@@ -3626,9 +3933,9 @@ data Instance = Instance
     labels :: (Core.Maybe Instance_Labels),
     -- | Required. A unique identifier for the instance, which cannot be changed after the instance is created. Values are of the form @projects\/\/instances\/a-z*[a-z0-9]@. The final segment of the name must be between 2 and 64 characters in length.
     name :: (Core.Maybe Core.Text),
-    -- | The number of nodes allocated to this instance. At most, one of either @node_count@ or @processing_units@ should be present in the message. Users can set the @node_count@ field to specify the target number of nodes allocated to the instance. If autoscaling is enabled, @node_count@ is treated as an @OUTPUT_ONLY@ field and reflects the current number of nodes allocated to the instance. This might be zero in API responses for instances that are not yet in the @READY@ state. For more information, see <https://cloud.google.com/spanner/docs/compute-capacity Compute capacity, nodes, and processing units>.
+    -- | The number of nodes allocated to this instance. At most, one of either @node_count@ or @processing_units@ should be present in the message. Users can set the @node_count@ field to specify the target number of nodes allocated to the instance. If autoscaling is enabled, @node_count@ is treated as an @OUTPUT_ONLY@ field and reflects the current number of nodes allocated to the instance. This might be zero in API responses for instances that are not yet in the @READY@ state. If the instance has varying node count across replicas (achieved by setting @asymmetric_autoscaling_options@ in the autoscaling configuration), the @node_count@ set here is the maximum node count across all replicas. For more information, see <https://cloud.google.com/spanner/docs/compute-capacity Compute capacity, nodes, and processing units>.
     nodeCount :: (Core.Maybe Core.Int32),
-    -- | The number of processing units allocated to this instance. At most, one of either @processing_units@ or @node_count@ should be present in the message. Users can set the @processing_units@ field to specify the target number of processing units allocated to the instance. If autoscaling is enabled, @processing_units@ is treated as an @OUTPUT_ONLY@ field and reflects the current number of processing units allocated to the instance. This might be zero in API responses for instances that are not yet in the @READY@ state. For more information, see <https://cloud.google.com/spanner/docs/compute-capacity Compute capacity, nodes and processing units>.
+    -- | The number of processing units allocated to this instance. At most, one of either @processing_units@ or @node_count@ should be present in the message. Users can set the @processing_units@ field to specify the target number of processing units allocated to the instance. If autoscaling is enabled, @processing_units@ is treated as an @OUTPUT_ONLY@ field and reflects the current number of processing units allocated to the instance. This might be zero in API responses for instances that are not yet in the @READY@ state. If the instance has varying processing units per replica (achieved by setting @asymmetric_autoscaling_options@ in the autoscaling configuration), the @processing_units@ set here is the maximum processing units across all replicas. For more information, see <https://cloud.google.com/spanner/docs/compute-capacity Compute capacity, nodes and processing units>.
     processingUnits :: (Core.Maybe Core.Int32),
     -- | Output only. Lists the compute capacity per ReplicaSelection. A replica selection identifies a set of replicas with common properties. Replicas identified by a ReplicaSelection are scaled with the same compute capacity.
     replicaComputeCapacity :: (Core.Maybe [ReplicaComputeCapacity]),
@@ -4021,6 +4328,31 @@ instance Core.ToJSON InstanceReplicaSelection where
   toJSON InstanceReplicaSelection {..} =
     Core.object
       (Core.catMaybes [("location" Core..=) Core.<$> location])
+
+-- | A split key.
+--
+-- /See:/ 'newKey' smart constructor.
+newtype Key = Key
+  { -- | Required. The column values making up the split key.
+    keyParts :: (Core.Maybe [Core.Value])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Key' with the minimum fields required to make a request.
+newKey ::
+  Key
+newKey = Key {keyParts = Core.Nothing}
+
+instance Core.FromJSON Key where
+  parseJSON =
+    Core.withObject
+      "Key"
+      (\o -> Key Core.<$> (o Core..:? "keyParts"))
+
+instance Core.ToJSON Key where
+  toJSON Key {..} =
+    Core.object
+      (Core.catMaybes [("keyParts" Core..=) Core.<$> keyParts])
 
 -- | KeyRange represents a range of rows in a table or index. A range has a start key and an end key. These keys can be open or closed, indicating if the range includes rows with that key. Keys are represented by lists, where the ith value in the list corresponds to the ith component of the table or index primary key. Individual values are encoded as described here. For example, consider the following table definition: CREATE TABLE UserEvents ( UserName STRING(MAX), EventDate STRING(10) ) PRIMARY KEY(UserName, EventDate); The following keys name rows in this table: \"Bob\", \"2014-09-23\" Since the @UserEvents@ table\'s @PRIMARY KEY@ clause names two columns, each @UserEvents@ key has two elements; the first is the @UserName@, and the second is the @EventDate@. Key ranges with multiple components are interpreted lexicographically by component using the table or index key\'s declared sort order. For example, the following range returns all events for user @\"Bob\"@ that occurred in the year 2015: \"start/closed\":
 -- [\"Bob\", \"2015-01-01\"] \"end/closed\": [\"Bob\", \"2015-12-31\"] Start and end keys can omit trailing key components. This affects the inclusion and exclusion of rows that exactly match the provided key components: if the key is closed, then rows that exactly match the provided components are included; if the key is open, then rows that exactly match are not included. For example, the following range includes all events for @\"Bob\"@ that occurred during and after the year 2000: \"start/closed\": [\"Bob\", \"2000-01-01\"] \"end/closed\": [\"Bob\"] The next example retrieves all events for @\"Bob\"@: \"start/closed\": [\"Bob\"] \"end/closed\": [\"Bob\"] To retrieve events before the year 2000: \"start/closed\": [\"Bob\"] \"end/open\": [\"Bob\", \"2000-01-01\"] The following range includes all rows in the table: \"start/closed\": [] \"end/closed\": [] This range returns all users whose @UserName@ begins with any character from A to C: \"start/closed\": [\"A\"] \"end/open\": [\"D\"] This range returns all
@@ -6033,7 +6365,7 @@ instance Core.ToJSON QueryOptions where
 data QueryPlan = QueryPlan
   { -- | The nodes in the query plan. Plan nodes are returned in pre-order starting with the plan root. Each PlanNode\'s @id@ corresponds to its index in @plan_nodes@.
     planNodes :: (Core.Maybe [PlanNode]),
-    -- | Optional. The advices\/recommendations for a query. Currently this field will be serving index recommendations for a query.
+    -- | Optional. The advise\/recommendations for a query. Currently this field will be serving index recommendations for a query.
     queryAdvice :: (Core.Maybe QueryAdvisorResult)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -7032,7 +7364,7 @@ data Session = Session
     creatorRole :: (Core.Maybe Core.Text),
     -- | The labels for the session. * Label keys must be between 1 and 63 characters long and must conform to the following regular expression: @[a-z]([-a-z0-9]*[a-z0-9])?@. * Label values must be between 0 and 63 characters long and must conform to the regular expression @([a-z]([-a-z0-9]*[a-z0-9])?)?@. * No more than 64 labels can be associated with a given session. See https:\/\/goo.gl\/xmQnxf for more information on and examples of labels.
     labels :: (Core.Maybe Session_Labels),
-    -- | Optional. If true, specifies a multiplexed session. Use a multiplexed session for multiple, concurrent read-only operations. Don\'t use them for read-write transactions, partitioned reads, or partitioned queries. Use CreateSession to create multiplexed sessions. Don\'t use BatchCreateSessions to create a multiplexed session. You can\'t delete or list multiplexed sessions.
+    -- | Optional. If true, specifies a multiplexed session. Use a multiplexed session for multiple, concurrent read-only operations. Don\'t use them for read-write transactions, partitioned reads, or partitioned queries. Use @sessions.create@ to create multiplexed sessions. Don\'t use BatchCreateSessions to create a multiplexed session. You can\'t delete or list multiplexed sessions.
     multiplexed :: (Core.Maybe Core.Bool),
     -- | Output only. The name of the session. This is always system-assigned.
     name :: (Core.Maybe Core.Text)
@@ -7221,6 +7553,55 @@ instance Core.ToJSON SingleRegionQuorum where
     Core.object
       ( Core.catMaybes
           [("servingLocation" Core..=) Core.<$> servingLocation]
+      )
+
+-- | The split points of a table\/index.
+--
+-- /See:/ 'newSplitPoints' smart constructor.
+data SplitPoints = SplitPoints
+  { -- | Optional. The expiration timestamp of the split points. A timestamp in the past means immediate expiration. The maximum value can be 30 days in the future. Defaults to 10 days in the future if not specified.
+    expireTime :: (Core.Maybe Core.DateTime),
+    -- | The index to split. If specified, the @table@ field must refer to the index\'s base table.
+    index :: (Core.Maybe Core.Text),
+    -- | Required. The list of split keys, i.e., the split boundaries.
+    keys :: (Core.Maybe [Key]),
+    -- | The table to split.
+    table :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SplitPoints' with the minimum fields required to make a request.
+newSplitPoints ::
+  SplitPoints
+newSplitPoints =
+  SplitPoints
+    { expireTime = Core.Nothing,
+      index = Core.Nothing,
+      keys = Core.Nothing,
+      table = Core.Nothing
+    }
+
+instance Core.FromJSON SplitPoints where
+  parseJSON =
+    Core.withObject
+      "SplitPoints"
+      ( \o ->
+          SplitPoints
+            Core.<$> (o Core..:? "expireTime")
+            Core.<*> (o Core..:? "index")
+            Core.<*> (o Core..:? "keys")
+            Core.<*> (o Core..:? "table")
+      )
+
+instance Core.ToJSON SplitPoints where
+  toJSON SplitPoints {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("expireTime" Core..=) Core.<$> expireTime,
+            ("index" Core..=) Core.<$> index,
+            ("keys" Core..=) Core.<$> keys,
+            ("table" Core..=) Core.<$> table
+          ]
       )
 
 -- | A single DML statement.

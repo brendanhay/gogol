@@ -23,7 +23,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a user workloads ConfigMap. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- Deletes a user workloads ConfigMap. This method is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ <https://cloud.google.com/composer/ Cloud Composer API Reference> for @composer.projects.locations.environments.userWorkloadsConfigMaps.delete@.
 module Gogol.Composer.Projects.Locations.Environments.UserWorkloadsConfigMaps.Delete
@@ -52,7 +52,7 @@ type ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsDeleteResource 
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Deletes a user workloads ConfigMap. This method is supported for Cloud Composer environments in versions composer-3././-airflow-/./.* and newer.
+-- | Deletes a user workloads ConfigMap. This method is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
 --
 -- /See:/ 'newComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsDelete' smart constructor.
 data ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsDelete = ComposerProjectsLocationsEnvironmentsUserWorkloadsConfigMapsDelete

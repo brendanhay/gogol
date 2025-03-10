@@ -12,11 +12,11 @@ module Gogol.Internal.Body where
 import Control.Monad.IO.Class (MonadIO (..))
 import Data.Conduit.Binary (sourceFile)
 import Data.Maybe (fromMaybe)
-import qualified Data.Text as Text
+import Data.Text qualified as Text
 import Gogol.Types (GBody (..))
 import Network.HTTP.Conduit (requestBodySource)
 import Network.HTTP.Media (MediaType, parseAccept, (//))
-import qualified Network.Mime as MIME
+import Network.Mime qualified as MIME
 import System.IO
 
 -- | Convenience function for obtaining the size of a file.
