@@ -3,12 +3,13 @@
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -23,228 +24,302 @@
 --               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.ContainerBuilder.Internal.Sum
-  ( -- * Xgafv
+  (
+
+    -- * Xgafv
     Xgafv
-      ( Xgafv_1,
+      (
+        Xgafv_1,
         Xgafv_2,
         ..
       ),
 
-    -- * AuditLogConfig_LogType
-    AuditLogConfig_LogType
-      ( AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
-        AuditLogConfig_LogType_ADMINREAD,
-        AuditLogConfig_LogType_DATAWRITE,
-        AuditLogConfig_LogType_DATAREAD,
+    -- * ApprovalResult_Decision
+    ApprovalResult_Decision
+      (
+        ApprovalResult_Decision_DECISIONUNSPECIFIED,
+        ApprovalResult_Decision_Approved,
+        ApprovalResult_Decision_Rejected,
         ..
       ),
 
-    -- * ChildStatusReference_Type
-    ChildStatusReference_Type
-      ( ChildStatusReference_Type_TYPEUNSPECIFIED,
-        ChildStatusReference_Type_TASKRUN,
+    -- * Build_Status
+    Build_Status
+      (
+        Build_Status_STATUSUNKNOWN,
+        Build_Status_Pending,
+        Build_Status_Queued,
+        Build_Status_Working,
+        Build_Status_Success,
+        Build_Status_Failure,
+        Build_Status_INTERNALERROR,
+        Build_Status_Timeout,
+        Build_Status_Cancelled,
+        Build_Status_Expired,
         ..
       ),
 
-    -- * GoogleDevtoolsCloudbuildV2Condition_Severity
-    GoogleDevtoolsCloudbuildV2Condition_Severity
-      ( GoogleDevtoolsCloudbuildV2Condition_Severity_SEVERITYUNSPECIFIED,
-        GoogleDevtoolsCloudbuildV2Condition_Severity_Warning,
-        GoogleDevtoolsCloudbuildV2Condition_Severity_Info,
+    -- * BuildApproval_State
+    BuildApproval_State
+      (
+        BuildApproval_State_STATEUNSPECIFIED,
+        BuildApproval_State_Pending,
+        BuildApproval_State_Approved,
+        BuildApproval_State_Rejected,
+        BuildApproval_State_Cancelled,
         ..
       ),
 
-    -- * GoogleDevtoolsCloudbuildV2Condition_Status
-    GoogleDevtoolsCloudbuildV2Condition_Status
-      ( GoogleDevtoolsCloudbuildV2Condition_Status_Unknown,
-        GoogleDevtoolsCloudbuildV2Condition_Status_True',
-        GoogleDevtoolsCloudbuildV2Condition_Status_False',
+    -- * BuildOptions_DefaultLogsBucketBehavior
+    BuildOptions_DefaultLogsBucketBehavior
+      (
+        BuildOptions_DefaultLogsBucketBehavior_DEFAULTLOGSBUCKETBEHAVIORUNSPECIFIED,
+        BuildOptions_DefaultLogsBucketBehavior_REGIONALUSEROWNEDBUCKET,
+        BuildOptions_DefaultLogsBucketBehavior_LEGACYBUCKET,
         ..
       ),
 
-    -- * InstallationState_Stage
-    InstallationState_Stage
-      ( InstallationState_Stage_STAGEUNSPECIFIED,
-        InstallationState_Stage_PENDINGCREATEAPP,
-        InstallationState_Stage_PENDINGUSEROAUTH,
-        InstallationState_Stage_PENDINGINSTALLAPP,
-        InstallationState_Stage_Complete,
+    -- * BuildOptions_LogStreamingOption
+    BuildOptions_LogStreamingOption
+      (
+        BuildOptions_LogStreamingOption_STREAMDEFAULT,
+        BuildOptions_LogStreamingOption_STREAMON,
+        BuildOptions_LogStreamingOption_STREAMOFF,
         ..
       ),
 
-    -- * ParamSpec_Type
-    ParamSpec_Type
-      ( ParamSpec_Type_TYPEUNSPECIFIED,
-        ParamSpec_Type_String,
-        ParamSpec_Type_Array,
-        ParamSpec_Type_Object,
+    -- * BuildOptions_Logging
+    BuildOptions_Logging
+      (
+        BuildOptions_Logging_LOGGINGUNSPECIFIED,
+        BuildOptions_Logging_Legacy,
+        BuildOptions_Logging_GCSONLY,
+        BuildOptions_Logging_STACKDRIVERONLY,
+        BuildOptions_Logging_CLOUDLOGGINGONLY,
+        BuildOptions_Logging_None,
         ..
       ),
 
-    -- * ParamValue_Type
-    ParamValue_Type
-      ( ParamValue_Type_TYPEUNSPECIFIED,
-        ParamValue_Type_String,
-        ParamValue_Type_Array,
-        ParamValue_Type_Object,
+    -- * BuildOptions_MachineType
+    BuildOptions_MachineType
+      (
+        BuildOptions_MachineType_Unspecified,
+        BuildOptions_MachineType_N1_HIGHCPU_8,
+        BuildOptions_MachineType_N1_HIGHCPU_32,
+        BuildOptions_MachineType_E2_HIGHCPU_8,
+        BuildOptions_MachineType_E2_HIGHCPU_32,
+        BuildOptions_MachineType_E2MEDIUM,
         ..
       ),
 
-    -- * PipelineRef_Resolver
-    PipelineRef_Resolver
-      ( PipelineRef_Resolver_RESOLVERNAMEUNSPECIFIED,
-        PipelineRef_Resolver_Bundles,
-        PipelineRef_Resolver_GCBREPO,
-        PipelineRef_Resolver_Git,
-        PipelineRef_Resolver_DEVELOPERCONNECT,
-        PipelineRef_Resolver_Default,
+    -- * BuildOptions_RequestedVerifyOption
+    BuildOptions_RequestedVerifyOption
+      (
+        BuildOptions_RequestedVerifyOption_NOTVERIFIED,
+        BuildOptions_RequestedVerifyOption_Verified,
         ..
       ),
 
-    -- * PipelineResult_Type
-    PipelineResult_Type
-      ( PipelineResult_Type_TYPEUNSPECIFIED,
-        PipelineResult_Type_String,
-        PipelineResult_Type_Array,
-        PipelineResult_Type_Object,
+    -- * BuildOptions_SourceProvenanceHashItem
+    BuildOptions_SourceProvenanceHashItem
+      (
+        BuildOptions_SourceProvenanceHashItem_None,
+        BuildOptions_SourceProvenanceHashItem_SHA256,
+        BuildOptions_SourceProvenanceHashItem_MD5,
+        BuildOptions_SourceProvenanceHashItem_GO_MODULE_H1,
+        BuildOptions_SourceProvenanceHashItem_SHA512,
         ..
       ),
 
-    -- * PipelineRun_PipelineRunStatus
-    PipelineRun_PipelineRunStatus
-      ( PipelineRun_PipelineRunStatus_PIPELINERUNSTATUSUNSPECIFIED,
-        PipelineRun_PipelineRunStatus_PIPELINERUNCANCELLED,
+    -- * BuildOptions_SubstitutionOption
+    BuildOptions_SubstitutionOption
+      (
+        BuildOptions_SubstitutionOption_MUSTMATCH,
+        BuildOptions_SubstitutionOption_ALLOWLOOSE,
         ..
       ),
 
-    -- * PropertySpec_Type
-    PropertySpec_Type
-      ( PropertySpec_Type_TYPEUNSPECIFIED,
-        PropertySpec_Type_String,
+    -- * BuildStep_Status
+    BuildStep_Status
+      (
+        BuildStep_Status_STATUSUNKNOWN,
+        BuildStep_Status_Pending,
+        BuildStep_Status_Queued,
+        BuildStep_Status_Working,
+        BuildStep_Status_Success,
+        BuildStep_Status_Failure,
+        BuildStep_Status_INTERNALERROR,
+        BuildStep_Status_Timeout,
+        BuildStep_Status_Cancelled,
+        BuildStep_Status_Expired,
         ..
       ),
 
-    -- * Provenance_Enabled
-    Provenance_Enabled
-      ( Provenance_Enabled_ENABLEDUNSPECIFIED,
-        Provenance_Enabled_Required,
-        Provenance_Enabled_Optimistic,
-        Provenance_Enabled_Disabled,
+    -- * BuildTrigger_EventType
+    BuildTrigger_EventType
+      (
+        BuildTrigger_EventType_EVENTTYPEUNSPECIFIED,
+        BuildTrigger_EventType_Repo,
+        BuildTrigger_EventType_Webhook,
+        BuildTrigger_EventType_Pubsub,
+        BuildTrigger_EventType_Manual,
         ..
       ),
 
-    -- * Provenance_Region
-    Provenance_Region
-      ( Provenance_Region_REGIONUNSPECIFIED,
-        Provenance_Region_Global,
+    -- * BuildTrigger_IncludeBuildLogs
+    BuildTrigger_IncludeBuildLogs
+      (
+        BuildTrigger_IncludeBuildLogs_INCLUDEBUILDLOGSUNSPECIFIED,
+        BuildTrigger_IncludeBuildLogs_INCLUDEBUILDLOGSWITHSTATUS,
         ..
       ),
 
-    -- * Provenance_Storage
-    Provenance_Storage
-      ( Provenance_Storage_STORAGEUNSPECIFIED,
-        Provenance_Storage_PREFERARTIFACTPROJECT,
-        Provenance_Storage_ARTIFACTPROJECTONLY,
-        Provenance_Storage_BUILDPROJECTONLY,
+    -- * FailureInfo_Type
+    FailureInfo_Type
+      (
+        FailureInfo_Type_FAILURETYPEUNSPECIFIED,
+        FailureInfo_Type_PUSHFAILED,
+        FailureInfo_Type_PUSHIMAGENOTFOUND,
+        FailureInfo_Type_PUSHNOTAUTHORIZED,
+        FailureInfo_Type_LOGGINGFAILURE,
+        FailureInfo_Type_USERBUILDSTEP,
+        FailureInfo_Type_FETCHSOURCEFAILED,
         ..
       ),
 
-    -- * ResultValue_Type
-    ResultValue_Type
-      ( ResultValue_Type_TYPEUNSPECIFIED,
-        ResultValue_Type_String,
-        ResultValue_Type_Array,
-        ResultValue_Type_Object,
+    -- * GitFileSource_RepoType
+    GitFileSource_RepoType
+      (
+        GitFileSource_RepoType_Unknown,
+        GitFileSource_RepoType_CLOUDSOURCEREPOSITORIES,
+        GitFileSource_RepoType_Github,
+        GitFileSource_RepoType_BITBUCKETSERVER,
+        GitFileSource_RepoType_Gitlab,
+        GitFileSource_RepoType_BITBUCKETCLOUD,
         ..
       ),
 
-    -- * Security_PrivilegeMode
-    Security_PrivilegeMode
-      ( Security_PrivilegeMode_PRIVILEGEMODEUNSPECIFIED,
-        Security_PrivilegeMode_Privileged,
-        Security_PrivilegeMode_Unprivileged,
+    -- * GitRepoSource_RepoType
+    GitRepoSource_RepoType
+      (
+        GitRepoSource_RepoType_Unknown,
+        GitRepoSource_RepoType_CLOUDSOURCEREPOSITORIES,
+        GitRepoSource_RepoType_Github,
+        GitRepoSource_RepoType_BITBUCKETSERVER,
+        GitRepoSource_RepoType_Gitlab,
+        GitRepoSource_RepoType_BITBUCKETCLOUD,
         ..
       ),
 
-    -- * Step_OnError
-    Step_OnError
-      ( Step_OnError_ONERRORTYPEUNSPECIFIED,
-        Step_OnError_STOPANDFAIL,
-        Step_OnError_Continue,
+    -- * Hash_Type
+    Hash_Type
+      (
+        Hash_Type_None,
+        Hash_Type_SHA256,
+        Hash_Type_MD5,
+        Hash_Type_GO_MODULE_H1,
+        Hash_Type_SHA512,
         ..
       ),
 
-    -- * StepRef_Resolver
-    StepRef_Resolver
-      ( StepRef_Resolver_RESOLVERNAMEUNSPECIFIED,
-        StepRef_Resolver_Bundles,
-        StepRef_Resolver_GCBREPO,
-        StepRef_Resolver_Git,
-        StepRef_Resolver_DEVELOPERCONNECT,
-        StepRef_Resolver_Default,
+    -- * NetworkConfig_EgressOption
+    NetworkConfig_EgressOption
+      (
+        NetworkConfig_EgressOption_EGRESSOPTIONUNSPECIFIED,
+        NetworkConfig_EgressOption_NOPUBLICEGRESS,
+        NetworkConfig_EgressOption_PUBLICEGRESS,
         ..
       ),
 
-    -- * TaskRef_Resolver
-    TaskRef_Resolver
-      ( TaskRef_Resolver_RESOLVERNAMEUNSPECIFIED,
-        TaskRef_Resolver_Bundles,
-        TaskRef_Resolver_GCBREPO,
-        TaskRef_Resolver_Git,
-        TaskRef_Resolver_DEVELOPERCONNECT,
-        TaskRef_Resolver_Default,
+    -- * PubsubConfig_State
+    PubsubConfig_State
+      (
+        PubsubConfig_State_STATEUNSPECIFIED,
+        PubsubConfig_State_OK,
+        PubsubConfig_State_SUBSCRIPTIONDELETED,
+        PubsubConfig_State_TOPICDELETED,
+        PubsubConfig_State_SUBSCRIPTIONMISCONFIGURED,
         ..
       ),
 
-    -- * TaskResult_Type
-    TaskResult_Type
-      ( TaskResult_Type_TYPEUNSPECIFIED,
-        TaskResult_Type_String,
-        TaskResult_Type_Array,
-        TaskResult_Type_Object,
+    -- * PullRequestFilter_CommentControl
+    PullRequestFilter_CommentControl
+      (
+        PullRequestFilter_CommentControl_COMMENTSDISABLED,
+        PullRequestFilter_CommentControl_COMMENTSENABLED,
+        PullRequestFilter_CommentControl_COMMENTSENABLEDFOREXTERNALCONTRIBUTORSONLY,
         ..
       ),
 
-    -- * TaskSpec_ManagedSidecarsItem
-    TaskSpec_ManagedSidecarsItem
-      ( TaskSpec_ManagedSidecarsItem_MANAGEDSIDECARUNSPECIFIED,
-        TaskSpec_ManagedSidecarsItem_PRIVILEGEDDOCKERDAEMON,
+    -- * RepositoryEventConfig_RepositoryType
+    RepositoryEventConfig_RepositoryType
+      (
+        RepositoryEventConfig_RepositoryType_REPOSITORYTYPEUNSPECIFIED,
+        RepositoryEventConfig_RepositoryType_Github,
+        RepositoryEventConfig_RepositoryType_GITHUBENTERPRISE,
+        RepositoryEventConfig_RepositoryType_GITLABENTERPRISE,
+        RepositoryEventConfig_RepositoryType_BITBUCKETDATACENTER,
+        RepositoryEventConfig_RepositoryType_BITBUCKETCLOUD,
         ..
       ),
 
-    -- * WhenExpression_ExpressionOperator
-    WhenExpression_ExpressionOperator
-      ( WhenExpression_ExpressionOperator_EXPRESSIONOPERATORUNSPECIFIED,
-        WhenExpression_ExpressionOperator_IN,
-        WhenExpression_ExpressionOperator_NOTIN,
+    -- * StorageSource_SourceFetcher
+    StorageSource_SourceFetcher
+      (
+        StorageSource_SourceFetcher_SOURCEFETCHERUNSPECIFIED,
+        StorageSource_SourceFetcher_Gsutil,
+        StorageSource_SourceFetcher_GCSFETCHER,
         ..
       ),
 
-    -- * ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType
-    ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType
-      ( ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType_REFTYPEUNSPECIFIED,
-        ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType_Tag,
-        ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType_Branch,
+    -- * Warning_Priority
+    Warning_Priority
+      (
+        Warning_Priority_PRIORITYUNSPECIFIED,
+        Warning_Priority_Info,
+        Warning_Priority_Warning,
+        Warning_Priority_Alert,
         ..
       ),
-  )
-where
 
-import Gogol.Prelude qualified as Core
+    -- * WebhookConfig_State
+    WebhookConfig_State
+      (
+        WebhookConfig_State_STATEUNSPECIFIED,
+        WebhookConfig_State_OK,
+        WebhookConfig_State_SECRETDELETED,
+        ..
+      ),
+
+    -- * WorkerPool_State
+    WorkerPool_State
+      (
+        WorkerPool_State_STATEUNSPECIFIED,
+        WorkerPool_State_Creating,
+        WorkerPool_State_Running,
+        WorkerPool_State_Deleting,
+        WorkerPool_State_Deleted,
+        WorkerPool_State_Updating,
+        ..
+      ),
+  ) where
+
+import qualified Gogol.Prelude as Core
 
 -- | V1 error format.
-newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype Xgafv = Xgafv { fromXgafv :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
 -- | v1 error format
 pattern Xgafv_1 :: Xgafv
@@ -257,810 +332,998 @@ pattern Xgafv_2 = Xgafv "2"
 {-# COMPLETE
   Xgafv_1,
   Xgafv_2,
-  Xgafv
-  #-}
+  Xgafv #-}
 
--- | The log type that this config enables.
-newtype AuditLogConfig_LogType = AuditLogConfig_LogType {fromAuditLogConfig_LogType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Required. The decision of this manual approval.
+newtype ApprovalResult_Decision = ApprovalResult_Decision { fromApprovalResult_Decision :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- | Default case. Should never be this.
-pattern AuditLogConfig_LogType_LOGTYPEUNSPECIFIED :: AuditLogConfig_LogType
-pattern AuditLogConfig_LogType_LOGTYPEUNSPECIFIED = AuditLogConfig_LogType "LOG_TYPE_UNSPECIFIED"
+-- | Default enum type. This should not be used.
+pattern ApprovalResult_Decision_DECISIONUNSPECIFIED :: ApprovalResult_Decision
+pattern ApprovalResult_Decision_DECISIONUNSPECIFIED = ApprovalResult_Decision "DECISION_UNSPECIFIED"
 
--- | Admin reads. Example: CloudIAM getIamPolicy
-pattern AuditLogConfig_LogType_ADMINREAD :: AuditLogConfig_LogType
-pattern AuditLogConfig_LogType_ADMINREAD = AuditLogConfig_LogType "ADMIN_READ"
+-- | Build is approved.
+pattern ApprovalResult_Decision_Approved :: ApprovalResult_Decision
+pattern ApprovalResult_Decision_Approved = ApprovalResult_Decision "APPROVED"
 
--- | Data writes. Example: CloudSQL Users create
-pattern AuditLogConfig_LogType_DATAWRITE :: AuditLogConfig_LogType
-pattern AuditLogConfig_LogType_DATAWRITE = AuditLogConfig_LogType "DATA_WRITE"
-
--- | Data reads. Example: CloudSQL Users list
-pattern AuditLogConfig_LogType_DATAREAD :: AuditLogConfig_LogType
-pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
+-- | Build is rejected.
+pattern ApprovalResult_Decision_Rejected :: ApprovalResult_Decision
+pattern ApprovalResult_Decision_Rejected = ApprovalResult_Decision "REJECTED"
 
 {-# COMPLETE
-  AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
-  AuditLogConfig_LogType_ADMINREAD,
-  AuditLogConfig_LogType_DATAWRITE,
-  AuditLogConfig_LogType_DATAREAD,
-  AuditLogConfig_LogType
-  #-}
+  ApprovalResult_Decision_DECISIONUNSPECIFIED,
+  ApprovalResult_Decision_Approved,
+  ApprovalResult_Decision_Rejected,
+  ApprovalResult_Decision #-}
 
--- | Output only. Type of the child reference.
-newtype ChildStatusReference_Type = ChildStatusReference_Type {fromChildStatusReference_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Output only. Status of the build.
+newtype Build_Status = Build_Status { fromBuild_Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- | Default enum type; should not be used.
-pattern ChildStatusReference_Type_TYPEUNSPECIFIED :: ChildStatusReference_Type
-pattern ChildStatusReference_Type_TYPEUNSPECIFIED = ChildStatusReference_Type "TYPE_UNSPECIFIED"
+-- | Status of the build is unknown.
+pattern Build_Status_STATUSUNKNOWN :: Build_Status
+pattern Build_Status_STATUSUNKNOWN = Build_Status "STATUS_UNKNOWN"
 
--- | TaskRun.
-pattern ChildStatusReference_Type_TASKRUN :: ChildStatusReference_Type
-pattern ChildStatusReference_Type_TASKRUN = ChildStatusReference_Type "TASK_RUN"
+-- | Build has been created and is pending execution and queuing. It has not been queued.
+pattern Build_Status_Pending :: Build_Status
+pattern Build_Status_Pending = Build_Status "PENDING"
 
-{-# COMPLETE
-  ChildStatusReference_Type_TYPEUNSPECIFIED,
-  ChildStatusReference_Type_TASKRUN,
-  ChildStatusReference_Type
-  #-}
+-- | Build or step is queued; work has not yet begun.
+pattern Build_Status_Queued :: Build_Status
+pattern Build_Status_Queued = Build_Status "QUEUED"
 
--- | Severity with which to treat failures of this type of condition.
-newtype GoogleDevtoolsCloudbuildV2Condition_Severity = GoogleDevtoolsCloudbuildV2Condition_Severity {fromGoogleDevtoolsCloudbuildV2Condition_Severity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Build or step is being executed.
+pattern Build_Status_Working :: Build_Status
+pattern Build_Status_Working = Build_Status "WORKING"
 
--- | Default enum type; should not be used.
-pattern GoogleDevtoolsCloudbuildV2Condition_Severity_SEVERITYUNSPECIFIED :: GoogleDevtoolsCloudbuildV2Condition_Severity
-pattern GoogleDevtoolsCloudbuildV2Condition_Severity_SEVERITYUNSPECIFIED = GoogleDevtoolsCloudbuildV2Condition_Severity "SEVERITY_UNSPECIFIED"
+-- | Build or step finished successfully.
+pattern Build_Status_Success :: Build_Status
+pattern Build_Status_Success = Build_Status "SUCCESS"
 
--- | Severity is warning.
-pattern GoogleDevtoolsCloudbuildV2Condition_Severity_Warning :: GoogleDevtoolsCloudbuildV2Condition_Severity
-pattern GoogleDevtoolsCloudbuildV2Condition_Severity_Warning = GoogleDevtoolsCloudbuildV2Condition_Severity "WARNING"
+-- | Build or step failed to complete successfully.
+pattern Build_Status_Failure :: Build_Status
+pattern Build_Status_Failure = Build_Status "FAILURE"
 
--- | Severity is informational only.
-pattern GoogleDevtoolsCloudbuildV2Condition_Severity_Info :: GoogleDevtoolsCloudbuildV2Condition_Severity
-pattern GoogleDevtoolsCloudbuildV2Condition_Severity_Info = GoogleDevtoolsCloudbuildV2Condition_Severity "INFO"
+-- | Build or step failed due to an internal cause.
+pattern Build_Status_INTERNALERROR :: Build_Status
+pattern Build_Status_INTERNALERROR = Build_Status "INTERNAL_ERROR"
 
-{-# COMPLETE
-  GoogleDevtoolsCloudbuildV2Condition_Severity_SEVERITYUNSPECIFIED,
-  GoogleDevtoolsCloudbuildV2Condition_Severity_Warning,
-  GoogleDevtoolsCloudbuildV2Condition_Severity_Info,
-  GoogleDevtoolsCloudbuildV2Condition_Severity
-  #-}
+-- | Build or step took longer than was allowed.
+pattern Build_Status_Timeout :: Build_Status
+pattern Build_Status_Timeout = Build_Status "TIMEOUT"
 
--- | Status of the condition.
-newtype GoogleDevtoolsCloudbuildV2Condition_Status = GoogleDevtoolsCloudbuildV2Condition_Status {fromGoogleDevtoolsCloudbuildV2Condition_Status :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Build or step was canceled by a user.
+pattern Build_Status_Cancelled :: Build_Status
+pattern Build_Status_Cancelled = Build_Status "CANCELLED"
 
--- | Default enum type indicating execution is still ongoing.
-pattern GoogleDevtoolsCloudbuildV2Condition_Status_Unknown :: GoogleDevtoolsCloudbuildV2Condition_Status
-pattern GoogleDevtoolsCloudbuildV2Condition_Status_Unknown = GoogleDevtoolsCloudbuildV2Condition_Status "UNKNOWN"
-
--- | Success
-pattern GoogleDevtoolsCloudbuildV2Condition_Status_True' :: GoogleDevtoolsCloudbuildV2Condition_Status
-pattern GoogleDevtoolsCloudbuildV2Condition_Status_True' = GoogleDevtoolsCloudbuildV2Condition_Status "TRUE"
-
--- | Failure
-pattern GoogleDevtoolsCloudbuildV2Condition_Status_False' :: GoogleDevtoolsCloudbuildV2Condition_Status
-pattern GoogleDevtoolsCloudbuildV2Condition_Status_False' = GoogleDevtoolsCloudbuildV2Condition_Status "FALSE"
+-- | Build was enqueued for longer than the value of @queue_ttl@.
+pattern Build_Status_Expired :: Build_Status
+pattern Build_Status_Expired = Build_Status "EXPIRED"
 
 {-# COMPLETE
-  GoogleDevtoolsCloudbuildV2Condition_Status_Unknown,
-  GoogleDevtoolsCloudbuildV2Condition_Status_True',
-  GoogleDevtoolsCloudbuildV2Condition_Status_False',
-  GoogleDevtoolsCloudbuildV2Condition_Status
-  #-}
+  Build_Status_STATUSUNKNOWN,
+  Build_Status_Pending,
+  Build_Status_Queued,
+  Build_Status_Working,
+  Build_Status_Success,
+  Build_Status_Failure,
+  Build_Status_INTERNALERROR,
+  Build_Status_Timeout,
+  Build_Status_Cancelled,
+  Build_Status_Expired,
+  Build_Status #-}
 
--- | Output only. Current step of the installation process.
-newtype InstallationState_Stage = InstallationState_Stage {fromInstallationState_Stage :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Output only. The state of this build\'s approval.
+newtype BuildApproval_State = BuildApproval_State { fromBuildApproval_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- | No stage specified.
-pattern InstallationState_Stage_STAGEUNSPECIFIED :: InstallationState_Stage
-pattern InstallationState_Stage_STAGEUNSPECIFIED = InstallationState_Stage "STAGE_UNSPECIFIED"
+-- | Default enum type. This should not be used.
+pattern BuildApproval_State_STATEUNSPECIFIED :: BuildApproval_State
+pattern BuildApproval_State_STATEUNSPECIFIED = BuildApproval_State "STATE_UNSPECIFIED"
 
--- | Only for GitHub Enterprise. An App creation has been requested. The user needs to confirm the creation in their GitHub enterprise host.
-pattern InstallationState_Stage_PENDINGCREATEAPP :: InstallationState_Stage
-pattern InstallationState_Stage_PENDINGCREATEAPP = InstallationState_Stage "PENDING_CREATE_APP"
+-- | Build approval is pending.
+pattern BuildApproval_State_Pending :: BuildApproval_State
+pattern BuildApproval_State_Pending = BuildApproval_State "PENDING"
 
--- | User needs to authorize the GitHub (or Enterprise) App via OAuth.
-pattern InstallationState_Stage_PENDINGUSEROAUTH :: InstallationState_Stage
-pattern InstallationState_Stage_PENDINGUSEROAUTH = InstallationState_Stage "PENDING_USER_OAUTH"
+-- | Build approval has been approved.
+pattern BuildApproval_State_Approved :: BuildApproval_State
+pattern BuildApproval_State_Approved = BuildApproval_State "APPROVED"
 
--- | User needs to follow the link to install the GitHub (or Enterprise) App.
-pattern InstallationState_Stage_PENDINGINSTALLAPP :: InstallationState_Stage
-pattern InstallationState_Stage_PENDINGINSTALLAPP = InstallationState_Stage "PENDING_INSTALL_APP"
+-- | Build approval has been rejected.
+pattern BuildApproval_State_Rejected :: BuildApproval_State
+pattern BuildApproval_State_Rejected = BuildApproval_State "REJECTED"
 
--- | Installation process has been completed.
-pattern InstallationState_Stage_Complete :: InstallationState_Stage
-pattern InstallationState_Stage_Complete = InstallationState_Stage "COMPLETE"
-
-{-# COMPLETE
-  InstallationState_Stage_STAGEUNSPECIFIED,
-  InstallationState_Stage_PENDINGCREATEAPP,
-  InstallationState_Stage_PENDINGUSEROAUTH,
-  InstallationState_Stage_PENDINGINSTALLAPP,
-  InstallationState_Stage_Complete,
-  InstallationState_Stage
-  #-}
-
--- | Type of ParamSpec
-newtype ParamSpec_Type = ParamSpec_Type {fromParamSpec_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Default enum type; should not be used.
-pattern ParamSpec_Type_TYPEUNSPECIFIED :: ParamSpec_Type
-pattern ParamSpec_Type_TYPEUNSPECIFIED = ParamSpec_Type "TYPE_UNSPECIFIED"
-
--- | Default
-pattern ParamSpec_Type_String :: ParamSpec_Type
-pattern ParamSpec_Type_String = ParamSpec_Type "STRING"
-
--- | Array type.
-pattern ParamSpec_Type_Array :: ParamSpec_Type
-pattern ParamSpec_Type_Array = ParamSpec_Type "ARRAY"
-
--- | Object type.
-pattern ParamSpec_Type_Object :: ParamSpec_Type
-pattern ParamSpec_Type_Object = ParamSpec_Type "OBJECT"
+-- | Build was cancelled while it was still pending approval.
+pattern BuildApproval_State_Cancelled :: BuildApproval_State
+pattern BuildApproval_State_Cancelled = BuildApproval_State "CANCELLED"
 
 {-# COMPLETE
-  ParamSpec_Type_TYPEUNSPECIFIED,
-  ParamSpec_Type_String,
-  ParamSpec_Type_Array,
-  ParamSpec_Type_Object,
-  ParamSpec_Type
-  #-}
+  BuildApproval_State_STATEUNSPECIFIED,
+  BuildApproval_State_Pending,
+  BuildApproval_State_Approved,
+  BuildApproval_State_Rejected,
+  BuildApproval_State_Cancelled,
+  BuildApproval_State #-}
 
--- | Type of parameter.
-newtype ParamValue_Type = ParamValue_Type {fromParamValue_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Optional. Option to specify how default logs buckets are setup.
+newtype BuildOptions_DefaultLogsBucketBehavior = BuildOptions_DefaultLogsBucketBehavior { fromBuildOptions_DefaultLogsBucketBehavior :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- | Default enum type; should not be used.
-pattern ParamValue_Type_TYPEUNSPECIFIED :: ParamValue_Type
-pattern ParamValue_Type_TYPEUNSPECIFIED = ParamValue_Type "TYPE_UNSPECIFIED"
+-- | Unspecified.
+pattern BuildOptions_DefaultLogsBucketBehavior_DEFAULTLOGSBUCKETBEHAVIORUNSPECIFIED :: BuildOptions_DefaultLogsBucketBehavior
+pattern BuildOptions_DefaultLogsBucketBehavior_DEFAULTLOGSBUCKETBEHAVIORUNSPECIFIED = BuildOptions_DefaultLogsBucketBehavior "DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED"
 
--- | Default
-pattern ParamValue_Type_String :: ParamValue_Type
-pattern ParamValue_Type_String = ParamValue_Type "STRING"
+-- | Bucket is located in user-owned project in the same region as the build. The builder service account must have access to create and write to Cloud Storage buckets in the build project.
+pattern BuildOptions_DefaultLogsBucketBehavior_REGIONALUSEROWNEDBUCKET :: BuildOptions_DefaultLogsBucketBehavior
+pattern BuildOptions_DefaultLogsBucketBehavior_REGIONALUSEROWNEDBUCKET = BuildOptions_DefaultLogsBucketBehavior "REGIONAL_USER_OWNED_BUCKET"
 
--- | Array type
-pattern ParamValue_Type_Array :: ParamValue_Type
-pattern ParamValue_Type_Array = ParamValue_Type "ARRAY"
-
--- | Object type
-pattern ParamValue_Type_Object :: ParamValue_Type
-pattern ParamValue_Type_Object = ParamValue_Type "OBJECT"
+-- | Bucket is located in a Google-owned project and is not regionalized.
+pattern BuildOptions_DefaultLogsBucketBehavior_LEGACYBUCKET :: BuildOptions_DefaultLogsBucketBehavior
+pattern BuildOptions_DefaultLogsBucketBehavior_LEGACYBUCKET = BuildOptions_DefaultLogsBucketBehavior "LEGACY_BUCKET"
 
 {-# COMPLETE
-  ParamValue_Type_TYPEUNSPECIFIED,
-  ParamValue_Type_String,
-  ParamValue_Type_Array,
-  ParamValue_Type_Object,
-  ParamValue_Type
-  #-}
+  BuildOptions_DefaultLogsBucketBehavior_DEFAULTLOGSBUCKETBEHAVIORUNSPECIFIED,
+  BuildOptions_DefaultLogsBucketBehavior_REGIONALUSEROWNEDBUCKET,
+  BuildOptions_DefaultLogsBucketBehavior_LEGACYBUCKET,
+  BuildOptions_DefaultLogsBucketBehavior #-}
 
--- | Resolver is the name of the resolver that should perform resolution of the referenced Tekton resource.
-newtype PipelineRef_Resolver = PipelineRef_Resolver {fromPipelineRef_Resolver :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Option to define build log streaming behavior to Cloud Storage.
+newtype BuildOptions_LogStreamingOption = BuildOptions_LogStreamingOption { fromBuildOptions_LogStreamingOption :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- | Default enum type; should not be used.
-pattern PipelineRef_Resolver_RESOLVERNAMEUNSPECIFIED :: PipelineRef_Resolver
-pattern PipelineRef_Resolver_RESOLVERNAMEUNSPECIFIED = PipelineRef_Resolver "RESOLVER_NAME_UNSPECIFIED"
+-- | Service may automatically determine build log streaming behavior.
+pattern BuildOptions_LogStreamingOption_STREAMDEFAULT :: BuildOptions_LogStreamingOption
+pattern BuildOptions_LogStreamingOption_STREAMDEFAULT = BuildOptions_LogStreamingOption "STREAM_DEFAULT"
 
--- | Bundles resolver. https:\/\/tekton.dev\/docs\/pipelines\/bundle-resolver\/
-pattern PipelineRef_Resolver_Bundles :: PipelineRef_Resolver
-pattern PipelineRef_Resolver_Bundles = PipelineRef_Resolver "BUNDLES"
+-- | Build logs should be streamed to Cloud Storage.
+pattern BuildOptions_LogStreamingOption_STREAMON :: BuildOptions_LogStreamingOption
+pattern BuildOptions_LogStreamingOption_STREAMON = BuildOptions_LogStreamingOption "STREAM_ON"
 
--- | GCB repo resolver.
-pattern PipelineRef_Resolver_GCBREPO :: PipelineRef_Resolver
-pattern PipelineRef_Resolver_GCBREPO = PipelineRef_Resolver "GCB_REPO"
-
--- | Simple Git resolver. https:\/\/tekton.dev\/docs\/pipelines\/git-resolver\/
-pattern PipelineRef_Resolver_Git :: PipelineRef_Resolver
-pattern PipelineRef_Resolver_Git = PipelineRef_Resolver "GIT"
-
--- | Developer Connect resolver.
-pattern PipelineRef_Resolver_DEVELOPERCONNECT :: PipelineRef_Resolver
-pattern PipelineRef_Resolver_DEVELOPERCONNECT = PipelineRef_Resolver "DEVELOPER_CONNECT"
-
--- | Default resolver.
-pattern PipelineRef_Resolver_Default :: PipelineRef_Resolver
-pattern PipelineRef_Resolver_Default = PipelineRef_Resolver "DEFAULT"
+-- | Build logs should not be streamed to Cloud Storage; they will be written when the build is completed.
+pattern BuildOptions_LogStreamingOption_STREAMOFF :: BuildOptions_LogStreamingOption
+pattern BuildOptions_LogStreamingOption_STREAMOFF = BuildOptions_LogStreamingOption "STREAM_OFF"
 
 {-# COMPLETE
-  PipelineRef_Resolver_RESOLVERNAMEUNSPECIFIED,
-  PipelineRef_Resolver_Bundles,
-  PipelineRef_Resolver_GCBREPO,
-  PipelineRef_Resolver_Git,
-  PipelineRef_Resolver_DEVELOPERCONNECT,
-  PipelineRef_Resolver_Default,
-  PipelineRef_Resolver
-  #-}
+  BuildOptions_LogStreamingOption_STREAMDEFAULT,
+  BuildOptions_LogStreamingOption_STREAMON,
+  BuildOptions_LogStreamingOption_STREAMOFF,
+  BuildOptions_LogStreamingOption #-}
 
--- | Output only. The type of data that the result holds.
-newtype PipelineResult_Type = PipelineResult_Type {fromPipelineResult_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Option to specify the logging mode, which determines if and where build logs are stored.
+newtype BuildOptions_Logging = BuildOptions_Logging { fromBuildOptions_Logging :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- | Default enum type; should not be used.
-pattern PipelineResult_Type_TYPEUNSPECIFIED :: PipelineResult_Type
-pattern PipelineResult_Type_TYPEUNSPECIFIED = PipelineResult_Type "TYPE_UNSPECIFIED"
+-- | The service determines the logging mode. The default is @LEGACY@. Do not rely on the default logging behavior as it may change in the future.
+pattern BuildOptions_Logging_LOGGINGUNSPECIFIED :: BuildOptions_Logging
+pattern BuildOptions_Logging_LOGGINGUNSPECIFIED = BuildOptions_Logging "LOGGING_UNSPECIFIED"
 
--- | Default
-pattern PipelineResult_Type_String :: PipelineResult_Type
-pattern PipelineResult_Type_String = PipelineResult_Type "STRING"
+-- | Build logs are stored in Cloud Logging and Cloud Storage.
+pattern BuildOptions_Logging_Legacy :: BuildOptions_Logging
+pattern BuildOptions_Logging_Legacy = BuildOptions_Logging "LEGACY"
 
--- | Array type
-pattern PipelineResult_Type_Array :: PipelineResult_Type
-pattern PipelineResult_Type_Array = PipelineResult_Type "ARRAY"
+-- | Build logs are stored in Cloud Storage.
+pattern BuildOptions_Logging_GCSONLY :: BuildOptions_Logging
+pattern BuildOptions_Logging_GCSONLY = BuildOptions_Logging "GCS_ONLY"
 
--- | Object type
-pattern PipelineResult_Type_Object :: PipelineResult_Type
-pattern PipelineResult_Type_Object = PipelineResult_Type "OBJECT"
+-- | This option is the same as CLOUD/LOGGING/ONLY.
+pattern BuildOptions_Logging_STACKDRIVERONLY :: BuildOptions_Logging
+pattern BuildOptions_Logging_STACKDRIVERONLY = BuildOptions_Logging "STACKDRIVER_ONLY"
 
-{-# COMPLETE
-  PipelineResult_Type_TYPEUNSPECIFIED,
-  PipelineResult_Type_String,
-  PipelineResult_Type_Array,
-  PipelineResult_Type_Object,
-  PipelineResult_Type
-  #-}
+-- | Build logs are stored in Cloud Logging. Selecting this option will not allow <https://cloud.google.com/sdk/gcloud/reference/builds/log logs streaming>.
+pattern BuildOptions_Logging_CLOUDLOGGINGONLY :: BuildOptions_Logging
+pattern BuildOptions_Logging_CLOUDLOGGINGONLY = BuildOptions_Logging "CLOUD_LOGGING_ONLY"
 
--- | Pipelinerun status the user can provide. Used for cancellation.
-newtype PipelineRun_PipelineRunStatus = PipelineRun_PipelineRunStatus {fromPipelineRun_PipelineRunStatus :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Default enum type; should not be used.
-pattern PipelineRun_PipelineRunStatus_PIPELINERUNSTATUSUNSPECIFIED :: PipelineRun_PipelineRunStatus
-pattern PipelineRun_PipelineRunStatus_PIPELINERUNSTATUSUNSPECIFIED = PipelineRun_PipelineRunStatus "PIPELINE_RUN_STATUS_UNSPECIFIED"
-
--- | Cancelled status.
-pattern PipelineRun_PipelineRunStatus_PIPELINERUNCANCELLED :: PipelineRun_PipelineRunStatus
-pattern PipelineRun_PipelineRunStatus_PIPELINERUNCANCELLED = PipelineRun_PipelineRunStatus "PIPELINE_RUN_CANCELLED"
+-- | Turn off all logging. No build logs will be captured.
+pattern BuildOptions_Logging_None :: BuildOptions_Logging
+pattern BuildOptions_Logging_None = BuildOptions_Logging "NONE"
 
 {-# COMPLETE
-  PipelineRun_PipelineRunStatus_PIPELINERUNSTATUSUNSPECIFIED,
-  PipelineRun_PipelineRunStatus_PIPELINERUNCANCELLED,
-  PipelineRun_PipelineRunStatus
-  #-}
+  BuildOptions_Logging_LOGGINGUNSPECIFIED,
+  BuildOptions_Logging_Legacy,
+  BuildOptions_Logging_GCSONLY,
+  BuildOptions_Logging_STACKDRIVERONLY,
+  BuildOptions_Logging_CLOUDLOGGINGONLY,
+  BuildOptions_Logging_None,
+  BuildOptions_Logging #-}
 
--- | A type for the object.
-newtype PropertySpec_Type = PropertySpec_Type {fromPropertySpec_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Compute Engine machine type on which to run the build.
+newtype BuildOptions_MachineType = BuildOptions_MachineType { fromBuildOptions_MachineType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- | Default enum type; should not be used.
-pattern PropertySpec_Type_TYPEUNSPECIFIED :: PropertySpec_Type
-pattern PropertySpec_Type_TYPEUNSPECIFIED = PropertySpec_Type "TYPE_UNSPECIFIED"
+-- | Standard machine type.
+pattern BuildOptions_MachineType_Unspecified :: BuildOptions_MachineType
+pattern BuildOptions_MachineType_Unspecified = BuildOptions_MachineType "UNSPECIFIED"
 
--- | Default
-pattern PropertySpec_Type_String :: PropertySpec_Type
-pattern PropertySpec_Type_String = PropertySpec_Type "STRING"
+-- | Highcpu machine with 8 CPUs.
+pattern BuildOptions_MachineType_N1_HIGHCPU_8 :: BuildOptions_MachineType
+pattern BuildOptions_MachineType_N1_HIGHCPU_8 = BuildOptions_MachineType "N1_HIGHCPU_8"
 
-{-# COMPLETE
-  PropertySpec_Type_TYPEUNSPECIFIED,
-  PropertySpec_Type_String,
-  PropertySpec_Type
-  #-}
+-- | Highcpu machine with 32 CPUs.
+pattern BuildOptions_MachineType_N1_HIGHCPU_32 :: BuildOptions_MachineType
+pattern BuildOptions_MachineType_N1_HIGHCPU_32 = BuildOptions_MachineType "N1_HIGHCPU_32"
 
--- | Optional. Provenance push mode.
-newtype Provenance_Enabled = Provenance_Enabled {fromProvenance_Enabled :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Highcpu e2 machine with 8 CPUs.
+pattern BuildOptions_MachineType_E2_HIGHCPU_8 :: BuildOptions_MachineType
+pattern BuildOptions_MachineType_E2_HIGHCPU_8 = BuildOptions_MachineType "E2_HIGHCPU_8"
 
--- | Default to disabled (before AA regionalization), optimistic after
-pattern Provenance_Enabled_ENABLEDUNSPECIFIED :: Provenance_Enabled
-pattern Provenance_Enabled_ENABLEDUNSPECIFIED = Provenance_Enabled "ENABLED_UNSPECIFIED"
+-- | Highcpu e2 machine with 32 CPUs.
+pattern BuildOptions_MachineType_E2_HIGHCPU_32 :: BuildOptions_MachineType
+pattern BuildOptions_MachineType_E2_HIGHCPU_32 = BuildOptions_MachineType "E2_HIGHCPU_32"
 
--- | Provenance failures would fail the run
-pattern Provenance_Enabled_Required :: Provenance_Enabled
-pattern Provenance_Enabled_Required = Provenance_Enabled "REQUIRED"
-
--- | GCB will attempt to push to artifact analaysis and build state would not be impacted by the push failures.
-pattern Provenance_Enabled_Optimistic :: Provenance_Enabled
-pattern Provenance_Enabled_Optimistic = Provenance_Enabled "OPTIMISTIC"
-
--- | Disable the provenance push entirely.
-pattern Provenance_Enabled_Disabled :: Provenance_Enabled
-pattern Provenance_Enabled_Disabled = Provenance_Enabled "DISABLED"
+-- | E2 machine with 1 CPU.
+pattern BuildOptions_MachineType_E2MEDIUM :: BuildOptions_MachineType
+pattern BuildOptions_MachineType_E2MEDIUM = BuildOptions_MachineType "E2_MEDIUM"
 
 {-# COMPLETE
-  Provenance_Enabled_ENABLEDUNSPECIFIED,
-  Provenance_Enabled_Required,
-  Provenance_Enabled_Optimistic,
-  Provenance_Enabled_Disabled,
-  Provenance_Enabled
-  #-}
+  BuildOptions_MachineType_Unspecified,
+  BuildOptions_MachineType_N1_HIGHCPU_8,
+  BuildOptions_MachineType_N1_HIGHCPU_32,
+  BuildOptions_MachineType_E2_HIGHCPU_8,
+  BuildOptions_MachineType_E2_HIGHCPU_32,
+  BuildOptions_MachineType_E2MEDIUM,
+  BuildOptions_MachineType #-}
 
--- | Optional. Provenance region.
-newtype Provenance_Region = Provenance_Region {fromProvenance_Region :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Requested verifiability options.
+newtype BuildOptions_RequestedVerifyOption = BuildOptions_RequestedVerifyOption { fromBuildOptions_RequestedVerifyOption :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- | The PipelineRun\/TaskRun\/Workflow will be rejected. Update this comment to push to the same region as the run in Artifact Analysis when it\'s regionalized.
-pattern Provenance_Region_REGIONUNSPECIFIED :: Provenance_Region
-pattern Provenance_Region_REGIONUNSPECIFIED = Provenance_Region "REGION_UNSPECIFIED"
+-- | Not a verifiable build (the default).
+pattern BuildOptions_RequestedVerifyOption_NOTVERIFIED :: BuildOptions_RequestedVerifyOption
+pattern BuildOptions_RequestedVerifyOption_NOTVERIFIED = BuildOptions_RequestedVerifyOption "NOT_VERIFIED"
 
--- | Push provenance to Artifact Analysis in global region.
-pattern Provenance_Region_Global :: Provenance_Region
-pattern Provenance_Region_Global = Provenance_Region "GLOBAL"
-
-{-# COMPLETE
-  Provenance_Region_REGIONUNSPECIFIED,
-  Provenance_Region_Global,
-  Provenance_Region
-  #-}
-
--- | Optional. Where provenance is stored.
-newtype Provenance_Storage = Provenance_Storage {fromProvenance_Storage :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Default PREFER/ARTIFACT/PROJECT.
-pattern Provenance_Storage_STORAGEUNSPECIFIED :: Provenance_Storage
-pattern Provenance_Storage_STORAGEUNSPECIFIED = Provenance_Storage "STORAGE_UNSPECIFIED"
-
--- | GCB will attempt to push provenance to the artifact project. If it is not available, fallback to build project.
-pattern Provenance_Storage_PREFERARTIFACTPROJECT :: Provenance_Storage
-pattern Provenance_Storage_PREFERARTIFACTPROJECT = Provenance_Storage "PREFER_ARTIFACT_PROJECT"
-
--- | Only push to artifact project.
-pattern Provenance_Storage_ARTIFACTPROJECTONLY :: Provenance_Storage
-pattern Provenance_Storage_ARTIFACTPROJECTONLY = Provenance_Storage "ARTIFACT_PROJECT_ONLY"
-
--- | Only push to build project.
-pattern Provenance_Storage_BUILDPROJECTONLY :: Provenance_Storage
-pattern Provenance_Storage_BUILDPROJECTONLY = Provenance_Storage "BUILD_PROJECT_ONLY"
+-- | Build must be verified.
+pattern BuildOptions_RequestedVerifyOption_Verified :: BuildOptions_RequestedVerifyOption
+pattern BuildOptions_RequestedVerifyOption_Verified = BuildOptions_RequestedVerifyOption "VERIFIED"
 
 {-# COMPLETE
-  Provenance_Storage_STORAGEUNSPECIFIED,
-  Provenance_Storage_PREFERARTIFACTPROJECT,
-  Provenance_Storage_ARTIFACTPROJECTONLY,
-  Provenance_Storage_BUILDPROJECTONLY,
-  Provenance_Storage
-  #-}
+  BuildOptions_RequestedVerifyOption_NOTVERIFIED,
+  BuildOptions_RequestedVerifyOption_Verified,
+  BuildOptions_RequestedVerifyOption #-}
 
--- | Output only. The type of data that the result holds.
-newtype ResultValue_Type = ResultValue_Type {fromResultValue_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+newtype BuildOptions_SourceProvenanceHashItem = BuildOptions_SourceProvenanceHashItem { fromBuildOptions_SourceProvenanceHashItem :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- | Default enum type; should not be used.
-pattern ResultValue_Type_TYPEUNSPECIFIED :: ResultValue_Type
-pattern ResultValue_Type_TYPEUNSPECIFIED = ResultValue_Type "TYPE_UNSPECIFIED"
+-- | No hash requested.
+pattern BuildOptions_SourceProvenanceHashItem_None :: BuildOptions_SourceProvenanceHashItem
+pattern BuildOptions_SourceProvenanceHashItem_None = BuildOptions_SourceProvenanceHashItem "NONE"
 
--- | Default
-pattern ResultValue_Type_String :: ResultValue_Type
-pattern ResultValue_Type_String = ResultValue_Type "STRING"
+-- | Use a sha256 hash.
+pattern BuildOptions_SourceProvenanceHashItem_SHA256 :: BuildOptions_SourceProvenanceHashItem
+pattern BuildOptions_SourceProvenanceHashItem_SHA256 = BuildOptions_SourceProvenanceHashItem "SHA256"
 
--- | Array type
-pattern ResultValue_Type_Array :: ResultValue_Type
-pattern ResultValue_Type_Array = ResultValue_Type "ARRAY"
+-- | Use a md5 hash.
+pattern BuildOptions_SourceProvenanceHashItem_MD5 :: BuildOptions_SourceProvenanceHashItem
+pattern BuildOptions_SourceProvenanceHashItem_MD5 = BuildOptions_SourceProvenanceHashItem "MD5"
 
--- | Object type
-pattern ResultValue_Type_Object :: ResultValue_Type
-pattern ResultValue_Type_Object = ResultValue_Type "OBJECT"
+-- | Dirhash of a Go module\'s source code which is then hex-encoded.
+pattern BuildOptions_SourceProvenanceHashItem_GO_MODULE_H1 :: BuildOptions_SourceProvenanceHashItem
+pattern BuildOptions_SourceProvenanceHashItem_GO_MODULE_H1 = BuildOptions_SourceProvenanceHashItem "GO_MODULE_H1"
 
-{-# COMPLETE
-  ResultValue_Type_TYPEUNSPECIFIED,
-  ResultValue_Type_String,
-  ResultValue_Type_Array,
-  ResultValue_Type_Object,
-  ResultValue_Type
-  #-}
-
--- | Optional. Privilege mode.
-newtype Security_PrivilegeMode = Security_PrivilegeMode {fromSecurity_PrivilegeMode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Default to PRIVILEGED.
-pattern Security_PrivilegeMode_PRIVILEGEMODEUNSPECIFIED :: Security_PrivilegeMode
-pattern Security_PrivilegeMode_PRIVILEGEMODEUNSPECIFIED = Security_PrivilegeMode "PRIVILEGE_MODE_UNSPECIFIED"
-
--- | Privileged mode.
-pattern Security_PrivilegeMode_Privileged :: Security_PrivilegeMode
-pattern Security_PrivilegeMode_Privileged = Security_PrivilegeMode "PRIVILEGED"
-
--- | Unprivileged mode.
-pattern Security_PrivilegeMode_Unprivileged :: Security_PrivilegeMode
-pattern Security_PrivilegeMode_Unprivileged = Security_PrivilegeMode "UNPRIVILEGED"
+-- | Use a sha512 hash.
+pattern BuildOptions_SourceProvenanceHashItem_SHA512 :: BuildOptions_SourceProvenanceHashItem
+pattern BuildOptions_SourceProvenanceHashItem_SHA512 = BuildOptions_SourceProvenanceHashItem "SHA512"
 
 {-# COMPLETE
-  Security_PrivilegeMode_PRIVILEGEMODEUNSPECIFIED,
-  Security_PrivilegeMode_Privileged,
-  Security_PrivilegeMode_Unprivileged,
-  Security_PrivilegeMode
-  #-}
+  BuildOptions_SourceProvenanceHashItem_None,
+  BuildOptions_SourceProvenanceHashItem_SHA256,
+  BuildOptions_SourceProvenanceHashItem_MD5,
+  BuildOptions_SourceProvenanceHashItem_GO_MODULE_H1,
+  BuildOptions_SourceProvenanceHashItem_SHA512,
+  BuildOptions_SourceProvenanceHashItem #-}
 
--- | Optional. OnError defines the exiting behavior on error can be set to [ continue | stopAndFail ]
-newtype Step_OnError = Step_OnError {fromStep_OnError :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Option to specify behavior when there is an error in the substitution checks. NOTE: this is always set to ALLOW_LOOSE for triggered builds and cannot be overridden in the build configuration file.
+newtype BuildOptions_SubstitutionOption = BuildOptions_SubstitutionOption { fromBuildOptions_SubstitutionOption :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- | Default enum type; should not be used.
-pattern Step_OnError_ONERRORTYPEUNSPECIFIED :: Step_OnError
-pattern Step_OnError_ONERRORTYPEUNSPECIFIED = Step_OnError "ON_ERROR_TYPE_UNSPECIFIED"
+-- | Fails the build if error in substitutions checks, like missing a substitution in the template or in the map.
+pattern BuildOptions_SubstitutionOption_MUSTMATCH :: BuildOptions_SubstitutionOption
+pattern BuildOptions_SubstitutionOption_MUSTMATCH = BuildOptions_SubstitutionOption "MUST_MATCH"
 
--- | StopAndFail indicates exit if the step\/task exits with non-zero exit code
-pattern Step_OnError_STOPANDFAIL :: Step_OnError
-pattern Step_OnError_STOPANDFAIL = Step_OnError "STOP_AND_FAIL"
-
--- | Continue indicates continue executing the rest of the steps\/tasks irrespective of the exit code
-pattern Step_OnError_Continue :: Step_OnError
-pattern Step_OnError_Continue = Step_OnError "CONTINUE"
+-- | Do not fail the build if error in substitutions checks.
+pattern BuildOptions_SubstitutionOption_ALLOWLOOSE :: BuildOptions_SubstitutionOption
+pattern BuildOptions_SubstitutionOption_ALLOWLOOSE = BuildOptions_SubstitutionOption "ALLOW_LOOSE"
 
 {-# COMPLETE
-  Step_OnError_ONERRORTYPEUNSPECIFIED,
-  Step_OnError_STOPANDFAIL,
-  Step_OnError_Continue,
-  Step_OnError
-  #-}
+  BuildOptions_SubstitutionOption_MUSTMATCH,
+  BuildOptions_SubstitutionOption_ALLOWLOOSE,
+  BuildOptions_SubstitutionOption #-}
 
--- | Optional. Type of the resolver.
-newtype StepRef_Resolver = StepRef_Resolver {fromStepRef_Resolver :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Output only. Status of the build step. At this time, build step status is only updated on build completion; step status is not updated in real-time as the build progresses.
+newtype BuildStep_Status = BuildStep_Status { fromBuildStep_Status :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- | Default enum type; should not be used.
-pattern StepRef_Resolver_RESOLVERNAMEUNSPECIFIED :: StepRef_Resolver
-pattern StepRef_Resolver_RESOLVERNAMEUNSPECIFIED = StepRef_Resolver "RESOLVER_NAME_UNSPECIFIED"
+-- | Status of the build is unknown.
+pattern BuildStep_Status_STATUSUNKNOWN :: BuildStep_Status
+pattern BuildStep_Status_STATUSUNKNOWN = BuildStep_Status "STATUS_UNKNOWN"
 
--- | Bundles resolver. https:\/\/tekton.dev\/docs\/pipelines\/bundle-resolver\/
-pattern StepRef_Resolver_Bundles :: StepRef_Resolver
-pattern StepRef_Resolver_Bundles = StepRef_Resolver "BUNDLES"
+-- | Build has been created and is pending execution and queuing. It has not been queued.
+pattern BuildStep_Status_Pending :: BuildStep_Status
+pattern BuildStep_Status_Pending = BuildStep_Status "PENDING"
 
--- | GCB repo resolver.
-pattern StepRef_Resolver_GCBREPO :: StepRef_Resolver
-pattern StepRef_Resolver_GCBREPO = StepRef_Resolver "GCB_REPO"
+-- | Build or step is queued; work has not yet begun.
+pattern BuildStep_Status_Queued :: BuildStep_Status
+pattern BuildStep_Status_Queued = BuildStep_Status "QUEUED"
 
--- | Simple Git resolver. https:\/\/tekton.dev\/docs\/pipelines\/git-resolver\/
-pattern StepRef_Resolver_Git :: StepRef_Resolver
-pattern StepRef_Resolver_Git = StepRef_Resolver "GIT"
+-- | Build or step is being executed.
+pattern BuildStep_Status_Working :: BuildStep_Status
+pattern BuildStep_Status_Working = BuildStep_Status "WORKING"
 
--- | Developer Connect resolver.
-pattern StepRef_Resolver_DEVELOPERCONNECT :: StepRef_Resolver
-pattern StepRef_Resolver_DEVELOPERCONNECT = StepRef_Resolver "DEVELOPER_CONNECT"
+-- | Build or step finished successfully.
+pattern BuildStep_Status_Success :: BuildStep_Status
+pattern BuildStep_Status_Success = BuildStep_Status "SUCCESS"
 
--- | Default resolver.
-pattern StepRef_Resolver_Default :: StepRef_Resolver
-pattern StepRef_Resolver_Default = StepRef_Resolver "DEFAULT"
+-- | Build or step failed to complete successfully.
+pattern BuildStep_Status_Failure :: BuildStep_Status
+pattern BuildStep_Status_Failure = BuildStep_Status "FAILURE"
 
-{-# COMPLETE
-  StepRef_Resolver_RESOLVERNAMEUNSPECIFIED,
-  StepRef_Resolver_Bundles,
-  StepRef_Resolver_GCBREPO,
-  StepRef_Resolver_Git,
-  StepRef_Resolver_DEVELOPERCONNECT,
-  StepRef_Resolver_Default,
-  StepRef_Resolver
-  #-}
+-- | Build or step failed due to an internal cause.
+pattern BuildStep_Status_INTERNALERROR :: BuildStep_Status
+pattern BuildStep_Status_INTERNALERROR = BuildStep_Status "INTERNAL_ERROR"
 
--- | Resolver is the name of the resolver that should perform resolution of the referenced Tekton resource.
-newtype TaskRef_Resolver = TaskRef_Resolver {fromTaskRef_Resolver :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | Build or step took longer than was allowed.
+pattern BuildStep_Status_Timeout :: BuildStep_Status
+pattern BuildStep_Status_Timeout = BuildStep_Status "TIMEOUT"
 
--- | Default enum type; should not be used.
-pattern TaskRef_Resolver_RESOLVERNAMEUNSPECIFIED :: TaskRef_Resolver
-pattern TaskRef_Resolver_RESOLVERNAMEUNSPECIFIED = TaskRef_Resolver "RESOLVER_NAME_UNSPECIFIED"
+-- | Build or step was canceled by a user.
+pattern BuildStep_Status_Cancelled :: BuildStep_Status
+pattern BuildStep_Status_Cancelled = BuildStep_Status "CANCELLED"
 
--- | Bundles resolver. https:\/\/tekton.dev\/docs\/pipelines\/bundle-resolver\/
-pattern TaskRef_Resolver_Bundles :: TaskRef_Resolver
-pattern TaskRef_Resolver_Bundles = TaskRef_Resolver "BUNDLES"
-
--- | GCB repo resolver.
-pattern TaskRef_Resolver_GCBREPO :: TaskRef_Resolver
-pattern TaskRef_Resolver_GCBREPO = TaskRef_Resolver "GCB_REPO"
-
--- | Simple Git resolver. https:\/\/tekton.dev\/docs\/pipelines\/git-resolver\/
-pattern TaskRef_Resolver_Git :: TaskRef_Resolver
-pattern TaskRef_Resolver_Git = TaskRef_Resolver "GIT"
-
--- | Developer Connect resolver.
-pattern TaskRef_Resolver_DEVELOPERCONNECT :: TaskRef_Resolver
-pattern TaskRef_Resolver_DEVELOPERCONNECT = TaskRef_Resolver "DEVELOPER_CONNECT"
-
--- | Default resolver.
-pattern TaskRef_Resolver_Default :: TaskRef_Resolver
-pattern TaskRef_Resolver_Default = TaskRef_Resolver "DEFAULT"
+-- | Build was enqueued for longer than the value of @queue_ttl@.
+pattern BuildStep_Status_Expired :: BuildStep_Status
+pattern BuildStep_Status_Expired = BuildStep_Status "EXPIRED"
 
 {-# COMPLETE
-  TaskRef_Resolver_RESOLVERNAMEUNSPECIFIED,
-  TaskRef_Resolver_Bundles,
-  TaskRef_Resolver_GCBREPO,
-  TaskRef_Resolver_Git,
-  TaskRef_Resolver_DEVELOPERCONNECT,
-  TaskRef_Resolver_Default,
-  TaskRef_Resolver
-  #-}
+  BuildStep_Status_STATUSUNKNOWN,
+  BuildStep_Status_Pending,
+  BuildStep_Status_Queued,
+  BuildStep_Status_Working,
+  BuildStep_Status_Success,
+  BuildStep_Status_Failure,
+  BuildStep_Status_INTERNALERROR,
+  BuildStep_Status_Timeout,
+  BuildStep_Status_Cancelled,
+  BuildStep_Status_Expired,
+  BuildStep_Status #-}
 
--- | The type of data that the result holds.
-newtype TaskResult_Type = TaskResult_Type {fromTaskResult_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | EventType allows the user to explicitly set the type of event to which this BuildTrigger should respond. This field will be validated against the rest of the configuration if it is set.
+newtype BuildTrigger_EventType = BuildTrigger_EventType { fromBuildTrigger_EventType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- | Default enum type; should not be used.
-pattern TaskResult_Type_TYPEUNSPECIFIED :: TaskResult_Type
-pattern TaskResult_Type_TYPEUNSPECIFIED = TaskResult_Type "TYPE_UNSPECIFIED"
+-- | EVENT/TYPE/UNSPECIFIED event_types are ignored.
+pattern BuildTrigger_EventType_EVENTTYPEUNSPECIFIED :: BuildTrigger_EventType
+pattern BuildTrigger_EventType_EVENTTYPEUNSPECIFIED = BuildTrigger_EventType "EVENT_TYPE_UNSPECIFIED"
 
--- | Default
-pattern TaskResult_Type_String :: TaskResult_Type
-pattern TaskResult_Type_String = TaskResult_Type "STRING"
+-- | REPO corresponds to the supported VCS integrations.
+pattern BuildTrigger_EventType_Repo :: BuildTrigger_EventType
+pattern BuildTrigger_EventType_Repo = BuildTrigger_EventType "REPO"
 
--- | Array type
-pattern TaskResult_Type_Array :: TaskResult_Type
-pattern TaskResult_Type_Array = TaskResult_Type "ARRAY"
+-- | WEBHOOK corresponds to webhook triggers.
+pattern BuildTrigger_EventType_Webhook :: BuildTrigger_EventType
+pattern BuildTrigger_EventType_Webhook = BuildTrigger_EventType "WEBHOOK"
 
--- | Object type
-pattern TaskResult_Type_Object :: TaskResult_Type
-pattern TaskResult_Type_Object = TaskResult_Type "OBJECT"
+-- | PUBSUB corresponds to pubsub triggers.
+pattern BuildTrigger_EventType_Pubsub :: BuildTrigger_EventType
+pattern BuildTrigger_EventType_Pubsub = BuildTrigger_EventType "PUBSUB"
 
-{-# COMPLETE
-  TaskResult_Type_TYPEUNSPECIFIED,
-  TaskResult_Type_String,
-  TaskResult_Type_Array,
-  TaskResult_Type_Object,
-  TaskResult_Type
-  #-}
-
-newtype TaskSpec_ManagedSidecarsItem = TaskSpec_ManagedSidecarsItem {fromTaskSpec_ManagedSidecarsItem :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Default enum type; should not be used.
-pattern TaskSpec_ManagedSidecarsItem_MANAGEDSIDECARUNSPECIFIED :: TaskSpec_ManagedSidecarsItem
-pattern TaskSpec_ManagedSidecarsItem_MANAGEDSIDECARUNSPECIFIED = TaskSpec_ManagedSidecarsItem "MANAGED_SIDECAR_UNSPECIFIED"
-
--- | Sidecar for a privileged docker daemon.
-pattern TaskSpec_ManagedSidecarsItem_PRIVILEGEDDOCKERDAEMON :: TaskSpec_ManagedSidecarsItem
-pattern TaskSpec_ManagedSidecarsItem_PRIVILEGEDDOCKERDAEMON = TaskSpec_ManagedSidecarsItem "PRIVILEGED_DOCKER_DAEMON"
+-- | MANUAL corresponds to manual-only invoked triggers.
+pattern BuildTrigger_EventType_Manual :: BuildTrigger_EventType
+pattern BuildTrigger_EventType_Manual = BuildTrigger_EventType "MANUAL"
 
 {-# COMPLETE
-  TaskSpec_ManagedSidecarsItem_MANAGEDSIDECARUNSPECIFIED,
-  TaskSpec_ManagedSidecarsItem_PRIVILEGEDDOCKERDAEMON,
-  TaskSpec_ManagedSidecarsItem
-  #-}
+  BuildTrigger_EventType_EVENTTYPEUNSPECIFIED,
+  BuildTrigger_EventType_Repo,
+  BuildTrigger_EventType_Webhook,
+  BuildTrigger_EventType_Pubsub,
+  BuildTrigger_EventType_Manual,
+  BuildTrigger_EventType #-}
 
--- | Operator that represents an Input\'s relationship to the values
-newtype WhenExpression_ExpressionOperator = WhenExpression_ExpressionOperator {fromWhenExpression_ExpressionOperator :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | If set to INCLUDE/BUILD/LOGS/WITH/STATUS, log url will be shown on GitHub page when build status is final. Setting this field to INCLUDE/BUILD/LOGS/WITH/STATUS for non GitHub triggers results in INVALID_ARGUMENT error.
+newtype BuildTrigger_IncludeBuildLogs = BuildTrigger_IncludeBuildLogs { fromBuildTrigger_IncludeBuildLogs :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- | Default enum type; should not be used.
-pattern WhenExpression_ExpressionOperator_EXPRESSIONOPERATORUNSPECIFIED :: WhenExpression_ExpressionOperator
-pattern WhenExpression_ExpressionOperator_EXPRESSIONOPERATORUNSPECIFIED = WhenExpression_ExpressionOperator "EXPRESSION_OPERATOR_UNSPECIFIED"
+-- | Build logs will not be shown on GitHub.
+pattern BuildTrigger_IncludeBuildLogs_INCLUDEBUILDLOGSUNSPECIFIED :: BuildTrigger_IncludeBuildLogs
+pattern BuildTrigger_IncludeBuildLogs_INCLUDEBUILDLOGSUNSPECIFIED = BuildTrigger_IncludeBuildLogs "INCLUDE_BUILD_LOGS_UNSPECIFIED"
 
--- | Input is in values.
-pattern WhenExpression_ExpressionOperator_IN :: WhenExpression_ExpressionOperator
-pattern WhenExpression_ExpressionOperator_IN = WhenExpression_ExpressionOperator "IN"
-
--- | Input is not in values.
-pattern WhenExpression_ExpressionOperator_NOTIN :: WhenExpression_ExpressionOperator
-pattern WhenExpression_ExpressionOperator_NOTIN = WhenExpression_ExpressionOperator "NOT_IN"
+-- | Build logs will be shown on GitHub.
+pattern BuildTrigger_IncludeBuildLogs_INCLUDEBUILDLOGSWITHSTATUS :: BuildTrigger_IncludeBuildLogs
+pattern BuildTrigger_IncludeBuildLogs_INCLUDEBUILDLOGSWITHSTATUS = BuildTrigger_IncludeBuildLogs "INCLUDE_BUILD_LOGS_WITH_STATUS"
 
 {-# COMPLETE
-  WhenExpression_ExpressionOperator_EXPRESSIONOPERATORUNSPECIFIED,
-  WhenExpression_ExpressionOperator_IN,
-  WhenExpression_ExpressionOperator_NOTIN,
-  WhenExpression_ExpressionOperator
-  #-}
+  BuildTrigger_IncludeBuildLogs_INCLUDEBUILDLOGSUNSPECIFIED,
+  BuildTrigger_IncludeBuildLogs_INCLUDEBUILDLOGSWITHSTATUS,
+  BuildTrigger_IncludeBuildLogs #-}
 
--- | Type of refs to fetch
-newtype ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType = ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType {fromProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
+-- | The name of the failure.
+newtype FailureInfo_Type = FailureInfo_Type { fromFailureInfo_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
 
--- | No type specified.
-pattern ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType_REFTYPEUNSPECIFIED :: ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType
-pattern ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType_REFTYPEUNSPECIFIED = ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType "REF_TYPE_UNSPECIFIED"
+-- | Type unspecified
+pattern FailureInfo_Type_FAILURETYPEUNSPECIFIED :: FailureInfo_Type
+pattern FailureInfo_Type_FAILURETYPEUNSPECIFIED = FailureInfo_Type "FAILURE_TYPE_UNSPECIFIED"
 
--- | To fetch tags.
-pattern ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType_Tag :: ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType
-pattern ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType_Tag = ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType "TAG"
+-- | Unable to push the image to the repository.
+pattern FailureInfo_Type_PUSHFAILED :: FailureInfo_Type
+pattern FailureInfo_Type_PUSHFAILED = FailureInfo_Type "PUSH_FAILED"
 
--- | To fetch branches.
-pattern ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType_Branch :: ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType
-pattern ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType_Branch = ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType "BRANCH"
+-- | Final image not found.
+pattern FailureInfo_Type_PUSHIMAGENOTFOUND :: FailureInfo_Type
+pattern FailureInfo_Type_PUSHIMAGENOTFOUND = FailureInfo_Type "PUSH_IMAGE_NOT_FOUND"
+
+-- | Unauthorized push of the final image.
+pattern FailureInfo_Type_PUSHNOTAUTHORIZED :: FailureInfo_Type
+pattern FailureInfo_Type_PUSHNOTAUTHORIZED = FailureInfo_Type "PUSH_NOT_AUTHORIZED"
+
+-- | Backend logging failures. Should retry.
+pattern FailureInfo_Type_LOGGINGFAILURE :: FailureInfo_Type
+pattern FailureInfo_Type_LOGGINGFAILURE = FailureInfo_Type "LOGGING_FAILURE"
+
+-- | A build step has failed.
+pattern FailureInfo_Type_USERBUILDSTEP :: FailureInfo_Type
+pattern FailureInfo_Type_USERBUILDSTEP = FailureInfo_Type "USER_BUILD_STEP"
+
+-- | The source fetching has failed.
+pattern FailureInfo_Type_FETCHSOURCEFAILED :: FailureInfo_Type
+pattern FailureInfo_Type_FETCHSOURCEFAILED = FailureInfo_Type "FETCH_SOURCE_FAILED"
 
 {-# COMPLETE
-  ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType_REFTYPEUNSPECIFIED,
-  ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType_Tag,
-  ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType_Branch,
-  ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType
-  #-}
+  FailureInfo_Type_FAILURETYPEUNSPECIFIED,
+  FailureInfo_Type_PUSHFAILED,
+  FailureInfo_Type_PUSHIMAGENOTFOUND,
+  FailureInfo_Type_PUSHNOTAUTHORIZED,
+  FailureInfo_Type_LOGGINGFAILURE,
+  FailureInfo_Type_USERBUILDSTEP,
+  FailureInfo_Type_FETCHSOURCEFAILED,
+  FailureInfo_Type #-}
+
+-- | See RepoType above.
+newtype GitFileSource_RepoType = GitFileSource_RepoType { fromGitFileSource_RepoType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | The default, unknown repo type. Don\'t use it, instead use one of the other repo types.
+pattern GitFileSource_RepoType_Unknown :: GitFileSource_RepoType
+pattern GitFileSource_RepoType_Unknown = GitFileSource_RepoType "UNKNOWN"
+
+-- | A Google Cloud Source Repositories-hosted repo.
+pattern GitFileSource_RepoType_CLOUDSOURCEREPOSITORIES :: GitFileSource_RepoType
+pattern GitFileSource_RepoType_CLOUDSOURCEREPOSITORIES = GitFileSource_RepoType "CLOUD_SOURCE_REPOSITORIES"
+
+-- | A GitHub-hosted repo not necessarily on \"github.com\" (i.e. GitHub Enterprise).
+pattern GitFileSource_RepoType_Github :: GitFileSource_RepoType
+pattern GitFileSource_RepoType_Github = GitFileSource_RepoType "GITHUB"
+
+-- | A Bitbucket Server-hosted repo.
+pattern GitFileSource_RepoType_BITBUCKETSERVER :: GitFileSource_RepoType
+pattern GitFileSource_RepoType_BITBUCKETSERVER = GitFileSource_RepoType "BITBUCKET_SERVER"
+
+-- | A GitLab-hosted repo.
+pattern GitFileSource_RepoType_Gitlab :: GitFileSource_RepoType
+pattern GitFileSource_RepoType_Gitlab = GitFileSource_RepoType "GITLAB"
+
+-- | A Bitbucket Cloud-hosted repo.
+pattern GitFileSource_RepoType_BITBUCKETCLOUD :: GitFileSource_RepoType
+pattern GitFileSource_RepoType_BITBUCKETCLOUD = GitFileSource_RepoType "BITBUCKET_CLOUD"
+
+{-# COMPLETE
+  GitFileSource_RepoType_Unknown,
+  GitFileSource_RepoType_CLOUDSOURCEREPOSITORIES,
+  GitFileSource_RepoType_Github,
+  GitFileSource_RepoType_BITBUCKETSERVER,
+  GitFileSource_RepoType_Gitlab,
+  GitFileSource_RepoType_BITBUCKETCLOUD,
+  GitFileSource_RepoType #-}
+
+-- | See RepoType below.
+newtype GitRepoSource_RepoType = GitRepoSource_RepoType { fromGitRepoSource_RepoType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | The default, unknown repo type. Don\'t use it, instead use one of the other repo types.
+pattern GitRepoSource_RepoType_Unknown :: GitRepoSource_RepoType
+pattern GitRepoSource_RepoType_Unknown = GitRepoSource_RepoType "UNKNOWN"
+
+-- | A Google Cloud Source Repositories-hosted repo.
+pattern GitRepoSource_RepoType_CLOUDSOURCEREPOSITORIES :: GitRepoSource_RepoType
+pattern GitRepoSource_RepoType_CLOUDSOURCEREPOSITORIES = GitRepoSource_RepoType "CLOUD_SOURCE_REPOSITORIES"
+
+-- | A GitHub-hosted repo not necessarily on \"github.com\" (i.e. GitHub Enterprise).
+pattern GitRepoSource_RepoType_Github :: GitRepoSource_RepoType
+pattern GitRepoSource_RepoType_Github = GitRepoSource_RepoType "GITHUB"
+
+-- | A Bitbucket Server-hosted repo.
+pattern GitRepoSource_RepoType_BITBUCKETSERVER :: GitRepoSource_RepoType
+pattern GitRepoSource_RepoType_BITBUCKETSERVER = GitRepoSource_RepoType "BITBUCKET_SERVER"
+
+-- | A GitLab-hosted repo.
+pattern GitRepoSource_RepoType_Gitlab :: GitRepoSource_RepoType
+pattern GitRepoSource_RepoType_Gitlab = GitRepoSource_RepoType "GITLAB"
+
+-- | A Bitbucket Cloud-hosted repo.
+pattern GitRepoSource_RepoType_BITBUCKETCLOUD :: GitRepoSource_RepoType
+pattern GitRepoSource_RepoType_BITBUCKETCLOUD = GitRepoSource_RepoType "BITBUCKET_CLOUD"
+
+{-# COMPLETE
+  GitRepoSource_RepoType_Unknown,
+  GitRepoSource_RepoType_CLOUDSOURCEREPOSITORIES,
+  GitRepoSource_RepoType_Github,
+  GitRepoSource_RepoType_BITBUCKETSERVER,
+  GitRepoSource_RepoType_Gitlab,
+  GitRepoSource_RepoType_BITBUCKETCLOUD,
+  GitRepoSource_RepoType #-}
+
+-- | The type of hash that was performed.
+newtype Hash_Type = Hash_Type { fromHash_Type :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | No hash requested.
+pattern Hash_Type_None :: Hash_Type
+pattern Hash_Type_None = Hash_Type "NONE"
+
+-- | Use a sha256 hash.
+pattern Hash_Type_SHA256 :: Hash_Type
+pattern Hash_Type_SHA256 = Hash_Type "SHA256"
+
+-- | Use a md5 hash.
+pattern Hash_Type_MD5 :: Hash_Type
+pattern Hash_Type_MD5 = Hash_Type "MD5"
+
+-- | Dirhash of a Go module\'s source code which is then hex-encoded.
+pattern Hash_Type_GO_MODULE_H1 :: Hash_Type
+pattern Hash_Type_GO_MODULE_H1 = Hash_Type "GO_MODULE_H1"
+
+-- | Use a sha512 hash.
+pattern Hash_Type_SHA512 :: Hash_Type
+pattern Hash_Type_SHA512 = Hash_Type "SHA512"
+
+{-# COMPLETE
+  Hash_Type_None,
+  Hash_Type_SHA256,
+  Hash_Type_MD5,
+  Hash_Type_GO_MODULE_H1,
+  Hash_Type_SHA512,
+  Hash_Type #-}
+
+-- | Option to configure network egress for the workers.
+newtype NetworkConfig_EgressOption = NetworkConfig_EgressOption { fromNetworkConfig_EgressOption :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | If set, defaults to PUBLIC_EGRESS.
+pattern NetworkConfig_EgressOption_EGRESSOPTIONUNSPECIFIED :: NetworkConfig_EgressOption
+pattern NetworkConfig_EgressOption_EGRESSOPTIONUNSPECIFIED = NetworkConfig_EgressOption "EGRESS_OPTION_UNSPECIFIED"
+
+-- | If set, workers are created without any public address, which prevents network egress to public IPs unless a network proxy is configured.
+pattern NetworkConfig_EgressOption_NOPUBLICEGRESS :: NetworkConfig_EgressOption
+pattern NetworkConfig_EgressOption_NOPUBLICEGRESS = NetworkConfig_EgressOption "NO_PUBLIC_EGRESS"
+
+-- | If set, workers are created with a public address which allows for public internet egress.
+pattern NetworkConfig_EgressOption_PUBLICEGRESS :: NetworkConfig_EgressOption
+pattern NetworkConfig_EgressOption_PUBLICEGRESS = NetworkConfig_EgressOption "PUBLIC_EGRESS"
+
+{-# COMPLETE
+  NetworkConfig_EgressOption_EGRESSOPTIONUNSPECIFIED,
+  NetworkConfig_EgressOption_NOPUBLICEGRESS,
+  NetworkConfig_EgressOption_PUBLICEGRESS,
+  NetworkConfig_EgressOption #-}
+
+-- | Potential issues with the underlying Pub\/Sub subscription configuration. Only populated on get requests.
+newtype PubsubConfig_State = PubsubConfig_State { fromPubsubConfig_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | The subscription configuration has not been checked.
+pattern PubsubConfig_State_STATEUNSPECIFIED :: PubsubConfig_State
+pattern PubsubConfig_State_STATEUNSPECIFIED = PubsubConfig_State "STATE_UNSPECIFIED"
+
+-- | The Pub\/Sub subscription is properly configured.
+pattern PubsubConfig_State_OK :: PubsubConfig_State
+pattern PubsubConfig_State_OK = PubsubConfig_State "OK"
+
+-- | The subscription has been deleted.
+pattern PubsubConfig_State_SUBSCRIPTIONDELETED :: PubsubConfig_State
+pattern PubsubConfig_State_SUBSCRIPTIONDELETED = PubsubConfig_State "SUBSCRIPTION_DELETED"
+
+-- | The topic has been deleted.
+pattern PubsubConfig_State_TOPICDELETED :: PubsubConfig_State
+pattern PubsubConfig_State_TOPICDELETED = PubsubConfig_State "TOPIC_DELETED"
+
+-- | Some of the subscription\'s field are misconfigured.
+pattern PubsubConfig_State_SUBSCRIPTIONMISCONFIGURED :: PubsubConfig_State
+pattern PubsubConfig_State_SUBSCRIPTIONMISCONFIGURED = PubsubConfig_State "SUBSCRIPTION_MISCONFIGURED"
+
+{-# COMPLETE
+  PubsubConfig_State_STATEUNSPECIFIED,
+  PubsubConfig_State_OK,
+  PubsubConfig_State_SUBSCRIPTIONDELETED,
+  PubsubConfig_State_TOPICDELETED,
+  PubsubConfig_State_SUBSCRIPTIONMISCONFIGURED,
+  PubsubConfig_State #-}
+
+-- | If CommentControl is enabled, depending on the setting, builds may not fire until a repository writer comments @\/gcbrun@ on a pull request or @\/gcbrun@ is in the pull request description. Only PR comments that contain @\/gcbrun@ will trigger builds. If CommentControl is set to disabled, comments with @\/gcbrun@ from a user with repository write permission or above will still trigger builds to run.
+newtype PullRequestFilter_CommentControl = PullRequestFilter_CommentControl { fromPullRequestFilter_CommentControl :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Do not require @\/gcbrun@ comments from a user with repository write permission or above on pull requests before builds are triggered. Comments that contain @\/gcbrun@ will still fire builds so this should be thought of as comments not required.
+pattern PullRequestFilter_CommentControl_COMMENTSDISABLED :: PullRequestFilter_CommentControl
+pattern PullRequestFilter_CommentControl_COMMENTSDISABLED = PullRequestFilter_CommentControl "COMMENTS_DISABLED"
+
+-- | Builds will only fire in response to pull requests if: 1. The pull request author has repository write permission or above and @\/gcbrun@ is in the PR description. 2. A user with repository writer permissions or above comments @\/gcbrun@ on a pull request authored by any user.
+pattern PullRequestFilter_CommentControl_COMMENTSENABLED :: PullRequestFilter_CommentControl
+pattern PullRequestFilter_CommentControl_COMMENTSENABLED = PullRequestFilter_CommentControl "COMMENTS_ENABLED"
+
+-- | Builds will only fire in response to pull requests if: 1. The pull request author is a repository writer or above. 2. If the author does not have write permissions, a user with write permissions or above must comment @\/gcbrun@ in order to fire a build.
+pattern PullRequestFilter_CommentControl_COMMENTSENABLEDFOREXTERNALCONTRIBUTORSONLY :: PullRequestFilter_CommentControl
+pattern PullRequestFilter_CommentControl_COMMENTSENABLEDFOREXTERNALCONTRIBUTORSONLY = PullRequestFilter_CommentControl "COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY"
+
+{-# COMPLETE
+  PullRequestFilter_CommentControl_COMMENTSDISABLED,
+  PullRequestFilter_CommentControl_COMMENTSENABLED,
+  PullRequestFilter_CommentControl_COMMENTSENABLEDFOREXTERNALCONTRIBUTORSONLY,
+  PullRequestFilter_CommentControl #-}
+
+-- | Output only. The type of the SCM vendor the repository points to.
+newtype RepositoryEventConfig_RepositoryType = RepositoryEventConfig_RepositoryType { fromRepositoryEventConfig_RepositoryType :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | If unspecified, RepositoryType defaults to GITHUB.
+pattern RepositoryEventConfig_RepositoryType_REPOSITORYTYPEUNSPECIFIED :: RepositoryEventConfig_RepositoryType
+pattern RepositoryEventConfig_RepositoryType_REPOSITORYTYPEUNSPECIFIED = RepositoryEventConfig_RepositoryType "REPOSITORY_TYPE_UNSPECIFIED"
+
+-- | The SCM repo is GITHUB.
+pattern RepositoryEventConfig_RepositoryType_Github :: RepositoryEventConfig_RepositoryType
+pattern RepositoryEventConfig_RepositoryType_Github = RepositoryEventConfig_RepositoryType "GITHUB"
+
+-- | The SCM repo is GITHUB Enterprise.
+pattern RepositoryEventConfig_RepositoryType_GITHUBENTERPRISE :: RepositoryEventConfig_RepositoryType
+pattern RepositoryEventConfig_RepositoryType_GITHUBENTERPRISE = RepositoryEventConfig_RepositoryType "GITHUB_ENTERPRISE"
+
+-- | The SCM repo is GITLAB Enterprise.
+pattern RepositoryEventConfig_RepositoryType_GITLABENTERPRISE :: RepositoryEventConfig_RepositoryType
+pattern RepositoryEventConfig_RepositoryType_GITLABENTERPRISE = RepositoryEventConfig_RepositoryType "GITLAB_ENTERPRISE"
+
+-- | The SCM repo is BITBUCKET Data Center.
+pattern RepositoryEventConfig_RepositoryType_BITBUCKETDATACENTER :: RepositoryEventConfig_RepositoryType
+pattern RepositoryEventConfig_RepositoryType_BITBUCKETDATACENTER = RepositoryEventConfig_RepositoryType "BITBUCKET_DATA_CENTER"
+
+-- | The SCM repo is BITBUCKET Cloud.
+pattern RepositoryEventConfig_RepositoryType_BITBUCKETCLOUD :: RepositoryEventConfig_RepositoryType
+pattern RepositoryEventConfig_RepositoryType_BITBUCKETCLOUD = RepositoryEventConfig_RepositoryType "BITBUCKET_CLOUD"
+
+{-# COMPLETE
+  RepositoryEventConfig_RepositoryType_REPOSITORYTYPEUNSPECIFIED,
+  RepositoryEventConfig_RepositoryType_Github,
+  RepositoryEventConfig_RepositoryType_GITHUBENTERPRISE,
+  RepositoryEventConfig_RepositoryType_GITLABENTERPRISE,
+  RepositoryEventConfig_RepositoryType_BITBUCKETDATACENTER,
+  RepositoryEventConfig_RepositoryType_BITBUCKETCLOUD,
+  RepositoryEventConfig_RepositoryType #-}
+
+-- | Optional. Option to specify the tool to fetch the source file for the build.
+newtype StorageSource_SourceFetcher = StorageSource_SourceFetcher { fromStorageSource_SourceFetcher :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Unspecified defaults to GSUTIL.
+pattern StorageSource_SourceFetcher_SOURCEFETCHERUNSPECIFIED :: StorageSource_SourceFetcher
+pattern StorageSource_SourceFetcher_SOURCEFETCHERUNSPECIFIED = StorageSource_SourceFetcher "SOURCE_FETCHER_UNSPECIFIED"
+
+-- | Use the \"gsutil\" tool to download the source file.
+pattern StorageSource_SourceFetcher_Gsutil :: StorageSource_SourceFetcher
+pattern StorageSource_SourceFetcher_Gsutil = StorageSource_SourceFetcher "GSUTIL"
+
+-- | Use the Cloud Storage Fetcher tool to download the source file.
+pattern StorageSource_SourceFetcher_GCSFETCHER :: StorageSource_SourceFetcher
+pattern StorageSource_SourceFetcher_GCSFETCHER = StorageSource_SourceFetcher "GCS_FETCHER"
+
+{-# COMPLETE
+  StorageSource_SourceFetcher_SOURCEFETCHERUNSPECIFIED,
+  StorageSource_SourceFetcher_Gsutil,
+  StorageSource_SourceFetcher_GCSFETCHER,
+  StorageSource_SourceFetcher #-}
+
+-- | The priority for this warning.
+newtype Warning_Priority = Warning_Priority { fromWarning_Priority :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | Should not be used.
+pattern Warning_Priority_PRIORITYUNSPECIFIED :: Warning_Priority
+pattern Warning_Priority_PRIORITYUNSPECIFIED = Warning_Priority "PRIORITY_UNSPECIFIED"
+
+-- | e.g. deprecation warnings and alternative feature highlights.
+pattern Warning_Priority_Info :: Warning_Priority
+pattern Warning_Priority_Info = Warning_Priority "INFO"
+
+-- | e.g. automated detection of possible issues with the build.
+pattern Warning_Priority_Warning :: Warning_Priority
+pattern Warning_Priority_Warning = Warning_Priority "WARNING"
+
+-- | e.g. alerts that a feature used in the build is pending removal
+pattern Warning_Priority_Alert :: Warning_Priority
+pattern Warning_Priority_Alert = Warning_Priority "ALERT"
+
+{-# COMPLETE
+  Warning_Priority_PRIORITYUNSPECIFIED,
+  Warning_Priority_Info,
+  Warning_Priority_Warning,
+  Warning_Priority_Alert,
+  Warning_Priority #-}
+
+-- | Potential issues with the underlying Pub\/Sub subscription configuration. Only populated on get requests.
+newtype WebhookConfig_State = WebhookConfig_State { fromWebhookConfig_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | The webhook auth configuration not been checked.
+pattern WebhookConfig_State_STATEUNSPECIFIED :: WebhookConfig_State
+pattern WebhookConfig_State_STATEUNSPECIFIED = WebhookConfig_State "STATE_UNSPECIFIED"
+
+-- | The auth configuration is properly setup.
+pattern WebhookConfig_State_OK :: WebhookConfig_State
+pattern WebhookConfig_State_OK = WebhookConfig_State "OK"
+
+-- | The secret provided in auth_method has been deleted.
+pattern WebhookConfig_State_SECRETDELETED :: WebhookConfig_State
+pattern WebhookConfig_State_SECRETDELETED = WebhookConfig_State "SECRET_DELETED"
+
+{-# COMPLETE
+  WebhookConfig_State_STATEUNSPECIFIED,
+  WebhookConfig_State_OK,
+  WebhookConfig_State_SECRETDELETED,
+  WebhookConfig_State #-}
+
+-- | Output only. @WorkerPool@ state.
+newtype WorkerPool_State = WorkerPool_State { fromWorkerPool_State :: Core.Text }
+    deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+    deriving newtype
+      ( Core.Hashable
+      , Core.ToHttpApiData
+      , Core.FromHttpApiData
+      , Core.ToJSON
+      , Core.ToJSONKey
+      , Core.FromJSON
+      , Core.FromJSONKey
+      )
+
+-- | State of the @WorkerPool@ is unknown.
+pattern WorkerPool_State_STATEUNSPECIFIED :: WorkerPool_State
+pattern WorkerPool_State_STATEUNSPECIFIED = WorkerPool_State "STATE_UNSPECIFIED"
+
+-- | @WorkerPool@ is being created.
+pattern WorkerPool_State_Creating :: WorkerPool_State
+pattern WorkerPool_State_Creating = WorkerPool_State "CREATING"
+
+-- | @WorkerPool@ is running.
+pattern WorkerPool_State_Running :: WorkerPool_State
+pattern WorkerPool_State_Running = WorkerPool_State "RUNNING"
+
+-- | @WorkerPool@ is being deleted: cancelling builds and draining workers.
+pattern WorkerPool_State_Deleting :: WorkerPool_State
+pattern WorkerPool_State_Deleting = WorkerPool_State "DELETING"
+
+-- | @WorkerPool@ is deleted.
+pattern WorkerPool_State_Deleted :: WorkerPool_State
+pattern WorkerPool_State_Deleted = WorkerPool_State "DELETED"
+
+-- | @WorkerPool@ is being updated; new builds cannot be run.
+pattern WorkerPool_State_Updating :: WorkerPool_State
+pattern WorkerPool_State_Updating = WorkerPool_State "UPDATING"
+
+{-# COMPLETE
+  WorkerPool_State_STATEUNSPECIFIED,
+  WorkerPool_State_Creating,
+  WorkerPool_State_Running,
+  WorkerPool_State_Deleting,
+  WorkerPool_State_Deleted,
+  WorkerPool_State_Updating,
+  WorkerPool_State #-}
