@@ -3,12 +3,13 @@
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
@@ -23,476 +24,622 @@
 --               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Gogol.ContainerBuilder.Types
-  ( -- * Configuration
-    containerBuilderService,
+    (
+    -- * Configuration
+      containerBuilderService
 
     -- * OAuth Scopes
-    CloudPlatform'FullControl,
+    , CloudPlatform'FullControl
 
     -- * Types
 
     -- ** Xgafv
-    Xgafv (..),
+    , Xgafv (..)
 
-    -- ** AuditConfig
-    AuditConfig (..),
-    newAuditConfig,
+    -- ** ApprovalConfig
+    , ApprovalConfig (..)
+    , newApprovalConfig
 
-    -- ** AuditLogConfig
-    AuditLogConfig (..),
-    newAuditLogConfig,
+    -- ** ApprovalResult
+    , ApprovalResult (..)
+    , newApprovalResult
 
-    -- ** AuditLogConfig_LogType
-    AuditLogConfig_LogType (..),
+    -- ** ApprovalResult_Decision
+    , ApprovalResult_Decision (..)
 
-    -- ** BatchCreateRepositoriesRequest
-    BatchCreateRepositoriesRequest (..),
-    newBatchCreateRepositoriesRequest,
+    -- ** ApproveBuildRequest
+    , ApproveBuildRequest (..)
+    , newApproveBuildRequest
 
-    -- ** BatchCreateRepositoriesResponse
-    BatchCreateRepositoriesResponse (..),
-    newBatchCreateRepositoriesResponse,
+    -- ** ArtifactObjects
+    , ArtifactObjects (..)
+    , newArtifactObjects
 
-    -- ** Binding
-    Binding (..),
-    newBinding,
+    -- ** ArtifactResult
+    , ArtifactResult (..)
+    , newArtifactResult
 
-    -- ** BitbucketCloudConfig
-    BitbucketCloudConfig (..),
-    newBitbucketCloudConfig,
+    -- ** Artifacts
+    , Artifacts (..)
+    , newArtifacts
 
-    -- ** BitbucketDataCenterConfig
-    BitbucketDataCenterConfig (..),
-    newBitbucketDataCenterConfig,
+    -- ** BatchCreateBitbucketServerConnectedRepositoriesRequest
+    , BatchCreateBitbucketServerConnectedRepositoriesRequest (..)
+    , newBatchCreateBitbucketServerConnectedRepositoriesRequest
+
+    -- ** BatchCreateBitbucketServerConnectedRepositoriesResponse
+    , BatchCreateBitbucketServerConnectedRepositoriesResponse (..)
+    , newBatchCreateBitbucketServerConnectedRepositoriesResponse
+
+    -- ** BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata
+    , BatchCreateBitbucketServerConnectedRepositoriesResponseMetadata (..)
+    , newBatchCreateBitbucketServerConnectedRepositoriesResponseMetadata
+
+    -- ** BatchCreateGitLabConnectedRepositoriesRequest
+    , BatchCreateGitLabConnectedRepositoriesRequest (..)
+    , newBatchCreateGitLabConnectedRepositoriesRequest
+
+    -- ** BatchCreateGitLabConnectedRepositoriesResponse
+    , BatchCreateGitLabConnectedRepositoriesResponse (..)
+    , newBatchCreateGitLabConnectedRepositoriesResponse
+
+    -- ** BatchCreateGitLabConnectedRepositoriesResponseMetadata
+    , BatchCreateGitLabConnectedRepositoriesResponseMetadata (..)
+    , newBatchCreateGitLabConnectedRepositoriesResponseMetadata
+
+    -- ** BitbucketServerConfig
+    , BitbucketServerConfig (..)
+    , newBitbucketServerConfig
+
+    -- ** BitbucketServerConnectedRepository
+    , BitbucketServerConnectedRepository (..)
+    , newBitbucketServerConnectedRepository
+
+    -- ** BitbucketServerRepository
+    , BitbucketServerRepository (..)
+    , newBitbucketServerRepository
+
+    -- ** BitbucketServerRepositoryId
+    , BitbucketServerRepositoryId (..)
+    , newBitbucketServerRepositoryId
+
+    -- ** BitbucketServerSecrets
+    , BitbucketServerSecrets (..)
+    , newBitbucketServerSecrets
+
+    -- ** BitbucketServerTriggerConfig
+    , BitbucketServerTriggerConfig (..)
+    , newBitbucketServerTriggerConfig
+
+    -- ** Build
+    , Build (..)
+    , newBuild
+
+    -- ** Build_Status
+    , Build_Status (..)
+
+    -- ** Build_Substitutions
+    , Build_Substitutions (..)
+    , newBuild_Substitutions
+
+    -- ** Build_Timing
+    , Build_Timing (..)
+    , newBuild_Timing
+
+    -- ** BuildApproval
+    , BuildApproval (..)
+    , newBuildApproval
+
+    -- ** BuildApproval_State
+    , BuildApproval_State (..)
+
+    -- ** BuildOperationMetadata
+    , BuildOperationMetadata (..)
+    , newBuildOperationMetadata
+
+    -- ** BuildOptions
+    , BuildOptions (..)
+    , newBuildOptions
+
+    -- ** BuildOptions_DefaultLogsBucketBehavior
+    , BuildOptions_DefaultLogsBucketBehavior (..)
+
+    -- ** BuildOptions_LogStreamingOption
+    , BuildOptions_LogStreamingOption (..)
+
+    -- ** BuildOptions_Logging
+    , BuildOptions_Logging (..)
+
+    -- ** BuildOptions_MachineType
+    , BuildOptions_MachineType (..)
+
+    -- ** BuildOptions_RequestedVerifyOption
+    , BuildOptions_RequestedVerifyOption (..)
+
+    -- ** BuildOptions_SourceProvenanceHashItem
+    , BuildOptions_SourceProvenanceHashItem (..)
+
+    -- ** BuildOptions_SubstitutionOption
+    , BuildOptions_SubstitutionOption (..)
+
+    -- ** BuildStep
+    , BuildStep (..)
+    , newBuildStep
+
+    -- ** BuildStep_Status
+    , BuildStep_Status (..)
+
+    -- ** BuildTrigger
+    , BuildTrigger (..)
+    , newBuildTrigger
+
+    -- ** BuildTrigger_EventType
+    , BuildTrigger_EventType (..)
+
+    -- ** BuildTrigger_IncludeBuildLogs
+    , BuildTrigger_IncludeBuildLogs (..)
+
+    -- ** BuildTrigger_Substitutions
+    , BuildTrigger_Substitutions (..)
+    , newBuildTrigger_Substitutions
+
+    -- ** BuiltImage
+    , BuiltImage (..)
+    , newBuiltImage
+
+    -- ** CancelBuildRequest
+    , CancelBuildRequest (..)
+    , newCancelBuildRequest
 
     -- ** CancelOperationRequest
-    CancelOperationRequest (..),
-    newCancelOperationRequest,
+    , CancelOperationRequest (..)
+    , newCancelOperationRequest
 
-    -- ** Capabilities
-    Capabilities (..),
-    newCapabilities,
+    -- ** ConnectedRepository
+    , ConnectedRepository (..)
+    , newConnectedRepository
 
-    -- ** ChildStatusReference
-    ChildStatusReference (..),
-    newChildStatusReference,
+    -- ** CreateBitbucketServerConfigOperationMetadata
+    , CreateBitbucketServerConfigOperationMetadata (..)
+    , newCreateBitbucketServerConfigOperationMetadata
 
-    -- ** ChildStatusReference_Type
-    ChildStatusReference_Type (..),
+    -- ** CreateBitbucketServerConnectedRepositoryRequest
+    , CreateBitbucketServerConnectedRepositoryRequest (..)
+    , newCreateBitbucketServerConnectedRepositoryRequest
 
-    -- ** Connection
-    Connection (..),
-    newConnection,
+    -- ** CreateGitHubEnterpriseConfigOperationMetadata
+    , CreateGitHubEnterpriseConfigOperationMetadata (..)
+    , newCreateGitHubEnterpriseConfigOperationMetadata
 
-    -- ** Connection_Annotations
-    Connection_Annotations (..),
-    newConnection_Annotations,
+    -- ** CreateGitLabConfigOperationMetadata
+    , CreateGitLabConfigOperationMetadata (..)
+    , newCreateGitLabConfigOperationMetadata
 
-    -- ** CreateRepositoryRequest
-    CreateRepositoryRequest (..),
-    newCreateRepositoryRequest,
+    -- ** CreateGitLabConnectedRepositoryRequest
+    , CreateGitLabConnectedRepositoryRequest (..)
+    , newCreateGitLabConnectedRepositoryRequest
 
-    -- ** EmbeddedTask
-    EmbeddedTask (..),
-    newEmbeddedTask,
+    -- ** CreateWorkerPoolOperationMetadata
+    , CreateWorkerPoolOperationMetadata (..)
+    , newCreateWorkerPoolOperationMetadata
 
-    -- ** EmbeddedTask_Annotations
-    EmbeddedTask_Annotations (..),
-    newEmbeddedTask_Annotations,
+    -- ** DefaultServiceAccount
+    , DefaultServiceAccount (..)
+    , newDefaultServiceAccount
+
+    -- ** DeleteBitbucketServerConfigOperationMetadata
+    , DeleteBitbucketServerConfigOperationMetadata (..)
+    , newDeleteBitbucketServerConfigOperationMetadata
+
+    -- ** DeleteGitHubEnterpriseConfigOperationMetadata
+    , DeleteGitHubEnterpriseConfigOperationMetadata (..)
+    , newDeleteGitHubEnterpriseConfigOperationMetadata
+
+    -- ** DeleteGitLabConfigOperationMetadata
+    , DeleteGitLabConfigOperationMetadata (..)
+    , newDeleteGitLabConfigOperationMetadata
+
+    -- ** DeleteWorkerPoolOperationMetadata
+    , DeleteWorkerPoolOperationMetadata (..)
+    , newDeleteWorkerPoolOperationMetadata
+
+    -- ** Dependency
+    , Dependency (..)
+    , newDependency
+
+    -- ** DeveloperConnectConfig
+    , DeveloperConnectConfig (..)
+    , newDeveloperConnectConfig
 
     -- ** Empty
-    Empty (..),
-    newEmpty,
+    , Empty (..)
+    , newEmpty
 
-    -- ** EmptyDirVolumeSource
-    EmptyDirVolumeSource (..),
-    newEmptyDirVolumeSource,
+    -- ** FailureInfo
+    , FailureInfo (..)
+    , newFailureInfo
 
-    -- ** EnvVar
-    EnvVar (..),
-    newEnvVar,
+    -- ** FailureInfo_Type
+    , FailureInfo_Type (..)
 
-    -- ** ExecAction
-    ExecAction (..),
-    newExecAction,
+    -- ** FileHashes
+    , FileHashes (..)
+    , newFileHashes
 
-    -- ** Expr
-    Expr (..),
-    newExpr,
+    -- ** GitConfig
+    , GitConfig (..)
+    , newGitConfig
 
-    -- ** FetchGitRefsResponse
-    FetchGitRefsResponse (..),
-    newFetchGitRefsResponse,
+    -- ** GitFileSource
+    , GitFileSource (..)
+    , newGitFileSource
 
-    -- ** FetchLinkableRepositoriesResponse
-    FetchLinkableRepositoriesResponse (..),
-    newFetchLinkableRepositoriesResponse,
+    -- ** GitFileSource_RepoType
+    , GitFileSource_RepoType (..)
 
-    -- ** FetchReadTokenRequest
-    FetchReadTokenRequest (..),
-    newFetchReadTokenRequest,
+    -- ** GitHubEnterpriseConfig
+    , GitHubEnterpriseConfig (..)
+    , newGitHubEnterpriseConfig
 
-    -- ** FetchReadTokenResponse
-    FetchReadTokenResponse (..),
-    newFetchReadTokenResponse,
+    -- ** GitHubEnterpriseSecrets
+    , GitHubEnterpriseSecrets (..)
+    , newGitHubEnterpriseSecrets
 
-    -- ** FetchReadWriteTokenRequest
-    FetchReadWriteTokenRequest (..),
-    newFetchReadWriteTokenRequest,
+    -- ** GitHubEventsConfig
+    , GitHubEventsConfig (..)
+    , newGitHubEventsConfig
 
-    -- ** FetchReadWriteTokenResponse
-    FetchReadWriteTokenResponse (..),
-    newFetchReadWriteTokenResponse,
+    -- ** GitLabConfig
+    , GitLabConfig (..)
+    , newGitLabConfig
 
-    -- ** GitHubConfig
-    GitHubConfig (..),
-    newGitHubConfig,
+    -- ** GitLabConnectedRepository
+    , GitLabConnectedRepository (..)
+    , newGitLabConnectedRepository
 
-    -- ** GoogleDevtoolsCloudbuildV2Condition
-    GoogleDevtoolsCloudbuildV2Condition (..),
-    newGoogleDevtoolsCloudbuildV2Condition,
+    -- ** GitLabEnterpriseConfig
+    , GitLabEnterpriseConfig (..)
+    , newGitLabEnterpriseConfig
 
-    -- ** GoogleDevtoolsCloudbuildV2Condition_Severity
-    GoogleDevtoolsCloudbuildV2Condition_Severity (..),
+    -- ** GitLabEventsConfig
+    , GitLabEventsConfig (..)
+    , newGitLabEventsConfig
 
-    -- ** GoogleDevtoolsCloudbuildV2Condition_Status
-    GoogleDevtoolsCloudbuildV2Condition_Status (..),
+    -- ** GitLabRepository
+    , GitLabRepository (..)
+    , newGitLabRepository
 
-    -- ** GoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig
-    GoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig (..),
-    newGoogleDevtoolsCloudbuildV2GitHubEnterpriseConfig,
+    -- ** GitLabRepositoryId
+    , GitLabRepositoryId (..)
+    , newGitLabRepositoryId
 
-    -- ** GoogleDevtoolsCloudbuildV2GitLabConfig
-    GoogleDevtoolsCloudbuildV2GitLabConfig (..),
-    newGoogleDevtoolsCloudbuildV2GitLabConfig,
+    -- ** GitLabSecrets
+    , GitLabSecrets (..)
+    , newGitLabSecrets
 
-    -- ** GoogleDevtoolsCloudbuildV2OperationMetadata
-    GoogleDevtoolsCloudbuildV2OperationMetadata (..),
-    newGoogleDevtoolsCloudbuildV2OperationMetadata,
+    -- ** GitRepoSource
+    , GitRepoSource (..)
+    , newGitRepoSource
 
-    -- ** GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig
-    GoogleDevtoolsCloudbuildV2ServiceDirectoryConfig (..),
-    newGoogleDevtoolsCloudbuildV2ServiceDirectoryConfig,
+    -- ** GitRepoSource_RepoType
+    , GitRepoSource_RepoType (..)
+
+    -- ** GitSource
+    , GitSource (..)
+    , newGitSource
+
+    -- ** GitSourceDependency
+    , GitSourceDependency (..)
+    , newGitSourceDependency
+
+    -- ** GitSourceRepository
+    , GitSourceRepository (..)
+    , newGitSourceRepository
+
+    -- ** GoModule
+    , GoModule (..)
+    , newGoModule
+
+    -- ** Hash
+    , Hash (..)
+    , newHash
+
+    -- ** Hash_Type
+    , Hash_Type (..)
 
     -- ** HttpBody
-    HttpBody (..),
-    newHttpBody,
+    , HttpBody (..)
+    , newHttpBody
 
     -- ** HttpBody_ExtensionsItem
-    HttpBody_ExtensionsItem (..),
-    newHttpBody_ExtensionsItem,
+    , HttpBody_ExtensionsItem (..)
+    , newHttpBody_ExtensionsItem
 
-    -- ** InstallationState
-    InstallationState (..),
-    newInstallationState,
+    -- ** HttpConfig
+    , HttpConfig (..)
+    , newHttpConfig
 
-    -- ** InstallationState_Stage
-    InstallationState_Stage (..),
+    -- ** InlineSecret
+    , InlineSecret (..)
+    , newInlineSecret
 
-    -- ** ListConnectionsResponse
-    ListConnectionsResponse (..),
-    newListConnectionsResponse,
+    -- ** InlineSecret_EnvMap
+    , InlineSecret_EnvMap (..)
+    , newInlineSecret_EnvMap
 
-    -- ** ListLocationsResponse
-    ListLocationsResponse (..),
-    newListLocationsResponse,
+    -- ** ListBitbucketServerConfigsResponse
+    , ListBitbucketServerConfigsResponse (..)
+    , newListBitbucketServerConfigsResponse
 
-    -- ** ListRepositoriesResponse
-    ListRepositoriesResponse (..),
-    newListRepositoriesResponse,
+    -- ** ListBitbucketServerRepositoriesResponse
+    , ListBitbucketServerRepositoriesResponse (..)
+    , newListBitbucketServerRepositoriesResponse
 
-    -- ** Location
-    Location (..),
-    newLocation,
+    -- ** ListBuildTriggersResponse
+    , ListBuildTriggersResponse (..)
+    , newListBuildTriggersResponse
 
-    -- ** Location_Labels
-    Location_Labels (..),
-    newLocation_Labels,
+    -- ** ListBuildsResponse
+    , ListBuildsResponse (..)
+    , newListBuildsResponse
 
-    -- ** Location_Metadata
-    Location_Metadata (..),
-    newLocation_Metadata,
+    -- ** ListGitLabConfigsResponse
+    , ListGitLabConfigsResponse (..)
+    , newListGitLabConfigsResponse
 
-    -- ** OAuthCredential
-    OAuthCredential (..),
-    newOAuthCredential,
+    -- ** ListGitLabRepositoriesResponse
+    , ListGitLabRepositoriesResponse (..)
+    , newListGitLabRepositoriesResponse
+
+    -- ** ListGithubEnterpriseConfigsResponse
+    , ListGithubEnterpriseConfigsResponse (..)
+    , newListGithubEnterpriseConfigsResponse
+
+    -- ** ListWorkerPoolsResponse
+    , ListWorkerPoolsResponse (..)
+    , newListWorkerPoolsResponse
+
+    -- ** MavenArtifact
+    , MavenArtifact (..)
+    , newMavenArtifact
+
+    -- ** NetworkConfig
+    , NetworkConfig (..)
+    , newNetworkConfig
+
+    -- ** NetworkConfig_EgressOption
+    , NetworkConfig_EgressOption (..)
+
+    -- ** NpmPackage
+    , NpmPackage (..)
+    , newNpmPackage
 
     -- ** Operation
-    Operation (..),
-    newOperation,
+    , Operation (..)
+    , newOperation
 
     -- ** Operation_Metadata
-    Operation_Metadata (..),
-    newOperation_Metadata,
+    , Operation_Metadata (..)
+    , newOperation_Metadata
 
     -- ** Operation_Response
-    Operation_Response (..),
-    newOperation_Response,
+    , Operation_Response (..)
+    , newOperation_Response
 
     -- ** OperationMetadata
-    OperationMetadata (..),
-    newOperationMetadata,
+    , OperationMetadata (..)
+    , newOperationMetadata
 
-    -- ** Param
-    Param (..),
-    newParam,
+    -- ** PoolOption
+    , PoolOption (..)
+    , newPoolOption
 
-    -- ** ParamSpec
-    ParamSpec (..),
-    newParamSpec,
+    -- ** PrivatePoolV1Config
+    , PrivatePoolV1Config (..)
+    , newPrivatePoolV1Config
 
-    -- ** ParamSpec_Type
-    ParamSpec_Type (..),
+    -- ** PrivateServiceConnect
+    , PrivateServiceConnect (..)
+    , newPrivateServiceConnect
 
-    -- ** ParamValue
-    ParamValue (..),
-    newParamValue,
+    -- ** ProcessAppManifestCallbackOperationMetadata
+    , ProcessAppManifestCallbackOperationMetadata (..)
+    , newProcessAppManifestCallbackOperationMetadata
 
-    -- ** ParamValue_ObjectVal
-    ParamValue_ObjectVal (..),
-    newParamValue_ObjectVal,
+    -- ** PubsubConfig
+    , PubsubConfig (..)
+    , newPubsubConfig
 
-    -- ** ParamValue_Type
-    ParamValue_Type (..),
+    -- ** PubsubConfig_State
+    , PubsubConfig_State (..)
 
-    -- ** PipelineRef
-    PipelineRef (..),
-    newPipelineRef,
+    -- ** PullRequestFilter
+    , PullRequestFilter (..)
+    , newPullRequestFilter
 
-    -- ** PipelineRef_Resolver
-    PipelineRef_Resolver (..),
+    -- ** PullRequestFilter_CommentControl
+    , PullRequestFilter_CommentControl (..)
 
-    -- ** PipelineResult
-    PipelineResult (..),
-    newPipelineResult,
+    -- ** PushFilter
+    , PushFilter (..)
+    , newPushFilter
 
-    -- ** PipelineResult_Type
-    PipelineResult_Type (..),
+    -- ** PythonPackage
+    , PythonPackage (..)
+    , newPythonPackage
 
-    -- ** PipelineRun
-    PipelineRun (..),
-    newPipelineRun,
+    -- ** ReceiveTriggerWebhookResponse
+    , ReceiveTriggerWebhookResponse (..)
+    , newReceiveTriggerWebhookResponse
 
-    -- ** PipelineRun_Annotations
-    PipelineRun_Annotations (..),
-    newPipelineRun_Annotations,
+    -- ** RemoveBitbucketServerConnectedRepositoryRequest
+    , RemoveBitbucketServerConnectedRepositoryRequest (..)
+    , newRemoveBitbucketServerConnectedRepositoryRequest
 
-    -- ** PipelineRun_GcbParams
-    PipelineRun_GcbParams (..),
-    newPipelineRun_GcbParams,
+    -- ** RemoveGitLabConnectedRepositoryRequest
+    , RemoveGitLabConnectedRepositoryRequest (..)
+    , newRemoveGitLabConnectedRepositoryRequest
 
-    -- ** PipelineRun_PipelineRunStatus
-    PipelineRun_PipelineRunStatus (..),
+    -- ** RepoSource
+    , RepoSource (..)
+    , newRepoSource
 
-    -- ** PipelineRunResult
-    PipelineRunResult (..),
-    newPipelineRunResult,
+    -- ** RepoSource_Substitutions
+    , RepoSource_Substitutions (..)
+    , newRepoSource_Substitutions
 
-    -- ** PipelineSpec
-    PipelineSpec (..),
-    newPipelineSpec,
+    -- ** RepositoryEventConfig
+    , RepositoryEventConfig (..)
+    , newRepositoryEventConfig
 
-    -- ** PipelineTask
-    PipelineTask (..),
-    newPipelineTask,
+    -- ** RepositoryEventConfig_RepositoryType
+    , RepositoryEventConfig_RepositoryType (..)
 
-    -- ** PipelineWorkspaceDeclaration
-    PipelineWorkspaceDeclaration (..),
-    newPipelineWorkspaceDeclaration,
+    -- ** Results
+    , Results (..)
+    , newResults
 
-    -- ** Policy
-    Policy (..),
-    newPolicy,
+    -- ** RetryBuildRequest
+    , RetryBuildRequest (..)
+    , newRetryBuildRequest
 
-    -- ** Probe
-    Probe (..),
-    newProbe,
+    -- ** RunBuildTriggerRequest
+    , RunBuildTriggerRequest (..)
+    , newRunBuildTriggerRequest
 
-    -- ** PropertySpec
-    PropertySpec (..),
-    newPropertySpec,
+    -- ** Secret
+    , Secret (..)
+    , newSecret
 
-    -- ** PropertySpec_Type
-    PropertySpec_Type (..),
+    -- ** Secret_SecretEnv
+    , Secret_SecretEnv (..)
+    , newSecret_SecretEnv
 
-    -- ** Provenance
-    Provenance (..),
-    newProvenance,
+    -- ** SecretManagerSecret
+    , SecretManagerSecret (..)
+    , newSecretManagerSecret
 
-    -- ** Provenance_Enabled
-    Provenance_Enabled (..),
+    -- ** Secrets
+    , Secrets (..)
+    , newSecrets
 
-    -- ** Provenance_Region
-    Provenance_Region (..),
+    -- ** ServiceDirectoryConfig
+    , ServiceDirectoryConfig (..)
+    , newServiceDirectoryConfig
 
-    -- ** Provenance_Storage
-    Provenance_Storage (..),
+    -- ** Source
+    , Source (..)
+    , newSource
 
-    -- ** Repository
-    Repository (..),
-    newRepository,
+    -- ** SourceProvenance
+    , SourceProvenance (..)
+    , newSourceProvenance
 
-    -- ** Repository_Annotations
-    Repository_Annotations (..),
-    newRepository_Annotations,
-
-    -- ** ResultValue
-    ResultValue (..),
-    newResultValue,
-
-    -- ** ResultValue_ObjectVal
-    ResultValue_ObjectVal (..),
-    newResultValue_ObjectVal,
-
-    -- ** ResultValue_Type
-    ResultValue_Type (..),
-
-    -- ** RunWorkflowCustomOperationMetadata
-    RunWorkflowCustomOperationMetadata (..),
-    newRunWorkflowCustomOperationMetadata,
-
-    -- ** SecretVolumeSource
-    SecretVolumeSource (..),
-    newSecretVolumeSource,
-
-    -- ** Security
-    Security (..),
-    newSecurity,
-
-    -- ** Security_PrivilegeMode
-    Security_PrivilegeMode (..),
-
-    -- ** SecurityContext
-    SecurityContext (..),
-    newSecurityContext,
-
-    -- ** SetIamPolicyRequest
-    SetIamPolicyRequest (..),
-    newSetIamPolicyRequest,
-
-    -- ** Sidecar
-    Sidecar (..),
-    newSidecar,
-
-    -- ** SkippedTask
-    SkippedTask (..),
-    newSkippedTask,
+    -- ** SourceProvenance_FileHashes
+    , SourceProvenance_FileHashes (..)
+    , newSourceProvenance_FileHashes
 
     -- ** Status
-    Status (..),
-    newStatus,
+    , Status (..)
+    , newStatus
 
     -- ** Status_DetailsItem
-    Status_DetailsItem (..),
-    newStatus_DetailsItem,
+    , Status_DetailsItem (..)
+    , newStatus_DetailsItem
 
-    -- ** Step
-    Step (..),
-    newStep,
+    -- ** StorageSource
+    , StorageSource (..)
+    , newStorageSource
 
-    -- ** Step_OnError
-    Step_OnError (..),
+    -- ** StorageSource_SourceFetcher
+    , StorageSource_SourceFetcher (..)
 
-    -- ** StepRef
-    StepRef (..),
-    newStepRef,
+    -- ** StorageSourceManifest
+    , StorageSourceManifest (..)
+    , newStorageSourceManifest
 
-    -- ** StepRef_Resolver
-    StepRef_Resolver (..),
+    -- ** TimeSpan
+    , TimeSpan (..)
+    , newTimeSpan
 
-    -- ** StepTemplate
-    StepTemplate (..),
-    newStepTemplate,
+    -- ** UpdateBitbucketServerConfigOperationMetadata
+    , UpdateBitbucketServerConfigOperationMetadata (..)
+    , newUpdateBitbucketServerConfigOperationMetadata
 
-    -- ** TaskRef
-    TaskRef (..),
-    newTaskRef,
+    -- ** UpdateGitHubEnterpriseConfigOperationMetadata
+    , UpdateGitHubEnterpriseConfigOperationMetadata (..)
+    , newUpdateGitHubEnterpriseConfigOperationMetadata
 
-    -- ** TaskRef_Resolver
-    TaskRef_Resolver (..),
+    -- ** UpdateGitLabConfigOperationMetadata
+    , UpdateGitLabConfigOperationMetadata (..)
+    , newUpdateGitLabConfigOperationMetadata
 
-    -- ** TaskResult
-    TaskResult (..),
-    newTaskResult,
+    -- ** UpdateWorkerPoolOperationMetadata
+    , UpdateWorkerPoolOperationMetadata (..)
+    , newUpdateWorkerPoolOperationMetadata
 
-    -- ** TaskResult_Properties
-    TaskResult_Properties (..),
-    newTaskResult_Properties,
+    -- ** UploadedGoModule
+    , UploadedGoModule (..)
+    , newUploadedGoModule
 
-    -- ** TaskResult_Type
-    TaskResult_Type (..),
+    -- ** UploadedMavenArtifact
+    , UploadedMavenArtifact (..)
+    , newUploadedMavenArtifact
 
-    -- ** TaskSpec
-    TaskSpec (..),
-    newTaskSpec,
+    -- ** UploadedNpmPackage
+    , UploadedNpmPackage (..)
+    , newUploadedNpmPackage
 
-    -- ** TaskSpec_ManagedSidecarsItem
-    TaskSpec_ManagedSidecarsItem (..),
+    -- ** UploadedPythonPackage
+    , UploadedPythonPackage (..)
+    , newUploadedPythonPackage
 
-    -- ** TestIamPermissionsRequest
-    TestIamPermissionsRequest (..),
-    newTestIamPermissionsRequest,
+    -- ** Volume
+    , Volume (..)
+    , newVolume
 
-    -- ** TestIamPermissionsResponse
-    TestIamPermissionsResponse (..),
-    newTestIamPermissionsResponse,
+    -- ** Warning
+    , Warning (..)
+    , newWarning
 
-    -- ** TimeoutFields
-    TimeoutFields (..),
-    newTimeoutFields,
+    -- ** Warning_Priority
+    , Warning_Priority (..)
 
-    -- ** UserCredential
-    UserCredential (..),
-    newUserCredential,
+    -- ** WebhookConfig
+    , WebhookConfig (..)
+    , newWebhookConfig
 
-    -- ** VolumeMount
-    VolumeMount (..),
-    newVolumeMount,
+    -- ** WebhookConfig_State
+    , WebhookConfig_State (..)
 
-    -- ** VolumeSource
-    VolumeSource (..),
-    newVolumeSource,
+    -- ** WorkerConfig
+    , WorkerConfig (..)
+    , newWorkerConfig
 
-    -- ** WhenExpression
-    WhenExpression (..),
-    newWhenExpression,
+    -- ** WorkerPool
+    , WorkerPool (..)
+    , newWorkerPool
 
-    -- ** WhenExpression_ExpressionOperator
-    WhenExpression_ExpressionOperator (..),
+    -- ** WorkerPool_Annotations
+    , WorkerPool_Annotations (..)
+    , newWorkerPool_Annotations
 
-    -- ** Worker
-    Worker (..),
-    newWorker,
+    -- ** WorkerPool_State
+    , WorkerPool_State (..)
+    ) where
 
-    -- ** WorkspaceBinding
-    WorkspaceBinding (..),
-    newWorkspaceBinding,
-
-    -- ** WorkspaceDeclaration
-    WorkspaceDeclaration (..),
-    newWorkspaceDeclaration,
-
-    -- ** WorkspacePipelineTaskBinding
-    WorkspacePipelineTaskBinding (..),
-    newWorkspacePipelineTaskBinding,
-
-    -- ** ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType
-    ProjectsLocationsConnectionsRepositoriesFetchGitRefsRefType (..),
-  )
-where
-
+import qualified Gogol.Prelude as Core
 import Gogol.ContainerBuilder.Internal.Product
 import Gogol.ContainerBuilder.Internal.Sum
-import Gogol.Prelude qualified as Core
 
--- | Default request referring to version @v2@ of the Cloud Build API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version @v1@ of the Cloud Build API. This contains the host and root path used as a starting point for constructing service requests.
 containerBuilderService :: Core.ServiceConfig
-containerBuilderService =
-  Core.defaultService
-    (Core.ServiceId "cloudbuild:v2")
-    "cloudbuild.googleapis.com"
+containerBuilderService
+  = Core.defaultService (Core.ServiceId "cloudbuild:v1")
+      "cloudbuild.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 type CloudPlatform'FullControl =
-  "https://www.googleapis.com/auth/cloud-platform"
+     "https://www.googleapis.com/auth/cloud-platform"
