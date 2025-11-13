@@ -25,6 +25,7 @@ import Data.Time as Export (Day, TimeOfDay, UTCTime)
 import Data.Word as Export (Word32, Word64, Word8)
 import GHC.Generics as Export (Generic)
 import Gogol.Data.Base64 as Export
+import Gogol.Data.Base64Url as Export
 import Gogol.Data.JSON as Export
 import Gogol.Data.Time as Export
 import Gogol.Types as Export

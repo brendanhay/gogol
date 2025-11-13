@@ -36,6 +36,7 @@ library
 
   exposed-modules:
     Gogol.Data.Base64
+    Gogol.Data.Base64Url
     Gogol.Data.JSON
     Gogol.Data.Time
     Gogol.Prelude

@@ -1681,7 +1681,7 @@ data Message = Message
     -- | The parsed email structure in the message parts.
     payload :: (Core.Maybe MessagePart),
     -- | The entire email message in an RFC 2822 formatted and base64url encoded string. Returned in @messages.get@ and @drafts.get@ responses when the @format=RAW@ parameter is supplied.
-    raw :: (Core.Maybe Core.Base64),
+    raw :: (Core.Maybe Core.Base64Url),
     -- | Estimated size in bytes of the message.
     sizeEstimate :: (Core.Maybe Core.Int32),
     -- | A short part of the message text.
@@ -1806,7 +1806,7 @@ data MessagePartBody = MessagePartBody
   { -- | When present, contains the ID of an external attachment that can be retrieved in a separate @messages.attachments.get@ request. When not present, the entire content of the message part body is contained in the data field.
     attachmentId :: (Core.Maybe Core.Text),
     -- | The body data of a MIME message part as a base64url encoded string. May be empty for MIME container types that have no message body or when the body data is sent as a separate attachment. An attachment ID is present if the body data is contained in a separate attachment.
-    data' :: (Core.Maybe Core.Base64),
+    data' :: (Core.Maybe Core.Base64Url),
     -- | Number of bytes for the message part data (encoding notwithstanding).
     size :: (Core.Maybe Core.Int32)
   }
@@ -2190,7 +2190,7 @@ data SmimeInfo = SmimeInfo
     -- | PEM formatted X509 concatenated certificate string (standard base64 encoding). Format used for returning key, which includes public key as well as certificate chain (not private key).
     pem :: (Core.Maybe Core.Text),
     -- | PKCS#12 format containing a single private\/public key pair and certificate chain. This format is only accepted from client for creating a new SmimeInfo and is never returned, because the private key is not intended to be exported. PKCS#12 may be encrypted, in which case encryptedKeyPassword should be set appropriately.
-    pkcs12 :: (Core.Maybe Core.Base64)
+    pkcs12 :: (Core.Maybe Core.Base64Url)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
